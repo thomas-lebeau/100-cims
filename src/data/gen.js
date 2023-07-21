@@ -68,7 +68,7 @@ async function getDetails(page, url) {
 
   try {
     img = await page.locator('.attachment-post-thumbnail').getAttribute('src');
-  } catch {}
+  } catch {} // eslint-disable-line no-empty
 
   const comarca = (
     await page.locator(':text("Comarca:") + div').textContent()
