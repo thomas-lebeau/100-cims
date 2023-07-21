@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NoSsr from '@/components/no-ssr';
+
 import data from '../data/cims.json';
 
 import Main from './components/main';
@@ -37,7 +39,11 @@ async function getCims() {
 }
 
 export default async function Home() {
-  const _cims = await getCims();
+  const cims = await getCims();
 
-  return <Main cims={_cims} />;
+  return (
+    <NoSsr>
+      <Main cims={cims} />
+    </NoSsr>
+  );
 }
