@@ -14,10 +14,7 @@
         "altitude": "2588"
       },
       "geometry": {
-        "coordinates": [
-          1.709588,
-          42.611704
-        ],
+        "coordinates": [1.709588, 42.611704],
         "type": "Point"
       },
       "id": 0
@@ -35,10 +32,7 @@
         "altitude": "2573"
       },
       "geometry": {
-        "coordinates": [
-          1.454193,
-          42.562973
-        ],
+        "coordinates": [1.454193, 42.562973],
         "type": "Point"
       },
       "id": 1
@@ -56,10 +50,7 @@
         "altitude": "2874"
       },
       "geometry": {
-        "coordinates": [
-          1.651239,
-          42.52514
-        ],
+        "coordinates": [1.651239, 42.52514],
         "type": "Point"
       },
       "id": 2
@@ -77,10 +68,7 @@
         "altitude": "2585"
       },
       "geometry": {
-        "coordinates": [
-          2.21956587983,
-          42.3701065555
-        ],
+        "coordinates": [2.21956587983, 42.3701065555],
         "type": "Point"
       },
       "id": 3
@@ -98,10 +86,7 @@
         "altitude": "1373"
       },
       "geometry": {
-        "coordinates": [
-          2.63072820832,
-          42.3127998427
-        ],
+        "coordinates": [2.63072820832, 42.3127998427],
         "type": "Point"
       },
       "id": 4
@@ -119,10 +104,7 @@
         "altitude": "2881"
       },
       "geometry": {
-        "coordinates": [
-          2.2328618189,
-          42.4262224049
-        ],
+        "coordinates": [2.2328618189, 42.4262224049],
         "type": "Point"
       },
       "id": 5
@@ -140,10 +122,7 @@
         "altitude": "1248"
       },
       "geometry": {
-        "coordinates": [
-          2.29375027555,
-          42.1015354717
-        ],
+        "coordinates": [2.29375027555, 42.1015354717],
         "type": "Point"
       },
       "id": 6
@@ -161,10 +140,7 @@
         "altitude": "3008"
       },
       "geometry": {
-        "coordinates": [
-          0.826303718072,
-          42.6052569802
-        ],
+        "coordinates": [0.826303718072, 42.6052569802],
         "type": "Point"
       },
       "id": 7
@@ -182,10 +158,7 @@
         "altitude": "3023"
       },
       "geometry": {
-        "coordinates": [
-          0.825995,
-          42.593789
-        ],
+        "coordinates": [0.825995, 42.593789],
         "type": "Point"
       },
       "id": 8
@@ -203,10 +176,7 @@
         "altitude": "2405"
       },
       "geometry": {
-        "coordinates": [
-          1.460396,
-          42.504804
-        ],
+        "coordinates": [1.460396, 42.504804],
         "type": "Point"
       },
       "id": 9
@@ -224,10 +194,7 @@
         "altitude": "1308"
       },
       "geometry": {
-        "coordinates": [
-          2.40727154853,
-          42.0759961774
-        ],
+        "coordinates": [2.40727154853, 42.0759961774],
         "type": "Point"
       },
       "id": 10
@@ -245,10 +212,7 @@
         "altitude": "2750"
       },
       "geometry": {
-        "coordinates": [
-          2.13126125,
-          42.450876
-        ],
+        "coordinates": [2.13126125, 42.450876],
         "type": "Point"
       },
       "id": 11
@@ -266,10 +230,7 @@
         "altitude": "2633"
       },
       "geometry": {
-        "coordinates": [
-          1.19362547646,
-          42.6595207314
-        ],
+        "coordinates": [1.19362547646, 42.6595207314],
         "type": "Point"
       },
       "id": 12
@@ -287,10 +248,7 @@
         "altitude": "2784"
       },
       "geometry": {
-        "coordinates": [
-          2.45655964191,
-          42.518901928
-        ],
+        "coordinates": [2.45655964191, 42.518901928],
         "type": "Point"
       },
       "id": 13
@@ -308,10 +266,7 @@
         "altitude": "2077"
       },
       "geometry": {
-        "coordinates": [
-          1.13468387277,
-          42.2350097134
-        ],
+        "coordinates": [1.13468387277, 42.2350097134],
         "type": "Point"
       },
       "id": 14
@@ -329,10 +284,7 @@
         "altitude": "2741"
       },
       "geometry": {
-        "coordinates": [
-          1.364376,
-          42.692368
-        ],
+        "coordinates": [1.364376, 42.692368],
         "type": "Point"
       },
       "id": 15
@@ -350,10 +302,7 @@
         "altitude": "1749"
       },
       "geometry": {
-        "coordinates": [
-          1.123586,
-          42.19357
-        ],
+        "coordinates": [1.123586, 42.19357],
         "type": "Point"
       },
       "id": 16
@@ -371,10 +320,7 @@
         "altitude": "2449"
       },
       "geometry": {
-        "coordinates": [
-          0.765144,
-          42.521551
-        ],
+        "coordinates": [0.765144, 42.521551],
         "type": "Point"
       },
       "id": 17
@@ -392,10 +338,7 @@
         "altitude": "1820"
       },
       "geometry": {
-        "coordinates": [
-          1.798617,
-          42.288559
-        ],
+        "coordinates": [1.798617, 42.288559],
         "type": "Point"
       },
       "id": 18
@@ -413,10 +356,7 @@
         "altitude": "2321"
       },
       "geometry": {
-        "coordinates": [
-          1.73803778545,
-          42.1894343677
-        ],
+        "coordinates": [1.73803778545, 42.1894343677],
         "type": "Point"
       },
       "id": 19
@@ -434,10 +374,7 @@
         "altitude": "1846"
       },
       "geometry": {
-        "coordinates": [
-          1.26702,
-          42.275525
-        ],
+        "coordinates": [1.26702, 42.275525],
         "type": "Point"
       },
       "id": 20
@@ -455,10 +392,7 @@
         "altitude": "2284"
       },
       "geometry": {
-        "coordinates": [
-          1.61370601396,
-          42.2008147325
-        ],
+        "coordinates": [1.61370601396, 42.2008147325],
         "type": "Point"
       },
       "id": 21
@@ -476,10 +410,7 @@
         "altitude": "2921"
       },
       "geometry": {
-        "coordinates": [
-          1.932099,
-          42.569861
-        ],
+        "coordinates": [1.932099, 42.569861],
         "type": "Point"
       },
       "id": 22
@@ -497,10 +428,7 @@
         "altitude": "1441"
       },
       "geometry": {
-        "coordinates": [
-          0.343121075505,
-          40.8031301137
-        ],
+        "coordinates": [0.343121075505, 40.8031301137],
         "type": "Point"
       },
       "id": 23
@@ -518,10 +446,7 @@
         "altitude": "2750"
       },
       "geometry": {
-        "coordinates": [
-          1.5703040881,
-          42.5873416545
-        ],
+        "coordinates": [1.5703040881, 42.5873416545],
         "type": "Point"
       },
       "id": 24
@@ -539,10 +464,7 @@
         "altitude": "1030"
       },
       "geometry": {
-        "coordinates": [
-          2.251122,
-          42.123941
-        ],
+        "coordinates": [2.251122, 42.123941],
         "type": "Point"
       },
       "id": 25
@@ -560,10 +482,7 @@
         "altitude": "662"
       },
       "geometry": {
-        "coordinates": [
-          1.941816,
-          41.642372
-        ],
+        "coordinates": [1.941816, 41.642372],
         "type": "Point"
       },
       "id": 26
@@ -581,10 +500,7 @@
         "altitude": "848"
       },
       "geometry": {
-        "coordinates": [
-          1.57477558985,
-          41.7706425868
-        ],
+        "coordinates": [1.57477558985, 41.7706425868],
         "type": "Point"
       },
       "id": 27
@@ -602,10 +518,7 @@
         "altitude": "392"
       },
       "geometry": {
-        "coordinates": [
-          2.38733933206,
-          41.5374582022
-        ],
+        "coordinates": [2.38733933206, 41.5374582022],
         "type": "Point"
       },
       "id": 28
@@ -623,10 +536,7 @@
         "altitude": "1358"
       },
       "geometry": {
-        "coordinates": [
-          1.985909,
-          42.467845
-        ],
+        "coordinates": [1.985909, 42.467845],
         "type": "Point"
       },
       "id": 29
@@ -644,10 +554,7 @@
         "altitude": "895"
       },
       "geometry": {
-        "coordinates": [
-          2.040229,
-          42.054577
-        ],
+        "coordinates": [2.040229, 42.054577],
         "type": "Point"
       },
       "id": 30
@@ -665,10 +572,7 @@
         "altitude": "1529"
       },
       "geometry": {
-        "coordinates": [
-          2.28960053077,
-          42.1655542733
-        ],
+        "coordinates": [2.28960053077, 42.1655542733],
         "type": "Point"
       },
       "id": 31
@@ -686,10 +590,7 @@
         "altitude": "303"
       },
       "geometry": {
-        "coordinates": [
-          3.13164949925,
-          42.0521068681
-        ],
+        "coordinates": [3.13164949925, 42.0521068681],
         "type": "Point"
       },
       "id": 32
@@ -707,10 +608,7 @@
         "altitude": "385"
       },
       "geometry": {
-        "coordinates": [
-          2.86209176566,
-          42.0068953001
-        ],
+        "coordinates": [2.86209176566, 42.0068953001],
         "type": "Point"
       },
       "id": 33
@@ -728,10 +626,7 @@
         "altitude": "682"
       },
       "geometry": {
-        "coordinates": [
-          3.16782473062,
-          42.3199721871
-        ],
+        "coordinates": [3.16782473062, 42.3199721871],
         "type": "Point"
       },
       "id": 34
@@ -749,10 +644,7 @@
         "altitude": "939"
       },
       "geometry": {
-        "coordinates": [
-          1.97087419147,
-          41.6445253816
-        ],
+        "coordinates": [1.97087419147, 41.6445253816],
         "type": "Point"
       },
       "id": 35
@@ -770,10 +662,7 @@
         "altitude": "1350"
       },
       "geometry": {
-        "coordinates": [
-          0.289653,
-          40.75873
-        ],
+        "coordinates": [0.289653, 40.75873],
         "type": "Point"
       },
       "id": 36
@@ -791,10 +680,7 @@
         "altitude": "840"
       },
       "geometry": {
-        "coordinates": [
-          0.875157009664,
-          41.0840507023
-        ],
+        "coordinates": [0.875157009664, 41.0840507023],
         "type": "Point"
       },
       "id": 37
@@ -812,10 +698,7 @@
         "altitude": "703"
       },
       "geometry": {
-        "coordinates": [
-          1.542632,
-          41.388047
-        ],
+        "coordinates": [1.542632, 41.388047],
         "type": "Point"
       },
       "id": 38
@@ -833,10 +716,7 @@
         "altitude": "832"
       },
       "geometry": {
-        "coordinates": [
-          2.059581,
-          41.740942
-        ],
+        "coordinates": [2.059581, 41.740942],
         "type": "Point"
       },
       "id": 39
@@ -854,10 +734,7 @@
         "altitude": "1870"
       },
       "geometry": {
-        "coordinates": [
-          1.78708523867,
-          42.1216063043
-        ],
+        "coordinates": [1.78708523867, 42.1216063043],
         "type": "Point"
       },
       "id": 40
@@ -875,10 +752,7 @@
         "altitude": "881"
       },
       "geometry": {
-        "coordinates": [
-          1.68642459544,
-          41.6874716091
-        ],
+        "coordinates": [1.68642459544, 41.6874716091],
         "type": "Point"
       },
       "id": 41
@@ -896,10 +770,7 @@
         "altitude": "1621"
       },
       "geometry": {
-        "coordinates": [
-          1.34727840172,
-          42.1511470485
-        ],
+        "coordinates": [1.34727840172, 42.1511470485],
         "type": "Point"
       },
       "id": 42
@@ -917,10 +788,7 @@
         "altitude": "500"
       },
       "geometry": {
-        "coordinates": [
-          0.593574351565,
-          40.9874138161
-        ],
+        "coordinates": [0.593574351565, 40.9874138161],
         "type": "Point"
       },
       "id": 43
@@ -938,10 +806,7 @@
         "altitude": "543"
       },
       "geometry": {
-        "coordinates": [
-          1.78096524985,
-          41.740870427
-        ],
+        "coordinates": [1.78096524985, 41.740870427],
         "type": "Point"
       },
       "id": 44
@@ -959,10 +824,7 @@
         "altitude": "2548"
       },
       "geometry": {
-        "coordinates": [
-          1.726288,
-          42.2836928
-        ],
+        "coordinates": [1.726288, 42.2836928],
         "type": "Point"
       },
       "id": 45
@@ -980,10 +842,7 @@
         "altitude": "1557"
       },
       "geometry": {
-        "coordinates": [
-          2.52776092867,
-          42.3333072525
-        ],
+        "coordinates": [2.52776092867, 42.3333072525],
         "type": "Point"
       },
       "id": 46
@@ -1001,10 +860,7 @@
         "altitude": "2942"
       },
       "geometry": {
-        "coordinates": [
-          1.44365450486,
-          42.5918057015
-        ],
+        "coordinates": [1.44365450486, 42.5918057015],
         "type": "Point"
       },
       "id": 47
@@ -1022,10 +878,7 @@
         "altitude": "2056"
       },
       "geometry": {
-        "coordinates": [
-          2.08066391016,
-          42.2857169362
-        ],
+        "coordinates": [2.08066391016, 42.2857169362],
         "type": "Point"
       },
       "id": 48
@@ -1043,10 +896,7 @@
         "altitude": "2465"
       },
       "geometry": {
-        "coordinates": [
-          2.34391990901,
-          42.4168972338
-        ],
+        "coordinates": [2.34391990901, 42.4168972338],
         "type": "Point"
       },
       "id": 49
@@ -1064,10 +914,7 @@
         "altitude": "842"
       },
       "geometry": {
-        "coordinates": [
-          2.21046092543,
-          41.9520875639
-        ],
+        "coordinates": [2.21046092543, 41.9520875639],
         "type": "Point"
       },
       "id": 50
@@ -1085,10 +932,7 @@
         "altitude": "942"
       },
       "geometry": {
-        "coordinates": [
-          0.586018857692,
-          40.9406887493
-        ],
+        "coordinates": [0.586018857692, 40.9406887493],
         "type": "Point"
       },
       "id": 51
@@ -1106,10 +950,7 @@
         "altitude": "525"
       },
       "geometry": {
-        "coordinates": [
-          0.977411,
-          41.153937
-        ],
+        "coordinates": [0.977411, 41.153937],
         "type": "Point"
       },
       "id": 52
@@ -1127,10 +968,7 @@
         "altitude": "2113"
       },
       "geometry": {
-        "coordinates": [
-          1.59782471728,
-          42.2643934199
-        ],
+        "coordinates": [1.59782471728, 42.2643934199],
         "type": "Point"
       },
       "id": 53
@@ -1148,10 +986,7 @@
         "altitude": "943"
       },
       "geometry": {
-        "coordinates": [
-          1.51647754872,
-          41.4483303855
-        ],
+        "coordinates": [1.51647754872, 41.4483303855],
         "type": "Point"
       },
       "id": 54
@@ -1169,10 +1004,7 @@
         "altitude": "465"
       },
       "geometry": {
-        "coordinates": [
-          1.57862965411,
-          41.3375872509
-        ],
+        "coordinates": [1.57862965411, 41.3375872509],
         "type": "Point"
       },
       "id": 55
@@ -1190,10 +1022,7 @@
         "altitude": "1327"
       },
       "geometry": {
-        "coordinates": [
-          0.914596,
-          42.301519
-        ],
+        "coordinates": [0.914596, 42.301519],
         "type": "Point"
       },
       "id": 56
@@ -1211,10 +1040,7 @@
         "altitude": "1526"
       },
       "geometry": {
-        "coordinates": [
-          1.6394532915,
-          42.1100346816
-        ],
+        "coordinates": [1.6394532915, 42.1100346816],
         "type": "Point"
       },
       "id": 57
@@ -1232,10 +1058,7 @@
         "altitude": "1002"
       },
       "geometry": {
-        "coordinates": [
-          1.039182,
-          41.998183
-        ],
+        "coordinates": [1.039182, 41.998183],
         "type": "Point"
       },
       "id": 58
@@ -1253,10 +1076,7 @@
         "altitude": "881"
       },
       "geometry": {
-        "coordinates": [
-          1.30575794888,
-          41.4290355033
-        ],
+        "coordinates": [1.30575794888, 41.4290355033],
         "type": "Point"
       },
       "id": 59
@@ -1274,10 +1094,7 @@
         "altitude": "1610"
       },
       "geometry": {
-        "coordinates": [
-          1.2675128268,
-          42.1141439558
-        ],
+        "coordinates": [1.2675128268, 42.1141439558],
         "type": "Point"
       },
       "id": 60
@@ -1295,10 +1112,7 @@
         "altitude": "1124"
       },
       "geometry": {
-        "coordinates": [
-          2.5366387097,
-          42.0208408193
-        ],
+        "coordinates": [2.5366387097, 42.0208408193],
         "type": "Point"
       },
       "id": 61
@@ -1316,10 +1130,7 @@
         "altitude": "617"
       },
       "geometry": {
-        "coordinates": [
-          1.93872,
-          41.861259
-        ],
+        "coordinates": [1.93872, 41.861259],
         "type": "Point"
       },
       "id": 62
@@ -1337,10 +1148,7 @@
         "altitude": "1125"
       },
       "geometry": {
-        "coordinates": [
-          2.70629661635,
-          42.2588459605
-        ],
+        "coordinates": [2.70629661635, 42.2588459605],
         "type": "Point"
       },
       "id": 63
@@ -1358,10 +1166,7 @@
         "altitude": "293"
       },
       "geometry": {
-        "coordinates": [
-          0.555600233824,
-          40.6830235057
-        ],
+        "coordinates": [0.555600233824, 40.6830235057],
         "type": "Point"
       },
       "id": 64
@@ -1379,10 +1184,7 @@
         "altitude": "1345"
       },
       "geometry": {
-        "coordinates": [
-          0.227329062732,
-          40.7341570377
-        ],
+        "coordinates": [0.227329062732, 40.7341570377],
         "type": "Point"
       },
       "id": 65
@@ -1400,10 +1202,7 @@
         "altitude": "2581"
       },
       "geometry": {
-        "coordinates": [
-          1.854635,
-          42.530582
-        ],
+        "coordinates": [1.854635, 42.530582],
         "type": "Point"
       },
       "id": 66
@@ -1421,10 +1220,7 @@
         "altitude": "1319"
       },
       "geometry": {
-        "coordinates": [
-          2.345652,
-          41.749114
-        ],
+        "coordinates": [2.345652, 41.749114],
         "type": "Point"
       },
       "id": 67
@@ -1442,10 +1238,7 @@
         "altitude": "152"
       },
       "geometry": {
-        "coordinates": [
-          0.883354759262,
-          40.9657461416
-        ],
+        "coordinates": [0.883354759262, 40.9657461416],
         "type": "Point"
       },
       "id": 68
@@ -1463,10 +1256,7 @@
         "altitude": "867"
       },
       "geometry": {
-        "coordinates": [
-          1.23938718304,
-          41.3753563472
-        ],
+        "coordinates": [1.23938718304, 41.3753563472],
         "type": "Point"
       },
       "id": 69
@@ -1484,10 +1274,7 @@
         "altitude": "483"
       },
       "geometry": {
-        "coordinates": [
-          2.90862814766,
-          41.9848033724
-        ],
+        "coordinates": [2.90862814766, 41.9848033724],
         "type": "Point"
       },
       "id": 70
@@ -1505,10 +1292,7 @@
         "altitude": "593"
       },
       "geometry": {
-        "coordinates": [
-          0.847132154148,
-          41.4665607398
-        ],
+        "coordinates": [0.847132154148, 41.4665607398],
         "type": "Point"
       },
       "id": 71
@@ -1526,10 +1310,7 @@
         "altitude": "1057"
       },
       "geometry": {
-        "coordinates": [
-          2.15328121534,
-          42.0787263425
-        ],
+        "coordinates": [2.15328121534, 42.0787263425],
         "type": "Point"
       },
       "id": 72
@@ -1547,10 +1328,7 @@
         "altitude": "433"
       },
       "geometry": {
-        "coordinates": [
-          0.561878,
-          40.643029
-        ],
+        "coordinates": [0.561878, 40.643029],
         "type": "Point"
       },
       "id": 73
@@ -1568,10 +1346,7 @@
         "altitude": "1525"
       },
       "geometry": {
-        "coordinates": [
-          1.72742659445,
-          42.0892489918
-        ],
+        "coordinates": [1.72742659445, 42.0892489918],
         "type": "Point"
       },
       "id": 74
@@ -1589,10 +1364,7 @@
         "altitude": "507"
       },
       "geometry": {
-        "coordinates": [
-          2.70022626173,
-          42.7269198717
-        ],
+        "coordinates": [2.70022626173, 42.7269198717],
         "type": "Point"
       },
       "id": 75
@@ -1610,10 +1382,7 @@
         "altitude": "1687"
       },
       "geometry": {
-        "coordinates": [
-          1.07808782096,
-          42.1847230594
-        ],
+        "coordinates": [1.07808782096, 42.1847230594],
         "type": "Point"
       },
       "id": 76
@@ -1631,10 +1400,7 @@
         "altitude": "2714"
       },
       "geometry": {
-        "coordinates": [
-          2.247755,
-          42.41548
-        ],
+        "coordinates": [2.247755, 42.41548],
         "type": "Point"
       },
       "id": 77
@@ -1652,10 +1418,7 @@
         "altitude": "2749"
       },
       "geometry": {
-        "coordinates": [
-          1.01483782051,
-          42.5684086401
-        ],
+        "coordinates": [1.01483782051, 42.5684086401],
         "type": "Point"
       },
       "id": 78
@@ -1673,10 +1436,7 @@
         "altitude": "2894"
       },
       "geometry": {
-        "coordinates": [
-          0.924102242387,
-          42.5094903448
-        ],
+        "coordinates": [0.924102242387, 42.5094903448],
         "type": "Point"
       },
       "id": 79
@@ -1694,10 +1454,7 @@
         "altitude": "2933"
       },
       "geometry": {
-        "coordinates": [
-          0.93780698965,
-          42.589389693
-        ],
+        "coordinates": [0.93780698965, 42.589389693],
         "type": "Point"
       },
       "id": 80
@@ -1715,10 +1472,7 @@
         "altitude": "866"
       },
       "geometry": {
-        "coordinates": [
-          1.49218341096,
-          41.5167025621
-        ],
+        "coordinates": [1.49218341096, 41.5167025621],
         "type": "Point"
       },
       "id": 81
@@ -1736,10 +1490,7 @@
         "altitude": "1178"
       },
       "geometry": {
-        "coordinates": [
-          1.813379,
-          41.60102
-        ],
+        "coordinates": [1.813379, 41.60102],
         "type": "Point"
       },
       "id": 82
@@ -1757,10 +1508,7 @@
         "altitude": "383"
       },
       "geometry": {
-        "coordinates": [
-          0.557909,
-          41.02771
-        ],
+        "coordinates": [0.557909, 41.02771],
         "type": "Point"
       },
       "id": 83
@@ -1778,10 +1526,7 @@
         "altitude": "465"
       },
       "geometry": {
-        "coordinates": [
-          2.63598108836,
-          41.8306607507
-        ],
+        "coordinates": [2.63598108836, 41.8306607507],
         "type": "Point"
       },
       "id": 84
@@ -1799,10 +1544,7 @@
         "altitude": "2532"
       },
       "geometry": {
-        "coordinates": [
-          0.808755,
-          42.54134
-        ],
+        "coordinates": [0.808755, 42.54134],
         "type": "Point"
       },
       "id": 85
@@ -1820,10 +1562,7 @@
         "altitude": "1839"
       },
       "geometry": {
-        "coordinates": [
-          0.838204,
-          42.314116
-        ],
+        "coordinates": [0.838204, 42.314116],
         "type": "Point"
       },
       "id": 86
@@ -1841,10 +1580,7 @@
         "altitude": "867"
       },
       "geometry": {
-        "coordinates": [
-          2.32093889931,
-          41.8707878226
-        ],
+        "coordinates": [2.32093889931, 41.8707878226],
         "type": "Point"
       },
       "id": 87
@@ -1862,10 +1598,7 @@
         "altitude": "1181"
       },
       "geometry": {
-        "coordinates": [
-          0.360899310112,
-          40.8793690775
-        ],
+        "coordinates": [0.360899310112, 40.8793690775],
         "type": "Point"
       },
       "id": 88
@@ -1883,10 +1616,7 @@
         "altitude": "1757"
       },
       "geometry": {
-        "coordinates": [
-          1.218321,
-          42.201373
-        ],
+        "coordinates": [1.218321, 42.201373],
         "type": "Point"
       },
       "id": 89
@@ -1904,10 +1634,7 @@
         "altitude": "2740"
       },
       "geometry": {
-        "coordinates": [
-          1.72717359885,
-          42.4579797147
-        ],
+        "coordinates": [1.72717359885, 42.4579797147],
         "type": "Point"
       },
       "id": 90
@@ -1925,10 +1652,7 @@
         "altitude": "406"
       },
       "geometry": {
-        "coordinates": [
-          0.482468,
-          40.577228
-        ],
+        "coordinates": [0.482468, 40.577228],
         "type": "Point"
       },
       "id": 91
@@ -1946,10 +1670,7 @@
         "altitude": "786"
       },
       "geometry": {
-        "coordinates": [
-          1.22482709087,
-          41.3488047979
-        ],
+        "coordinates": [1.22482709087, 41.3488047979],
         "type": "Point"
       },
       "id": 92
@@ -1967,10 +1688,7 @@
         "altitude": "1062"
       },
       "geometry": {
-        "coordinates": [
-          0.805672027137,
-          41.2775256311
-        ],
+        "coordinates": [0.805672027137, 41.2775256311],
         "type": "Point"
       },
       "id": 93
@@ -1988,10 +1706,7 @@
         "altitude": "879"
       },
       "geometry": {
-        "coordinates": [
-          0.413558589612,
-          40.9023779146
-        ],
+        "coordinates": [0.413558589612, 40.9023779146],
         "type": "Point"
       },
       "id": 94
@@ -2009,10 +1724,7 @@
         "altitude": "2067"
       },
       "geometry": {
-        "coordinates": [
-          2.002298,
-          42.305552
-        ],
+        "coordinates": [2.002298, 42.305552],
         "type": "Point"
       },
       "id": 95
@@ -2030,10 +1742,7 @@
         "altitude": "1699"
       },
       "geometry": {
-        "coordinates": [
-          0.77512806113,
-          42.3750354872
-        ],
+        "coordinates": [0.77512806113, 42.3750354872],
         "type": "Point"
       },
       "id": 96
@@ -2051,10 +1760,7 @@
         "altitude": "289"
       },
       "geometry": {
-        "coordinates": [
-          0.843120284099,
-          41.6129870926
-        ],
+        "coordinates": [0.843120284099, 41.6129870926],
         "type": "Point"
       },
       "id": 97
@@ -2072,10 +1778,7 @@
         "altitude": "1448"
       },
       "geometry": {
-        "coordinates": [
-          1.624209,
-          42.093104
-        ],
+        "coordinates": [1.624209, 42.093104],
         "type": "Point"
       },
       "id": 98
@@ -2093,10 +1796,7 @@
         "altitude": "1193"
       },
       "geometry": {
-        "coordinates": [
-          0.280338,
-          40.835005
-        ],
+        "coordinates": [0.280338, 40.835005],
         "type": "Point"
       },
       "id": 99
@@ -2114,10 +1814,7 @@
         "altitude": "317"
       },
       "geometry": {
-        "coordinates": [
-          1.41730041394,
-          41.2116572604
-        ],
+        "coordinates": [1.41730041394, 41.2116572604],
         "type": "Point"
       },
       "id": 100
@@ -2135,10 +1832,7 @@
         "altitude": "1102"
       },
       "geometry": {
-        "coordinates": [
-          2.01767220976,
-          41.6411519036
-        ],
+        "coordinates": [2.01767220976, 41.6411519036],
         "type": "Point"
       },
       "id": 101
@@ -2156,10 +1850,7 @@
         "altitude": "812"
       },
       "geometry": {
-        "coordinates": [
-          0.417868,
-          40.899297
-        ],
+        "coordinates": [0.417868, 40.899297],
         "type": "Point"
       },
       "id": 102
@@ -2177,10 +1868,7 @@
         "altitude": "594"
       },
       "geometry": {
-        "coordinates": [
-          1.91548593125,
-          41.2965325027
-        ],
+        "coordinates": [1.91548593125, 41.2965325027],
         "type": "Point"
       },
       "id": 103
@@ -2198,10 +1886,7 @@
         "altitude": "2861"
       },
       "geometry": {
-        "coordinates": [
-          1.67761271375,
-          42.4747635712
-        ],
+        "coordinates": [1.67761271375, 42.4747635712],
         "type": "Point"
       },
       "id": 104
@@ -2219,10 +1904,7 @@
         "altitude": "499"
       },
       "geometry": {
-        "coordinates": [
-          0.57641655962,
-          41.1094058162
-        ],
+        "coordinates": [0.57641655962, 41.1094058162],
         "type": "Point"
       },
       "id": 105
@@ -2240,10 +1922,7 @@
         "altitude": "1098"
       },
       "geometry": {
-        "coordinates": [
-          0.306421,
-          40.712783
-        ],
+        "coordinates": [0.306421, 40.712783],
         "type": "Point"
       },
       "id": 106
@@ -2261,10 +1940,7 @@
         "altitude": "576"
       },
       "geometry": {
-        "coordinates": [
-          2.793761,
-          42.865681
-        ],
+        "coordinates": [2.793761, 42.865681],
         "type": "Point"
       },
       "id": 107
@@ -2282,10 +1958,7 @@
         "altitude": "1635"
       },
       "geometry": {
-        "coordinates": [
-          2.537154,
-          42.460067
-        ],
+        "coordinates": [2.537154, 42.460067],
         "type": "Point"
       },
       "id": 108
@@ -2303,10 +1976,7 @@
         "altitude": "2536"
       },
       "geometry": {
-        "coordinates": [
-          1.89266087667,
-          42.3205750504
-        ],
+        "coordinates": [1.89266087667, 42.3205750504],
         "type": "Point"
       },
       "id": 109
@@ -2324,10 +1994,7 @@
         "altitude": "718"
       },
       "geometry": {
-        "coordinates": [
-          0.736267392572,
-          41.0289467835
-        ],
+        "coordinates": [0.736267392572, 41.0289467835],
         "type": "Point"
       },
       "id": 110
@@ -2345,10 +2012,7 @@
         "altitude": "1705"
       },
       "geometry": {
-        "coordinates": [
-          2.44395480371,
-          41.7893335256
-        ],
+        "coordinates": [2.44395480371, 41.7893335256],
         "type": "Point"
       },
       "id": 111
@@ -2366,10 +2030,7 @@
         "altitude": "2693"
       },
       "geometry": {
-        "coordinates": [
-          2.2477214416,
-          42.3963220756
-        ],
+        "coordinates": [2.2477214416, 42.3963220756],
         "type": "Point"
       },
       "id": 112
@@ -2387,10 +2048,7 @@
         "altitude": "425"
       },
       "geometry": {
-        "coordinates": [
-          0.679571,
-          41.035922
-        ],
+        "coordinates": [0.679571, 41.035922],
         "type": "Point"
       },
       "id": 113
@@ -2408,10 +2066,7 @@
         "altitude": "2802"
       },
       "geometry": {
-        "coordinates": [
-          1.052679,
-          42.527161
-        ],
+        "coordinates": [1.052679, 42.527161],
         "type": "Point"
       },
       "id": 114
@@ -2429,10 +2084,7 @@
         "altitude": "772"
       },
       "geometry": {
-        "coordinates": [
-          0.58437,
-          40.963486
-        ],
+        "coordinates": [0.58437, 40.963486],
         "type": "Point"
       },
       "id": 115
@@ -2450,10 +2102,7 @@
         "altitude": "1969"
       },
       "geometry": {
-        "coordinates": [
-          1.17584546118,
-          42.3209657507
-        ],
+        "coordinates": [1.17584546118, 42.3209657507],
         "type": "Point"
       },
       "id": 116
@@ -2471,10 +2120,7 @@
         "altitude": "533"
       },
       "geometry": {
-        "coordinates": [
-          1.886802,
-          41.308457
-        ],
+        "coordinates": [1.886802, 41.308457],
         "type": "Point"
       },
       "id": 117
@@ -2492,10 +2138,7 @@
         "altitude": "841"
       },
       "geometry": {
-        "coordinates": [
-          0.266146,
-          40.870771
-        ],
+        "coordinates": [0.266146, 40.870771],
         "type": "Point"
       },
       "id": 118
@@ -2513,10 +2156,7 @@
         "altitude": "429"
       },
       "geometry": {
-        "coordinates": [
-          0.547846,
-          40.987114
-        ],
+        "coordinates": [0.547846, 40.987114],
         "type": "Point"
       },
       "id": 119
@@ -2534,10 +2174,7 @@
         "altitude": "2543"
       },
       "geometry": {
-        "coordinates": [
-          0.828503168114,
-          42.4621240806
-        ],
+        "coordinates": [0.828503168114, 42.4621240806],
         "type": "Point"
       },
       "id": 120
@@ -2555,10 +2192,7 @@
         "altitude": "682"
       },
       "geometry": {
-        "coordinates": [
-          0.851249,
-          41.156296
-        ],
+        "coordinates": [0.851249, 41.156296],
         "type": "Point"
       },
       "id": 121
@@ -2576,10 +2210,7 @@
         "altitude": "1471"
       },
       "geometry": {
-        "coordinates": [
-          0.912398,
-          42.02627
-        ],
+        "coordinates": [0.912398, 42.02627],
         "type": "Point"
       },
       "id": 122
@@ -2597,10 +2228,7 @@
         "altitude": "2700"
       },
       "geometry": {
-        "coordinates": [
-          1.03925511174,
-          42.6083714427
-        ],
+        "coordinates": [1.03925511174, 42.6083714427],
         "type": "Point"
       },
       "id": 123
@@ -2618,10 +2246,7 @@
         "altitude": "523"
       },
       "geometry": {
-        "coordinates": [
-          0.643458682023,
-          41.1790342228
-        ],
+        "coordinates": [0.643458682023, 41.1790342228],
         "type": "Point"
       },
       "id": 124
@@ -2639,10 +2264,7 @@
         "altitude": "951"
       },
       "geometry": {
-        "coordinates": [
-          0.641572525273,
-          41.9258368303
-        ],
+        "coordinates": [0.641572525273, 41.9258368303],
         "type": "Point"
       },
       "id": 125
@@ -2660,10 +2282,7 @@
         "altitude": "877"
       },
       "geometry": {
-        "coordinates": [
-          0.720439,
-          41.929903
-        ],
+        "coordinates": [0.720439, 41.929903],
         "type": "Point"
       },
       "id": 126
@@ -2681,10 +2300,7 @@
         "altitude": "2753"
       },
       "geometry": {
-        "coordinates": [
-          0.96045,
-          42.805808
-        ],
+        "coordinates": [0.96045, 42.805808],
         "type": "Point"
       },
       "id": 127
@@ -2702,10 +2318,7 @@
         "altitude": "2710"
       },
       "geometry": {
-        "coordinates": [
-          0.695561,
-          42.658615
-        ],
+        "coordinates": [0.695561, 42.658615],
         "type": "Point"
       },
       "id": 128
@@ -2723,10 +2336,7 @@
         "altitude": "2883"
       },
       "geometry": {
-        "coordinates": [
-          0.705628888897,
-          42.6432185354
-        ],
+        "coordinates": [0.705628888897, 42.6432185354],
         "type": "Point"
       },
       "id": 129
@@ -2744,10 +2354,7 @@
         "altitude": "1697"
       },
       "geometry": {
-        "coordinates": [
-          2.38261778463,
-          41.8088174884
-        ],
+        "coordinates": [2.38261778463, 41.8088174884],
         "type": "Point"
       },
       "id": 130
@@ -2765,10 +2372,7 @@
         "altitude": "2882"
       },
       "geometry": {
-        "coordinates": [
-          0.917142208298,
-          42.7937464428
-        ],
+        "coordinates": [0.917142208298, 42.7937464428],
         "type": "Point"
       },
       "id": 131
@@ -2786,10 +2390,7 @@
         "altitude": "2141"
       },
       "geometry": {
-        "coordinates": [
-          1.6329485067,
-          42.4045530362
-        ],
+        "coordinates": [1.6329485067, 42.4045530362],
         "type": "Point"
       },
       "id": 132
@@ -2807,10 +2408,7 @@
         "altitude": "919"
       },
       "geometry": {
-        "coordinates": [
-          0.862623,
-          41.092629
-        ],
+        "coordinates": [0.862623, 41.092629],
         "type": "Point"
       },
       "id": 133
@@ -2828,10 +2426,7 @@
         "altitude": "834"
       },
       "geometry": {
-        "coordinates": [
-          0.931584555592,
-          41.1935878726
-        ],
+        "coordinates": [0.931584555592, 41.1935878726],
         "type": "Point"
       },
       "id": 134
@@ -2849,10 +2444,7 @@
         "altitude": "1132"
       },
       "geometry": {
-        "coordinates": [
-          1.82647684649,
-          41.5884059331
-        ],
+        "coordinates": [1.82647684649, 41.5884059331],
         "type": "Point"
       },
       "id": 135
@@ -2870,10 +2462,7 @@
         "altitude": "993"
       },
       "geometry": {
-        "coordinates": [
-          1.792784,
-          41.604897
-        ],
+        "coordinates": [1.792784, 41.604897],
         "type": "Point"
       },
       "id": 136
@@ -2891,10 +2480,7 @@
         "altitude": "1223"
       },
       "geometry": {
-        "coordinates": [
-          1.8062062446,
-          41.604409941
-        ],
+        "coordinates": [1.8062062446, 41.604409941],
         "type": "Point"
       },
       "id": 137
@@ -2912,10 +2498,7 @@
         "altitude": "1034"
       },
       "geometry": {
-        "coordinates": [
-          0.369778,
-          40.799761
-        ],
+        "coordinates": [0.369778, 40.799761],
         "type": "Point"
       },
       "id": 138
@@ -2933,10 +2516,7 @@
         "altitude": "1136"
       },
       "geometry": {
-        "coordinates": [
-          1.06058023385,
-          41.3255542218
-        ],
+        "coordinates": [1.06058023385, 41.3255542218],
         "type": "Point"
       },
       "id": 139
@@ -2954,10 +2534,7 @@
         "altitude": "538"
       },
       "geometry": {
-        "coordinates": [
-          0.4748,
-          41.041788
-        ],
+        "coordinates": [0.4748, 41.041788],
         "type": "Point"
       },
       "id": 140
@@ -2975,10 +2552,7 @@
         "altitude": "922"
       },
       "geometry": {
-        "coordinates": [
-          0.873961400419,
-          41.107465464
-        ],
+        "coordinates": [0.873961400419, 41.107465464],
         "type": "Point"
       },
       "id": 141
@@ -2996,10 +2570,7 @@
         "altitude": "711"
       },
       "geometry": {
-        "coordinates": [
-          0.785434472003,
-          41.0162924783
-        ],
+        "coordinates": [0.785434472003, 41.0162924783],
         "type": "Point"
       },
       "id": 142
@@ -3017,10 +2588,7 @@
         "altitude": "1189"
       },
       "geometry": {
-        "coordinates": [
-          1.581828,
-          42.116674
-        ],
+        "coordinates": [1.581828, 42.116674],
         "type": "Point"
       },
       "id": 143
@@ -3038,10 +2606,7 @@
         "altitude": "1070"
       },
       "geometry": {
-        "coordinates": [
-          0.362741,
-          40.909033
-        ],
+        "coordinates": [0.362741, 40.909033],
         "type": "Point"
       },
       "id": 144
@@ -3059,10 +2624,7 @@
         "altitude": "727"
       },
       "geometry": {
-        "coordinates": [
-          0.847835490761,
-          40.9906241809
-        ],
+        "coordinates": [0.847835490761, 40.9906241809],
         "type": "Point"
       },
       "id": 145
@@ -3080,10 +2642,7 @@
         "altitude": "2864"
       },
       "geometry": {
-        "coordinates": [
-          1.1768,
-          42.7108
-        ],
+        "coordinates": [1.1768, 42.7108],
         "type": "Point"
       },
       "id": 146
@@ -3101,10 +2660,7 @@
         "altitude": "715"
       },
       "geometry": {
-        "coordinates": [
-          0.87865,
-          41.902987
-        ],
+        "coordinates": [0.87865, 41.902987],
         "type": "Point"
       },
       "id": 147
@@ -3122,10 +2678,7 @@
         "altitude": "963"
       },
       "geometry": {
-        "coordinates": [
-          1.42226158803,
-          41.4068776962
-        ],
+        "coordinates": [1.42226158803, 41.4068776962],
         "type": "Point"
       },
       "id": 148
@@ -3143,10 +2696,7 @@
         "altitude": "597"
       },
       "geometry": {
-        "coordinates": [
-          2.49632222322,
-          41.6041277928
-        ],
+        "coordinates": [2.49632222322, 41.6041277928],
         "type": "Point"
       },
       "id": 149
@@ -3164,10 +2714,7 @@
         "altitude": "766"
       },
       "geometry": {
-        "coordinates": [
-          0.803218722587,
-          41.0683345646
-        ],
+        "coordinates": [0.803218722587, 41.0683345646],
         "type": "Point"
       },
       "id": 150
@@ -3185,10 +2732,7 @@
         "altitude": "2339"
       },
       "geometry": {
-        "coordinates": [
-          0.732791,
-          42.765611
-        ],
+        "coordinates": [0.732791, 42.765611],
         "type": "Point"
       },
       "id": 151
@@ -3206,10 +2750,7 @@
         "altitude": "2833"
       },
       "geometry": {
-        "coordinates": [
-          0.875353350552,
-          42.6333280573
-        ],
+        "coordinates": [0.875353350552, 42.6333280573],
         "type": "Point"
       },
       "id": 152
@@ -3227,10 +2768,7 @@
         "altitude": "2593"
       },
       "geometry": {
-        "coordinates": [
-          1.307491,
-          42.637993
-        ],
+        "coordinates": [1.307491, 42.637993],
         "type": "Point"
       },
       "id": 153
@@ -3248,10 +2786,7 @@
         "altitude": "528"
       },
       "geometry": {
-        "coordinates": [
-          0.570928,
-          40.87558
-        ],
+        "coordinates": [0.570928, 40.87558],
         "type": "Point"
       },
       "id": 154
@@ -3269,10 +2804,7 @@
         "altitude": "658"
       },
       "geometry": {
-        "coordinates": [
-          1.88500083001,
-          41.3458636248
-        ],
+        "coordinates": [1.88500083001, 41.3458636248],
         "type": "Point"
       },
       "id": 155
@@ -3290,10 +2822,7 @@
         "altitude": "328"
       },
       "geometry": {
-        "coordinates": [
-          2.7766586707,
-          41.7355101863
-        ],
+        "coordinates": [2.7766586707, 41.7355101863],
         "type": "Point"
       },
       "id": 156
@@ -3311,10 +2840,7 @@
         "altitude": "1057"
       },
       "geometry": {
-        "coordinates": [
-          2.00462687673,
-          41.6750412662
-        ],
+        "coordinates": [2.00462687673, 41.6750412662],
         "type": "Point"
       },
       "id": 157
@@ -3332,10 +2858,7 @@
         "altitude": "2291"
       },
       "geometry": {
-        "coordinates": [
-          1.17941713732,
-          42.5986630987
-        ],
+        "coordinates": [1.17941713732, 42.5986630987],
         "type": "Point"
       },
       "id": 158
@@ -3353,10 +2876,7 @@
         "altitude": "401"
       },
       "geometry": {
-        "coordinates": [
-          2.95619265406,
-          41.7886622761
-        ],
+        "coordinates": [2.95619265406, 41.7886622761],
         "type": "Point"
       },
       "id": 159
@@ -3374,10 +2894,7 @@
         "altitude": "2173"
       },
       "geometry": {
-        "coordinates": [
-          0.758684327977,
-          42.7078178721
-        ],
+        "coordinates": [0.758684327977, 42.7078178721],
         "type": "Point"
       },
       "id": 160
@@ -3395,10 +2912,7 @@
         "altitude": "2905"
       },
       "geometry": {
-        "coordinates": [
-          1.36165,
-          42.601748
-        ],
+        "coordinates": [1.36165, 42.601748],
         "type": "Point"
       },
       "id": 161
@@ -3416,10 +2930,7 @@
         "altitude": "574"
       },
       "geometry": {
-        "coordinates": [
-          0.852997,
-          41.862861
-        ],
+        "coordinates": [0.852997, 41.862861],
         "type": "Point"
       },
       "id": 162
@@ -3437,10 +2948,7 @@
         "altitude": "1133"
       },
       "geometry": {
-        "coordinates": [
-          1.80508768977,
-          41.5999938678
-        ],
+        "coordinates": [1.80508768977, 41.5999938678],
         "type": "Point"
       },
       "id": 163
@@ -3458,10 +2966,7 @@
         "altitude": "464"
       },
       "geometry": {
-        "coordinates": [
-          2.92463692226,
-          41.9630547913
-        ],
+        "coordinates": [2.92463692226, 41.9630547913],
         "type": "Point"
       },
       "id": 164
@@ -3479,10 +2984,7 @@
         "altitude": "1104"
       },
       "geometry": {
-        "coordinates": [
-          0.797767345034,
-          42.1465952076
-        ],
+        "coordinates": [0.797767345034, 42.1465952076],
         "type": "Point"
       },
       "id": 165
@@ -3500,10 +3002,7 @@
         "altitude": "2518"
       },
       "geometry": {
-        "coordinates": [
-          0.758715323462,
-          42.7852609493
-        ],
+        "coordinates": [0.758715323462, 42.7852609493],
         "type": "Point"
       },
       "id": 166
@@ -3521,10 +3020,7 @@
         "altitude": "762"
       },
       "geometry": {
-        "coordinates": [
-          1.12875357473,
-          41.9765577307
-        ],
+        "coordinates": [1.12875357473, 41.9765577307],
         "type": "Point"
       },
       "id": 167
@@ -3542,10 +3038,7 @@
         "altitude": "1074"
       },
       "geometry": {
-        "coordinates": [
-          2.48304982626,
-          42.2687834061
-        ],
+        "coordinates": [2.48304982626, 42.2687834061],
         "type": "Point"
       },
       "id": 168
@@ -3563,10 +3056,7 @@
         "altitude": "2781"
       },
       "geometry": {
-        "coordinates": [
-          1.68656940099,
-          42.5089260625
-        ],
+        "coordinates": [1.68656940099, 42.5089260625],
         "type": "Point"
       },
       "id": 169
@@ -3584,10 +3074,7 @@
         "altitude": "707"
       },
       "geometry": {
-        "coordinates": [
-          2.86518569768,
-          42.9185248623
-        ],
+        "coordinates": [2.86518569768, 42.9185248623],
         "type": "Point"
       },
       "id": 170
@@ -3605,10 +3092,7 @@
         "altitude": "264"
       },
       "geometry": {
-        "coordinates": [
-          2.670392,
-          41.642219
-        ],
+        "coordinates": [2.670392, 41.642219],
         "type": "Point"
       },
       "id": 171
@@ -3626,10 +3110,7 @@
         "altitude": "2890"
       },
       "geometry": {
-        "coordinates": [
-          1.008688,
-          42.603103
-        ],
+        "coordinates": [1.008688, 42.603103],
         "type": "Point"
       },
       "id": 172
@@ -3647,10 +3128,7 @@
         "altitude": "963"
       },
       "geometry": {
-        "coordinates": [
-          1.908241,
-          42.095783
-        ],
+        "coordinates": [1.908241, 42.095783],
         "type": "Point"
       },
       "id": 173
@@ -3668,10 +3146,7 @@
         "altitude": "2883"
       },
       "geometry": {
-        "coordinates": [
-          1.02442265779,
-          42.4901106285
-        ],
+        "coordinates": [1.02442265779, 42.4901106285],
         "type": "Point"
       },
       "id": 174
@@ -3689,10 +3164,7 @@
         "altitude": "2760"
       },
       "geometry": {
-        "coordinates": [
-          1.58099716436,
-          42.4499499945
-        ],
+        "coordinates": [1.58099716436, 42.4499499945],
         "type": "Point"
       },
       "id": 175
@@ -3710,10 +3182,7 @@
         "altitude": "753"
       },
       "geometry": {
-        "coordinates": [
-          0.625025,
-          40.898583
-        ],
+        "coordinates": [0.625025, 40.898583],
         "type": "Point"
       },
       "id": 176
@@ -3731,10 +3200,7 @@
         "altitude": "591"
       },
       "geometry": {
-        "coordinates": [
-          1.014055,
-          41.885768
-        ],
+        "coordinates": [1.014055, 41.885768],
         "type": "Point"
       },
       "id": 177
@@ -3752,10 +3218,7 @@
         "altitude": "2861"
       },
       "geometry": {
-        "coordinates": [
-          2.16788405017,
-          42.4246523941
-        ],
+        "coordinates": [2.16788405017, 42.4246523941],
         "type": "Point"
       },
       "id": 178
@@ -3773,10 +3236,7 @@
         "altitude": "947"
       },
       "geometry": {
-        "coordinates": [
-          0.836346461295,
-          41.8962885339
-        ],
+        "coordinates": [0.836346461295, 41.8962885339],
         "type": "Point"
       },
       "id": 179
@@ -3794,10 +3254,7 @@
         "altitude": "1889"
       },
       "geometry": {
-        "coordinates": [
-          0.809481028197,
-          42.3168553491
-        ],
+        "coordinates": [0.809481028197, 42.3168553491],
         "type": "Point"
       },
       "id": 180
@@ -3815,10 +3272,7 @@
         "altitude": "287"
       },
       "geometry": {
-        "coordinates": [
-          2.57368270577,
-          41.6088812679
-        ],
+        "coordinates": [2.57368270577, 41.6088812679],
         "type": "Point"
       },
       "id": 181
@@ -3836,10 +3290,7 @@
         "altitude": "1543"
       },
       "geometry": {
-        "coordinates": [
-          2.04956708035,
-          42.2201958619
-        ],
+        "coordinates": [2.04956708035, 42.2201958619],
         "type": "Point"
       },
       "id": 182
@@ -3857,10 +3308,7 @@
         "altitude": "2387"
       },
       "geometry": {
-        "coordinates": [
-          1.5209102343,
-          42.1847955583
-        ],
+        "coordinates": [1.5209102343, 42.1847955583],
         "type": "Point"
       },
       "id": 183
@@ -3878,10 +3326,7 @@
         "altitude": "1523"
       },
       "geometry": {
-        "coordinates": [
-          1.267256,
-          42.214531
-        ],
+        "coordinates": [1.267256, 42.214531],
         "type": "Point"
       },
       "id": 184
@@ -3899,10 +3344,7 @@
         "altitude": "381"
       },
       "geometry": {
-        "coordinates": [
-          1.743849,
-          41.322954
-        ],
+        "coordinates": [1.743849, 41.322954],
         "type": "Point"
       },
       "id": 185
@@ -3920,10 +3362,7 @@
         "altitude": "1675"
       },
       "geometry": {
-        "coordinates": [
-          0.766567591212,
-          42.0398582745
-        ],
+        "coordinates": [0.766567591212, 42.0398582745],
         "type": "Point"
       },
       "id": 186
@@ -3941,10 +3380,7 @@
         "altitude": "2276"
       },
       "geometry": {
-        "coordinates": [
-          1.84247482148,
-          42.3063002008
-        ],
+        "coordinates": [1.84247482148, 42.3063002008],
         "type": "Point"
       },
       "id": 187
@@ -3962,10 +3398,7 @@
         "altitude": "2834"
       },
       "geometry": {
-        "coordinates": [
-          1.670181,
-          42.527781
-        ],
+        "coordinates": [1.670181, 42.527781],
         "type": "Point"
       },
       "id": 188
@@ -3983,10 +3416,7 @@
         "altitude": "2780"
       },
       "geometry": {
-        "coordinates": [
-          1.73563223829,
-          42.6091788805
-        ],
+        "coordinates": [1.73563223829, 42.6091788805],
         "type": "Point"
       },
       "id": 189
@@ -4004,10 +3434,7 @@
         "altitude": "2934"
       },
       "geometry": {
-        "coordinates": [
-          1.367073,
-          42.657463
-        ],
+        "coordinates": [1.367073, 42.657463],
         "type": "Point"
       },
       "id": 190
@@ -4025,10 +3452,7 @@
         "altitude": "2546"
       },
       "geometry": {
-        "coordinates": [
-          2.00222336016,
-          42.6611074097
-        ],
+        "coordinates": [2.00222336016, 42.6611074097],
         "type": "Point"
       },
       "id": 191
@@ -4046,10 +3470,7 @@
         "altitude": "2732"
       },
       "geometry": {
-        "coordinates": [
-          1.468022,
-          42.630904
-        ],
+        "coordinates": [1.468022, 42.630904],
         "type": "Point"
       },
       "id": 192
@@ -4067,10 +3488,7 @@
         "altitude": "2965"
       },
       "geometry": {
-        "coordinates": [
-          1.405891,
-          42.656583
-        ],
+        "coordinates": [1.405891, 42.656583],
         "type": "Point"
       },
       "id": 193
@@ -4088,10 +3506,7 @@
         "altitude": "2805"
       },
       "geometry": {
-        "coordinates": [
-          1.4774275311,
-          42.6148182182
-        ],
+        "coordinates": [1.4774275311, 42.6148182182],
         "type": "Point"
       },
       "id": 194
@@ -4109,10 +3524,7 @@
         "altitude": "2853"
       },
       "geometry": {
-        "coordinates": [
-          1.27771844284,
-          42.7119661042
-        ],
+        "coordinates": [1.27771844284, 42.7119661042],
         "type": "Point"
       },
       "id": 195
@@ -4130,10 +3542,7 @@
         "altitude": "2721"
       },
       "geometry": {
-        "coordinates": [
-          1.07672157012,
-          42.7877860028
-        ],
+        "coordinates": [1.07672157012, 42.7877860028],
         "type": "Point"
       },
       "id": 196
@@ -4151,10 +3560,7 @@
         "altitude": "2570"
       },
       "geometry": {
-        "coordinates": [
-          1.325358,
-          42.724307
-        ],
+        "coordinates": [1.325358, 42.724307],
         "type": "Point"
       },
       "id": 197
@@ -4172,10 +3578,7 @@
         "altitude": "2732"
       },
       "geometry": {
-        "coordinates": [
-          2.209608,
-          42.441761
-        ],
+        "coordinates": [2.209608, 42.441761],
         "type": "Point"
       },
       "id": 198
@@ -4193,10 +3596,7 @@
         "altitude": "3029"
       },
       "geometry": {
-        "coordinates": [
-          0.827834271065,
-          42.5913820355
-        ],
+        "coordinates": [0.827834271065, 42.5913820355],
         "type": "Point"
       },
       "id": 199
@@ -4214,10 +3614,7 @@
         "altitude": "2958"
       },
       "geometry": {
-        "coordinates": [
-          0.906931,
-          42.58524
-        ],
+        "coordinates": [0.906931, 42.58524],
         "type": "Point"
       },
       "id": 200
@@ -4235,10 +3632,7 @@
         "altitude": "2604"
       },
       "geometry": {
-        "coordinates": [
-          1.670418,
-          42.281459
-        ],
+        "coordinates": [1.670418, 42.281459],
         "type": "Point"
       },
       "id": 201
@@ -4256,10 +3650,7 @@
         "altitude": "2772"
       },
       "geometry": {
-        "coordinates": [
-          0.930322794098,
-          42.4729420398
-        ],
+        "coordinates": [0.930322794098, 42.4729420398],
         "type": "Point"
       },
       "id": 202
@@ -4277,10 +3668,7 @@
         "altitude": "2782"
       },
       "geometry": {
-        "coordinates": [
-          1.261402,
-          42.712741
-        ],
+        "coordinates": [1.261402, 42.712741],
         "type": "Point"
       },
       "id": 203
@@ -4298,10 +3686,7 @@
         "altitude": "2903"
       },
       "geometry": {
-        "coordinates": [
-          1.53440090753,
-          42.6497189222
-        ],
+        "coordinates": [1.53440090753, 42.6497189222],
         "type": "Point"
       },
       "id": 204
@@ -4319,10 +3704,7 @@
         "altitude": "2738"
       },
       "geometry": {
-        "coordinates": [
-          1.7949934141,
-          42.5363510575
-        ],
+        "coordinates": [1.7949934141, 42.5363510575],
         "type": "Point"
       },
       "id": 205
@@ -4340,10 +3722,7 @@
         "altitude": "2461"
       },
       "geometry": {
-        "coordinates": [
-          2.507173,
-          42.502
-        ],
+        "coordinates": [2.507173, 42.502],
         "type": "Point"
       },
       "id": 206
@@ -4361,10 +3740,7 @@
         "altitude": "2859"
       },
       "geometry": {
-        "coordinates": [
-          1.394249,
-          42.597526
-        ],
+        "coordinates": [1.394249, 42.597526],
         "type": "Point"
       },
       "id": 207
@@ -4382,10 +3758,7 @@
         "altitude": "492"
       },
       "geometry": {
-        "coordinates": [
-          0.602189,
-          41.139903
-        ],
+        "coordinates": [0.602189, 41.139903],
         "type": "Point"
       },
       "id": 208
@@ -4403,10 +3776,7 @@
         "altitude": "2549"
       },
       "geometry": {
-        "coordinates": [
-          0.971881,
-          42.499185
-        ],
+        "coordinates": [0.971881, 42.499185],
         "type": "Point"
       },
       "id": 209
@@ -4424,10 +3794,7 @@
         "altitude": "2915"
       },
       "geometry": {
-        "coordinates": [
-          1.592584,
-          42.608698
-        ],
+        "coordinates": [1.592584, 42.608698],
         "type": "Point"
       },
       "id": 210
@@ -4445,10 +3812,7 @@
         "altitude": "2870"
       },
       "geometry": {
-        "coordinates": [
-          2.21373246579,
-          42.4239313658
-        ],
+        "coordinates": [2.21373246579, 42.4239313658],
         "type": "Point"
       },
       "id": 211
@@ -4466,10 +3830,7 @@
         "altitude": "2760"
       },
       "geometry": {
-        "coordinates": [
-          1.664295,
-          42.619163
-        ],
+        "coordinates": [1.664295, 42.619163],
         "type": "Point"
       },
       "id": 212
@@ -4487,10 +3848,7 @@
         "altitude": "2909"
       },
       "geometry": {
-        "coordinates": [
-          1.027159,
-          42.52448
-        ],
+        "coordinates": [1.027159, 42.52448],
         "type": "Point"
       },
       "id": 213
@@ -4508,10 +3866,7 @@
         "altitude": "2983"
       },
       "geometry": {
-        "coordinates": [
-          0.890942673958,
-          42.5747132507
-        ],
+        "coordinates": [0.890942673958, 42.5747132507],
         "type": "Point"
       },
       "id": 214
@@ -4529,10 +3884,7 @@
         "altitude": "2493"
       },
       "geometry": {
-        "coordinates": [
-          1.036675,
-          42.661582
-        ],
+        "coordinates": [1.036675, 42.661582],
         "type": "Point"
       },
       "id": 215
@@ -4550,10 +3902,7 @@
         "altitude": "2912"
       },
       "geometry": {
-        "coordinates": [
-          1.602514145,
-          42.625535127
-        ],
+        "coordinates": [1.602514145, 42.625535127],
         "type": "Point"
       },
       "id": 216
@@ -4571,10 +3920,7 @@
         "altitude": "2686"
       },
       "geometry": {
-        "coordinates": [
-          0.917915,
-          42.446888
-        ],
+        "coordinates": [0.917915, 42.446888],
         "type": "Point"
       },
       "id": 217
@@ -4592,10 +3938,7 @@
         "altitude": "2517"
       },
       "geometry": {
-        "coordinates": [
-          1.32883919585,
-          42.5057348985
-        ],
+        "coordinates": [1.32883919585, 42.5057348985],
         "type": "Point"
       },
       "id": 218
@@ -4613,10 +3956,7 @@
         "altitude": "2663"
       },
       "geometry": {
-        "coordinates": [
-          1.216644,
-          42.720051
-        ],
+        "coordinates": [1.216644, 42.720051],
         "type": "Point"
       },
       "id": 219
@@ -4634,10 +3974,7 @@
         "altitude": "2857"
       },
       "geometry": {
-        "coordinates": [
-          0.957631,
-          42.53073
-        ],
+        "coordinates": [0.957631, 42.53073],
         "type": "Point"
       },
       "id": 220
@@ -4655,10 +3992,7 @@
         "altitude": "2915"
       },
       "geometry": {
-        "coordinates": [
-          1.441992,
-          42.603724
-        ],
+        "coordinates": [1.441992, 42.603724],
         "type": "Point"
       },
       "id": 221
@@ -4676,10 +4010,7 @@
         "altitude": "2496"
       },
       "geometry": {
-        "coordinates": [
-          1.132836,
-          42.750379
-        ],
+        "coordinates": [1.132836, 42.750379],
         "type": "Point"
       },
       "id": 222
@@ -4697,10 +4028,7 @@
         "altitude": "2766"
       },
       "geometry": {
-        "coordinates": [
-          1.04993056374,
-          42.718939301
-        ],
+        "coordinates": [1.04993056374, 42.718939301],
         "type": "Point"
       },
       "id": 223
@@ -4718,10 +4046,7 @@
         "altitude": "2983"
       },
       "geometry": {
-        "coordinates": [
-          1.01195828499,
-          42.540541256
-        ],
+        "coordinates": [1.01195828499, 42.540541256],
         "type": "Point"
       },
       "id": 224
@@ -4739,10 +4064,7 @@
         "altitude": "2656"
       },
       "geometry": {
-        "coordinates": [
-          1.13150733611,
-          42.6828291223
-        ],
+        "coordinates": [1.13150733611, 42.6828291223],
         "type": "Point"
       },
       "id": 225
@@ -4760,10 +4082,7 @@
         "altitude": "2639"
       },
       "geometry": {
-        "coordinates": [
-          1.054304,
-          42.699814
-        ],
+        "coordinates": [1.054304, 42.699814],
         "type": "Point"
       },
       "id": 226
@@ -4781,10 +4100,7 @@
         "altitude": "2782"
       },
       "geometry": {
-        "coordinates": [
-          2.1871139362,
-          42.4322202523
-        ],
+        "coordinates": [2.1871139362, 42.4322202523],
         "type": "Point"
       },
       "id": 227
@@ -4802,10 +4118,7 @@
         "altitude": "2830"
       },
       "geometry": {
-        "coordinates": [
-          0.981018,
-          42.607902
-        ],
+        "coordinates": [0.981018, 42.607902],
         "type": "Point"
       },
       "id": 228
@@ -4823,10 +4136,7 @@
         "altitude": "994"
       },
       "geometry": {
-        "coordinates": [
-          3.03804096524,
-          42.4734705922
-        ],
+        "coordinates": [3.03804096524, 42.4734705922],
         "type": "Point"
       },
       "id": 229
@@ -4844,10 +4154,7 @@
         "altitude": "2789"
       },
       "geometry": {
-        "coordinates": [
-          1.38513757735,
-          42.5144490848
-        ],
+        "coordinates": [1.38513757735, 42.5144490848],
         "type": "Point"
       },
       "id": 230
@@ -4865,10 +4172,7 @@
         "altitude": "2889"
       },
       "geometry": {
-        "coordinates": [
-          1.427663,
-          42.587471
-        ],
+        "coordinates": [1.427663, 42.587471],
         "type": "Point"
       },
       "id": 231
@@ -4886,10 +4190,7 @@
         "altitude": "3073"
       },
       "geometry": {
-        "coordinates": [
-          1.38745825992,
-          42.6687087543
-        ],
+        "coordinates": [1.38745825992, 42.6687087543],
         "type": "Point"
       },
       "id": 232
@@ -4907,10 +4208,7 @@
         "altitude": "2950"
       },
       "geometry": {
-        "coordinates": [
-          0.979380978448,
-          42.5549470732
-        ],
+        "coordinates": [0.979380978448, 42.5549470732],
         "type": "Point"
       },
       "id": 233
@@ -4928,10 +4226,7 @@
         "altitude": "2851"
       },
       "geometry": {
-        "coordinates": [
-          1.190422,
-          42.690651
-        ],
+        "coordinates": [1.190422, 42.690651],
         "type": "Point"
       },
       "id": 234
@@ -4949,10 +4244,7 @@
         "altitude": "2860"
       },
       "geometry": {
-        "coordinates": [
-          1.46403,
-          42.606802
-        ],
+        "coordinates": [1.46403, 42.606802],
         "type": "Point"
       },
       "id": 235
@@ -4970,10 +4262,7 @@
         "altitude": "2734"
       },
       "geometry": {
-        "coordinates": [
-          0.970147,
-          42.583737
-        ],
+        "coordinates": [0.970147, 42.583737],
         "type": "Point"
       },
       "id": 236
@@ -4991,10 +4280,7 @@
         "altitude": "816"
       },
       "geometry": {
-        "coordinates": [
-          2.12829694974,
-          41.6553025564
-        ],
+        "coordinates": [2.12829694974, 41.6553025564],
         "type": "Point"
       },
       "id": 237
@@ -5012,10 +4298,7 @@
         "altitude": "2137"
       },
       "geometry": {
-        "coordinates": [
-          1.99099502046,
-          42.5131817626
-        ],
+        "coordinates": [1.99099502046, 42.5131817626],
         "type": "Point"
       },
       "id": 238
@@ -5033,10 +4316,7 @@
         "altitude": "2715"
       },
       "geometry": {
-        "coordinates": [
-          1.752267,
-          42.53151
-        ],
+        "coordinates": [1.752267, 42.53151],
         "type": "Point"
       },
       "id": 239
@@ -5054,10 +4334,7 @@
         "altitude": "2862"
       },
       "geometry": {
-        "coordinates": [
-          1.664673,
-          42.508121
-        ],
+        "coordinates": [1.664673, 42.508121],
         "type": "Point"
       },
       "id": 240
@@ -5075,10 +4352,7 @@
         "altitude": "2822"
       },
       "geometry": {
-        "coordinates": [
-          1.72144258547,
-          42.5172544705
-        ],
+        "coordinates": [1.72144258547, 42.5172544705],
         "type": "Point"
       },
       "id": 241
@@ -5096,10 +4370,7 @@
         "altitude": "2585"
       },
       "geometry": {
-        "coordinates": [
-          0.798188,
-          42.565195
-        ],
+        "coordinates": [0.798188, 42.565195],
         "type": "Point"
       },
       "id": 242
@@ -5117,10 +4388,7 @@
         "altitude": "2886"
       },
       "geometry": {
-        "coordinates": [
-          0.988832,
-          42.533747
-        ],
+        "coordinates": [0.988832, 42.533747],
         "type": "Point"
       },
       "id": 243
@@ -5138,10 +4406,7 @@
         "altitude": "3144"
       },
       "geometry": {
-        "coordinates": [
-          1.39790065859,
-          42.6669371771
-        ],
+        "coordinates": [1.39790065859, 42.6669371771],
         "type": "Point"
       },
       "id": 244
@@ -5159,10 +4424,7 @@
         "altitude": "2753"
       },
       "geometry": {
-        "coordinates": [
-          0.879226097309,
-          42.4529431796
-        ],
+        "coordinates": [0.879226097309, 42.4529431796],
         "type": "Point"
       },
       "id": 245
@@ -5180,10 +4442,7 @@
         "altitude": "2903"
       },
       "geometry": {
-        "coordinates": [
-          1.42041450706,
-          42.624996751
-        ],
+        "coordinates": [1.42041450706, 42.624996751],
         "type": "Point"
       },
       "id": 246
@@ -5201,10 +4460,7 @@
         "altitude": "991"
       },
       "geometry": {
-        "coordinates": [
-          1.01719022482,
-          41.2878857333
-        ],
+        "coordinates": [1.01719022482, 41.2878857333],
         "type": "Point"
       },
       "id": 247
@@ -5222,10 +4478,7 @@
         "altitude": "2903"
       },
       "geometry": {
-        "coordinates": [
-          0.995373452004,
-          42.6066752263
-        ],
+        "coordinates": [0.995373452004, 42.6066752263],
         "type": "Point"
       },
       "id": 248
@@ -5243,10 +4496,7 @@
         "altitude": "459"
       },
       "geometry": {
-        "coordinates": [
-          1.06724684153,
-          41.7534156867
-        ],
+        "coordinates": [1.06724684153, 41.7534156867],
         "type": "Point"
       },
       "id": 249
@@ -5264,10 +4514,7 @@
         "altitude": "1281"
       },
       "geometry": {
-        "coordinates": [
-          2.650714,
-          42.432057
-        ],
+        "coordinates": [2.650714, 42.432057],
         "type": "Point"
       },
       "id": 250
@@ -5285,10 +4532,7 @@
         "altitude": "2445"
       },
       "geometry": {
-        "coordinates": [
-          1.707024,
-          42.23563
-        ],
+        "coordinates": [1.707024, 42.23563],
         "type": "Point"
       },
       "id": 251
@@ -5306,10 +4550,7 @@
         "altitude": "2506"
       },
       "geometry": {
-        "coordinates": [
-          1.70292577431,
-          42.2399451722
-        ],
+        "coordinates": [1.70292577431, 42.2399451722],
         "type": "Point"
       },
       "id": 252
@@ -5327,10 +4568,7 @@
         "altitude": "2226"
       },
       "geometry": {
-        "coordinates": [
-          1.248309,
-          42.471185
-        ],
+        "coordinates": [1.248309, 42.471185],
         "type": "Point"
       },
       "id": 253
@@ -5348,10 +4586,7 @@
         "altitude": "2085"
       },
       "geometry": {
-        "coordinates": [
-          1.264857,
-          42.560695
-        ],
+        "coordinates": [1.264857, 42.560695],
         "type": "Point"
       },
       "id": 254
@@ -5369,10 +4604,7 @@
         "altitude": "2778"
       },
       "geometry": {
-        "coordinates": [
-          1.019481,
-          42.627196
-        ],
+        "coordinates": [1.019481, 42.627196],
         "type": "Point"
       },
       "id": 255
@@ -5390,10 +4622,7 @@
         "altitude": "2870"
       },
       "geometry": {
-        "coordinates": [
-          1.043251,
-          42.565985
-        ],
+        "coordinates": [1.043251, 42.565985],
         "type": "Point"
       },
       "id": 256
@@ -5411,10 +4640,7 @@
         "altitude": "1692"
       },
       "geometry": {
-        "coordinates": [
-          0.852649166388,
-          42.2691950908
-        ],
+        "coordinates": [0.852649166388, 42.2691950908],
         "type": "Point"
       },
       "id": 257
@@ -5432,10 +4658,7 @@
         "altitude": "1718"
       },
       "geometry": {
-        "coordinates": [
-          1.223107,
-          42.588479
-        ],
+        "coordinates": [1.223107, 42.588479],
         "type": "Point"
       },
       "id": 258
@@ -5453,10 +4676,7 @@
         "altitude": "519"
       },
       "geometry": {
-        "coordinates": [
-          2.92821015443,
-          41.7573307749
-        ],
+        "coordinates": [2.92821015443, 41.7573307749],
         "type": "Point"
       },
       "id": 259
@@ -5474,10 +4694,7 @@
         "altitude": "303"
       },
       "geometry": {
-        "coordinates": [
-          2.2065864631,
-          41.4703022946
-        ],
+        "coordinates": [2.2065864631, 41.4703022946],
         "type": "Point"
       },
       "id": 260
@@ -5495,10 +4712,7 @@
         "altitude": "706"
       },
       "geometry": {
-        "coordinates": [
-          0.437628283448,
-          41.0277617786
-        ],
+        "coordinates": [0.437628283448, 41.0277617786],
         "type": "Point"
       },
       "id": 261
@@ -5516,10 +4730,7 @@
         "altitude": "499"
       },
       "geometry": {
-        "coordinates": [
-          1.89299280596,
-          41.5756360735
-        ],
+        "coordinates": [1.89299280596, 41.5756360735],
         "type": "Point"
       },
       "id": 262
@@ -5537,10 +4748,7 @@
         "altitude": "315"
       },
       "geometry": {
-        "coordinates": [
-          2.738329,
-          42.132836
-        ],
+        "coordinates": [2.738329, 42.132836],
         "type": "Point"
       },
       "id": 263
@@ -5558,10 +4766,7 @@
         "altitude": "1229"
       },
       "geometry": {
-        "coordinates": [
-          2.10833614168,
-          42.1397374015
-        ],
+        "coordinates": [2.10833614168, 42.1397374015],
         "type": "Point"
       },
       "id": 264
@@ -5579,10 +4784,7 @@
         "altitude": "1488"
       },
       "geometry": {
-        "coordinates": [
-          2.350877,
-          42.137669
-        ],
+        "coordinates": [2.350877, 42.137669],
         "type": "Point"
       },
       "id": 265
@@ -5600,10 +4802,7 @@
         "altitude": "626"
       },
       "geometry": {
-        "coordinates": [
-          1.67081069484,
-          41.6047885186
-        ],
+        "coordinates": [1.67081069484, 41.6047885186],
         "type": "Point"
       },
       "id": 266
@@ -5621,10 +4820,7 @@
         "altitude": "653"
       },
       "geometry": {
-        "coordinates": [
-          1.88497858406,
-          41.4080777208
-        ],
+        "coordinates": [1.88497858406, 41.4080777208],
         "type": "Point"
       },
       "id": 267
@@ -5642,10 +4838,7 @@
         "altitude": "533"
       },
       "geometry": {
-        "coordinates": [
-          2.99429857701,
-          41.8887283793
-        ],
+        "coordinates": [2.99429857701, 41.8887283793],
         "type": "Point"
       },
       "id": 268
@@ -5663,10 +4856,7 @@
         "altitude": "717"
       },
       "geometry": {
-        "coordinates": [
-          1.09406719048,
-          41.2202617175
-        ],
+        "coordinates": [1.09406719048, 41.2202617175],
         "type": "Point"
       },
       "id": 269
@@ -5684,10 +4874,7 @@
         "altitude": "754"
       },
       "geometry": {
-        "coordinates": [
-          3.08205,
-          42.427758
-        ],
+        "coordinates": [3.08205, 42.427758],
         "type": "Point"
       },
       "id": 270
@@ -5705,10 +4892,7 @@
         "altitude": "606"
       },
       "geometry": {
-        "coordinates": [
-          3.09635933543,
-          42.3926797402
-        ],
+        "coordinates": [3.09635933543, 42.3926797402],
         "type": "Point"
       },
       "id": 271
@@ -5726,10 +4910,7 @@
         "altitude": "450"
       },
       "geometry": {
-        "coordinates": [
-          2.05499061251,
-          41.4121939529
-        ],
+        "coordinates": [2.05499061251, 41.4121939529],
         "type": "Point"
       },
       "id": 272
@@ -5747,10 +4928,7 @@
         "altitude": "1056"
       },
       "geometry": {
-        "coordinates": [
-          2.51542425463,
-          42.2943132206
-        ],
+        "coordinates": [2.51542425463, 42.2943132206],
         "type": "Point"
       },
       "id": 273
@@ -5768,10 +4946,7 @@
         "altitude": "207"
       },
       "geometry": {
-        "coordinates": [
-          3.170752,
-          42.435216
-        ],
+        "coordinates": [3.170752, 42.435216],
         "type": "Point"
       },
       "id": 274
@@ -5789,10 +4964,7 @@
         "altitude": "2826"
       },
       "geometry": {
-        "coordinates": [
-          1.873621,
-          42.583556
-        ],
+        "coordinates": [1.873621, 42.583556],
         "type": "Point"
       },
       "id": 275
@@ -5810,10 +4982,7 @@
         "altitude": "2547"
       },
       "geometry": {
-        "coordinates": [
-          2.084664,
-          42.361767
-        ],
+        "coordinates": [2.084664, 42.361767],
         "type": "Point"
       },
       "id": 276
@@ -5831,10 +5000,7 @@
         "altitude": "2673"
       },
       "geometry": {
-        "coordinates": [
-          1.879615,
-          42.569143
-        ],
+        "coordinates": [1.879615, 42.569143],
         "type": "Point"
       },
       "id": 277
@@ -5852,10 +5018,7 @@
         "altitude": "1010"
       },
       "geometry": {
-        "coordinates": [
-          0.960719737495,
-          41.2495015167
-        ],
+        "coordinates": [0.960719737495, 41.2495015167],
         "type": "Point"
       },
       "id": 278
@@ -5873,10 +5036,7 @@
         "altitude": "2624"
       },
       "geometry": {
-        "coordinates": [
-          2.2153093651,
-          42.4777793254
-        ],
+        "coordinates": [2.2153093651, 42.4777793254],
         "type": "Point"
       },
       "id": 279
@@ -5894,10 +5054,7 @@
         "altitude": "667"
       },
       "geometry": {
-        "coordinates": [
-          1.10878212966,
-          41.9017488183
-        ],
+        "coordinates": [1.10878212966, 41.9017488183],
         "type": "Point"
       },
       "id": 280
@@ -5915,10 +5072,7 @@
         "altitude": "464"
       },
       "geometry": {
-        "coordinates": [
-          1.69738245456,
-          41.2838672007
-        ],
+        "coordinates": [1.69738245456, 41.2838672007],
         "type": "Point"
       },
       "id": 281
@@ -5936,10 +5090,7 @@
         "altitude": "463"
       },
       "geometry": {
-        "coordinates": [
-          3.204968,
-          42.280507
-        ],
+        "coordinates": [3.204968, 42.280507],
         "type": "Point"
       },
       "id": 282
@@ -5957,10 +5108,7 @@
         "altitude": "1778"
       },
       "geometry": {
-        "coordinates": [
-          2.55355631584,
-          42.5146828414
-        ],
+        "coordinates": [2.55355631584, 42.5146828414],
         "type": "Point"
       },
       "id": 283
@@ -5978,10 +5126,7 @@
         "altitude": "614"
       },
       "geometry": {
-        "coordinates": [
-          0.895050001562,
-          41.0534399179
-        ],
+        "coordinates": [0.895050001562, 41.0534399179],
         "type": "Point"
       },
       "id": 284
@@ -5999,10 +5144,7 @@
         "altitude": "1010"
       },
       "geometry": {
-        "coordinates": [
-          2.10883311828,
-          41.8757956096
-        ],
+        "coordinates": [2.10883311828, 41.8757956096],
         "type": "Point"
       },
       "id": 285
@@ -6020,10 +5162,7 @@
         "altitude": "2403"
       },
       "geometry": {
-        "coordinates": [
-          2.396931,
-          42.454611
-        ],
+        "coordinates": [2.396931, 42.454611],
         "type": "Point"
       },
       "id": 286
@@ -6041,10 +5180,7 @@
         "altitude": "2763"
       },
       "geometry": {
-        "coordinates": [
-          1.959298,
-          42.617214
-        ],
+        "coordinates": [1.959298, 42.617214],
         "type": "Point"
       },
       "id": 287
@@ -6062,10 +5198,7 @@
         "altitude": "672"
       },
       "geometry": {
-        "coordinates": [
-          1.47510807421,
-          41.3151038048
-        ],
+        "coordinates": [1.47510807421, 41.3151038048],
         "type": "Point"
       },
       "id": 288
@@ -6083,10 +5216,7 @@
         "altitude": "668"
       },
       "geometry": {
-        "coordinates": [
-          2.10122891326,
-          41.6292076749
-        ],
+        "coordinates": [2.10122891326, 41.6292076749],
         "type": "Point"
       },
       "id": 289
@@ -6104,10 +5234,7 @@
         "altitude": "740"
       },
       "geometry": {
-        "coordinates": [
-          2.38898447593,
-          41.9810070598
-        ],
+        "coordinates": [2.38898447593, 41.9810070598],
         "type": "Point"
       },
       "id": 290
@@ -6125,10 +5252,7 @@
         "altitude": "1057"
       },
       "geometry": {
-        "coordinates": [
-          2.69684853147,
-          42.3607261639
-        ],
+        "coordinates": [2.69684853147, 42.3607261639],
         "type": "Point"
       },
       "id": 291
@@ -6146,10 +5270,7 @@
         "altitude": "2671"
       },
       "geometry": {
-        "coordinates": [
-          1.93347627782,
-          42.6048517182
-        ],
+        "coordinates": [1.93347627782, 42.6048517182],
         "type": "Point"
       },
       "id": 292
@@ -6167,10 +5288,7 @@
         "altitude": "534"
       },
       "geometry": {
-        "coordinates": [
-          1.84785320744,
-          41.3193219621
-        ],
+        "coordinates": [1.84785320744, 41.3193219621],
         "type": "Point"
       },
       "id": 293
@@ -6188,10 +5306,7 @@
         "altitude": "2370"
       },
       "geometry": {
-        "coordinates": [
-          2.194762,
-          42.621619
-        ],
+        "coordinates": [2.194762, 42.621619],
         "type": "Point"
       },
       "id": 294
@@ -6209,10 +5324,7 @@
         "altitude": "1976"
       },
       "geometry": {
-        "coordinates": [
-          2.31874391776,
-          42.3633808585
-        ],
+        "coordinates": [2.31874391776, 42.3633808585],
         "type": "Point"
       },
       "id": 295
@@ -6230,10 +5342,7 @@
         "altitude": "1344"
       },
       "geometry": {
-        "coordinates": [
-          2.34931774822,
-          42.1090151344
-        ],
+        "coordinates": [2.34931774822, 42.1090151344],
         "type": "Point"
       },
       "id": 296
@@ -6251,10 +5360,7 @@
         "altitude": "1391"
       },
       "geometry": {
-        "coordinates": [
-          2.55549817266,
-          42.3244930629
-        ],
+        "coordinates": [2.55549817266, 42.3244930629],
         "type": "Point"
       },
       "id": 297
@@ -6272,10 +5378,7 @@
         "altitude": "417"
       },
       "geometry": {
-        "coordinates": [
-          2.975677,
-          41.780436
-        ],
+        "coordinates": [2.975677, 41.780436],
         "type": "Point"
       },
       "id": 298
@@ -6293,10 +5396,7 @@
         "altitude": "2211"
       },
       "geometry": {
-        "coordinates": [
-          1.5394423235,
-          42.1509179033
-        ],
+        "coordinates": [1.5394423235, 42.1509179033],
         "type": "Point"
       },
       "id": 299
@@ -6314,10 +5414,7 @@
         "altitude": "2099"
       },
       "geometry": {
-        "coordinates": [
-          2.32321679045,
-          42.508771955
-        ],
+        "coordinates": [2.32321679045, 42.508771955],
         "type": "Point"
       },
       "id": 300
@@ -6335,10 +5432,7 @@
         "altitude": "1025"
       },
       "geometry": {
-        "coordinates": [
-          0.672191437353,
-          42.001724505
-        ],
+        "coordinates": [0.672191437353, 42.001724505],
         "type": "Point"
       },
       "id": 301
@@ -6356,10 +5450,7 @@
         "altitude": "409"
       },
       "geometry": {
-        "coordinates": [
-          1.47433479322,
-          41.2437100625
-        ],
+        "coordinates": [1.47433479322, 41.2437100625],
         "type": "Point"
       },
       "id": 302
@@ -6377,10 +5468,7 @@
         "altitude": "1015"
       },
       "geometry": {
-        "coordinates": [
-          2.89069878728,
-          42.4920219845
-        ],
+        "coordinates": [2.89069878728, 42.4920219845],
         "type": "Point"
       },
       "id": 303
@@ -6398,10 +5486,7 @@
         "altitude": "733"
       },
       "geometry": {
-        "coordinates": [
-          1.58098481729,
-          41.6372385192
-        ],
+        "coordinates": [1.58098481729, 41.6372385192],
         "type": "Point"
       },
       "id": 304
@@ -6419,10 +5504,7 @@
         "altitude": "2731"
       },
       "geometry": {
-        "coordinates": [
-          2.4683643295,
-          42.492101894
-        ],
+        "coordinates": [2.4683643295, 42.492101894],
         "type": "Point"
       },
       "id": 305
@@ -6440,10 +5522,7 @@
         "altitude": "832"
       },
       "geometry": {
-        "coordinates": [
-          2.376163,
-          41.959633
-        ],
+        "coordinates": [2.376163, 41.959633],
         "type": "Point"
       },
       "id": 306
@@ -6461,10 +5540,7 @@
         "altitude": "2470"
       },
       "geometry": {
-        "coordinates": [
-          2.031042,
-          42.60482
-        ],
+        "coordinates": [2.031042, 42.60482],
         "type": "Point"
       },
       "id": 307
@@ -6482,10 +5558,7 @@
         "altitude": "432"
       },
       "geometry": {
-        "coordinates": [
-          3.248749,
-          42.301067
-        ],
+        "coordinates": [3.248749, 42.301067],
         "type": "Point"
       },
       "id": 308
@@ -6503,10 +5576,7 @@
         "altitude": "832"
       },
       "geometry": {
-        "coordinates": [
-          2.802938,
-          42.428005
-        ],
+        "coordinates": [2.802938, 42.428005],
         "type": "Point"
       },
       "id": 309
@@ -6524,10 +5594,7 @@
         "altitude": "2013"
       },
       "geometry": {
-        "coordinates": [
-          2.2539920533,
-          42.2843006575
-        ],
+        "coordinates": [2.2539920533, 42.2843006575],
         "type": "Point"
       },
       "id": 310
@@ -6545,10 +5612,7 @@
         "altitude": "1097"
       },
       "geometry": {
-        "coordinates": [
-          2.667094,
-          42.37529
-        ],
+        "coordinates": [2.667094, 42.37529],
         "type": "Point"
       },
       "id": 311
@@ -6566,10 +5630,7 @@
         "altitude": "551"
       },
       "geometry": {
-        "coordinates": [
-          1.458887,
-          41.301168
-        ],
+        "coordinates": [1.458887, 41.301168],
         "type": "Point"
       },
       "id": 312
@@ -6587,10 +5648,7 @@
         "altitude": "325"
       },
       "geometry": {
-        "coordinates": [
-          2.99796651839,
-          41.7750249885
-        ],
+        "coordinates": [2.99796651839, 41.7750249885],
         "type": "Point"
       },
       "id": 313
@@ -6608,10 +5666,7 @@
         "altitude": "341"
       },
       "geometry": {
-        "coordinates": [
-          2.02409766978,
-          41.4512983754
-        ],
+        "coordinates": [2.02409766978, 41.4512983754],
         "type": "Point"
       },
       "id": 314
@@ -6629,10 +5684,7 @@
         "altitude": "1257"
       },
       "geometry": {
-        "coordinates": [
-          2.94711007326,
-          42.482101374
-        ],
+        "coordinates": [2.94711007326, 42.482101374],
         "type": "Point"
       },
       "id": 315
@@ -6650,10 +5702,7 @@
         "altitude": "2833"
       },
       "geometry": {
-        "coordinates": [
-          1.916784,
-          42.549348
-        ],
+        "coordinates": [1.916784, 42.549348],
         "type": "Point"
       },
       "id": 316
@@ -6671,10 +5720,7 @@
         "altitude": "1300"
       },
       "geometry": {
-        "coordinates": [
-          2.42776271465,
-          42.2841286008
-        ],
+        "coordinates": [2.42776271465, 42.2841286008],
         "type": "Point"
       },
       "id": 317
@@ -6692,10 +5738,7 @@
         "altitude": "2842"
       },
       "geometry": {
-        "coordinates": [
-          1.87309,
-          42.588501
-        ],
+        "coordinates": [1.87309, 42.588501],
         "type": "Point"
       },
       "id": 318
@@ -6713,10 +5756,7 @@
         "altitude": "1076"
       },
       "geometry": {
-        "coordinates": [
-          1.05450380794,
-          41.2663110481
-        ],
+        "coordinates": [1.05450380794, 41.2663110481],
         "type": "Point"
       },
       "id": 319
@@ -6734,10 +5774,7 @@
         "altitude": "2810"
       },
       "geometry": {
-        "coordinates": [
-          1.98444924692,
-          42.6136270709
-        ],
+        "coordinates": [1.98444924692, 42.6136270709],
         "type": "Point"
       },
       "id": 320
@@ -6755,10 +5792,7 @@
         "altitude": "175"
       },
       "geometry": {
-        "coordinates": [
-          3.04993,
-          42.11244
-        ],
+        "coordinates": [3.04993, 42.11244],
         "type": "Point"
       },
       "id": 321
@@ -6776,10 +5810,7 @@
         "altitude": "1938"
       },
       "geometry": {
-        "coordinates": [
-          1.49765053388,
-          42.1340410525
-        ],
+        "coordinates": [1.49765053388, 42.1340410525],
         "type": "Point"
       },
       "id": 322
@@ -6797,10 +5828,7 @@
         "altitude": "468"
       },
       "geometry": {
-        "coordinates": [
-          1.95404,
-          41.367809
-        ],
+        "coordinates": [1.95404, 41.367809],
         "type": "Point"
       },
       "id": 323
@@ -6818,10 +5846,7 @@
         "altitude": "522"
       },
       "geometry": {
-        "coordinates": [
-          1.785542,
-          41.81393
-        ],
+        "coordinates": [1.785542, 41.81393],
         "type": "Point"
       },
       "id": 324
@@ -6839,10 +5864,7 @@
         "altitude": "524"
       },
       "geometry": {
-        "coordinates": [
-          1.19129326727,
-          41.3153344091
-        ],
+        "coordinates": [1.19129326727, 41.3153344091],
         "type": "Point"
       },
       "id": 325
@@ -6860,10 +5882,7 @@
         "altitude": "839"
       },
       "geometry": {
-        "coordinates": [
-          2.592501,
-          41.963543
-        ],
+        "coordinates": [2.592501, 41.963543],
         "type": "Point"
       },
       "id": 326
@@ -6881,10 +5900,7 @@
         "altitude": "808"
       },
       "geometry": {
-        "coordinates": [
-          2.24118699931,
-          41.7026698984
-        ],
+        "coordinates": [2.24118699931, 41.7026698984],
         "type": "Point"
       },
       "id": 327
@@ -6902,10 +5918,7 @@
         "altitude": "2409"
       },
       "geometry": {
-        "coordinates": [
-          1.93553484457,
-          42.300483377
-        ],
+        "coordinates": [1.93553484457, 42.300483377],
         "type": "Point"
       },
       "id": 328
@@ -6923,10 +5936,7 @@
         "altitude": "2910"
       },
       "geometry": {
-        "coordinates": [
-          2.11679066241,
-          42.3832660904
-        ],
+        "coordinates": [2.11679066241, 42.3832660904],
         "type": "Point"
       },
       "id": 329
@@ -6944,10 +5954,7 @@
         "altitude": "2915"
       },
       "geometry": {
-        "coordinates": [
-          1.76193328898,
-          42.4875750896
-        ],
+        "coordinates": [1.76193328898, 42.4875750896],
         "type": "Point"
       },
       "id": 330
@@ -6965,10 +5972,7 @@
         "altitude": "1514"
       },
       "geometry": {
-        "coordinates": [
-          2.38789142783,
-          42.1251777741
-        ],
+        "coordinates": [2.38789142783, 42.1251777741],
         "type": "Point"
       },
       "id": 331
@@ -6986,10 +5990,7 @@
         "altitude": "1027"
       },
       "geometry": {
-        "coordinates": [
-          2.58147210612,
-          42.1150682972
-        ],
+        "coordinates": [2.58147210612, 42.1150682972],
         "type": "Point"
       },
       "id": 332
@@ -7007,10 +6008,7 @@
         "altitude": "524"
       },
       "geometry": {
-        "coordinates": [
-          1.89285524584,
-          41.6678850742
-        ],
+        "coordinates": [1.89285524584, 41.6678850742],
         "type": "Point"
       },
       "id": 333
@@ -7028,10 +6026,7 @@
         "altitude": "2504"
       },
       "geometry": {
-        "coordinates": [
-          0.840139,
-          42.655205
-        ],
+        "coordinates": [0.840139, 42.655205],
         "type": "Point"
       },
       "id": 334
@@ -7049,10 +6044,7 @@
         "altitude": "770"
       },
       "geometry": {
-        "coordinates": [
-          1.98442838996,
-          41.6821512175
-        ],
+        "coordinates": [1.98442838996, 41.6821512175],
         "type": "Point"
       },
       "id": 335
@@ -7070,10 +6062,7 @@
         "altitude": "3014"
       },
       "geometry": {
-        "coordinates": [
-          0.880286835146,
-          42.5857010202
-        ],
+        "coordinates": [0.880286835146, 42.5857010202],
         "type": "Point"
       },
       "id": 336
@@ -7091,10 +6080,7 @@
         "altitude": "2885"
       },
       "geometry": {
-        "coordinates": [
-          0.842595085439,
-          42.6104008216
-        ],
+        "coordinates": [0.842595085439, 42.6104008216],
         "type": "Point"
       },
       "id": 337
@@ -7112,10 +6098,7 @@
         "altitude": "1014"
       },
       "geometry": {
-        "coordinates": [
-          0.632397,
-          41.949799
-        ],
+        "coordinates": [0.632397, 41.949799],
         "type": "Point"
       },
       "id": 338
@@ -7133,10 +6116,7 @@
         "altitude": "1092"
       },
       "geometry": {
-        "coordinates": [
-          0.368809,
-          40.927734
-        ],
+        "coordinates": [0.368809, 40.927734],
         "type": "Point"
       },
       "id": 339
@@ -7154,10 +6134,7 @@
         "altitude": "495"
       },
       "geometry": {
-        "coordinates": [
-          0.401385033909,
-          41.3887118921
-        ],
+        "coordinates": [0.401385033909, 41.3887118921],
         "type": "Point"
       },
       "id": 340
@@ -7175,10 +6152,7 @@
         "altitude": "1022"
       },
       "geometry": {
-        "coordinates": [
-          0.96432912146,
-          41.3552988479
-        ],
+        "coordinates": [0.96432912146, 41.3552988479],
         "type": "Point"
       },
       "id": 341
@@ -7196,10 +6170,7 @@
         "altitude": "923"
       },
       "geometry": {
-        "coordinates": [
-          0.878149,
-          41.341427
-        ],
+        "coordinates": [0.878149, 41.341427],
         "type": "Point"
       },
       "id": 342
@@ -7217,10 +6188,7 @@
         "altitude": "551"
       },
       "geometry": {
-        "coordinates": [
-          0.873881,
-          41.012469
-        ],
+        "coordinates": [0.873881, 41.012469],
         "type": "Point"
       },
       "id": 343
@@ -7238,10 +6206,7 @@
         "altitude": "1062"
       },
       "geometry": {
-        "coordinates": [
-          0.842026,
-          41.305632
-        ],
+        "coordinates": [0.842026, 41.305632],
         "type": "Point"
       },
       "id": 344
@@ -7259,10 +6224,7 @@
         "altitude": "659"
       },
       "geometry": {
-        "coordinates": [
-          0.500927909963,
-          41.0588485404
-        ],
+        "coordinates": [0.500927909963, 41.0588485404],
         "type": "Point"
       },
       "id": 345
@@ -7280,10 +6242,7 @@
         "altitude": "2952"
       },
       "geometry": {
-        "coordinates": [
-          0.808478,
-          42.59137
-        ],
+        "coordinates": [0.808478, 42.59137],
         "type": "Point"
       },
       "id": 346
@@ -7301,10 +6260,7 @@
         "altitude": "228"
       },
       "geometry": {
-        "coordinates": [
-          3.17009964673,
-          41.9603145487
-        ],
+        "coordinates": [3.17009964673, 41.9603145487],
         "type": "Point"
       },
       "id": 347
@@ -7322,10 +6278,7 @@
         "altitude": "672"
       },
       "geometry": {
-        "coordinates": [
-          3.12092853859,
-          42.4382628983
-        ],
+        "coordinates": [3.12092853859, 42.4382628983],
         "type": "Point"
       },
       "id": 348
@@ -7343,10 +6296,7 @@
         "altitude": "1681"
       },
       "geometry": {
-        "coordinates": [
-          1.56049672773,
-          42.3712181404
-        ],
+        "coordinates": [1.56049672773, 42.3712181404],
         "type": "Point"
       },
       "id": 349
@@ -7364,10 +6314,7 @@
         "altitude": "885"
       },
       "geometry": {
-        "coordinates": [
-          1.26543,
-          42.065286
-        ],
+        "coordinates": [1.26543, 42.065286],
         "type": "Point"
       },
       "id": 350
@@ -7385,10 +6332,7 @@
         "altitude": "1630"
       },
       "geometry": {
-        "coordinates": [
-          1.41096353508,
-          42.1980678653
-        ],
+        "coordinates": [1.41096353508, 42.1980678653],
         "type": "Point"
       },
       "id": 351
@@ -7406,10 +6350,7 @@
         "altitude": "1415"
       },
       "geometry": {
-        "coordinates": [
-          1.717248,
-          42.096656
-        ],
+        "coordinates": [1.717248, 42.096656],
         "type": "Point"
       },
       "id": 352
@@ -7427,10 +6368,7 @@
         "altitude": "854"
       },
       "geometry": {
-        "coordinates": [
-          1.309484,
-          42.091256
-        ],
+        "coordinates": [1.309484, 42.091256],
         "type": "Point"
       },
       "id": 353
@@ -7448,10 +6386,7 @@
         "altitude": "2469"
       },
       "geometry": {
-        "coordinates": [
-          2.19240962976,
-          42.6518175066
-        ],
+        "coordinates": [2.19240962976, 42.6518175066],
         "type": "Point"
       },
       "id": 354
@@ -7469,10 +6404,7 @@
         "altitude": "443"
       },
       "geometry": {
-        "coordinates": [
-          2.705595,
-          42.616003
-        ],
+        "coordinates": [2.705595, 42.616003],
         "type": "Point"
       },
       "id": 355
@@ -7490,10 +6422,7 @@
         "altitude": "1480"
       },
       "geometry": {
-        "coordinates": [
-          0.974246319524,
-          42.3072328376
-        ],
+        "coordinates": [0.974246319524, 42.3072328376],
         "type": "Point"
       },
       "id": 356
@@ -7511,10 +6440,7 @@
         "altitude": "1235"
       },
       "geometry": {
-        "coordinates": [
-          2.69458,
-          42.427344
-        ],
+        "coordinates": [2.69458, 42.427344],
         "type": "Point"
       },
       "id": 357
@@ -7532,10 +6458,7 @@
         "altitude": "2774"
       },
       "geometry": {
-        "coordinates": [
-          2.15515749301,
-          42.4463355484
-        ],
+        "coordinates": [2.15515749301, 42.4463355484],
         "type": "Point"
       },
       "id": 358
@@ -7553,10 +6476,7 @@
         "altitude": "1451"
       },
       "geometry": {
-        "coordinates": [
-          2.72729098521,
-          42.4227911919
-        ],
+        "coordinates": [2.72729098521, 42.4227911919],
         "type": "Point"
       },
       "id": 359
@@ -7574,10 +6494,7 @@
         "altitude": "1153"
       },
       "geometry": {
-        "coordinates": [
-          1.362394,
-          42.104533
-        ],
+        "coordinates": [1.362394, 42.104533],
         "type": "Point"
       },
       "id": 360
@@ -7595,10 +6512,7 @@
         "altitude": "2811"
       },
       "geometry": {
-        "coordinates": [
-          1.74181711408,
-          42.587786779
-        ],
+        "coordinates": [1.74181711408, 42.587786779],
         "type": "Point"
       },
       "id": 361
@@ -7616,10 +6530,7 @@
         "altitude": "2020"
       },
       "geometry": {
-        "coordinates": [
-          1.338294,
-          42.435353
-        ],
+        "coordinates": [1.338294, 42.435353],
         "type": "Point"
       },
       "id": 362
@@ -7637,10 +6548,7 @@
         "altitude": "2506"
       },
       "geometry": {
-        "coordinates": [
-          2.318749,
-          42.425151
-        ],
+        "coordinates": [2.318749, 42.425151],
         "type": "Point"
       },
       "id": 363
@@ -7658,10 +6566,7 @@
         "altitude": "1163"
       },
       "geometry": {
-        "coordinates": [
-          0.891232362067,
-          41.288591728
-        ],
+        "coordinates": [0.891232362067, 41.288591728],
         "type": "Point"
       },
       "id": 364
@@ -7679,10 +6584,7 @@
         "altitude": "1870"
       },
       "geometry": {
-        "coordinates": [
-          1.568135,
-          42.207929
-        ],
+        "coordinates": [1.568135, 42.207929],
         "type": "Point"
       },
       "id": 365
@@ -7700,10 +6602,7 @@
         "altitude": "1156"
       },
       "geometry": {
-        "coordinates": [
-          1.82973892266,
-          41.5957799591
-        ],
+        "coordinates": [1.82973892266, 41.5957799591],
         "type": "Point"
       },
       "id": 366
@@ -7721,10 +6620,7 @@
         "altitude": "1299"
       },
       "geometry": {
-        "coordinates": [
-          1.35435,
-          42.127821
-        ],
+        "coordinates": [1.35435, 42.127821],
         "type": "Point"
       },
       "id": 367
@@ -7742,10 +6638,7 @@
         "altitude": "1615"
       },
       "geometry": {
-        "coordinates": [
-          1.96373,
-          42.215193
-        ],
+        "coordinates": [1.96373, 42.215193],
         "type": "Point"
       },
       "id": 368
@@ -7763,10 +6656,7 @@
         "altitude": "2929"
       },
       "geometry": {
-        "coordinates": [
-          1.442189,
-          42.598398
-        ],
+        "coordinates": [1.442189, 42.598398],
         "type": "Point"
       },
       "id": 369
@@ -7784,10 +6674,7 @@
         "altitude": "1110"
       },
       "geometry": {
-        "coordinates": [
-          2.43770677452,
-          42.6851098962
-        ],
+        "coordinates": [2.43770677452, 42.6851098962],
         "type": "Point"
       },
       "id": 370
@@ -7805,10 +6692,7 @@
         "altitude": "2088"
       },
       "geometry": {
-        "coordinates": [
-          1.711598,
-          42.316284
-        ],
+        "coordinates": [1.711598, 42.316284],
         "type": "Point"
       },
       "id": 371
@@ -7826,10 +6710,7 @@
         "altitude": "907"
       },
       "geometry": {
-        "coordinates": [
-          2.49813,
-          42.136518
-        ],
+        "coordinates": [2.49813, 42.136518],
         "type": "Point"
       },
       "id": 372
@@ -7847,10 +6728,7 @@
         "altitude": "225"
       },
       "geometry": {
-        "coordinates": [
-          3.189831,
-          42.055397
-        ],
+        "coordinates": [3.189831, 42.055397],
         "type": "Point"
       },
       "id": 373
@@ -7868,10 +6746,7 @@
         "altitude": "1239"
       },
       "geometry": {
-        "coordinates": [
-          1.10016255867,
-          42.0722101705
-        ],
+        "coordinates": [1.10016255867, 42.0722101705],
         "type": "Point"
       },
       "id": 374
@@ -7889,10 +6764,7 @@
         "altitude": "804"
       },
       "geometry": {
-        "coordinates": [
-          2.01789428863,
-          41.6945024649
-        ],
+        "coordinates": [2.01789428863, 41.6945024649],
         "type": "Point"
       },
       "id": 375
@@ -7910,10 +6782,7 @@
         "altitude": "1187"
       },
       "geometry": {
-        "coordinates": [
-          2.44560136469,
-          42.0098094301
-        ],
+        "coordinates": [2.44560136469, 42.0098094301],
         "type": "Point"
       },
       "id": 376
@@ -7931,10 +6800,7 @@
         "altitude": "1489"
       },
       "geometry": {
-        "coordinates": [
-          1.044505,
-          42.211578
-        ],
+        "coordinates": [1.044505, 42.211578],
         "type": "Point"
       },
       "id": 377
@@ -7952,10 +6818,7 @@
         "altitude": "621"
       },
       "geometry": {
-        "coordinates": [
-          0.397732,
-          40.992862
-        ],
+        "coordinates": [0.397732, 40.992862],
         "type": "Point"
       },
       "id": 378
@@ -7973,10 +6836,7 @@
         "altitude": "1017"
       },
       "geometry": {
-        "coordinates": [
-          0.326553661024,
-          40.90065369
-        ],
+        "coordinates": [0.326553661024, 40.90065369],
         "type": "Point"
       },
       "id": 379
@@ -7994,10 +6854,7 @@
         "altitude": "852"
       },
       "geometry": {
-        "coordinates": [
-          2.565848,
-          41.88528
-        ],
+        "coordinates": [2.565848, 41.88528],
         "type": "Point"
       },
       "id": 380
@@ -8015,10 +6872,7 @@
         "altitude": "1172"
       },
       "geometry": {
-        "coordinates": [
-          1.95140868336,
-          42.1192540287
-        ],
+        "coordinates": [1.95140868336, 42.1192540287],
         "type": "Point"
       },
       "id": 381
@@ -8036,10 +6890,7 @@
         "altitude": "1361"
       },
       "geometry": {
-        "coordinates": [
-          2.375953,
-          42.305123
-        ],
+        "coordinates": [2.375953, 42.305123],
         "type": "Point"
       },
       "id": 382
@@ -8057,10 +6908,7 @@
         "altitude": "1150"
       },
       "geometry": {
-        "coordinates": [
-          2.51350177313,
-          41.9487368657
-        ],
+        "coordinates": [2.51350177313, 41.9487368657],
         "type": "Point"
       },
       "id": 383
@@ -8078,10 +6926,7 @@
         "altitude": "1351"
       },
       "geometry": {
-        "coordinates": [
-          1.00279294037,
-          42.1828150542
-        ],
+        "coordinates": [1.00279294037, 42.1828150542],
         "type": "Point"
       },
       "id": 384
@@ -8099,10 +6944,7 @@
         "altitude": "500"
       },
       "geometry": {
-        "coordinates": [
-          2.715114,
-          41.992444
-        ],
+        "coordinates": [2.715114, 41.992444],
         "type": "Point"
       },
       "id": 385
@@ -8120,10 +6962,7 @@
         "altitude": "1068"
       },
       "geometry": {
-        "coordinates": [
-          1.270382,
-          42.083792
-        ],
+        "coordinates": [1.270382, 42.083792],
         "type": "Point"
       },
       "id": 386
@@ -8141,10 +6980,7 @@
         "altitude": "1236"
       },
       "geometry": {
-        "coordinates": [
-          1.81150454088,
-          41.6053835626
-        ],
+        "coordinates": [1.81150454088, 41.6053835626],
         "type": "Point"
       },
       "id": 387
@@ -8162,10 +6998,7 @@
         "altitude": "1391"
       },
       "geometry": {
-        "coordinates": [
-          0.94130938873,
-          41.9778152606
-        ],
+        "coordinates": [0.94130938873, 41.9778152606],
         "type": "Point"
       },
       "id": 388
@@ -8183,10 +7016,7 @@
         "altitude": "1611"
       },
       "geometry": {
-        "coordinates": [
-          1.89873987298,
-          42.2649312024
-        ],
+        "coordinates": [1.89873987298, 42.2649312024],
         "type": "Point"
       },
       "id": 389
@@ -8204,10 +7034,7 @@
         "altitude": "522"
       },
       "geometry": {
-        "coordinates": [
-          2.678001,
-          42.624735
-        ],
+        "coordinates": [2.678001, 42.624735],
         "type": "Point"
       },
       "id": 390
@@ -8225,10 +7052,7 @@
         "altitude": "859"
       },
       "geometry": {
-        "coordinates": [
-          2.206427,
-          42.010248
-        ],
+        "coordinates": [2.206427, 42.010248],
         "type": "Point"
       },
       "id": 391
@@ -8246,10 +7070,7 @@
         "altitude": "948"
       },
       "geometry": {
-        "coordinates": [
-          1.34564773737,
-          41.465725492
-        ],
+        "coordinates": [1.34564773737, 41.465725492],
         "type": "Point"
       },
       "id": 392
@@ -8267,10 +7088,7 @@
         "altitude": "1203"
       },
       "geometry": {
-        "coordinates": [
-          2.53302886771,
-          41.923121729
-        ],
+        "coordinates": [2.53302886771, 41.923121729],
         "type": "Point"
       },
       "id": 393
@@ -8288,10 +7106,7 @@
         "altitude": "793"
       },
       "geometry": {
-        "coordinates": [
-          2.446635,
-          42.197876
-        ],
+        "coordinates": [2.446635, 42.197876],
         "type": "Point"
       },
       "id": 394
@@ -8309,10 +7124,7 @@
         "altitude": "646"
       },
       "geometry": {
-        "coordinates": [
-          2.71172885085,
-          42.1120830253
-        ],
+        "coordinates": [2.71172885085, 42.1120830253],
         "type": "Point"
       },
       "id": 395
@@ -8330,10 +7142,7 @@
         "altitude": "389"
       },
       "geometry": {
-        "coordinates": [
-          2.0978784699,
-          41.3936585908
-        ],
+        "coordinates": [2.0978784699, 41.3936585908],
         "type": "Point"
       },
       "id": 396
@@ -8351,10 +7160,7 @@
         "altitude": "1503"
       },
       "geometry": {
-        "coordinates": [
-          1.301323,
-          42.30524
-        ],
+        "coordinates": [1.301323, 42.30524],
         "type": "Point"
       },
       "id": 397
@@ -8372,10 +7178,7 @@
         "altitude": "295"
       },
       "geometry": {
-        "coordinates": [
-          2.01117775092,
-          41.3377752491
-        ],
+        "coordinates": [2.01117775092, 41.3377752491],
         "type": "Point"
       },
       "id": 398
@@ -8393,10 +7196,7 @@
         "altitude": "598"
       },
       "geometry": {
-        "coordinates": [
-          2.66189985111,
-          42.0174863364
-        ],
+        "coordinates": [2.66189985111, 42.0174863364],
         "type": "Point"
       },
       "id": 399
@@ -8414,10 +7214,7 @@
         "altitude": "942"
       },
       "geometry": {
-        "coordinates": [
-          2.12295683181,
-          41.702765106
-        ],
+        "coordinates": [2.12295683181, 41.702765106],
         "type": "Point"
       },
       "id": 400
@@ -8435,10 +7232,7 @@
         "altitude": "1157"
       },
       "geometry": {
-        "coordinates": [
-          1.781976,
-          42.061364
-        ],
+        "coordinates": [1.781976, 42.061364],
         "type": "Point"
       },
       "id": 401
@@ -8456,10 +7250,7 @@
         "altitude": "413"
       },
       "geometry": {
-        "coordinates": [
-          1.88442879727,
-          41.5790930928
-        ],
+        "coordinates": [1.88442879727, 41.5790930928],
         "type": "Point"
       },
       "id": 402
@@ -8477,10 +7268,7 @@
         "altitude": "110"
       },
       "geometry": {
-        "coordinates": [
-          1.337035,
-          41.144903
-        ],
+        "coordinates": [1.337035, 41.144903],
         "type": "Point"
       },
       "id": 403
@@ -8498,10 +7286,7 @@
         "altitude": "1348"
       },
       "geometry": {
-        "coordinates": [
-          2.561282,
-          42.565323
-        ],
+        "coordinates": [2.561282, 42.565323],
         "type": "Point"
       },
       "id": 404
@@ -8519,10 +7304,7 @@
         "altitude": "752"
       },
       "geometry": {
-        "coordinates": [
-          0.338327729704,
-          40.9568864446
-        ],
+        "coordinates": [0.338327729704, 40.9568864446],
         "type": "Point"
       },
       "id": 405
@@ -8540,10 +7322,7 @@
         "altitude": "641"
       },
       "geometry": {
-        "coordinates": [
-          0.914951,
-          41.127021
-        ],
+        "coordinates": [0.914951, 41.127021],
         "type": "Point"
       },
       "id": 406
@@ -8561,10 +7340,7 @@
         "altitude": "1613"
       },
       "geometry": {
-        "coordinates": [
-          0.923423,
-          42.380797
-        ],
+        "coordinates": [0.923423, 42.380797],
         "type": "Point"
       },
       "id": 407
@@ -8582,10 +7358,7 @@
         "altitude": "1211"
       },
       "geometry": {
-        "coordinates": [
-          1.30115336685,
-          42.2090661303
-        ],
+        "coordinates": [1.30115336685, 42.2090661303],
         "type": "Point"
       },
       "id": 408
@@ -8603,10 +7376,7 @@
         "altitude": "526"
       },
       "geometry": {
-        "coordinates": [
-          2.825785,
-          42.324546
-        ],
+        "coordinates": [2.825785, 42.324546],
         "type": "Point"
       },
       "id": 409
@@ -8624,10 +7394,7 @@
         "altitude": "1547"
       },
       "geometry": {
-        "coordinates": [
-          2.34026503464,
-          42.1689910199
-        ],
+        "coordinates": [2.34026503464, 42.1689910199],
         "type": "Point"
       },
       "id": 410
@@ -8645,10 +7412,7 @@
         "altitude": "928"
       },
       "geometry": {
-        "coordinates": [
-          1.52894123151,
-          41.8335886088
-        ],
+        "coordinates": [1.52894123151, 41.8335886088],
         "type": "Point"
       },
       "id": 411
@@ -8666,10 +7430,7 @@
         "altitude": "830"
       },
       "geometry": {
-        "coordinates": [
-          2.259536,
-          42.080405
-        ],
+        "coordinates": [2.259536, 42.080405],
         "type": "Point"
       },
       "id": 412
@@ -8687,10 +7448,7 @@
         "altitude": "1429"
       },
       "geometry": {
-        "coordinates": [
-          1.192696,
-          42.132545
-        ],
+        "coordinates": [1.192696, 42.132545],
         "type": "Point"
       },
       "id": 413
@@ -8708,10 +7466,7 @@
         "altitude": "682"
       },
       "geometry": {
-        "coordinates": [
-          1.843372,
-          41.990488
-        ],
+        "coordinates": [1.843372, 41.990488],
         "type": "Point"
       },
       "id": 414
@@ -8729,10 +7484,7 @@
         "altitude": "1082"
       },
       "geometry": {
-        "coordinates": [
-          1.931652,
-          42.118155
-        ],
+        "coordinates": [1.931652, 42.118155],
         "type": "Point"
       },
       "id": 415
@@ -8750,10 +7502,7 @@
         "altitude": "1117"
       },
       "geometry": {
-        "coordinates": [
-          1.961989,
-          42.090509
-        ],
+        "coordinates": [1.961989, 42.090509],
         "type": "Point"
       },
       "id": 416
@@ -8771,10 +7520,7 @@
         "altitude": "2282"
       },
       "geometry": {
-        "coordinates": [
-          1.777023,
-          42.188121
-        ],
+        "coordinates": [1.777023, 42.188121],
         "type": "Point"
       },
       "id": 417
@@ -8792,10 +7538,7 @@
         "altitude": "542"
       },
       "geometry": {
-        "coordinates": [
-          1.017457,
-          41.199653
-        ],
+        "coordinates": [1.017457, 41.199653],
         "type": "Point"
       },
       "id": 418
@@ -8813,10 +7556,7 @@
         "altitude": "1653"
       },
       "geometry": {
-        "coordinates": [
-          1.91070593443,
-          42.1677248606
-        ],
+        "coordinates": [1.91070593443, 42.1677248606],
         "type": "Point"
       },
       "id": 419
@@ -8834,10 +7574,7 @@
         "altitude": "2040"
       },
       "geometry": {
-        "coordinates": [
-          2.20988746608,
-          42.2807720623
-        ],
+        "coordinates": [2.20988746608, 42.2807720623],
         "type": "Point"
       },
       "id": 420
@@ -8855,10 +7592,7 @@
         "altitude": "1056"
       },
       "geometry": {
-        "coordinates": [
-          2.29602067502,
-          41.7474775481
-        ],
+        "coordinates": [2.29602067502, 41.7474775481],
         "type": "Point"
       },
       "id": 421
@@ -8876,10 +7610,7 @@
         "altitude": "861"
       },
       "geometry": {
-        "coordinates": [
-          1.46671424676,
-          41.3357901533
-        ],
+        "coordinates": [1.46671424676, 41.3357901533],
         "type": "Point"
       },
       "id": 422
@@ -8897,10 +7628,7 @@
         "altitude": "842"
       },
       "geometry": {
-        "coordinates": [
-          1.76328314465,
-          41.6112068212
-        ],
+        "coordinates": [1.76328314465, 41.6112068212],
         "type": "Point"
       },
       "id": 423
@@ -8918,10 +7646,7 @@
         "altitude": "2830"
       },
       "geometry": {
-        "coordinates": [
-          2.14714732054,
-          42.4344424965
-        ],
+        "coordinates": [2.14714732054, 42.4344424965],
         "type": "Point"
       },
       "id": 424
@@ -8939,10 +7664,7 @@
         "altitude": "1267"
       },
       "geometry": {
-        "coordinates": [
-          2.377506,
-          42.522667
-        ],
+        "coordinates": [2.377506, 42.522667],
         "type": "Point"
       },
       "id": 425
@@ -8960,10 +7682,7 @@
         "altitude": "794"
       },
       "geometry": {
-        "coordinates": [
-          3.026334,
-          42.498172
-        ],
+        "coordinates": [3.026334, 42.498172],
         "type": "Point"
       },
       "id": 426
@@ -8981,10 +7700,7 @@
         "altitude": "699"
       },
       "geometry": {
-        "coordinates": [
-          0.658726,
-          42.016106
-        ],
+        "coordinates": [0.658726, 42.016106],
         "type": "Point"
       },
       "id": 427
@@ -9002,10 +7718,7 @@
         "altitude": "656"
       },
       "geometry": {
-        "coordinates": [
-          3.07511682009,
-          42.4904284262
-        ],
+        "coordinates": [3.07511682009, 42.4904284262],
         "type": "Point"
       },
       "id": 428
@@ -9023,10 +7736,7 @@
         "altitude": "498"
       },
       "geometry": {
-        "coordinates": [
-          2.76180548558,
-          42.8054119343
-        ],
+        "coordinates": [2.76180548558, 42.8054119343],
         "type": "Point"
       },
       "id": 429
@@ -9044,10 +7754,7 @@
         "altitude": "2713"
       },
       "geometry": {
-        "coordinates": [
-          2.19620075069,
-          42.3908750324
-        ],
+        "coordinates": [2.19620075069, 42.3908750324],
         "type": "Point"
       },
       "id": 430
@@ -9065,10 +7772,7 @@
         "altitude": "1344"
       },
       "geometry": {
-        "coordinates": [
-          2.5421728176,
-          42.3645718057
-        ],
+        "coordinates": [2.5421728176, 42.3645718057],
         "type": "Point"
       },
       "id": 431
@@ -9086,10 +7790,7 @@
         "altitude": "2436"
       },
       "geometry": {
-        "coordinates": [
-          1.2148545,
-          42.4086558
-        ],
+        "coordinates": [1.2148545, 42.4086558],
         "type": "Point"
       },
       "id": 432
@@ -9107,10 +7808,7 @@
         "altitude": "2562"
       },
       "geometry": {
-        "coordinates": [
-          1.58419812657,
-          42.2870741235
-        ],
+        "coordinates": [1.58419812657, 42.2870741235],
         "type": "Point"
       },
       "id": 433
@@ -9128,10 +7826,7 @@
         "altitude": "763"
       },
       "geometry": {
-        "coordinates": [
-          0.530331521271,
-          40.6136410446
-        ],
+        "coordinates": [0.530331521271, 40.6136410446],
         "type": "Point"
       },
       "id": 434
@@ -9149,10 +7844,7 @@
         "altitude": "1087"
       },
       "geometry": {
-        "coordinates": [
-          2.69285,
-          42.273432
-        ],
+        "coordinates": [2.69285, 42.273432],
         "type": "Point"
       },
       "id": 435
@@ -9170,10 +7862,7 @@
         "altitude": "2657"
       },
       "geometry": {
-        "coordinates": [
-          1.59850483358,
-          42.5029747118
-        ],
+        "coordinates": [1.59850483358, 42.5029747118],
         "type": "Point"
       },
       "id": 436
@@ -9191,10 +7880,7 @@
         "altitude": "387"
       },
       "geometry": {
-        "coordinates": [
-          1.37048307675,
-          41.2534469696
-        ],
+        "coordinates": [1.37048307675, 41.2534469696],
         "type": "Point"
       },
       "id": 437
@@ -9212,10 +7898,7 @@
         "altitude": "2905"
       },
       "geometry": {
-        "coordinates": [
-          1.65656107795,
-          42.4682057164
-        ],
+        "coordinates": [1.65656107795, 42.4682057164],
         "type": "Point"
       },
       "id": 438
@@ -9233,10 +7916,7 @@
         "altitude": "2842"
       },
       "geometry": {
-        "coordinates": [
-          1.631675,
-          42.462752
-        ],
+        "coordinates": [1.631675, 42.462752],
         "type": "Point"
       },
       "id": 439
@@ -9254,10 +7934,7 @@
         "altitude": "1072"
       },
       "geometry": {
-        "coordinates": [
-          0.370789362269,
-          40.9430405014
-        ],
+        "coordinates": [0.370789362269, 40.9430405014],
         "type": "Point"
       },
       "id": 440
@@ -9275,10 +7952,7 @@
         "altitude": "368"
       },
       "geometry": {
-        "coordinates": [
-          1.089982,
-          41.711267
-        ],
+        "coordinates": [1.089982, 41.711267],
         "type": "Point"
       },
       "id": 441
@@ -9296,10 +7970,7 @@
         "altitude": "1818"
       },
       "geometry": {
-        "coordinates": [
-          1.624994,
-          42.323748
-        ],
+        "coordinates": [1.624994, 42.323748],
         "type": "Point"
       },
       "id": 442
@@ -9317,10 +7988,7 @@
         "altitude": "1211"
       },
       "geometry": {
-        "coordinates": [
-          1.343498,
-          42.188403
-        ],
+        "coordinates": [1.343498, 42.188403],
         "type": "Point"
       },
       "id": 443
@@ -9338,10 +8006,7 @@
         "altitude": "1425"
       },
       "geometry": {
-        "coordinates": [
-          0.814206,
-          42.227967
-        ],
+        "coordinates": [0.814206, 42.227967],
         "type": "Point"
       },
       "id": 444
@@ -9359,10 +8024,7 @@
         "altitude": "1315"
       },
       "geometry": {
-        "coordinates": [
-          1.018841,
-          42.298927
-        ],
+        "coordinates": [1.018841, 42.298927],
         "type": "Point"
       },
       "id": 445
@@ -9380,10 +8042,7 @@
         "altitude": "697"
       },
       "geometry": {
-        "coordinates": [
-          0.809551,
-          40.968088
-        ],
+        "coordinates": [0.809551, 40.968088],
         "type": "Point"
       },
       "id": 446
@@ -9401,10 +8060,7 @@
         "altitude": "1201"
       },
       "geometry": {
-        "coordinates": [
-          1.00419364629,
-          41.3260040526
-        ],
+        "coordinates": [1.00419364629, 41.3260040526],
         "type": "Point"
       },
       "id": 447
@@ -9422,10 +8078,7 @@
         "altitude": "658"
       },
       "geometry": {
-        "coordinates": [
-          1.40207143007,
-          41.8465649784
-        ],
+        "coordinates": [1.40207143007, 41.8465649784],
         "type": "Point"
       },
       "id": 448
@@ -9443,10 +8096,7 @@
         "altitude": "243"
       },
       "geometry": {
-        "coordinates": [
-          0.709795465691,
-          41.619530636
-        ],
+        "coordinates": [0.709795465691, 41.619530636],
         "type": "Point"
       },
       "id": 449
@@ -9464,10 +8114,7 @@
         "altitude": "2753"
       },
       "geometry": {
-        "coordinates": [
-          1.585502,
-          42.459196
-        ],
+        "coordinates": [1.585502, 42.459196],
         "type": "Point"
       },
       "id": 450
@@ -9485,10 +8132,7 @@
         "altitude": "2445"
       },
       "geometry": {
-        "coordinates": [
-          0.765365646658,
-          42.5185798109
-        ],
+        "coordinates": [0.765365646658, 42.5185798109],
         "type": "Point"
       },
       "id": 451
@@ -9506,10 +8150,7 @@
         "altitude": "1379"
       },
       "geometry": {
-        "coordinates": [
-          1.65922632604,
-          42.1147525661
-        ],
+        "coordinates": [1.65922632604, 42.1147525661],
         "type": "Point"
       },
       "id": 452
@@ -9527,10 +8168,7 @@
         "altitude": "1631"
       },
       "geometry": {
-        "coordinates": [
-          1.542997,
-          42.311767
-        ],
+        "coordinates": [1.542997, 42.311767],
         "type": "Point"
       },
       "id": 453
@@ -9548,10 +8186,7 @@
         "altitude": "1672"
       },
       "geometry": {
-        "coordinates": [
-          0.959033353518,
-          42.0210727556
-        ],
+        "coordinates": [0.959033353518, 42.0210727556],
         "type": "Point"
       },
       "id": 454
@@ -9569,10 +8204,7 @@
         "altitude": "394"
       },
       "geometry": {
-        "coordinates": [
-          0.714712,
-          40.941305
-        ],
+        "coordinates": [0.714712, 40.941305],
         "type": "Point"
       },
       "id": 455
@@ -9590,10 +8222,7 @@
         "altitude": "326"
       },
       "geometry": {
-        "coordinates": [
-          0.749767,
-          41.779937
-        ],
+        "coordinates": [0.749767, 41.779937],
         "type": "Point"
       },
       "id": 456
@@ -9611,10 +8240,7 @@
         "altitude": "740"
       },
       "geometry": {
-        "coordinates": [
-          0.892467,
-          41.899053
-        ],
+        "coordinates": [0.892467, 41.899053],
         "type": "Point"
       },
       "id": 457
@@ -9632,10 +8258,7 @@
         "altitude": "828"
       },
       "geometry": {
-        "coordinates": [
-          1.3049206803,
-          41.5727833358
-        ],
+        "coordinates": [1.3049206803, 41.5727833358],
         "type": "Point"
       },
       "id": 458
@@ -9653,10 +8276,7 @@
         "altitude": "526"
       },
       "geometry": {
-        "coordinates": [
-          1.317351,
-          41.825562
-        ],
+        "coordinates": [1.317351, 41.825562],
         "type": "Point"
       },
       "id": 459
@@ -9674,10 +8294,7 @@
         "altitude": "1913"
       },
       "geometry": {
-        "coordinates": [
-          1.13303,
-          42.341786
-        ],
+        "coordinates": [1.13303, 42.341786],
         "type": "Point"
       },
       "id": 460
@@ -9695,10 +8312,7 @@
         "altitude": "1350"
       },
       "geometry": {
-        "coordinates": [
-          0.170231508703,
-          40.732788284
-        ],
+        "coordinates": [0.170231508703, 40.732788284],
         "type": "Point"
       },
       "id": 461
@@ -9716,10 +8330,7 @@
         "altitude": "2256"
       },
       "geometry": {
-        "coordinates": [
-          1.734439,
-          42.420227
-        ],
+        "coordinates": [1.734439, 42.420227],
         "type": "Point"
       },
       "id": 462
@@ -9737,10 +8348,7 @@
         "altitude": "1546"
       },
       "geometry": {
-        "coordinates": [
-          0.7711,
-          42.333077
-        ],
+        "coordinates": [0.7711, 42.333077],
         "type": "Point"
       },
       "id": 463
@@ -9758,10 +8366,7 @@
         "altitude": "346"
       },
       "geometry": {
-        "coordinates": [
-          0.381876,
-          41.333165
-        ],
+        "coordinates": [0.381876, 41.333165],
         "type": "Point"
       },
       "id": 464
@@ -9779,10 +8384,7 @@
         "altitude": "803"
       },
       "geometry": {
-        "coordinates": [
-          1.11287099172,
-          41.4688603287
-        ],
+        "coordinates": [1.11287099172, 41.4688603287],
         "type": "Point"
       },
       "id": 465
@@ -9800,10 +8402,7 @@
         "altitude": "1326"
       },
       "geometry": {
-        "coordinates": [
-          1.84353,
-          42.201154
-        ],
+        "coordinates": [1.84353, 42.201154],
         "type": "Point"
       },
       "id": 466
@@ -9821,10 +8420,7 @@
         "altitude": "2750"
       },
       "geometry": {
-        "coordinates": [
-          0.82896879,
-          42.63029682
-        ],
+        "coordinates": [0.82896879, 42.63029682],
         "type": "Point"
       },
       "id": 467
@@ -9842,10 +8438,7 @@
         "altitude": "2869"
       },
       "geometry": {
-        "coordinates": [
-          1.730058,
-          42.492381
-        ],
+        "coordinates": [1.730058, 42.492381],
         "type": "Point"
       },
       "id": 468
@@ -9863,10 +8456,7 @@
         "altitude": "1217"
       },
       "geometry": {
-        "coordinates": [
-          0.327442,
-          40.845019
-        ],
+        "coordinates": [0.327442, 40.845019],
         "type": "Point"
       },
       "id": 469
@@ -9884,10 +8474,7 @@
         "altitude": "2878"
       },
       "geometry": {
-        "coordinates": [
-          1.49344401828,
-          42.6534200397
-        ],
+        "coordinates": [1.49344401828, 42.6534200397],
         "type": "Point"
       },
       "id": 470
@@ -9905,10 +8492,7 @@
         "altitude": "2163"
       },
       "geometry": {
-        "coordinates": [
-          0.663349,
-          42.743713
-        ],
+        "coordinates": [0.663349, 42.743713],
         "type": "Point"
       },
       "id": 471
@@ -9926,10 +8510,7 @@
         "altitude": "2269"
       },
       "geometry": {
-        "coordinates": [
-          0.696960900078,
-          42.7180741367
-        ],
+        "coordinates": [0.696960900078, 42.7180741367],
         "type": "Point"
       },
       "id": 472
@@ -9947,10 +8528,7 @@
         "altitude": "2802"
       },
       "geometry": {
-        "coordinates": [
-          1.0098439898,
-          42.7885699239
-        ],
+        "coordinates": [1.0098439898, 42.7885699239],
         "type": "Point"
       },
       "id": 473
@@ -9968,10 +8546,7 @@
         "altitude": "2630"
       },
       "geometry": {
-        "coordinates": [
-          0.858212,
-          42.8257
-        ],
+        "coordinates": [0.858212, 42.8257],
         "type": "Point"
       },
       "id": 474
@@ -9989,10 +8564,7 @@
         "altitude": "2562"
       },
       "geometry": {
-        "coordinates": [
-          0.878311634743,
-          42.5264278782
-        ],
+        "coordinates": [0.878311634743, 42.5264278782],
         "type": "Point"
       },
       "id": 475
@@ -10010,10 +8582,7 @@
         "altitude": "2445"
       },
       "geometry": {
-        "coordinates": [
-          1.03304925486,
-          42.4236996448
-        ],
+        "coordinates": [1.03304925486, 42.4236996448],
         "type": "Point"
       },
       "id": 476
@@ -10031,10 +8600,7 @@
         "altitude": "2780"
       },
       "geometry": {
-        "coordinates": [
-          0.788591,
-          42.615515
-        ],
+        "coordinates": [0.788591, 42.615515],
         "type": "Point"
       },
       "id": 477
@@ -10052,10 +8618,7 @@
         "altitude": "2659"
       },
       "geometry": {
-        "coordinates": [
-          0.990518362006,
-          42.6840617618
-        ],
+        "coordinates": [0.990518362006, 42.6840617618],
         "type": "Point"
       },
       "id": 478
@@ -10073,10 +8636,7 @@
         "altitude": "2956"
       },
       "geometry": {
-        "coordinates": [
-          0.723704,
-          42.616766
-        ],
+        "coordinates": [0.723704, 42.616766],
         "type": "Point"
       },
       "id": 479
@@ -10094,10 +8654,7 @@
         "altitude": "2778"
       },
       "geometry": {
-        "coordinates": [
-          0.901177564183,
-          42.6102917642
-        ],
+        "coordinates": [0.901177564183, 42.6102917642],
         "type": "Point"
       },
       "id": 480
@@ -10115,10 +8672,7 @@
         "altitude": "2679"
       },
       "geometry": {
-        "coordinates": [
-          1.01233231492,
-          42.709242624
-        ],
+        "coordinates": [1.01233231492, 42.709242624],
         "type": "Point"
       },
       "id": 481
@@ -10136,10 +8690,7 @@
         "altitude": "3010"
       },
       "geometry": {
-        "coordinates": [
-          0.698560841901,
-          42.6294790552
-        ],
+        "coordinates": [0.698560841901, 42.6294790552],
         "type": "Point"
       },
       "id": 482
@@ -10157,10 +8708,7 @@
         "altitude": "2731"
       },
       "geometry": {
-        "coordinates": [
-          0.933047,
-          42.767776
-        ],
+        "coordinates": [0.933047, 42.767776],
         "type": "Point"
       },
       "id": 483
@@ -10178,10 +8726,7 @@
         "altitude": "2861"
       },
       "geometry": {
-        "coordinates": [
-          0.953482311716,
-          42.6012245847
-        ],
+        "coordinates": [0.953482311716, 42.6012245847],
         "type": "Point"
       },
       "id": 484
@@ -10199,10 +8744,7 @@
         "altitude": "2676"
       },
       "geometry": {
-        "coordinates": [
-          0.89524,
-          42.626145
-        ],
+        "coordinates": [0.89524, 42.626145],
         "type": "Point"
       },
       "id": 485
@@ -10220,10 +8762,7 @@
         "altitude": "2485"
       },
       "geometry": {
-        "coordinates": [
-          0.908438,
-          42.646875
-        ],
+        "coordinates": [0.908438, 42.646875],
         "type": "Point"
       },
       "id": 486
@@ -10241,10 +8780,7 @@
         "altitude": "2634"
       },
       "geometry": {
-        "coordinates": [
-          0.796356,
-          42.644251
-        ],
+        "coordinates": [0.796356, 42.644251],
         "type": "Point"
       },
       "id": 487
@@ -10262,10 +8798,7 @@
         "altitude": "2508"
       },
       "geometry": {
-        "coordinates": [
-          0.851899,
-          42.751276
-        ],
+        "coordinates": [0.851899, 42.751276],
         "type": "Point"
       },
       "id": 488
@@ -10283,10 +8816,7 @@
         "altitude": "2645"
       },
       "geometry": {
-        "coordinates": [
-          0.991789,
-          42.712633
-        ],
+        "coordinates": [0.991789, 42.712633],
         "type": "Point"
       },
       "id": 489
@@ -10304,10 +8834,7 @@
         "altitude": "2536"
       },
       "geometry": {
-        "coordinates": [
-          0.875683713178,
-          42.7428629004
-        ],
+        "coordinates": [0.875683713178, 42.7428629004],
         "type": "Point"
       },
       "id": 490
@@ -10325,10 +8852,7 @@
         "altitude": "2534"
       },
       "geometry": {
-        "coordinates": [
-          0.876909,
-          42.781246
-        ],
+        "coordinates": [0.876909, 42.781246],
         "type": "Point"
       },
       "id": 491
@@ -10346,10 +8870,7 @@
         "altitude": "2791"
       },
       "geometry": {
-        "coordinates": [
-          0.903326,
-          42.514046
-        ],
+        "coordinates": [0.903326, 42.514046],
         "type": "Point"
       },
       "id": 492
@@ -10367,10 +8888,7 @@
         "altitude": "2699"
       },
       "geometry": {
-        "coordinates": [
-          0.866017,
-          42.622386
-        ],
+        "coordinates": [0.866017, 42.622386],
         "type": "Point"
       },
       "id": 493
@@ -10388,10 +8906,7 @@
         "altitude": "2194"
       },
       "geometry": {
-        "coordinates": [
-          0.675123685097,
-          42.8461319437
-        ],
+        "coordinates": [0.675123685097, 42.8461319437],
         "type": "Point"
       },
       "id": 494
@@ -10409,10 +8924,7 @@
         "altitude": "2606"
       },
       "geometry": {
-        "coordinates": [
-          0.765530738046,
-          42.6418637321
-        ],
+        "coordinates": [0.765530738046, 42.6418637321],
         "type": "Point"
       },
       "id": 495
@@ -10430,10 +8942,7 @@
         "altitude": "1843"
       },
       "geometry": {
-        "coordinates": [
-          2.26614,
-          42.708578
-        ],
+        "coordinates": [2.26614, 42.708578],
         "type": "Point"
       },
       "id": 496
@@ -10451,10 +8960,7 @@
         "altitude": "2703"
       },
       "geometry": {
-        "coordinates": [
-          0.946848989161,
-          42.6239250652
-        ],
+        "coordinates": [0.946848989161, 42.6239250652],
         "type": "Point"
       },
       "id": 497
@@ -10472,10 +8978,7 @@
         "altitude": "484"
       },
       "geometry": {
-        "coordinates": [
-          2.26664062157,
-          41.5046857089
-        ],
+        "coordinates": [2.26664062157, 41.5046857089],
         "type": "Point"
       },
       "id": 498
@@ -10493,10 +8996,7 @@
         "altitude": "266"
       },
       "geometry": {
-        "coordinates": [
-          2.153352,
-          41.418435
-        ],
+        "coordinates": [2.153352, 41.418435],
         "type": "Point"
       },
       "id": 499
@@ -10514,10 +9014,7 @@
         "altitude": "131"
       },
       "geometry": {
-        "coordinates": [
-          2.46903089064,
-          41.5545820258
-        ],
+        "coordinates": [2.46903089064, 41.5545820258],
         "type": "Point"
       },
       "id": 500
@@ -10535,10 +9032,7 @@
         "altitude": "1702"
       },
       "geometry": {
-        "coordinates": [
-          1.92218442466,
-          42.4832775498
-        ],
+        "coordinates": [1.92218442466, 42.4832775498],
         "type": "Point"
       },
       "id": 501
@@ -10556,10 +9050,7 @@
         "altitude": "1045"
       },
       "geometry": {
-        "coordinates": [
-          2.17154371646,
-          41.8471462109
-        ],
+        "coordinates": [2.17154371646, 41.8471462109],
         "type": "Point"
       },
       "id": 502
@@ -10577,10 +9068,7 @@
         "altitude": "416"
       },
       "geometry": {
-        "coordinates": [
-          1.815801,
-          41.555408
-        ],
+        "coordinates": [1.815801, 41.555408],
         "type": "Point"
       },
       "id": 503
@@ -10598,10 +9086,7 @@
         "altitude": "595"
       },
       "geometry": {
-        "coordinates": [
-          1.815019,
-          41.620262
-        ],
+        "coordinates": [1.815019, 41.620262],
         "type": "Point"
       },
       "id": 504
@@ -10619,10 +9104,7 @@
         "altitude": "447"
       },
       "geometry": {
-        "coordinates": [
-          1.88694712824,
-          41.6287105203
-        ],
+        "coordinates": [1.88694712824, 41.6287105203],
         "type": "Point"
       },
       "id": 505
@@ -10640,10 +9122,7 @@
         "altitude": "1706"
       },
       "geometry": {
-        "coordinates": [
-          2.434813,
-          41.776488
-        ],
+        "coordinates": [2.434813, 41.776488],
         "type": "Point"
       },
       "id": 506
@@ -10661,10 +9140,7 @@
         "altitude": "930"
       },
       "geometry": {
-        "coordinates": [
-          1.969698,
-          41.64995
-        ],
+        "coordinates": [1.969698, 41.64995],
         "type": "Point"
       },
       "id": 507
@@ -10682,10 +9158,7 @@
         "altitude": "624"
       },
       "geometry": {
-        "coordinates": [
-          1.8300988474,
-          41.8509216559
-        ],
+        "coordinates": [1.8300988474, 41.8509216559],
         "type": "Point"
       },
       "id": 508
@@ -10703,10 +9176,7 @@
         "altitude": "430"
       },
       "geometry": {
-        "coordinates": [
-          2.12968297951,
-          41.4421744885
-        ],
+        "coordinates": [2.12968297951, 41.4421744885],
         "type": "Point"
       },
       "id": 509
@@ -10724,10 +9194,7 @@
         "altitude": "273"
       },
       "geometry": {
-        "coordinates": [
-          2.176612,
-          41.477208
-        ],
+        "coordinates": [2.176612, 41.477208],
         "type": "Point"
       },
       "id": 510
@@ -10745,10 +9212,7 @@
         "altitude": "40"
       },
       "geometry": {
-        "coordinates": [
-          2.27868166694,
-          41.4658949776
-        ],
+        "coordinates": [2.27868166694, 41.4658949776],
         "type": "Point"
       },
       "id": 511
@@ -10766,10 +9230,7 @@
         "altitude": "633"
       },
       "geometry": {
-        "coordinates": [
-          2.54064315408,
-          41.7827714155
-        ],
+        "coordinates": [2.54064315408, 41.7827714155],
         "type": "Point"
       },
       "id": 512
@@ -10787,10 +9248,7 @@
         "altitude": "233"
       },
       "geometry": {
-        "coordinates": [
-          2.730416,
-          41.754554
-        ],
+        "coordinates": [2.730416, 41.754554],
         "type": "Point"
       },
       "id": 513
@@ -10808,10 +9266,7 @@
         "altitude": "755"
       },
       "geometry": {
-        "coordinates": [
-          1.954693,
-          41.671376
-        ],
+        "coordinates": [1.954693, 41.671376],
         "type": "Point"
       },
       "id": 514
@@ -10829,10 +9284,7 @@
         "altitude": "1265"
       },
       "geometry": {
-        "coordinates": [
-          2.347413,
-          41.832591
-        ],
+        "coordinates": [2.347413, 41.832591],
         "type": "Point"
       },
       "id": 515
@@ -10850,10 +9302,7 @@
         "altitude": "635"
       },
       "geometry": {
-        "coordinates": [
-          1.93396849589,
-          41.5763385712
-        ],
+        "coordinates": [1.93396849589, 41.5763385712],
         "type": "Point"
       },
       "id": 516
@@ -10871,10 +9320,7 @@
         "altitude": "1273"
       },
       "geometry": {
-        "coordinates": [
-          2.36552500233,
-          41.7426763307
-        ],
+        "coordinates": [2.36552500233, 41.7426763307],
         "type": "Point"
       },
       "id": 517
@@ -10892,10 +9338,7 @@
         "altitude": "442"
       },
       "geometry": {
-        "coordinates": [
-          2.631007,
-          41.861292
-        ],
+        "coordinates": [2.631007, 41.861292],
         "type": "Point"
       },
       "id": 518
@@ -10913,10 +9356,7 @@
         "altitude": "2493"
       },
       "geometry": {
-        "coordinates": [
-          1.600995,
-          42.424555
-        ],
+        "coordinates": [1.600995, 42.424555],
         "type": "Point"
       },
       "id": 519
@@ -10934,10 +9374,7 @@
         "altitude": "789"
       },
       "geometry": {
-        "coordinates": [
-          2.53606815969,
-          42.1539906034
-        ],
+        "coordinates": [2.53606815969, 42.1539906034],
         "type": "Point"
       },
       "id": 520
@@ -10955,10 +9392,7 @@
         "altitude": "2649"
       },
       "geometry": {
-        "coordinates": [
-          1.63642947853,
-          42.2857798845
-        ],
+        "coordinates": [1.63642947853, 42.2857798845],
         "type": "Point"
       },
       "id": 521
