@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+const useSecureCookies = process.env.NEXTAUTH_URL?.startsWith('https://');
+const cookiePrefix = useSecureCookies ? '__Secure-' : '';
+const cookieName = `${cookiePrefix}next-auth.session-token`;
+
 export async function GET(req: NextRequest) {
-  const sessionToken = req.cookies.get('next-auth.session-token')?.value;
+  const sessionToken = req.cookies.get(cookieName)?.value;
 
   if (!sessionToken) {
     return NextResponse.json(
