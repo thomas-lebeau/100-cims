@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const sessionToken = req.cookies.get('next-auth.session-token')?.value;
 
   if (!sessionToken) {
-    throw new Error('Unauthorized');
+    return NextResponse.json({ user: null });
   }
 
   const session = await prisma.session.findUnique({
@@ -13,15 +13,9 @@ export async function GET(req: NextRequest) {
     select: { user: true },
   });
 
-  if (!session) {
-    throw new Error('Session not found');
+  if (!session || !session.user) {
+    return NextResponse.json({ user: null });
   }
 
-  // const user = await prisma.user.findUnique({ where: { id: session.userId } });
-
-  // if (!user) {
-  //   throw new Error('User not found');
-  // }
-
-  return NextResponse.json({ session });
+  return NextResponse.json({ user: session.user });
 }
