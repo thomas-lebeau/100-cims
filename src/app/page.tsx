@@ -9,6 +9,8 @@ import SessionProvider from './components/session-provider';
 import Nav from './components/nav';
 import Main from './components/main';
 
+export const dynamic = 'force-dynamic';
+
 async function getCims() {
   return fetch('/api/cims').then((res) => res.json());
 }
