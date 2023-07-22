@@ -11,9 +11,8 @@ import { createPopup } from './popup';
 export function createMarker({
   longitude,
   latitude,
-  essencial,
-}: Pick<Cim, 'latitude' | 'essencial' | 'longitude'>) {
-  const color = essencial ? Pin.COLOR.GREEN : Pin.COLOR.RED;
+}: Pick<Cim, 'latitude' | 'longitude'>) {
+  const color = Pin.COLOR.RED;
   const staticElement = renderToStaticMarkup(<Pin color={color} />);
 
   const element = document.createElement('div');
