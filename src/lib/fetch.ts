@@ -7,7 +7,7 @@ async function _fetch(input: RequestInfo | URL): Promise<Response> {
   const protocol = host?.includes('localhost') ? 'http' : 'https';
 
   return await fetch(`${protocol}://${host}${input}`, {
-    headers: headers(),
+    // headers: headers(),
   });
 }
 

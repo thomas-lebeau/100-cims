@@ -21,6 +21,7 @@ const FILTER_TYPE = {
   name: 'name',
   essencial: 'essencial',
   comarca: 'comarca',
+  climbed: 'climbed',
 } as const;
 
 type FilterType = ValueOf<typeof FILTER_TYPE>;
@@ -29,6 +30,7 @@ type FilterState = {
   name?: string;
   essencial?: boolean;
   comarca?: Array<string>;
+  climbed?: boolean;
 };
 
 type Action<T extends FilterType> = {
@@ -51,31 +53,14 @@ const filterFns: FilterFn<FilterType> = {
   essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
   comarca: (comarca: Array<string>) => (cim: Cim) =>
     cim.comarcas.some((c) => comarca.includes(c.name)),
+  climbed: (climbed: boolean) => (cim: Cim) => cim.climbed === climbed,
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
-  if (action.type === FILTER_TYPE.name) {
-    return {
-      ...state,
-      name: action.payload,
-    };
-  }
-
-  if (action.type === FILTER_TYPE.essencial) {
-    return {
-      ...state,
-      essencial: action.payload,
-    };
-  }
-
-  if (action.type === FILTER_TYPE.comarca) {
-    return {
-      ...state,
-      comarca: action.payload,
-    };
-  }
-
-  return state;
+  return {
+    ...state,
+    [action.type]: action.payload,
+  };
 }
 
 type MainProps = {
@@ -106,6 +91,10 @@ export default function Main({ cims }: MainProps) {
 
       if (filter.name) {
         filteredCims = filteredCims.filter(filterFns.name(filter.name));
+      }
+
+      if (filter.climbed) {
+        filteredCims = filteredCims.filter(filterFns.climbed(filter.climbed));
       }
 
       setFilteredCims(filteredCims);
@@ -156,6 +145,21 @@ export default function Main({ cims }: MainProps) {
               <SegmentedControlOption value="all">All</SegmentedControlOption>
               <SegmentedControlOption value="essentials">
                 Essentials
+              </SegmentedControlOption>
+            </SecgmentedControl>
+            <SecgmentedControl
+              className="space-x-2"
+              value={filter.climbed ? 'climbed' : 'all'}
+              onValueChange={(value) =>
+                setFilter({
+                  type: FILTER_TYPE.climbed,
+                  payload: value === 'climbed',
+                })
+              }
+            >
+              <SegmentedControlOption value="all">All</SegmentedControlOption>
+              <SegmentedControlOption value="climbed">
+                Acsended
               </SegmentedControlOption>
             </SecgmentedControl>
           </div>
