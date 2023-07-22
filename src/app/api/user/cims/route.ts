@@ -5,7 +5,10 @@ export async function GET(req: NextRequest) {
   const sessionToken = req.cookies.get('next-auth.session-token')?.value;
 
   if (!sessionToken) {
-    return NextResponse.json({ user: null });
+    return NextResponse.json(
+      { error: 'sessionToken not found' },
+      { status: 301 }
+    );
   }
 
   const session = await prisma.session.findUnique({
@@ -14,7 +17,7 @@ export async function GET(req: NextRequest) {
   });
 
   if (!session || !session.user) {
-    return NextResponse.json({ user: null });
+    return NextResponse.json({ error: 'session not found' }, { status: 301 });
   }
 
   return NextResponse.json({ user: session.user });
