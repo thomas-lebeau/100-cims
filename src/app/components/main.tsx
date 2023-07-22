@@ -63,17 +63,20 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
   };
 }
 
-type MainProps = {
-  cims: Cim[];
-};
-
-export default function Main({ cims }: MainProps) {
+export default function Main() {
+  const [cims, setCims] = React.useState<Cim[]>([]);
   const map = useMap();
   const [showFilterControls, setShowFilterControls] =
     React.useState<boolean>(false);
   const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
+
+  useEffect(function fetchCims() {
+    fetch('/api/cims')
+      .then((res) => res.json())
+      .then((cims) => setCims(cims));
+  }, []);
 
   useEffect(
     function applyFilters() {

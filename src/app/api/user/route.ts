@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getToken } from 'next-auth/jwt';
 
-export const dynamic = 'force-dynamic';
-
 export async function GET(req: NextRequest) {
   const sessionToken = await getToken({ req, raw: true });
 
