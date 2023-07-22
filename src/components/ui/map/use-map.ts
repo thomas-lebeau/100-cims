@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import { useState } from 'react';
 
-const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
+const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const BOUNDS: mapboxgl.LngLatBoundsLike = [
   [0.170231508703, 40.577228],
