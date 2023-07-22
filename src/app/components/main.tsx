@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { Settings2 } from 'lucide-react';
 
 import { Map, useMap, Marker } from '@/components/ui/map';
@@ -21,6 +21,7 @@ const FILTER_TYPE = {
   name: 'name',
   essencial: 'essencial',
   comarca: 'comarca',
+  climbed: 'climbed',
 } as const;
 
 type FilterType = ValueOf<typeof FILTER_TYPE>;
@@ -29,6 +30,7 @@ type FilterState = {
   name?: string;
   essencial?: boolean;
   comarca?: Array<string>;
+  climbed?: boolean;
 };
 
 type Action<T extends FilterType> = {
@@ -50,45 +52,44 @@ const filterFns: FilterFn<FilterType> = {
   name: (name: string) => (cim: Cim) => cim.name.toLowerCase().includes(name),
   essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
   comarca: (comarca: Array<string>) => (cim: Cim) =>
-    cim.comarca.some((c) => comarca.includes(c)),
+    cim.comarcas.some((c) => comarca.includes(c.name)),
+  climbed: (climbed: boolean) => (cim: Cim) => cim.climbed === climbed,
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
-  if (action.type === FILTER_TYPE.name) {
-    return {
-      ...state,
-      name: action.payload,
-    };
-  }
-
-  if (action.type === FILTER_TYPE.essencial) {
-    return {
-      ...state,
-      essencial: action.payload,
-    };
-  }
-
-  if (action.type === FILTER_TYPE.comarca) {
-    return {
-      ...state,
-      comarca: action.payload,
-    };
-  }
-
-  return state;
+  return {
+    ...state,
+    [action.type]: action.payload,
+  };
 }
 
-type MainProps = {
-  cims: Cim[];
-};
-
-export default function Main({ cims }: MainProps) {
+export default function Main() {
+  const [cims, setCims] = React.useState<Cim[]>([]);
   const map = useMap();
   const [showFilterControls, setShowFilterControls] =
     React.useState<boolean>(false);
   const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
+
+  const onClickClimb = useCallback((id: string, climbed: boolean) => {
+    fetch(`/api/cims/${id}`, {
+      method: climbed ? 'DELETE' : 'PUT',
+    })
+      .then((res) => res.json())
+      .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
+      .then((cims) => setCims(cims));
+  }, []);
+
+  useEffect(
+    function fetchCims() {
+      fetch('/api/cims')
+        .then((res) => res.json())
+        .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
+        .then((cims) => setCims(cims));
+    },
+    [onClickClimb]
+  );
 
   useEffect(
     function applyFilters() {
@@ -108,6 +109,10 @@ export default function Main({ cims }: MainProps) {
         filteredCims = filteredCims.filter(filterFns.name(filter.name));
       }
 
+      if (filter.climbed) {
+        filteredCims = filteredCims.filter(filterFns.climbed(filter.climbed));
+      }
+
       setFilteredCims(filteredCims);
     },
     [cims, filter]
@@ -122,7 +127,7 @@ export default function Main({ cims }: MainProps) {
           ))}
         </Map>
       </div>
-      <div className="max-h-screen overflow-scroll">
+      <div className="max-h-screen overflow-scroll mr-2">
         <div className="flex py-2">
           <Input
             type="search"
@@ -134,7 +139,7 @@ export default function Main({ cims }: MainProps) {
             className="max-w space-x-2"
           />
           <Button
-            className="space-x-2"
+            className="ml-2"
             variant="outline"
             size="icon"
             onClick={() => setShowFilterControls(!showFilterControls)}
@@ -156,6 +161,22 @@ export default function Main({ cims }: MainProps) {
               <SegmentedControlOption value="all">All</SegmentedControlOption>
               <SegmentedControlOption value="essentials">
                 Essentials
+              </SegmentedControlOption>
+            </SecgmentedControl>
+
+            <SecgmentedControl
+              className="ml-2"
+              value={filter.climbed ? 'climbed' : 'all'}
+              onValueChange={(value) =>
+                setFilter({
+                  type: FILTER_TYPE.climbed,
+                  payload: value === 'climbed',
+                })
+              }
+            >
+              <SegmentedControlOption value="all">All</SegmentedControlOption>
+              <SegmentedControlOption value="climbed">
+                Acsended
               </SegmentedControlOption>
             </SecgmentedControl>
           </div>

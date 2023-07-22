@@ -1,24 +1,52 @@
 'use client';
 
-import { ArrowUpDown, Sparkles } from 'lucide-react';
+import { ArrowUpDown, Sparkles, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-import type { Cim } from '@/types/cim';
+import type { Cim, Comarca } from '@/types/cim';
 import type { ColumnDef } from '@tanstack/react-table';
+import { cn } from '@/lib/utils';
 
 export const columns: ColumnDef<Cim>[] = [
   {
     accessorKey: 'essencial',
     header: '',
     cell: ({ row }) => {
+      return row.getValue<boolean>('essencial') ? (
+        <Sparkles className="h-4 w-4 text-yellow-500" />
+      ) : null;
+    },
+  },
+  {
+    accessorKey: 'climbed',
+    header: '',
+    cell: ({ row }) => {
+      const climbed = row.getValue<boolean>('climbed');
+
+      // TODO: fix this type!
+      // @ts-expect-error
+      const { id, onClickClimb } = row.original;
+
       return (
-        <>
-          {row.getValue<boolean>('essencial') ? (
-            <Sparkles className="h-4 w-4" />
-          ) : null}
-        </>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={(e) => {
+            e.stopPropagation();
+
+            onClickClimb(id, climbed);
+          }}
+        >
+          <CheckCircle
+            strokeWidth={3}
+            className={cn(
+              'h-4 w-4',
+              climbed ? 'text-green-500' : 'text-gray-300'
+            )}
+          />
+        </Button>
       );
     },
   },
@@ -27,18 +55,14 @@ export const columns: ColumnDef<Cim>[] = [
     header: 'Cim',
   },
   {
-    accessorKey: 'comarca',
+    accessorKey: 'comarcas',
     header: 'Comarca',
     cell: ({ row }) => {
-      return (
-        <>
-          {row.getValue<string[]>('comarca').map((comarca) => (
-            <Badge className="space-x-2" variant="secondary" key={comarca}>
-              {comarca}
-            </Badge>
-          ))}
-        </>
-      );
+      return row.getValue<Comarca[]>('comarcas')?.map((comarca) => (
+        <Badge className="m-1" variant="secondary" key={comarca.id}>
+          {comarca.name}
+        </Badge>
+      ));
     },
   },
   {

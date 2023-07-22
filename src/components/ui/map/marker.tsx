@@ -8,11 +8,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Map } from './map';
 import { createPopup } from './popup';
 
-export function createMarker({
-  longitude,
-  latitude,
-}: Pick<Cim, 'latitude' | 'longitude'>) {
-  const color = Pin.COLOR.RED;
+export function createMarker({ longitude, latitude, climbed }: Cim) {
+  const color = climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED;
   const staticElement = renderToStaticMarkup(<Pin color={color} />);
 
   const element = document.createElement('div');

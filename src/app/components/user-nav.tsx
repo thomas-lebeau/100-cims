@@ -13,18 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
 
 export function UserNav() {
   const { data, status } = useSession();
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      fetch('/api/user/cims')
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-    }
-  }, [status]);
 
   if (status !== 'authenticated') {
     return (
