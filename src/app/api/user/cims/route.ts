@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-
-const useSecureCookies = process.env.NEXTAUTH_URL?.startsWith('https://');
-const cookiePrefix = useSecureCookies ? '__Secure-' : '';
-const cookieName = `${cookiePrefix}next-auth.session-token`;
+import { getToken } from 'next-auth/jwt';
 
 export async function GET(req: NextRequest) {
-  const sessionToken = req.cookies.get(cookieName)?.value;
+  const sessionToken = await getToken({ req, raw: true });
 
   if (!sessionToken) {
     return NextResponse.json(
-      { error: `sessionToken "${cookieName}" not found` },
+      { error: `sessionToken not found` },
       { status: 301 }
     );
   }
