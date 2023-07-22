@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Sparkles } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,19 @@ import type { Cim } from '@/types/cim';
 import type { ColumnDef } from '@tanstack/react-table';
 
 export const columns: ColumnDef<Cim>[] = [
+  {
+    accessorKey: 'essencial',
+    header: '',
+    cell: ({ row }) => {
+      return (
+        <>
+          {row.getValue<boolean>('essencial') ? (
+            <Sparkles className="h-4 w-4" />
+          ) : null}
+        </>
+      );
+    },
+  },
   {
     accessorKey: 'name',
     header: 'Cim',

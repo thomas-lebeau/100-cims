@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useReducer } from 'react';
-import { Cog } from 'lucide-react';
+import { Settings2 } from 'lucide-react';
 
 import { Map, useMap, Marker } from '@/components/ui/map';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,10 @@ import { DataTable } from './cims/data-table';
 
 import type { Cim } from '@/types/cim';
 import type { ValueOf } from '@/types/values-of';
+import {
+  SecgmentedControl,
+  SegmentedControlOption,
+} from '@/components/ui/segmented-control';
 
 const FILTER_TYPE = {
   name: 'name',
@@ -80,6 +84,8 @@ type MainProps = {
 
 export default function Main({ cims }: MainProps) {
   const map = useMap();
+  const [showFilterControls, setShowFilterControls] =
+    React.useState<boolean>(false);
   const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
@@ -117,7 +123,7 @@ export default function Main({ cims }: MainProps) {
         </Map>
       </div>
       <div className="max-h-screen overflow-scroll">
-        <div className="py-2 flex">
+        <div className="flex py-2">
           <Input
             type="search"
             placeholder="Filter cims..."
@@ -127,18 +133,33 @@ export default function Main({ cims }: MainProps) {
             }
             className="max-w space-x-2"
           />
-          <Button className="space-x-2" variant="outline" size="icon">
-            <Cog
-              className="h-4 w-4"
-              onClick={() =>
-                setFilter({
-                  type: FILTER_TYPE.essencial,
-                  payload: !filter.essencial,
-                })
-              }
-            />
+          <Button
+            className="space-x-2"
+            variant="outline"
+            size="icon"
+            onClick={() => setShowFilterControls(!showFilterControls)}
+          >
+            <Settings2 className="h-4 w-4" />
           </Button>
         </div>
+        {showFilterControls && (
+          <div className="py-2 flex">
+            <SecgmentedControl
+              value={filter.essencial ? 'essentials' : 'all'}
+              onValueChange={(value) =>
+                setFilter({
+                  type: FILTER_TYPE.essencial,
+                  payload: value === 'essentials',
+                })
+              }
+            >
+              <SegmentedControlOption value="all">All</SegmentedControlOption>
+              <SegmentedControlOption value="essentials">
+                Essentials
+              </SegmentedControlOption>
+            </SecgmentedControl>
+          </div>
+        )}
         <DataTable
           columns={columns}
           data={filteredCims}

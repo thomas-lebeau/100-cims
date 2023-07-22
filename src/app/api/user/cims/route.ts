@@ -14,7 +14,17 @@ export async function GET(req: NextRequest) {
 
   const session = await prisma.session.findUnique({
     where: { sessionToken },
-    select: { user: true },
+    select: {
+      user: {
+        select: {
+          cims: {
+            include: {
+              comarcas: true,
+            },
+          },
+        },
+      },
+    },
   });
 
   if (!session || !session.user) {
@@ -24,5 +34,5 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ user: session.user });
+  return NextResponse.json({ cims: session.user });
 }
