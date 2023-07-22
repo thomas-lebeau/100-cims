@@ -3,26 +3,36 @@
 import type { Cim } from '@/types/cim';
 import mapboxgl from 'mapbox-gl';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { CheckCircle } from 'lucide-react';
+import { Button } from '../button';
 
-type PopupProps = Pick<Cim, 'name' | 'img' | 'altitude'>;
+export type PopupProps = Cim;
+function Popup({ name, img, altitude, climbed }: PopupProps) {
+  const buttonColor = climbed ? 'text-green-500' : 'text-gray-400';
 
-function Popup({ name, img, altitude }: PopupProps) {
   return (
     <div className="grid gap-4">
       {img ? <img src={img} alt={name} className="rounded-md" /> : null}
-      <div className="space-y-2">
-        <h4 className="font-medium leading-none text-base">{name}</h4>
-        <p className="text-sm text-muted-foreground">{altitude} m</p>
+      <div className="flex">
+        <div>
+          <h4 className="font-medium leading-none text-base">{name}</h4>
+          <p className="text-sm text-muted-foreground">{altitude} m</p>
+        </div>
+        <div className={`ml-auto ${buttonColor}`}>
+          <Button variant="ghost" size="sm" disabled>
+            <CheckCircle />
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
-export function createPopup(marker: PopupProps) {
+export function createPopup(props: PopupProps) {
   const popup = new mapboxgl.Popup({
     closeButton: false,
     maxWidth: '320px',
-  }).setHTML(renderToStaticMarkup(<Popup {...marker} />)) as mapboxgl.Popup & {
+  }).setHTML(renderToStaticMarkup(<Popup {...props} />)) as mapboxgl.Popup & {
     _content: HTMLElement;
   };
 

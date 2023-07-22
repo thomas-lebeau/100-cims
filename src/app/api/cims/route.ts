@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getToken } from 'next-auth/jwt';
 
+// Return all cims.
+// for authenticated users, include a their ascents (`climbed`)
 export async function GET(req: NextRequest) {
   const sessionToken = await getToken({ req, raw: true });
 

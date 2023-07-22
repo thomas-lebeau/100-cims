@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { Settings2 } from 'lucide-react';
 
 import { Map, useMap, Marker } from '@/components/ui/map';
@@ -72,11 +72,24 @@ export default function Main() {
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
 
-  useEffect(function fetchCims() {
-    fetch('/api/cims')
+  const onClickClimb = useCallback((id: string, climbed: boolean) => {
+    fetch(`/api/cims/${id}`, {
+      method: climbed ? 'DELETE' : 'PUT',
+    })
       .then((res) => res.json())
+      .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
       .then((cims) => setCims(cims));
   }, []);
+
+  useEffect(
+    function fetchCims() {
+      fetch('/api/cims')
+        .then((res) => res.json())
+        .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
+        .then((cims) => setCims(cims));
+    },
+    [onClickClimb]
+  );
 
   useEffect(
     function applyFilters() {
@@ -114,7 +127,7 @@ export default function Main() {
           ))}
         </Map>
       </div>
-      <div className="max-h-screen overflow-scroll">
+      <div className="max-h-screen overflow-scroll mr-2">
         <div className="flex py-2">
           <Input
             type="search"
@@ -126,7 +139,7 @@ export default function Main() {
             className="max-w space-x-2"
           />
           <Button
-            className="space-x-2"
+            className="ml-2"
             variant="outline"
             size="icon"
             onClick={() => setShowFilterControls(!showFilterControls)}
@@ -150,8 +163,9 @@ export default function Main() {
                 Essentials
               </SegmentedControlOption>
             </SecgmentedControl>
+
             <SecgmentedControl
-              className="space-x-2"
+              className="ml-2"
               value={filter.climbed ? 'climbed' : 'all'}
               onValueChange={(value) =>
                 setFilter({
