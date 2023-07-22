@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 
   if (!sessionToken) {
     return NextResponse.json(
-      { error: 'sessionToken not found' },
+      { error: `sessionToken "${cookieName}" not found` },
       { status: 301 }
     );
   }
