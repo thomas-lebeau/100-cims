@@ -17,7 +17,10 @@ function getBaseUrl() {
 }
 
 async function getCims() {
-  return fetch(`${getBaseUrl()}/api/cims`).then((res) => res.json());
+  console.log('baseUrl = ' + getBaseUrl());
+  return fetch(`${getBaseUrl()}/api/cims`, {
+    credentials: 'include',
+  }).then((res) => res.json());
 }
 
 export default async function Home() {
