@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         {children}
-        <Analytics />
+        <Analytics debug={false} />
       </body>
     </html>
   );

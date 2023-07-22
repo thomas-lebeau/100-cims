@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/data/gen.js"
+    "src/tools/scrap.js",
+    "src/tools/populate-db.js"
   ],
   "exclude": ["node_modules"]
 }
