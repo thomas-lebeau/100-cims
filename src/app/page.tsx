@@ -1,7 +1,7 @@
 import React from 'react';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/next-auth';
-import { headers } from 'next/headers';
+
+import fetch from '@/lib/fetch';
+import getServerSession from '@/lib/getServerSession';
 
 import NoSsr from '@/components/no-ssr';
 
@@ -9,23 +9,13 @@ import SessionProvider from './components/session-provider';
 import Nav from './components/nav';
 import Main from './components/main';
 
-function getBaseUrl() {
-  const host = headers().get('host');
-  const protocol = host?.includes('localhost') ? 'http' : 'https';
-
-  return `${protocol}://${host}`;
-}
-
 async function getCims() {
-  console.log('baseUrl = ' + getBaseUrl());
-  return fetch(`${getBaseUrl()}/api/cims`, {
-    credentials: 'include',
-  }).then((res) => res.json());
+  return fetch('/api/cims').then((res) => res.json());
 }
 
 export default async function Home() {
   const cims = await getCims();
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   return (
     <>
