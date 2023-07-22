@@ -17,7 +17,10 @@ export async function GET(req: NextRequest) {
   });
 
   if (!session || !session.user) {
-    return NextResponse.json({ error: 'session not found' }, { status: 301 });
+    return NextResponse.json(
+      { error: `session not found for sessionToken "${sessionToken}"` },
+      { status: 301 }
+    );
   }
 
   return NextResponse.json({ user: session.user });
