@@ -1,11 +1,11 @@
 'use client';
 
-import { ArrowUpDown, Sparkles } from 'lucide-react';
+import { ArrowUpDown, Sparkles, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-import type { Cim } from '@/types/cim';
+import type { Cim, Comarca } from '@/types/cim';
 import type { ColumnDef } from '@tanstack/react-table';
 
 export const columns: ColumnDef<Cim>[] = [
@@ -23,18 +23,31 @@ export const columns: ColumnDef<Cim>[] = [
     },
   },
   {
+    accessorKey: 'climbed',
+    header: '',
+    cell: ({ row }) => {
+      return (
+        <>
+          {row.getValue<boolean>('climbed') ? (
+            <CheckCircle className="h-4 w-4" />
+          ) : null}
+        </>
+      );
+    },
+  },
+  {
     accessorKey: 'name',
     header: 'Cim',
   },
   {
-    accessorKey: 'comarca',
+    accessorKey: 'comarcas',
     header: 'Comarca',
     cell: ({ row }) => {
       return (
         <>
-          {row.getValue<string[]>('comarca').map((comarca) => (
-            <Badge className="space-x-2" variant="secondary" key={comarca}>
-              {comarca}
+          {row.getValue<Comarca[]>('comarcas')?.map((comarca) => (
+            <Badge className="space-x-2" variant="secondary" key={comarca.id}>
+              {comarca.name}
             </Badge>
           ))}
         </>

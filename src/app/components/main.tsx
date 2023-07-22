@@ -50,7 +50,7 @@ const filterFns: FilterFn<FilterType> = {
   name: (name: string) => (cim: Cim) => cim.name.toLowerCase().includes(name),
   essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
   comarca: (comarca: Array<string>) => (cim: Cim) =>
-    cim.comarca.some((c) => comarca.includes(c)),
+    cim.comarcas.some((c) => comarca.includes(c.name)),
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
