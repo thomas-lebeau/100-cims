@@ -12,13 +12,13 @@ export default async function Home() {
   const session = await getServerSession();
 
   return (
-    <>
+    <div className="h-screen max-h-screen flex flex-col">
       <SessionProvider session={session}>
         <Nav />
         <NoSsr>
           <Main />
         </NoSsr>
       </SessionProvider>
-    </>
+    </div>
   );
 }

@@ -10,11 +10,12 @@ export type MapProps = {
   map: mapboxgl.Map;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 };
 
 const mapContext = React.createContext<mapboxgl.Map | null>(null);
 
-export function Map({ className, children, map }: MapProps) {
+export function Map({ className, children, map, style }: MapProps) {
   const [div, setDiv] = useState<HTMLElement | null>(null);
 
   const refCallback = useCallback((node: HTMLDivElement) => {
@@ -40,7 +41,7 @@ export function Map({ className, children, map }: MapProps) {
   );
 
   return (
-    <div ref={refCallback} className={className}>
+    <div ref={refCallback} className={className} style={style}>
       <mapContext.Provider value={map}>{children}</mapContext.Provider>
     </div>
   );
