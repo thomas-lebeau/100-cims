@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
 import { Settings2 } from 'lucide-react';
 
 import { Map, useMap, Marker } from '@/components/ui/map';
@@ -16,6 +16,7 @@ import {
   SecgmentedControl,
   SegmentedControlOption,
 } from '@/components/ui/segmented-control';
+import { Progress } from '@/components/ui/progress';
 
 const FILTER_TYPE = {
   name: 'name',
@@ -46,6 +47,15 @@ type FilterValue<T extends FilterType> = {
 
 type FilterFn<T extends FilterType> = {
   [K in T]: (filterValue: FilterValue<K>) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
+};
+
+type ClimStats = {
+  totalAltitude: number;
+  totalCims: number;
+  climbedAltitude: number;
+  climbedCims: number;
+  climbedPercentage: number;
+  climbedCimsPercentage: number;
 };
 
 const filterFns: FilterFn<FilterType> = {
@@ -118,17 +128,43 @@ export default function Main() {
     [cims, filter]
   );
 
+  const stats = useMemo<ClimStats>(
+    function calculateStats() {
+      const stats = filteredCims.reduce(
+        (acc, { altitude, climbed }) => {
+          acc.totalAltitude += altitude;
+          acc.totalCims += 1;
+          acc.climbedAltitude += climbed ? altitude : 0;
+          acc.climbedCims += climbed ? 1 : 0;
+
+          return acc;
+        },
+        { totalAltitude: 0, totalCims: 0, climbedAltitude: 0, climbedCims: 0 }
+      );
+
+      const climbedPercentage = Math.round(
+        (stats.climbedAltitude / stats.totalAltitude) * 100
+      );
+      const climbedCimsPercentage = Math.round(
+        (stats.climbedCims / stats.totalCims) * 100
+      );
+
+      return { ...stats, climbedPercentage, climbedCimsPercentage };
+    },
+    [filteredCims]
+  );
+
   return (
-    <main className="grid grid-cols-3 gap-2">
-      <div className="col-span-2">
-        <Map className="h-screen" map={map}>
+    <main className="flex grow" style={{ height: 'calc(100% - 5rem)' }}>
+      <div className="basis-2/3">
+        <Map className="h-full" map={map}>
           {filteredCims.map((cim) => (
             <Marker key={cim.id} {...cim} selected={selected === cim.id} />
           ))}
         </Map>
       </div>
-      <div className="max-h-screen overflow-scroll mr-2">
-        <div className="flex py-2">
+      <aside className="flex basis-1/3 flex-col">
+        <div className="flex p-2">
           <Input
             type="search"
             placeholder="Filter cims..."
@@ -148,7 +184,7 @@ export default function Main() {
           </Button>
         </div>
         {showFilterControls && (
-          <div className="py-2 flex">
+          <div className="flex p-2">
             <SecgmentedControl
               value={filter.essencial ? 'essentials' : 'all'}
               onValueChange={(value) =>
@@ -181,12 +217,25 @@ export default function Main() {
             </SecgmentedControl>
           </div>
         )}
-        <DataTable
-          columns={columns}
-          data={filteredCims}
-          onClickRow={({ id }) => setSelect(id)}
-        />
-      </div>
+        <div className="overflow-auto grow p-2">
+          <DataTable
+            columns={columns}
+            data={filteredCims}
+            onClickRow={({ id }) => setSelect(id)}
+          />
+        </div>
+        <div className="p-2 text-sm text-muted-foreground text-right grid grid-cols-3 grid-rows-2 items-center">
+          <Progress
+            value={stats.climbedCimsPercentage}
+            className="col-span-2 "
+          />
+          {stats.climbedCimsPercentage}% ({stats.climbedCims} /{stats.totalCims}
+          )
+          <Progress value={stats.climbedPercentage} className="col-span-2" />
+          {stats.climbedPercentage}% ({stats.climbedAltitude}m /{' '}
+          {stats.totalAltitude}m)
+        </div>
+      </aside>
     </main>
   );
 }

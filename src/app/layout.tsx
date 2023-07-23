@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 import type { Metadata } from 'next';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,9 +19,13 @@ type RootLayoutProps = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  cn(inter.className);
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="h-screen">
+      <body
+        className={cn(inter.className, 'h-screen max-h-screen flex flex-col')}
+      >
         {children}
         <Analytics debug={false} />
       </body>
