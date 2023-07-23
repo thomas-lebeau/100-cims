@@ -1,6 +1,6 @@
 import React from 'react';
 
-import getServerSession from '@/lib/getServerSession';
+import getServerSession from '@/lib/get-server-session';
 
 import NoSsr from '@/components/no-ssr';
 

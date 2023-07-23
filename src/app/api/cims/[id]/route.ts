@@ -2,6 +2,8 @@ import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 import prisma from '@/lib/prisma';
+import serverTimings from '@/lib/server-timings';
+import withHeaders from '@/lib/with-header';
 
 type ReqContext = {
   params: {
@@ -10,17 +12,30 @@ type ReqContext = {
 };
 
 export async function PUT(req: NextRequest, { params }: ReqContext) {
+  const serverTiming = new serverTimings();
+  serverTiming.start('tkn');
+
   const sessionToken = await getToken({ req, raw: true });
   const { id } = params;
+  serverTiming.stop('tkn');
+
+  serverTiming.start('auth');
 
   const user = await prisma.user.findFirst({
     where: { sessions: { some: { sessionToken } } },
     select: { id: true },
   });
 
+  serverTiming.stop('auth');
+
   if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return withHeaders(
+      NextResponse.json({ error: 'Unauthorized' }, { status: 401 }),
+      serverTiming.headers()
+    );
   }
+
+  serverTiming.start('usr');
 
   await prisma.user.update({
     where: { id: user.id },
@@ -31,6 +46,9 @@ export async function PUT(req: NextRequest, { params }: ReqContext) {
     },
   });
 
+  serverTiming.stop('usr');
+  serverTiming.start('cim');
+
   const cims = (
     await prisma.cim.findMany({
       include: {
@@ -46,21 +64,39 @@ export async function PUT(req: NextRequest, { params }: ReqContext) {
     climbed: Boolean(users?.length > 0),
   }));
 
-  return NextResponse.json(cims, { status: 200 });
+  serverTiming.stop('cim');
+
+  return withHeaders(
+    NextResponse.json(cims, { status: 200 }),
+    serverTiming.headers()
+  );
 }
 
 export async function DELETE(req: NextRequest, { params }: ReqContext) {
+  const serverTiming = new serverTimings();
+
+  serverTiming.start('tkn');
   const sessionToken = await getToken({ req, raw: true });
   const { id } = params;
+
+  serverTiming.stop('tkn');
+  serverTiming.start('auth');
 
   const user = await prisma.user.findFirst({
     where: { sessions: { some: { sessionToken } } },
     select: { id: true },
   });
 
+  serverTiming.stop('auth');
+
   if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return withHeaders(
+      NextResponse.json({ error: 'Unauthorized' }, { status: 401 }),
+      serverTiming.headers()
+    );
   }
+
+  serverTiming.start('usr');
 
   await prisma.user.update({
     where: { id: user.id },
@@ -71,6 +107,9 @@ export async function DELETE(req: NextRequest, { params }: ReqContext) {
     },
   });
 
+  serverTiming.stop('usr');
+  serverTiming.start('cim');
+
   const cims = (
     await prisma.cim.findMany({
       include: {
@@ -86,5 +125,10 @@ export async function DELETE(req: NextRequest, { params }: ReqContext) {
     climbed: Boolean(users?.length > 0),
   }));
 
-  return NextResponse.json(cims, { status: 200 });
+  serverTiming.stop('cim');
+
+  return withHeaders(
+    NextResponse.json(cims, { status: 200 }),
+    serverTiming.headers()
+  );
 }

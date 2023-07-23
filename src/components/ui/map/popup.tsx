@@ -7,12 +7,12 @@ import { CheckCircle } from 'lucide-react';
 import { Button } from '../button';
 
 export type PopupProps = Cim;
-function Popup({ name, img, altitude, climbed }: PopupProps) {
+function Popup({ name, altitude, climbed }: PopupProps) {
   const buttonColor = climbed ? 'text-green-500' : 'text-gray-400';
 
   return (
     <div className="grid gap-4">
-      {img ? <img src={img} alt={name} className="rounded-md" /> : null}
+      {/* {img ? <img src={img} alt={name} className="rounded-md" /> : null} */}
       <div className="flex">
         <div>
           <h4 className="font-medium leading-none text-base">{name}</h4>
