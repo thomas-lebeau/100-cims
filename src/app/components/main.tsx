@@ -86,7 +86,7 @@ export default function Main({ data: data }: { data: unknown }) {
   console.log('srr', data);
 
   useEffect(() => {
-    fetch(PUBLIC_API + '/demo/thing')
+    fetch(PUBLIC_API + '/demo')
       .then((res) => res.json())
       .catch((err) => err)
       .then((res) => console.log('csr', res));
