@@ -30,7 +30,7 @@ const emailProvider = EmailProvider({
   from: process.env.EMAIL_FROM,
 });
 
-const providers: Array<Provider> = [googleProvider, emailProvider];
+const providers: Array<Provider> = [googleProvider];
 
 if (process.env.EMAIL_SERVER_HOST) {
   providers.push(emailProvider);
