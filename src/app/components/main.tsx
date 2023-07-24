@@ -17,6 +17,7 @@ import {
   SegmentedControlOption,
 } from '@/components/ui/segmented-control';
 import { Progress } from '@/components/ui/progress';
+import { PUBLIC_API } from '@/lib/api';
 
 const FILTER_TYPE = {
   name: 'name',
@@ -82,7 +83,14 @@ export default function Main({ data: data }: { data: unknown }) {
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
 
-  console.log(data);
+  console.log('srr', data);
+
+  useEffect(() => {
+    fetch(PUBLIC_API + '/demo/thing')
+      .then((res) => res.json())
+      .catch((err) => err)
+      .then((res) => console.log('csr', res));
+  }, []);
 
   const onClickClimb = useCallback((id: string, climbed: boolean) => {
     fetch(`/api/cims/${id}`, {

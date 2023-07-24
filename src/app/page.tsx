@@ -7,28 +7,27 @@ import NoSsr from '@/components/no-ssr';
 import SessionProvider from './components/session-provider';
 import Nav from './components/nav';
 import Main from './components/main';
+import { PUBLIC_API } from '@/lib/api';
 
-const host = process.env.NEXT_PUBLIC_VERCEL_URL;
-const protocol = host?.startsWith('localhost') ? 'http' : 'https';
-
-async function getCims() {
-  // const res = await fetch(`${protocol}://${host}/api` + '/cims');
-
-  // return await res.json();
-
-  return { protocol, host };
+async function getThing() {
+  return fetch(PUBLIC_API + '/demo/thing')
+    .then((res) => res.json())
+    .catch((err) => {
+      const { message, stack } = err;
+      return { message, stack, url: PUBLIC_API };
+    });
 }
 
 export default async function Home() {
   const session = await getServerSession();
-  const cims = await getCims();
+  const data = await getThing();
 
   return (
     <div className="h-screen max-h-screen flex flex-col">
       <SessionProvider session={session}>
         <Nav />
         <NoSsr>
-          <Main data={cims} />
+          <Main data={data} />
         </NoSsr>
       </SessionProvider>
     </div>
