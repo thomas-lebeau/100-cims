@@ -15,6 +15,14 @@ async function handler(
   const sessionToken = await getToken({ req, raw: true });
 
   serverTiming.stop('tkn');
+
+  if (!sessionToken) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401, headers: serverTiming.headers() }
+    );
+  }
+
   serverTiming.start('auth');
 
   const { id } = params;
