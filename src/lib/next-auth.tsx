@@ -32,7 +32,7 @@ const emailProvider = EmailProvider({
 
 const providers: Array<Provider> = [googleProvider];
 
-if (process.env.EMAIL_SERVER_HOST) {
+if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
   providers.push(emailProvider);
 }
 
