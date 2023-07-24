@@ -8,15 +8,25 @@ import SessionProvider from './components/session-provider';
 import Nav from './components/nav';
 import Main from './components/main';
 
+const host = process.env.NEXT_PUBLIC_VERCEL_URL;
+const protocol = host?.startsWith('localhost') ? 'http' : 'https';
+
+async function getCims() {
+  const res = await fetch(`${protocol}://${host}/api` + '/cims');
+
+  return await res.json();
+}
+
 export default async function Home() {
   const session = await getServerSession();
+  const cims = await getCims();
 
   return (
     <div className="h-screen max-h-screen flex flex-col">
       <SessionProvider session={session}>
         <Nav />
         <NoSsr>
-          <Main />
+          <Main cims={cims} />
         </NoSsr>
       </SessionProvider>
     </div>
