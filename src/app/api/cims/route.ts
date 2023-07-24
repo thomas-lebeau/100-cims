@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getToken } from 'next-auth/jwt';
 import serverTimings from '@/lib/server-timings';
-import withHeaders from '@/lib/with-header';
 
 // Return all cims.
 // for authenticated users, include a their ascents (`climbed`)
@@ -22,8 +21,16 @@ export async function GET(req: NextRequest) {
         comarcas: true,
         users: sessionToken
           ? {
-              where: { sessions: { some: { sessionToken } } },
-              select: { id: true },
+              where: {
+                user: {
+                  sessions: {
+                    some: {
+                      sessionToken,
+                    },
+                  },
+                },
+              },
+              select: { userId: true },
             }
           : false,
       },
@@ -35,8 +42,8 @@ export async function GET(req: NextRequest) {
 
   serverTiming.stop('cim');
 
-  return withHeaders(
-    NextResponse.json(cims, { status: 200 }),
-    serverTiming.headers()
-  );
+  return NextResponse.json(cims, {
+    status: 200,
+    headers: serverTiming.headers(),
+  });
 }
