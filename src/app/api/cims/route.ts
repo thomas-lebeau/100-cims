@@ -10,7 +10,9 @@ import { PUBLIC_API } from '@/lib/api';
 export async function GET(req: NextRequest) {
   const serverTiming = new serverTimings();
 
-  const data = await fetch(PUBLIC_API + '/demo')
+  const data = await fetch(PUBLIC_API + '/demo', {
+    headers: req.headers,
+  })
     .then((res) => res.json())
     .catch((err) => err);
 
