@@ -25,6 +25,7 @@
     "mapbox-gl": "^2.15.0",
     "next": "13.4.9",
     "next-auth": "^4.22.3",
+    "nodemailer": "^6.9.4",
     "playwright": "^1.36.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
