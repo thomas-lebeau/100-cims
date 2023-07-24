@@ -1,37 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { getToken } from 'next-auth/jwt';
 import serverTimings from '@/lib/server-timings';
 import withHeaders from '@/lib/with-header';
 
 // Return all cims.
 // for authenticated users, include a their ascents (`climbed`)
-export async function GET(req: NextRequest) {
+export async function GET() {
   const serverTiming = new serverTimings();
 
   serverTiming.start('tkn');
 
-  const sessionToken = await getToken({ req, raw: true });
-
   serverTiming.stop('tkn');
   serverTiming.start('cim');
 
-  const cims = (
-    await prisma.cim.findMany({
-      include: {
-        comarcas: true,
-        users: sessionToken
-          ? {
-              where: { sessions: { some: { sessionToken } } },
-              select: { id: true },
-            }
-          : false,
-      },
-    })
-  ).map(({ users, ...cim }) => ({
-    ...cim,
-    climbed: Boolean(users?.length > 0),
-  }));
+  const cims = await prisma.cim.findMany({
+    include: {
+      comarcas: true,
+    },
+  });
 
   serverTiming.stop('cim');
 
