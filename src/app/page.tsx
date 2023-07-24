@@ -10,7 +10,7 @@ import Main from './components/main';
 import { PUBLIC_API } from '@/lib/api';
 
 async function getThing() {
-  return fetch(PUBLIC_API + '/demo/thing')
+  return fetch(PUBLIC_API + '/demo')
     .then((res) => res.json())
     .catch((err) => {
       const { message, stack } = err;
