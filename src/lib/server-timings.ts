@@ -35,15 +35,17 @@ export default class ServerTimings {
     const headers = new Headers();
 
     this.timings.forEach(({ name, duration, description }) => {
-      if (duration !== null) {
-        let value = `${name};dur=${duration}`;
-
-        if (description) {
-          value += `;desc="${description}"`;
-        }
-
-        headers.append('Server-Timing', value);
+      if (duration === null) {
+        this.stop(name);
       }
+
+      let value = `${name};dur=${duration}`;
+
+      if (description) {
+        value += `;desc="${description}"`;
+      }
+
+      headers.append('Server-Timing', value);
     });
 
     return headers;
