@@ -12,9 +12,11 @@ const host = process.env.NEXT_PUBLIC_VERCEL_URL;
 const protocol = host?.startsWith('localhost') ? 'http' : 'https';
 
 async function getCims() {
-  const res = await fetch(`${protocol}://${host}/api` + '/cims');
+  // const res = await fetch(`${protocol}://${host}/api` + '/cims');
 
-  return await res.json();
+  // return await res.json();
+
+  return { protocol, host };
 }
 
 export default async function Home() {
@@ -26,7 +28,7 @@ export default async function Home() {
       <SessionProvider session={session}>
         <Nav />
         <NoSsr>
-          <Main cims={cims} />
+          <Main data={cims} />
         </NoSsr>
       </SessionProvider>
     </div>

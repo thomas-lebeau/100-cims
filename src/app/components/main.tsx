@@ -73,7 +73,7 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
   };
 }
 
-export default function Main({ cims: _cims }: { cims: Cim[] }) {
+export default function Main({ data: data }: { data: unknown }) {
   const [cims, setCims] = React.useState<Cim[]>([]);
   const map = useMap();
   const [showFilterControls, setShowFilterControls] =
@@ -82,7 +82,7 @@ export default function Main({ cims: _cims }: { cims: Cim[] }) {
   const [selected, setSelect] = React.useState<string | null>(null);
   const [filter, setFilter] = useReducer(reducer, {});
 
-  console.log({ _cims });
+  console.log(data);
 
   const onClickClimb = useCallback((id: string, climbed: boolean) => {
     fetch(`/api/cims/${id}`, {
