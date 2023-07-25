@@ -4,6 +4,7 @@ import * as React from 'react';
 import {
   ColumnDef,
   SortingState,
+  TableMeta,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
@@ -22,13 +23,17 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  className?: string;
+  meta: TableMeta<TData>;
   onClickRow?: (row: TData) => void; // eslint-disable-line no-unused-vars
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  onClickRow = () => {},
+  className,
+  onClickRow,
+  meta,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -41,10 +46,11 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
     },
+    meta,
   });
 
   return (
-    <Table>
+    <Table className={className}>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
@@ -69,7 +75,7 @@ export function DataTable<TData, TValue>({
             <TableRow
               key={row.id}
               data-state={row.getIsSelected() && 'selected'}
-              onClick={() => onClickRow(row.original)}
+              onClick={() => onClickRow?.(row.original)}
             >
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id} className="p-1">

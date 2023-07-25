@@ -12,7 +12,7 @@ export const FILTER_TYPE = {
 
 type FilterType = ValueOf<typeof FILTER_TYPE>;
 
-type FilterState = {
+export type FilterState = {
   name?: string;
   essencial?: boolean;
   comarca?: Array<string>;
@@ -34,6 +34,8 @@ type FilterFn<T extends FilterType> = {
   [K in T]: (filterValue: FilterValue<K>) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
 };
 
+export type TSetFilter = React.Dispatch<Action<FilterType>>;
+
 const filterFns: FilterFn<FilterType> = {
   name: (name: string) => (cim: Cim) => cim.name.toLowerCase().includes(name),
   essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
@@ -49,9 +51,7 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
   };
 }
 
-export function useCimFilter(
-  cims: Cim[]
-): [Cim[], FilterState, React.Dispatch<Action<FilterType>>] {
+export function useCimFilter(cims: Cim[]): [Cim[], FilterState, TSetFilter] {
   const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
   const [filter, setFilter] = useReducer(reducer, {});
 

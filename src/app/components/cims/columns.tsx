@@ -22,12 +22,10 @@ export const columns: ColumnDef<Cim>[] = [
   {
     accessorKey: 'climbed',
     header: '',
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const climbed = row.getValue<boolean>('climbed');
 
-      // TODO: fix this type!
-      // @ts-expect-error
-      const { id, onClickClimb } = row.original;
+      const { id } = row.original;
 
       return (
         <Button
@@ -36,7 +34,16 @@ export const columns: ColumnDef<Cim>[] = [
           onClick={(e) => {
             e.stopPropagation();
 
-            onClickClimb(id, climbed);
+            const meta = table.options.meta;
+
+            // meta is of type `unknown`
+            if (
+              meta &&
+              'onClickClimb' in meta &&
+              typeof meta.onClickClimb === 'function'
+            ) {
+              meta.onClickClimb(id, climbed);
+            }
           }}
         >
           <CheckCircle
