@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Settings2 } from 'lucide-react';
 
-import { Map, useMap, Marker } from '@/components/ui/map';
+import { Map, Marker } from '@/components/ui/map';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -22,7 +22,6 @@ import { cn } from '@/lib/utils';
 
 export default function Main({ className }: { className?: string }) {
   const [cims, setCims] = React.useState<Cim[]>([]);
-  const map = useMap();
   const [showFilterControls, setShowFilterControls] =
     React.useState<boolean>(false);
   const [selected, setSelect] = React.useState<string | null>(null);
@@ -56,9 +55,14 @@ export default function Main({ className }: { className?: string }) {
       style={{ height: 'calc(100% - 5rem)' }}
     >
       <div className="basis-2/3">
-        <Map className="h-full" map={map}>
+        <Map className="h-full">
           {filteredCims.map((cim) => (
-            <Marker key={cim.id} {...cim} selected={selected === cim.id} />
+            <Marker
+              key={cim.id}
+              {...cim}
+              selected={selected === cim.id}
+              onClickClimb={onClickClimb}
+            />
           ))}
         </Map>
       </div>
