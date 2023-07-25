@@ -1,13 +1,12 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { UserNav } from './user-nav';
 
-export default function Nav() {
+export default function Nav({ className }: { className?: string }) {
   return (
-    <div className="flex h-10 ml-auto items-center px-2 py-4">
-      <div className="flex ml-auto">
-        <UserNav />
-      </div>
-    </div>
+    <nav className={cn(className, 'flex h-10 ml-auto items-center px-2 py-4')}>
+      <UserNav className="flex ml-auto" />
+    </nav>
   );
 }
