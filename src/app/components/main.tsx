@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { columns } from './cims/columns';
 import { DataTable } from './cims/data-table';
 
-import type { Cim } from '@/types/cim';
+import { cimsSchema, type Cim } from '@/types/cim';
 import {
   SecgmentedControl,
   SegmentedControlOption,
@@ -34,6 +34,7 @@ export default function Main({ className }: { className?: string }) {
       method: climbed ? 'DELETE' : 'PUT',
     })
       .then((res) => res.json())
+      .then((cim) => cimsSchema.parse(cim))
       .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
       .then((cims) => setCims(cims));
   }, []);
@@ -42,6 +43,7 @@ export default function Main({ className }: { className?: string }) {
     function fetchCims() {
       fetch('/api/cims')
         .then((res) => res.json())
+        .then((cim) => cimsSchema.parse(cim))
         .then((cims) => cims.map((cim: Cim) => ({ ...cim, onClickClimb })))
         .then((cims) => setCims(cims));
     },

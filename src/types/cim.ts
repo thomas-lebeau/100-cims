@@ -1,17 +1,24 @@
-export type Cim = {
-  id: string;
-  name: string;
-  comarcas: Array<Comarca>;
-  altitude: number;
-  longitude: number;
-  latitude: number;
-  url: string;
-  img?: string;
-  essencial: boolean;
-  climbed?: boolean;
-};
+import { z } from 'zod';
 
-export type Comarca = {
-  id: string;
-  name: string;
-};
+export const cimsSchema = z.array(
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    altitude: z.number(),
+    latitude: z.number(),
+    longitude: z.number(),
+    climbed: z.boolean(),
+    url: z.string(),
+    img: z.string(),
+    essencial: z.boolean(),
+    comarcas: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+      })
+    ),
+  })
+);
+
+export type Cim = z.infer<typeof cimsSchema>[0];
+export type Comarca = Cim['comarcas'][0];
