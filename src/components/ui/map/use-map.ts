@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -9,22 +9,28 @@ const BOUNDS: mapboxgl.LngLatBoundsLike = [
 ];
 
 export function useMap() {
-  const [container] = useState<HTMLDivElement>(() =>
-    document.createElement('div')
-  );
-  container.classList.add('h-full');
+  const mapContainer = useRef<HTMLDivElement | null>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+  const mapControls = useRef(new mapboxgl.NavigationControl());
 
-  const [map] = useState<mapboxgl.Map>(
-    () =>
-      new mapboxgl.Map({
-        container,
-        zoom: 9,
-        accessToken: TOKEN,
-        attributionControl: false,
-        bounds: BOUNDS,
-        style: 'mapbox://styles/mapbox/outdoors-v12',
-      }) as mapboxgl.Map & { _container: HTMLDivElement }
-  );
+  useEffect(() => {
+    if (!mapContainer.current) return;
 
-  return map;
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      zoom: 9,
+      accessToken: TOKEN,
+      attributionControl: false,
+      bounds: BOUNDS,
+      style: 'mapbox://styles/mapbox/outdoors-v12',
+    });
+
+    map.current?.addControl(mapControls.current, 'top-right');
+
+    return () => {
+      map.current?.remove();
+    };
+  }, []);
+
+  return { map: map.current, mapContainer };
 }
