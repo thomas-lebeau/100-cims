@@ -78,6 +78,7 @@ export function Marker({
       );
     },
     [
+      id,
       markerRoot,
       markerContainer,
       name,
