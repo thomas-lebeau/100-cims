@@ -16,7 +16,7 @@ export default async function Home() {
       <SessionProvider session={session}>
         <Nav />
         <NoSsr>
-          <Main />
+          <Main className="grow" />
         </NoSsr>
       </SessionProvider>
     </div>

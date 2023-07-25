@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Settings2 } from 'lucide-react';
 
 import { Map, useMap, Marker } from '@/components/ui/map';
@@ -11,76 +11,23 @@ import { columns } from './cims/columns';
 import { DataTable } from './cims/data-table';
 
 import type { Cim } from '@/types/cim';
-import type { ValueOf } from '@/types/values-of';
 import {
   SecgmentedControl,
   SegmentedControlOption,
 } from '@/components/ui/segmented-control';
 import { Progress } from '@/components/ui/progress';
+import { FILTER_TYPE, useCimFilter } from './use-cim-filter';
+import { useCimStats } from './use-cim-stats';
+import { cn } from '@/lib/utils';
 
-const FILTER_TYPE = {
-  name: 'name',
-  essencial: 'essencial',
-  comarca: 'comarca',
-  climbed: 'climbed',
-} as const;
-
-type FilterType = ValueOf<typeof FILTER_TYPE>;
-
-type FilterState = {
-  name?: string;
-  essencial?: boolean;
-  comarca?: Array<string>;
-  climbed?: boolean;
-};
-
-type Action<T extends FilterType> = {
-  [K in T]: {
-    type: K;
-    payload: FilterState[K];
-  };
-}[T];
-
-type FilterValue<T extends FilterType> = {
-  [K in T]: Exclude<FilterState[K], undefined>;
-}[T];
-
-type FilterFn<T extends FilterType> = {
-  [K in T]: (filterValue: FilterValue<K>) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
-};
-
-type ClimStats = {
-  totalAltitude: number;
-  totalCims: number;
-  climbedAltitude: number;
-  climbedCims: number;
-  climbedPercentage: number;
-  climbedCimsPercentage: number;
-};
-
-const filterFns: FilterFn<FilterType> = {
-  name: (name: string) => (cim: Cim) => cim.name.toLowerCase().includes(name),
-  essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
-  comarca: (comarca: Array<string>) => (cim: Cim) =>
-    cim.comarcas.some((c) => comarca.includes(c.name)),
-  climbed: (climbed: boolean) => (cim: Cim) => cim.climbed === climbed,
-} as const;
-
-function reducer(state: FilterState, action: Action<FilterType>): FilterState {
-  return {
-    ...state,
-    [action.type]: action.payload,
-  };
-}
-
-export default function Main() {
+export default function Main({ className }: { className?: string }) {
   const [cims, setCims] = React.useState<Cim[]>([]);
   const map = useMap();
   const [showFilterControls, setShowFilterControls] =
     React.useState<boolean>(false);
-  const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
   const [selected, setSelect] = React.useState<string | null>(null);
-  const [filter, setFilter] = useReducer(reducer, {});
+  const [filteredCims, filter, setFilter] = useCimFilter(cims);
+  const stats = useCimStats(filteredCims);
 
   const onClickClimb = useCallback((id: string, climbed: boolean) => {
     fetch(`/api/cims/${id}`, {
@@ -101,61 +48,11 @@ export default function Main() {
     [onClickClimb]
   );
 
-  useEffect(
-    function applyFilters() {
-      let filteredCims = cims;
-
-      if (filter.essencial) {
-        filteredCims = filteredCims.filter(
-          filterFns.essencial(filter.essencial)
-        );
-      }
-
-      if (filter.comarca) {
-        filteredCims = filteredCims.filter(filterFns.comarca(filter.comarca));
-      }
-
-      if (filter.name) {
-        filteredCims = filteredCims.filter(filterFns.name(filter.name));
-      }
-
-      if (filter.climbed) {
-        filteredCims = filteredCims.filter(filterFns.climbed(filter.climbed));
-      }
-
-      setFilteredCims(filteredCims);
-    },
-    [cims, filter]
-  );
-
-  const stats = useMemo<ClimStats>(
-    function calculateStats() {
-      const stats = filteredCims.reduce(
-        (acc, { altitude, climbed }) => {
-          acc.totalAltitude += altitude;
-          acc.totalCims += 1;
-          acc.climbedAltitude += climbed ? altitude : 0;
-          acc.climbedCims += climbed ? 1 : 0;
-
-          return acc;
-        },
-        { totalAltitude: 0, totalCims: 0, climbedAltitude: 0, climbedCims: 0 }
-      );
-
-      const climbedPercentage = Math.round(
-        (stats.climbedAltitude / stats.totalAltitude) * 100
-      );
-      const climbedCimsPercentage = Math.round(
-        (stats.climbedCims / stats.totalCims) * 100
-      );
-
-      return { ...stats, climbedPercentage, climbedCimsPercentage };
-    },
-    [filteredCims]
-  );
-
   return (
-    <main className="flex grow" style={{ height: 'calc(100% - 5rem)' }}>
+    <main
+      className={cn(className, 'flex')}
+      style={{ height: 'calc(100% - 5rem)' }}
+    >
       <div className="basis-2/3">
         <Map className="h-full" map={map}>
           {filteredCims.map((cim) => (
