@@ -9,7 +9,7 @@ export const cimsSchema = z.array(
     longitude: z.number(),
     climbed: z.boolean(),
     url: z.string(),
-    img: z.string(),
+    img: z.string().nullable(),
     essencial: z.boolean(),
     comarcas: z.array(
       z.object({
