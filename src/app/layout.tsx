@@ -1,11 +1,11 @@
 import React from 'react';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import type { Metadata } from 'next';
+
+import { cn } from '@/lib/utils';
 
 import './globals.css';
-
-import type { Metadata } from 'next';
-import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,8 +19,6 @@ type RootLayoutProps = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  cn(inter.className);
-
   return (
     <html lang="en" className="h-screen">
       <body
