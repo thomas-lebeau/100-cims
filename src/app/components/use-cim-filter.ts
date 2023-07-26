@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import type { ValueOf } from '@/types/values-of';
 import { Cim } from '@/types/cim';
@@ -52,7 +52,7 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
 }
 
 export function useCimFilter(cims: Cim[]): [Cim[], FilterState, TSetFilter] {
-  const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
+  const [filteredCims, setFilteredCims] = useState<Cim[]>(cims);
   const [filter, setFilter] = useReducer(reducer, {});
 
   useEffect(
