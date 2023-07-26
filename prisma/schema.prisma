@@ -47,6 +47,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   cims          CimToUser[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt @default(now())
 }
 
 model VerificationToken {
@@ -68,18 +70,22 @@ model Cim {
   essencial Boolean
   comarcas  Comarca[]
   users     CimToUser[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt @default(now())
 }
 
 model Comarca {
-  id   String @id @default(cuid())
-  name String @unique
-  cims Cim[]
+  id        String   @id @default(cuid())
+  name      String   @unique
+  cims      Cim[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model CimToUser {
   cim       Cim      @relation(fields: [cimId], references: [id])
   cimId     String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
