@@ -39,4 +39,16 @@ if (process.env.EMAIL_SERVER_HOST) {
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prismaClient),
   providers: providers,
+  session: {
+    strategy: 'jwt',
+  },
+  callbacks: {
+    async session({ token, session }) {
+      if (token?.sub) {
+        session.user.id = token.sub;
+      }
+
+      return session;
+    },
+  },
 };
