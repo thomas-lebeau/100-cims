@@ -1,41 +1,44 @@
 'use client';
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Map, Marker } from '@/components/ui/map';
 
 import { columns } from './cims/columns';
 import { DataTable } from './cims/data-table';
 
-import { cimsSchema, type Cim } from '@/types/cim';
+import { type Cim } from '@/types/cim';
 import { useCimFilter } from './use-cim-filter';
 import { cn } from '@/lib/utils';
 import ClimbStats from './climb-stats';
 import FilterBar from './filter-bar';
+import { useCims } from './use-cims';
 
-export default function Main({ className }: { className?: string }) {
-  const [cims, setCims] = React.useState<Cim[]>([]);
+type mainProps = {
+  initialCims: Cim[];
+  className?: string;
+};
 
-  const [selected, setSelect] = React.useState<string | null>(null);
+export default function Main({ className, initialCims }: mainProps) {
+  const [cims, setClimbed] = useCims(initialCims);
+  const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
 
-  const onClickClimb = useCallback((id: string, climbed: boolean) => {
-    fetch(`/api/cims/${id}`, {
-      method: climbed ? 'DELETE' : 'PUT',
-    })
-      .then((res) => res.json())
-      .then((cim) => cimsSchema.parse(cim))
-      .then((cims) => setCims(cims));
-  }, []);
+  console.log('rendering main');
 
-  useEffect(
-    function fetchCims() {
-      fetch('/api/cims')
-        .then((res) => res.json())
-        .then((cim) => cimsSchema.parse(cim))
-        .then((cims) => setCims(cims));
+  const onClickClimb = useCallback(
+    (id: string, climbed: boolean) => {
+      setClimbed({ cimId: id, value: !climbed });
+
+      fetch(`/api/cims/${id}`, {
+        method: climbed ? 'DELETE' : 'PUT',
+      }).then((res) => {
+        if (res.status !== 200) {
+          setClimbed({ cimId: id, value: climbed });
+        }
+      });
     },
-    [onClickClimb]
+    [setClimbed]
   );
 
   return (
