@@ -7,9 +7,9 @@ export const cimsSchema = z.array(
     altitude: z.number(),
     latitude: z.number(),
     longitude: z.number(),
-    climbed: z.boolean(),
+    climbed: z.boolean().optional(),
     url: z.string(),
-    img: z.string().nullable(),
+    img: z.string().optional(),
     essencial: z.boolean(),
     comarcas: z.array(
       z.object({
@@ -19,6 +19,13 @@ export const cimsSchema = z.array(
     ),
   })
 );
+
+export const userSchema = z.object({
+  userId: z.string(),
+  name: z.string(),
+  email: z.string(),
+  image: z.string(),
+});
 
 export type Cim = z.infer<typeof cimsSchema>[0];
 export type Comarca = Cim['comarcas'][0];

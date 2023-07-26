@@ -2,10 +2,10 @@
 
 import React, { useCallback, useState } from 'react';
 
-import { Map, Marker } from '@/components/ui/map';
+import { Map, Marker } from '@/components/map';
 
-import { columns } from './cims/columns';
-import { DataTable } from './cims/data-table';
+import { columns } from './columns-def';
+import { DataTable } from '../../components/data-table/data-table';
 
 import { type Cim } from '@/types/cim';
 import { useCimFilter } from './use-cim-filter';
@@ -23,8 +23,6 @@ export default function Main({ className, initialCims }: mainProps) {
   const [cims, setClimbed] = useCims(initialCims);
   const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
-
-  console.log('rendering main');
 
   const onClickClimb = useCallback(
     (id: string, climbed: boolean) => {
@@ -44,7 +42,7 @@ export default function Main({ className, initialCims }: mainProps) {
   return (
     <main
       className={cn(className, 'flex')}
-      style={{ height: 'calc(100% - 5rem)' }}
+      style={{ height: 'calc(100% - 3rem)' }}
     >
       <Map className="basis-2/3 h-full">
         {filteredCims.map((cim) => (
