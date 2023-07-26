@@ -1,40 +1,31 @@
-import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 
 import prisma from '@/lib/prisma';
 import serverTimings from '@/lib/server-timings';
+import getServerSession from '@/lib/get-server-session';
+
+const routeContextSchema = z.object({
+  params: z.object({
+    id: z.string(),
+  }),
+});
 
 async function handler(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: z.infer<typeof routeContextSchema>
 ) {
-  const serverTiming = new serverTimings();
+  const result = routeContextSchema.safeParse(context);
 
-  serverTiming.start('tkn');
-
-  const sessionToken = await getToken({ req, raw: true });
-
-  serverTiming.stop('tkn');
-
-  if (!sessionToken) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401, headers: serverTiming.headers() }
-    );
+  if (!result.success) {
+    return NextResponse.json(result.error.issues, { status: 422 });
   }
 
-  serverTiming.start('auth');
+  const id = result.data.params.id;
+  const serverTiming = new serverTimings();
+  const session = await getServerSession();
 
-  const { id } = params;
-
-  const user = await prisma.user.findFirst({
-    where: { sessions: { some: { sessionToken } } },
-    select: { id: true },
-  });
-
-  serverTiming.stop('auth');
-
-  if (!user) {
+  if (!session) {
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 401, headers: serverTiming.headers() }
@@ -47,14 +38,14 @@ async function handler(
     await prisma.cimToUser.create({
       data: {
         cimId: id,
-        userId: user.id,
+        userId: session.user.id,
       },
     });
   } else {
     await prisma.cimToUser.deleteMany({
       where: {
         cimId: id,
-        userId: user.id,
+        userId: session.user.id,
       },
     });
   }
@@ -67,7 +58,7 @@ async function handler(
       include: {
         comarcas: true,
         users: {
-          where: { userId: user.id },
+          where: { userId: session.user.id },
           select: { userId: true },
         },
       },
