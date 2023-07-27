@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Sparkles, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';

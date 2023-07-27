@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Map, Marker } from '@/components/map';
 
@@ -17,9 +17,10 @@ import { useCims } from './use-cims';
 type mainProps = {
   initialCims: Cim[];
   className?: string;
+  comarcas: string[];
 };
 
-export default function Main({ className, initialCims }: mainProps) {
+export default function Main({ className, initialCims, comarcas }: mainProps) {
   const [cims, setClimbed] = useCims(initialCims);
   const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
@@ -55,7 +56,7 @@ export default function Main({ className, initialCims }: mainProps) {
         ))}
       </Map>
       <aside className="flex basis-1/3 flex-col">
-        <FilterBar filter={filter} setFilter={setFilter} />
+        <FilterBar filter={filter} setFilter={setFilter} comarcas={comarcas} />
         <DataTable
           columns={columns}
           data={filteredCims}
