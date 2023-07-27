@@ -45,7 +45,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
       className={cn(className, 'flex')}
       style={{ height: 'calc(100% - 3rem)' }}
     >
-      <Map className="basis-2/3 h-full">
+      <Map className="basis-2/3 h-full" geoJsonSource={filter.comarca}>
         {filteredCims.map((cim) => (
           <Marker
             key={cim.id}

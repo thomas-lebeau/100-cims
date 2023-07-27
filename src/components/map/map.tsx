@@ -10,12 +10,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export type MapProps = {
   children: ReactNode;
   className?: string;
+  geoJsonSource: Array<string> | undefined;
 };
 
 const mapContext = createContext<mapboxgl.Map | null>(null);
 
-export function Map({ className, children }: MapProps) {
-  const { map, mapContainer } = useMap();
+export function Map({ className, children, geoJsonSource }: MapProps) {
+  const { map, mapContainer } = useMap(geoJsonSource);
 
   return (
     <div ref={mapContainer} className={className}>
