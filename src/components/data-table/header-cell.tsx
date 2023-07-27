@@ -1,4 +1,4 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import { ChevronsUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,7 @@ export function HeaderCell<TData, TValue>({
 }: {
   column: Column<TData, TValue>;
   className?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <div className={className}>

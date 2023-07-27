@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { createContext, type ReactNode } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 import { useMap } from './use-map';
@@ -8,11 +8,11 @@ import { useMap } from './use-map';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export type MapProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 };
 
-const mapContext = React.createContext<mapboxgl.Map | null>(null);
+const mapContext = createContext<mapboxgl.Map | null>(null);
 
 export function Map({ className, children }: MapProps) {
   const { map, mapContainer } = useMap();
