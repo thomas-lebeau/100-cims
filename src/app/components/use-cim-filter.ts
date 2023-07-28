@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState, type Dispatch } from 'react';
 
 import type { ValueOf } from '@/types/values-of';
 import { Cim } from '@/types/cim';
@@ -34,14 +34,14 @@ type FilterFn<T extends FilterType> = {
   [K in T]: (filterValue: FilterValue<K>) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
 };
 
-export type TSetFilter = React.Dispatch<Action<FilterType>>;
+export type TSetFilter = Dispatch<Action<FilterType>>;
 
 const filterFns: FilterFn<FilterType> = {
-  name: (name: string) => (cim: Cim) => cim.name.toLowerCase().includes(name),
-  essencial: (essencial: boolean) => (cim: Cim) => cim.essencial === essencial,
-  comarca: (comarca: Array<string>) => (cim: Cim) =>
-    cim.comarcas.some((c) => comarca.includes(c.name)),
-  climbed: (climbed: boolean) => (cim: Cim) => cim.climbed === climbed,
+  name: (name) => (cim) => cim.name.toLowerCase().includes(name),
+  essencial: (essencial) => (cim) => cim.essencial === essencial,
+  comarca: (comarca) => (cim) =>
+    cim.comarcas.some((c) => comarca.includes(c.codigo)),
+  climbed: (climbed) => (cim) => cim.climbed === climbed,
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
@@ -52,7 +52,7 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
 }
 
 export function useCimFilter(cims: Cim[]): [Cim[], FilterState, TSetFilter] {
-  const [filteredCims, setFilteredCims] = React.useState<Cim[]>(cims);
+  const [filteredCims, setFilteredCims] = useState<Cim[]>(cims);
   const [filter, setFilter] = useReducer(reducer, {});
 
   useEffect(

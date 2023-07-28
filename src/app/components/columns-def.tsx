@@ -1,18 +1,19 @@
 'use client';
 
-import { ArrowUpDown, Sparkles, CheckCircle } from 'lucide-react';
+import { Sparkles, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import type { Cim, Comarca } from '@/types/cim';
 import type { ColumnDef } from '@tanstack/react-table';
-import { cn } from '@/lib/utils';
+import { HeaderCell } from '../../components/data-table/header-cell';
 
 export const columns: ColumnDef<Cim>[] = [
   {
     accessorKey: 'essencial',
-    header: '',
+    header: ({ column }) => <HeaderCell column={column} />,
     cell: ({ row }) => {
       return row.getValue<boolean>('essencial') ? (
         <Sparkles className="h-4 w-4 text-yellow-500" />
@@ -21,7 +22,7 @@ export const columns: ColumnDef<Cim>[] = [
   },
   {
     accessorKey: 'climbed',
-    header: '',
+    header: ({ column }) => <HeaderCell column={column} />,
     cell: ({ row, table }) => {
       const climbed = row.getValue<boolean>('climbed');
 
@@ -29,7 +30,8 @@ export const columns: ColumnDef<Cim>[] = [
 
       return (
         <Button
-          size="sm"
+          className="rounded-full"
+          size="icon"
           variant="ghost"
           onClick={(e) => {
             e.stopPropagation();
@@ -59,14 +61,14 @@ export const columns: ColumnDef<Cim>[] = [
   },
   {
     accessorKey: 'name',
-    header: 'Cim',
+    header: ({ column }) => <HeaderCell column={column}>Cim</HeaderCell>,
   },
   {
     accessorKey: 'comarcas',
-    header: 'Comarca',
+    header: ({ column }) => <HeaderCell column={column}>Comarca</HeaderCell>,
     cell: ({ row }) => {
       return row.getValue<Comarca[]>('comarcas')?.map((comarca) => (
-        <Badge className="m-1" variant="secondary" key={comarca.id}>
+        <Badge className="m-1" variant="secondary" key={comarca.codigo}>
           {comarca.name}
         </Badge>
       ));
@@ -74,19 +76,11 @@ export const columns: ColumnDef<Cim>[] = [
   },
   {
     accessorKey: 'altitude',
-    header: ({ column }) => {
-      return (
-        <div className="text-right">
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Altitude
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      );
-    },
+    header: ({ column }) => (
+      <HeaderCell column={column} className="text-right">
+        Altitude
+      </HeaderCell>
+    ),
     cell: ({ row }) => {
       const altitude = row.getValue<number>('altitude');
 

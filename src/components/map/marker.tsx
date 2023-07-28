@@ -5,10 +5,10 @@ import { createRoot } from 'react-dom/client';
 
 import { Pin } from './pin';
 import type { Cim } from '@/types/cim';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { StrictMode, useContext, useEffect, useRef, useState } from 'react';
 import { Map } from './map';
 import { PopupContent } from './popup-content';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 type MarkerProps = Cim & {
   selected: boolean;
@@ -61,20 +61,22 @@ export function Marker({
       }
 
       markerRoot.render(
-        <Popover>
-          <PopoverTrigger>
-            <Pin color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} />
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopupContent
-              id={id}
-              name={name}
-              altitude={altitude}
-              climbed={climbed}
-              onClickClimb={onClickClimb}
-            />
-          </PopoverContent>
-        </Popover>
+        <StrictMode>
+          <Popover>
+            <PopoverTrigger>
+              <Pin color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} />
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopupContent
+                id={id}
+                name={name}
+                altitude={altitude}
+                climbed={climbed}
+                onClickClimb={onClickClimb}
+              />
+            </PopoverContent>
+          </Popover>
+        </StrictMode>
       );
     },
     [

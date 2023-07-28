@@ -15,65 +15,53 @@ async function handler(
   req: NextRequest,
   context: z.infer<typeof routeContextSchema>
 ) {
-  const result = routeContextSchema.safeParse(context);
+  try {
+    const result = routeContextSchema.safeParse(context);
 
-  if (!result.success) {
-    return NextResponse.json(result.error.issues, { status: 422 });
-  }
+    if (!result.success) {
+      return NextResponse.json(result.error.issues, { status: 422 });
+    }
 
-  const id = result.data.params.id;
-  const serverTiming = new serverTimings();
-  const session = await getServerSession();
+    const id = result.data.params.id;
+    const serverTiming = new serverTimings();
+    const session = await getServerSession();
 
-  if (!session) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401, headers: serverTiming.headers() }
-    );
-  }
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401, headers: serverTiming.headers() }
+      );
+    }
 
-  serverTiming.start('usr');
+    serverTiming.start('usr');
 
-  if (req.method === 'PUT') {
-    await prisma.cimToUser.create({
-      data: {
-        cimId: id,
-        userId: session.user.id,
-      },
-    });
-  } else {
-    await prisma.cimToUser.deleteMany({
-      where: {
-        cimId: id,
-        userId: session.user.id,
-      },
-    });
-  }
+    let data;
 
-  serverTiming.stop('usr');
-  serverTiming.start('cim');
-
-  const cims = (
-    await prisma.cim.findMany({
-      include: {
-        comarcas: true,
-        users: {
-          where: { userId: session.user.id },
-          select: { userId: true },
+    if (req.method === 'PUT') {
+      data = await prisma.cimToUser.create({
+        data: {
+          cimId: id,
+          userId: session.user.id,
         },
-      },
-    })
-  ).map(({ users, ...cim }) => ({
-    ...cim,
-    climbed: Boolean(users?.length > 0),
-  }));
+      });
+    } else {
+      data = await prisma.cimToUser.deleteMany({
+        where: {
+          cimId: id,
+          userId: session.user.id,
+        },
+      });
+    }
 
-  serverTiming.stop('cim');
+    serverTiming.stop('usr');
 
-  return NextResponse.json(cims, {
-    status: 200,
-    headers: serverTiming.headers(),
-  });
+    return NextResponse.json(data, {
+      status: 200,
+      headers: serverTiming.headers(),
+    });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
 }
 export const PUT = handler;
 export const DELETE = handler;

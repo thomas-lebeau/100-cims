@@ -1,49 +1,56 @@
 'use client';
 
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { Map, Marker } from '@/components/ui/map';
+import { Map, Marker } from '@/components/map';
 
-import { columns } from './cims/columns';
-import { DataTable } from './cims/data-table';
+import { columns } from './columns-def';
+import { DataTable } from '../../components/data-table/data-table';
 
-import { cimsSchema, type Cim } from '@/types/cim';
+import { Comarca, type Cim } from '@/types/cim';
 import { useCimFilter } from './use-cim-filter';
 import { cn } from '@/lib/utils';
 import ClimbStats from './climb-stats';
 import FilterBar from './filter-bar';
+import { useCims } from './use-cims';
 
-export default function Main({ className }: { className?: string }) {
-  const [cims, setCims] = React.useState<Cim[]>([]);
+type mainProps = {
+  initialCims: Cim[];
+  className?: string;
+  comarcas: Comarca[];
+};
 
-  const [selected, setSelect] = React.useState<string | null>(null);
+export default function Main({ className, initialCims, comarcas }: mainProps) {
+  const [cims, setClimbed] = useCims(initialCims);
+  const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
+  const geoJsonUrl = useMemo(
+    () =>
+      filter.comarca ? `/api/comarca/${filter.comarca.join(',')}` : undefined,
+    [filter.comarca]
+  );
 
-  const onClickClimb = useCallback((id: string, climbed: boolean) => {
-    fetch(`/api/cims/${id}`, {
-      method: climbed ? 'DELETE' : 'PUT',
-    })
-      .then((res) => res.json())
-      .then((cim) => cimsSchema.parse(cim))
-      .then((cims) => setCims(cims));
-  }, []);
+  const onClickClimb = useCallback(
+    (id: string, climbed: boolean) => {
+      setClimbed({ cimId: id, value: !climbed });
 
-  useEffect(
-    function fetchCims() {
-      fetch('/api/cims')
-        .then((res) => res.json())
-        .then((cim) => cimsSchema.parse(cim))
-        .then((cims) => setCims(cims));
+      fetch(`/api/cims/${id}`, {
+        method: climbed ? 'DELETE' : 'PUT',
+      }).then((res) => {
+        if (res.status !== 200) {
+          setClimbed({ cimId: id, value: climbed });
+        }
+      });
     },
-    [onClickClimb]
+    [setClimbed]
   );
 
   return (
     <main
       className={cn(className, 'flex')}
-      style={{ height: 'calc(100% - 5rem)' }}
+      style={{ height: 'calc(100% - 3rem)' }}
     >
-      <Map className="basis-2/3 h-full">
+      <Map className="basis-2/3 h-full" geoJsonUrl={geoJsonUrl}>
         {filteredCims.map((cim) => (
           <Marker
             key={cim.id}
@@ -54,7 +61,7 @@ export default function Main({ className }: { className?: string }) {
         ))}
       </Map>
       <aside className="flex basis-1/3 flex-col">
-        <FilterBar filter={filter} setFilter={setFilter} />
+        <FilterBar filter={filter} setFilter={setFilter} comarcas={comarcas} />
         <DataTable
           columns={columns}
           data={filteredCims}
