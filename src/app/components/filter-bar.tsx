@@ -10,6 +10,7 @@ import { FILTER_TYPE, FilterState, TSetFilter } from './use-cim-filter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FacetPicker } from '@/components/facet-picker';
+import { Comarca } from '@/types/cim';
 
 export default function FilterBar({
   filter,
@@ -18,10 +19,10 @@ export default function FilterBar({
 }: {
   filter: FilterState;
   setFilter: TSetFilter;
-  comarcas: Array<string>;
+  comarcas: Array<Comarca>;
 }) {
   const options = useMemo(() => {
-    return comarcas.map((comarca) => ({ label: comarca, value: comarca }));
+    return comarcas.map(({ name, codigo }) => ({ label: name, value: codigo }));
   }, [comarcas]);
 
   return (

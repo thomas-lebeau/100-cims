@@ -13,8 +13,8 @@ export const cimsSchema = z.array(
     essencial: z.boolean(),
     comarcas: z.array(
       z.object({
-        id: z.string(),
         name: z.string(),
+        codigo: z.string(),
       })
     ),
   })
