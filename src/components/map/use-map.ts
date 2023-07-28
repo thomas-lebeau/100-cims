@@ -77,7 +77,7 @@ export function useMap(comarcas: Array<string> | undefined) {
 
       const source = map.getSource('comarcas') as mapboxgl.GeoJSONSource;
 
-      if (comarcas?.length === 0) {
+      if (!comarcas?.length) {
         source.setData(EMPTY_GEOJSON);
       } else {
         source.setData(`/api/comarca/${comarcas?.join(',')}`);
