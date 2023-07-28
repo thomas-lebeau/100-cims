@@ -1,13 +1,13 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Map, Marker } from '@/components/map';
 
 import { columns } from './columns-def';
 import { DataTable } from '../../components/data-table/data-table';
 
-import { type Cim } from '@/types/cim';
+import { Comarca, type Cim } from '@/types/cim';
 import { useCimFilter } from './use-cim-filter';
 import { cn } from '@/lib/utils';
 import ClimbStats from './climb-stats';
@@ -17,13 +17,18 @@ import { useCims } from './use-cims';
 type mainProps = {
   initialCims: Cim[];
   className?: string;
-  comarcas: string[];
+  comarcas: Comarca[];
 };
 
 export default function Main({ className, initialCims, comarcas }: mainProps) {
   const [cims, setClimbed] = useCims(initialCims);
   const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
+  const geoJsonUrl = useMemo(
+    () =>
+      filter.comarca ? `/api/comarca/${filter.comarca.join(',')}` : undefined,
+    [filter.comarca]
+  );
 
   const onClickClimb = useCallback(
     (id: string, climbed: boolean) => {
@@ -45,7 +50,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
       className={cn(className, 'flex')}
       style={{ height: 'calc(100% - 3rem)' }}
     >
-      <Map className="basis-2/3 h-full" geoJsonSource={filter.comarca}>
+      <Map className="basis-2/3 h-full" geoJsonUrl={geoJsonUrl}>
         {filteredCims.map((cim) => (
           <Marker
             key={cim.id}

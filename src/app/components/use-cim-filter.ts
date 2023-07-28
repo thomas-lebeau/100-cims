@@ -40,7 +40,7 @@ const filterFns: FilterFn<FilterType> = {
   name: (name) => (cim) => cim.name.toLowerCase().includes(name),
   essencial: (essencial) => (cim) => cim.essencial === essencial,
   comarca: (comarca) => (cim) =>
-    cim.comarcas.some((c) => comarca.includes(c.name)),
+    cim.comarcas.some((c) => comarca.includes(c.codigo)),
   climbed: (climbed) => (cim) => cim.climbed === climbed,
 } as const;
 

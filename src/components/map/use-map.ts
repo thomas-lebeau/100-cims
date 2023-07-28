@@ -14,7 +14,7 @@ const EMPTY_GEOJSON: FeatureCollection = {
   features: [],
 };
 
-export function useMap(comarcas: Array<string> | undefined) {
+export function useMap(geoJsonUrl: string | undefined) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
   const mapControls = useRef(new mapboxgl.NavigationControl());
@@ -77,13 +77,13 @@ export function useMap(comarcas: Array<string> | undefined) {
 
       const source = map.getSource('comarcas') as mapboxgl.GeoJSONSource;
 
-      if (!comarcas?.length) {
+      if (!geoJsonUrl?.length) {
         source.setData(EMPTY_GEOJSON);
       } else {
-        source.setData(`/api/comarca/${comarcas?.join(',')}`);
+        source.setData(geoJsonUrl);
       }
     },
-    [map, comarcas]
+    [map, geoJsonUrl]
   );
 
   return { map, mapContainer };

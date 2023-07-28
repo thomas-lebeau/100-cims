@@ -68,7 +68,7 @@ export const columns: ColumnDef<Cim>[] = [
     header: ({ column }) => <HeaderCell column={column}>Comarca</HeaderCell>,
     cell: ({ row }) => {
       return row.getValue<Comarca[]>('comarcas')?.map((comarca) => (
-        <Badge className="m-1" variant="secondary" key={comarca.id}>
+        <Badge className="m-1" variant="secondary" key={comarca.codigo}>
           {comarca.name}
         </Badge>
       ));

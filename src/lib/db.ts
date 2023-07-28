@@ -24,7 +24,12 @@ export async function getCims(userId: string | undefined) {
         latitude: true,
         longitude: true,
         altitude: true,
-        comarcas: true,
+        comarcas: {
+          select: {
+            name: true,
+            codigo: true,
+          },
+        },
         url: true,
         essencial: true,
         users: userId
@@ -44,14 +49,13 @@ export async function getCims(userId: string | undefined) {
 }
 
 export async function getUniqueComarcas() {
-  return await prisma.comarca
-    .findMany({
-      select: {
-        name: true,
-      },
-      orderBy: {
-        name: 'asc',
-      },
-    })
-    .then((comarcas) => comarcas.map((comarca) => comarca.name));
+  return await prisma.comarca.findMany({
+    select: {
+      name: true,
+      codigo: true,
+    },
+    orderBy: {
+      name: 'asc',
+    },
+  });
 }

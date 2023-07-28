@@ -48,7 +48,7 @@ model User {
   sessions      Session[]
   cims          CimToUser[]
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
 }
 
 model VerificationToken {
@@ -71,15 +71,16 @@ model Cim {
   comarcas  Comarca[]
   users     CimToUser[]
   createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt @default(now())
+  updatedAt DateTime    @default(now()) @updatedAt
 }
 
 model Comarca {
   id        String   @id @default(cuid())
   name      String   @unique
+  codigo    String   @unique
   cims      Cim[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model CimToUser {
@@ -90,8 +91,8 @@ model CimToUser {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([cimId, userId])
   @@id([cimId, userId])
+  @@unique([cimId, userId])
   @@index([userId])
   @@index([cimId])
 }
