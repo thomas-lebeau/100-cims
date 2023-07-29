@@ -1,23 +1,34 @@
 import mapboxgl from 'mapbox-gl';
 import { type FeatureCollection } from 'geojson';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const B_BOX: mapboxgl.LngLatBoundsLike = [0.15908, 40.52292, 3.33249, 42.91834];
 
-const BOUNDS: mapboxgl.LngLatBoundsLike = [
-  [0.170231508703, 40.577228],
-  [3.248749, 42.9185248623],
-];
-
-const EMPTY_GEOJSON: FeatureCollection = {
+const INITIAL_GEOJSON: FeatureCollection = {
   type: 'FeatureCollection',
+  bbox: B_BOX,
   features: [],
 };
 
 export function useMap(geoJsonUrl: string | undefined) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+  const abortController = useRef<AbortController>(new AbortController());
   const mapControls = useRef(new mapboxgl.NavigationControl());
+
+  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+
+  const setGeoJson = useCallback(
+    (geojson: FeatureCollection) => {
+      if (!map) return;
+
+      const source = map.getSource('comarcas') as mapboxgl.GeoJSONSource;
+
+      source.setData(geojson);
+      map.fitBounds(geojson.bbox as mapboxgl.LngLatBoundsLike);
+    },
+    [map]
+  );
 
   useEffect(function init() {
     if (!mapContainer.current) return;
@@ -27,7 +38,7 @@ export function useMap(geoJsonUrl: string | undefined) {
       zoom: 9,
       accessToken: TOKEN,
       attributionControl: false,
-      bounds: BOUNDS,
+      bounds: B_BOX,
       style: 'mapbox://styles/mapbox/outdoors-v12',
     });
 
@@ -36,7 +47,7 @@ export function useMap(geoJsonUrl: string | undefined) {
 
       map.addSource('comarcas', {
         type: 'geojson',
-        data: EMPTY_GEOJSON,
+        data: INITIAL_GEOJSON,
       });
 
       map.addLayer({
@@ -75,15 +86,20 @@ export function useMap(geoJsonUrl: string | undefined) {
     function setLayerData() {
       if (!map) return;
 
-      const source = map.getSource('comarcas') as mapboxgl.GeoJSONSource;
+      abortController.current.abort();
 
       if (!geoJsonUrl?.length) {
-        source.setData(EMPTY_GEOJSON);
+        setGeoJson(INITIAL_GEOJSON);
       } else {
-        source.setData(geoJsonUrl);
+        abortController.current = new AbortController();
+
+        fetch(geoJsonUrl, { signal: abortController.current.signal })
+          .then((response) => response.json() as Promise<FeatureCollection>)
+          .then((data) => setGeoJson(data))
+          .catch(() => {});
       }
     },
-    [map, geoJsonUrl]
+    [map, geoJsonUrl, setGeoJson]
   );
 
   return { map, mapContainer };

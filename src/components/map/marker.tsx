@@ -13,6 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 type MarkerProps = Cim & {
   selected: boolean;
   onClickClimb: (id: string, climbed: boolean) => void; // eslint-disable-line no-unused-vars
+  onClick: (id: string) => void; // eslint-disable-line no-unused-vars
 };
 
 export function Marker({
@@ -24,8 +25,10 @@ export function Marker({
   climbed,
   selected,
   onClickClimb,
+  onClick,
 }: MarkerProps) {
   const map = useContext(Map.context);
+  const [open, setOpen] = useState(selected);
 
   // using `useState` as a Lazy initial ref
   const [markerContainer] = useState(() => document.createElement('div'));
@@ -44,6 +47,10 @@ export function Marker({
 
       return () => {
         marker.remove();
+
+        // It seems like you are supposed to unmount components outside of `useEffect`:
+        //   https://github.com/facebook/react/issues/25675#issuecomment-1363957941
+        setTimeout(() => markerRoot.unmount(), 0);
       };
     },
 
@@ -62,7 +69,7 @@ export function Marker({
 
       markerRoot.render(
         <StrictMode>
-          <Popover>
+          <Popover open={open} onOpenChange={(open) => open && onClick(id)}>
             <PopoverTrigger>
               <Pin color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} />
             </PopoverTrigger>
@@ -86,8 +93,9 @@ export function Marker({
       name,
       climbed,
       altitude,
-      selected,
+      open,
       onClickClimb,
+      onClick,
     ]
   );
 
@@ -100,14 +108,30 @@ export function Marker({
 
   useEffect(
     function handleSelection() {
-      if (!selected) return;
+      if (!map) return;
 
-      map?.jumpTo({
-        center: [longitude, latitude],
-        zoom: 12,
+      if (!selected) {
+        setOpen(false);
+
+        return;
+      }
+
+      map.flyTo(
+        {
+          center: [longitude, latitude],
+          zoom: 12,
+          speed: 1.6,
+        },
+        { markerId: id }
+      );
+
+      map.on('moveend', (data) => {
+        if (data?.markerId === id) {
+          setOpen(true);
+        }
       });
     },
-    [map, selected, longitude, latitude]
+    [map, id, selected, longitude, latitude]
   );
 
   return null;
