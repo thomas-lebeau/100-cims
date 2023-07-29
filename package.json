@@ -30,7 +30,7 @@
     "next": "13.4.12",
     "next-auth": "^4.22.3",
     "nodemailer": "^6.9.4",
-    "playwright": "^1.36.0",
+    "playwright": "^1.36.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.14.0",
