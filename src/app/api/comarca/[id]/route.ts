@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import _rawData from './data.json';
+import rawData from './data.json';
 import { type FeatureCollection } from 'geojson';
 import { getBBox } from '@/lib/geojson';
-
-const rawData = _rawData as unknown as FeatureCollection;
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -25,8 +23,8 @@ export async function GET(
 
     const ids = result.data.params.id.split(',');
 
-    const features = rawData.features.filter((feature) =>
-      ids.includes(feature.properties?.CODICOMAR)
+    const features = (rawData as unknown as FeatureCollection).features.filter(
+      (feature) => ids.includes(feature.properties?.CODICOMAR)
     );
 
     const data: FeatureCollection = {
