@@ -47,6 +47,10 @@ export function Marker({
 
       return () => {
         marker.remove();
+
+        // It seems like you are supposed to unmount components outside of `useEffect`:
+        //   https://github.com/facebook/react/issues/25675#issuecomment-1363957941
+        setTimeout(() => markerRoot.unmount(), 0);
       };
     },
 

@@ -66,10 +66,29 @@ export const columns: ColumnDef<Cim>[] = [
   {
     accessorKey: 'comarcas',
     header: ({ column }) => <HeaderCell column={column}>Comarca</HeaderCell>,
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       return row.getValue<Comarca[]>('comarcas')?.map((comarca) => (
-        <Badge className="m-1" variant="secondary" key={comarca.codigo}>
-          {comarca.name}
+        <Badge
+          asChild
+          className="m-1"
+          variant="secondary"
+          key={comarca.codigo}
+          onClick={(e) => {
+            e.stopPropagation();
+
+            const meta = table.options.meta;
+
+            // meta is of type `unknown`
+            if (
+              meta &&
+              'onClickComarca' in meta &&
+              typeof meta.onClickComarca === 'function'
+            ) {
+              meta.onClickComarca(comarca.codigo);
+            }
+          }}
+        >
+          <button>{comarca.name}</button>
         </Badge>
       ));
     },

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
 
 const badgeVariants = cva(
   'inline-flex items-center rounded-sm border px-1 py-0.5 text-xs font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
@@ -25,12 +26,23 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  );
+    VariantProps<typeof badgeVariants> {
+  asChild?: boolean;
 }
+
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ className, variant, asChild, ...props }: BadgeProps, ref) => {
+    const Comp = asChild ? Slot : 'div';
+
+    return (
+      <Comp
+        className={cn(badgeVariants({ variant }), className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Badge.displayName = 'Badge';
 
 export { Badge, badgeVariants };

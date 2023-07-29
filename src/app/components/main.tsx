@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Map, Marker } from '@/components/map';
 
@@ -8,7 +8,7 @@ import { columns } from './columns-def';
 import { DataTable } from '../../components/data-table/data-table';
 
 import { Comarca, type Cim } from '@/types/cim';
-import { useCimFilter } from './use-cim-filter';
+import { FILTER_TYPE, useCimFilter } from './use-cim-filter';
 import { cn } from '@/lib/utils';
 import ClimbStats from './climb-stats';
 import FilterBar from './filter-bar';
@@ -46,6 +46,26 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
     [setClimbed]
   );
 
+  const onClickComarca = useCallback(
+    (comarcaId: string) => {
+      const selectedvalues = new Set(filter.comarca);
+
+      if (selectedvalues.has(comarcaId)) return;
+
+      selectedvalues.add(comarcaId);
+
+      setFilter({
+        type: FILTER_TYPE.comarca,
+        payload: Array.from(selectedvalues),
+      });
+    },
+    [filter.comarca, setFilter]
+  );
+
+  useEffect(() => {
+    setSelect(null);
+  }, [filter.comarca]);
+
   return (
     <main
       className={cn(className, 'flex')}
@@ -69,7 +89,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
           data={filteredCims}
           className="overflow-auto grow p-2"
           onClickRow={({ id }) => setSelect(id)}
-          meta={{ onClickClimb }}
+          meta={{ onClickClimb, onClickComarca }}
         />
         <ClimbStats cims={filteredCims} />
       </aside>
