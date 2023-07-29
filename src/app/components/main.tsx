@@ -24,6 +24,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
   const [cims, setClimbed] = useCims(initialCims);
   const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims);
+
   const geoJsonUrl = useMemo(
     () =>
       filter.comarca ? `/api/comarca/${filter.comarca.join(',')}` : undefined,
@@ -57,6 +58,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
             {...cim}
             selected={selected === cim.id}
             onClickClimb={onClickClimb}
+            onClick={setSelect}
           />
         ))}
       </Map>
