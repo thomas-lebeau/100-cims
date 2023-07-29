@@ -25,14 +25,15 @@ export async function GET(
 
     const ids = result.data.params.id.split(',');
 
+    const features = rawData.features.filter((feature) =>
+      ids.includes(feature.properties?.CODICOMAR)
+    );
+
     const data: FeatureCollection = {
       type: 'FeatureCollection',
-      features: rawData.features.filter((feature) =>
-        ids.includes(feature.properties?.CODICOMAR)
-      ),
+      bbox: getBBox(features),
+      features,
     };
-
-    data.bbox = getBBox(data);
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {

@@ -1,4 +1,4 @@
-import { type FeatureCollection, BBox } from 'geojson';
+import { type Feature, BBox } from 'geojson';
 
 function extendBBox(bboxA: BBox, bboxB: BBox): BBox {
   return [
@@ -9,8 +9,8 @@ function extendBBox(bboxA: BBox, bboxB: BBox): BBox {
   ];
 }
 
-export function getBBox(geojson: FeatureCollection): BBox {
-  return geojson.features.reduce(
+export function getBBox(features: Array<Feature>): BBox {
+  return features.reduce(
     (bbox: BBox, feature) => {
       if (!feature.bbox) return bbox;
 
