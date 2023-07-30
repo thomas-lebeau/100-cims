@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 import './globals.css';
 

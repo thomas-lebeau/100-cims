@@ -1,7 +1,7 @@
 import { useMemo, type ComponentType } from 'react';
 import { CheckIcon, PlusCircleIcon } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Badge } from './ui/badge';

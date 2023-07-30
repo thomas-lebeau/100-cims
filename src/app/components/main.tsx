@@ -9,7 +9,7 @@ import { DataTable } from '../../components/data-table/data-table';
 
 import { Comarca, type Cim } from '@/types/cim';
 import { FILTER_TYPE, useCimFilter } from './use-cim-filter';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import ClimbStats from './climb-stats';
 import FilterBar from './filter-bar';
 import { useCims } from './use-cims';

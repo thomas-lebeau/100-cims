@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 import { ChevronsUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 import type { Column } from '@tanstack/react-table';
 

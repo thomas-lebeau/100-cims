@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useSession } from 'next-auth/react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 export function UserNav({ className }: { className?: string }) {
   const { data, status } = useSession();

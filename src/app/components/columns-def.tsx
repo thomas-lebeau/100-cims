@@ -4,7 +4,7 @@ import { Sparkles, CheckCircle } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 import type { Cim, Comarca } from '@/types/cim';
 import type { ColumnDef } from '@tanstack/react-table';

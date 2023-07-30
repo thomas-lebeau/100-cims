@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { UserNav } from './user-nav';
 
 export default function Nav({ className }: { className?: string }) {
