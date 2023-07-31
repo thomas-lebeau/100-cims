@@ -1,7 +1,7 @@
-import { Progress } from '@/components/ui/progress';
+import { Progress } from "@/components/ui/progress";
 
-import { useClimbStats } from './use-climb-stats';
-import { Cim } from '@/types/cim';
+import { useClimbStats } from "./use-climb-stats";
+import { Cim } from "@/types/cim";
 
 export default function ClimbStats({ cims }: { cims: Cim[] }) {
   const stats = useClimbStats(cims);
@@ -12,7 +12,7 @@ export default function ClimbStats({ cims }: { cims: Cim[] }) {
       {stats.climbedCimsPercentage}% ({stats.climbedCims} /{stats.totalCims}
       )
       <Progress value={stats.climbedPercentage} className="col-span-2" />
-      {stats.climbedPercentage}% ({stats.climbedAltitude}m /{' '}
+      {stats.climbedPercentage}% ({stats.climbedAltitude}m /{" "}
       {stats.totalAltitude}m)
     </div>
   );

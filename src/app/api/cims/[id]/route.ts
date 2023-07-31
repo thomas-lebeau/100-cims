@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-import prisma from '@/lib/prisma';
-import serverTimings from '@/lib/server-timings';
-import getServerSession from '@/lib/get-server-session';
+import prisma from "@/lib/prisma";
+import serverTimings from "@/lib/server-timings";
+import getServerSession from "@/lib/get-server-session";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -28,16 +28,16 @@ async function handler(
 
     if (!session) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: "Unauthorized" },
         { status: 401, headers: serverTiming.headers() }
       );
     }
 
-    serverTiming.start('usr');
+    serverTiming.start("usr");
 
     let data;
 
-    if (req.method === 'PUT') {
+    if (req.method === "PUT") {
       data = await prisma.cimToUser.create({
         data: {
           cimId: id,
@@ -53,7 +53,7 @@ async function handler(
       });
     }
 
-    serverTiming.stop('usr');
+    serverTiming.stop("usr");
 
     return NextResponse.json(data, {
       status: 200,

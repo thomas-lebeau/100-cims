@@ -1,5 +1,5 @@
-const fs = require('fs');
-const data = JSON.parse(fs.readFileSync(__dirname + '/cims.json', 'utf8'));
+const fs = require("fs");
+const data = JSON.parse(fs.readFileSync(__dirname + "/cims.json", "utf8"));
 
 // {
 //   name: 'la Miranda de Terranyes',
@@ -37,25 +37,25 @@ const data = JSON.parse(fs.readFileSync(__dirname + '/cims.json', 'utf8'));
 // }
 
 const geoJson = {
-  type: 'FeatureCollection',
+  type: "FeatureCollection",
   features: data.map((cim, i) => ({
-    type: 'Feature',
+    type: "Feature",
     properties: {
-      'marker-color': cim.essencial ? '#3cc83e' : '#ff0000',
-      'marker-size': 'medium',
-      'marker-symbol': 'mountain',
-      'name': cim.name,
-      'url': cim.url,
-      'img': cim.img,
-      'comarca': cim.comarca,
-      'altitude': cim.altitude,
+      "marker-color": cim.essencial ? "#3cc83e" : "#ff0000",
+      "marker-size": "medium",
+      "marker-symbol": "mountain",
+      name: cim.name,
+      url: cim.url,
+      img: cim.img,
+      comarca: cim.comarca,
+      altitude: cim.altitude,
     },
     geometry: {
       coordinates: [+cim.longitude, +cim.latitude],
-      type: 'Point',
+      type: "Point",
     },
     id: i,
   })),
 };
 
-fs.writeFileSync('cims.geojson', JSON.stringify(geoJson, null, 2));
+fs.writeFileSync("cims.geojson", JSON.stringify(geoJson, null, 2));

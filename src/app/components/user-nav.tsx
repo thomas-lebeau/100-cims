@@ -1,7 +1,7 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,14 +9,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useSession } from 'next-auth/react';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dropdown-menu";
+import { useSession } from "next-auth/react";
+import { cn } from "@/lib/cn";
 
 export function UserNav({ className }: { className?: string }) {
   const { data, status } = useSession();
 
-  if (status !== 'authenticated') {
+  if (status !== "authenticated") {
     return (
       <Button asChild size="sm">
         <Link href="/api/auth/signin">Login</Link>
@@ -30,9 +30,9 @@ export function UserNav({ className }: { className?: string }) {
     image: data.user?.image ?? undefined,
     initial:
       data.user?.name
-        ?.split(' ')
+        ?.split(" ")
         .map((n) => n[0])
-        .join('')
+        .join("")
         .toUpperCase() ?? undefined,
   };
 

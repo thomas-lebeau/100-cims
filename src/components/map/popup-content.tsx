@@ -1,12 +1,12 @@
-import type { Cim } from '@/types/cim';
-import { CheckCircle } from 'lucide-react';
+import type { Cim } from "@/types/cim";
+import { CheckCircle } from "lucide-react";
 
-import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { cn } from "@/lib/cn";
+import { Button } from "../ui/button";
 
 export type PopupContentProps = Pick<
   Cim,
-  'id' | 'name' | 'altitude' | 'climbed'
+  "id" | "name" | "altitude" | "climbed"
 > & {
   onClickClimb: (id: string, climbed: boolean) => void; // eslint-disable-line no-unused-vars
 };
@@ -27,8 +27,8 @@ export function PopupContent({
         </div>
         <div
           className={cn(
-            'ml-auto',
-            climbed ? 'text-green-500' : 'text-gray-400'
+            "ml-auto",
+            climbed ? "text-green-500" : "text-gray-400"
           )}
         >
           <Button

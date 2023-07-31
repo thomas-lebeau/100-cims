@@ -1,8 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 
-const fs = require('fs');
+const fs = require("fs");
 
-const data = JSON.parse(fs.readFileSync(__dirname + '/cims.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync(__dirname + "/cims.json", "utf8"));
 
 const prisma = new PrismaClient();
 
@@ -19,7 +19,7 @@ async function main() {
           img: cim.img ?? null,
           url: cim.url,
           comarcas: {
-            connectOrCreate: cim.comarca.split(',').map((comarca) => ({
+            connectOrCreate: cim.comarca.split(",").map((comarca) => ({
               where: { name: comarca.trim() },
               create: { name: comarca.trim() },
             })),
@@ -32,11 +32,11 @@ async function main() {
 
   await prisma.cim
     .findMany()
-    .then((data) => console.log('total cims:', data.length));
+    .then((data) => console.log("total cims:", data.length));
 
   await prisma.comarca
     .findMany()
-    .then((data) => console.log('total length:', data.length));
+    .then((data) => console.log("total length:", data.length));
 }
 
 main();

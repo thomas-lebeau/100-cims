@@ -45,7 +45,7 @@ export default class ServerTimings {
         value += `;desc="${description}"`;
       }
 
-      headers.append('Server-Timing', value);
+      headers.append("Server-Timing", value);
     });
 
     return headers;

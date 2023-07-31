@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const cimsSchema = z.array(
   z.object({
@@ -28,4 +28,4 @@ export const userSchema = z.object({
 });
 
 export type Cim = z.infer<typeof cimsSchema>[0];
-export type Comarca = Cim['comarcas'][0];
+export type Comarca = Cim["comarcas"][0];

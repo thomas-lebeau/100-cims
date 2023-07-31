@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import getServerSession from '@/lib/get-server-session';
+import getServerSession from "@/lib/get-server-session";
 
-import SessionProvider from './components/session-provider';
-import Nav from './components/nav';
-import Main from './components/main';
-import { getCims, getUniqueComarcas } from '@/lib/db';
+import SessionProvider from "./components/session-provider";
+import Nav from "./components/nav";
+import Main from "./components/main";
+import { getCims, getUniqueComarcas } from "@/lib/db";
 
 export default async function Home() {
   const session = await getServerSession();

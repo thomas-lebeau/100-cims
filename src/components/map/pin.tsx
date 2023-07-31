@@ -1,8 +1,8 @@
-import type { ValueOf } from '@/types/values-of';
+import type { ValueOf } from "@/types/values-of";
 
 const COLOR = {
-  GREEN: '#3cc83e',
-  RED: '#ff0000',
+  GREEN: "#3cc83e",
+  RED: "#ff0000",
 } as const;
 
 export function Pin({ color }: { color: ValueOf<typeof COLOR> }) {

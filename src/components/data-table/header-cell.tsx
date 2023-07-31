@@ -1,10 +1,10 @@
-import { type ReactNode } from 'react';
-import { ChevronsUpDown } from 'lucide-react';
+import { type ReactNode } from "react";
+import { ChevronsUpDown } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 
-import type { Column } from '@tanstack/react-table';
+import type { Column } from "@tanstack/react-table";
 
 export function HeaderCell<TData, TValue>({
   column,
@@ -20,10 +20,10 @@ export function HeaderCell<TData, TValue>({
       <Button
         size="sm"
         variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         {children}
-        <ChevronsUpDown className={cn(children ? 'ml-2' : null, 'h-4 w-4')} />
+        <ChevronsUpDown className={cn(children ? "ml-2" : null, "h-4 w-4")} />
       </Button>
     </div>
   );
