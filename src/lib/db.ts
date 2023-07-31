@@ -1,5 +1,5 @@
-import prisma from '@/lib/prisma';
-import { cimsSchema, userSchema } from '@/types/cim';
+import prisma from "@/lib/prisma";
+import { cimsSchema, userSchema } from "@/types/cim";
 
 const schema = cimsSchema.element
   .extend({
@@ -55,7 +55,7 @@ export async function getUniqueComarcas() {
       codigo: true,
     },
     orderBy: {
-      name: 'asc',
+      name: "asc",
     },
   });
 }

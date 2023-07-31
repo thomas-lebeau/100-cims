@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { createContext, type ReactNode } from 'react';
-import mapboxgl from 'mapbox-gl';
+import { createContext, type ReactNode } from "react";
+import mapboxgl from "mapbox-gl";
 
-import { useMap } from './use-map';
+import { useMap } from "./use-map";
 
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export type MapProps = {
   children: ReactNode;

@@ -1,7 +1,7 @@
-require('dotenv').config({ path: '.env.local' });
+require("dotenv").config({ path: ".env.local" });
 // const fs = require('fs');
 
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 // const { error } = require('console');
 // const json = JSON.parse(fs.readFileSync(__dirname + '/cims.json', 'utf8'));
 

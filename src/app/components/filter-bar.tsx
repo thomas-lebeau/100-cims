@@ -1,16 +1,16 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 import {
   SecgmentedControl,
   SegmentedControlOption,
-} from '@/components/ui/segmented-control';
-import { XIcon } from 'lucide-react';
+} from "@/components/ui/segmented-control";
+import { XIcon } from "lucide-react";
 
-import { FILTER_TYPE, FilterState, TSetFilter } from './use-cim-filter';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { FacetPicker } from '@/components/facet-picker';
-import { Comarca } from '@/types/cim';
+import { FILTER_TYPE, FilterState, TSetFilter } from "./use-cim-filter";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FacetPicker } from "@/components/facet-picker";
+import { Comarca } from "@/types/cim";
 
 export default function FilterBar({
   filter,
@@ -31,7 +31,7 @@ export default function FilterBar({
         <Input
           type="search"
           placeholder="Filter cims..."
-          value={filter.name ?? ''}
+          value={filter.name ?? ""}
           onChange={(event) =>
             setFilter({ type: FILTER_TYPE.name, payload: event.target.value })
           }
@@ -40,11 +40,11 @@ export default function FilterBar({
       </div>
       <div className="flex p-2 gap-2">
         <SecgmentedControl
-          value={filter.essencial ? 'essentials' : 'all'}
+          value={filter.essencial ? "essentials" : "all"}
           onValueChange={(value) =>
             setFilter({
               type: FILTER_TYPE.essencial,
-              payload: value === 'essentials',
+              payload: value === "essentials",
             })
           }
         >
@@ -55,11 +55,11 @@ export default function FilterBar({
         </SecgmentedControl>
 
         <SecgmentedControl
-          value={filter.climbed ? 'climbed' : 'all'}
+          value={filter.climbed ? "climbed" : "all"}
           onValueChange={(value) =>
             setFilter({
               type: FILTER_TYPE.climbed,
-              payload: value === 'climbed',
+              payload: value === "climbed",
             })
           }
         >

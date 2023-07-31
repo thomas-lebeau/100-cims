@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Map, Marker } from '@/components/map';
+import { Map, Marker } from "@/components/map";
 
-import { columns } from './columns-def';
-import { DataTable } from '../../components/data-table/data-table';
+import { columns } from "./columns-def";
+import { DataTable } from "../../components/data-table/data-table";
 
-import { Comarca, type Cim } from '@/types/cim';
-import { FILTER_TYPE, useCimFilter } from './use-cim-filter';
-import { cn } from '@/lib/cn';
-import ClimbStats from './climb-stats';
-import FilterBar from './filter-bar';
-import { useCims } from './use-cims';
+import { Comarca, type Cim } from "@/types/cim";
+import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
+import { cn } from "@/lib/cn";
+import ClimbStats from "./climb-stats";
+import FilterBar from "./filter-bar";
+import { useCims } from "./use-cims";
 
 type mainProps = {
   initialCims: Cim[];
@@ -27,7 +27,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
 
   const geoJsonUrl = useMemo(
     () =>
-      filter.comarca ? `/api/comarca/${filter.comarca.join(',')}` : undefined,
+      filter.comarca ? `/api/comarca/${filter.comarca.join(",")}` : undefined,
     [filter.comarca]
   );
 
@@ -36,7 +36,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
       setClimbed({ cimId: id, value: !climbed });
 
       fetch(`/api/cims/${id}`, {
-        method: climbed ? 'DELETE' : 'PUT',
+        method: climbed ? "DELETE" : "PUT",
       }).then((res) => {
         if (res.status !== 200) {
           setClimbed({ cimId: id, value: climbed });
@@ -68,8 +68,8 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
 
   return (
     <main
-      className={cn(className, 'flex')}
-      style={{ height: 'calc(100% - 3rem)' }}
+      className={cn(className, "flex")}
+      style={{ height: "calc(100% - 3rem)" }}
     >
       <Map className="basis-2/3 h-full" geoJsonUrl={geoJsonUrl}>
         {filteredCims.map((cim) => (

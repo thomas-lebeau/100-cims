@@ -1,4 +1,4 @@
-import { type Feature, BBox } from 'geojson';
+import { type Feature, BBox } from "geojson";
 
 function extendBBox(bboxA: BBox, bboxB: BBox): BBox {
   return [

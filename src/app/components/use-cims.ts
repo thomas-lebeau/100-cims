@@ -1,5 +1,5 @@
-import { Cim } from '@/types/cim';
-import { useReducer, type Dispatch } from 'react';
+import { Cim } from "@/types/cim";
+import { useReducer, type Dispatch } from "react";
 
 type Action = {
   value: boolean;

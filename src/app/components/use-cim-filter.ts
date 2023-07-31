@@ -1,13 +1,13 @@
-import { useEffect, useReducer, useState, type Dispatch } from 'react';
+import { useEffect, useReducer, useState, type Dispatch } from "react";
 
-import type { ValueOf } from '@/types/values-of';
-import { Cim } from '@/types/cim';
+import type { ValueOf } from "@/types/values-of";
+import { Cim } from "@/types/cim";
 
 export const FILTER_TYPE = {
-  name: 'name',
-  essencial: 'essencial',
-  comarca: 'comarca',
-  climbed: 'climbed',
+  name: "name",
+  essencial: "essencial",
+  comarca: "comarca",
+  climbed: "climbed",
 } as const;
 
 type FilterType = ValueOf<typeof FILTER_TYPE>;

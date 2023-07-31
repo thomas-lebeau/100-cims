@@ -1,12 +1,12 @@
-import mapboxgl from 'mapbox-gl';
-import { type FeatureCollection } from 'geojson';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import mapboxgl from "mapbox-gl";
+import { type FeatureCollection } from "geojson";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const B_BOX: mapboxgl.LngLatBoundsLike = [0.15908, 40.52292, 3.33249, 42.91834];
 
 const INITIAL_GEOJSON: FeatureCollection = {
-  type: 'FeatureCollection',
+  type: "FeatureCollection",
   bbox: B_BOX,
   features: [],
 };
@@ -22,7 +22,7 @@ export function useMap(geoJsonUrl: string | undefined) {
     (geojson: FeatureCollection) => {
       if (!map) return;
 
-      const source = map.getSource('comarcas') as mapboxgl.GeoJSONSource;
+      const source = map.getSource("comarcas") as mapboxgl.GeoJSONSource;
 
       source.setData(geojson);
       map.fitBounds(geojson.bbox as mapboxgl.LngLatBoundsLike);
@@ -39,38 +39,38 @@ export function useMap(geoJsonUrl: string | undefined) {
       accessToken: TOKEN,
       attributionControl: false,
       bounds: B_BOX,
-      style: 'mapbox://styles/mapbox/outdoors-v12',
+      style: "mapbox://styles/mapbox/outdoors-v12",
     });
 
-    map.on('load', () => {
-      map.addControl(mapControls.current, 'top-right');
+    map.on("load", () => {
+      map.addControl(mapControls.current, "top-right");
 
-      map.addSource('comarcas', {
-        type: 'geojson',
+      map.addSource("comarcas", {
+        type: "geojson",
         data: INITIAL_GEOJSON,
       });
 
       map.addLayer({
-        id: 'fill',
-        type: 'fill',
-        source: 'comarcas',
+        id: "fill",
+        type: "fill",
+        source: "comarcas",
         layout: {},
         paint: {
-          'fill-color': '#f00',
-          'fill-opacity': 0.1,
+          "fill-color": "#f00",
+          "fill-opacity": 0.1,
         },
       });
 
       map.addLayer({
-        id: 'outline',
-        type: 'line',
-        source: 'comarcas',
+        id: "outline",
+        type: "line",
+        source: "comarcas",
         layout: {},
         paint: {
-          'line-color': '#f00',
-          'line-width': 1,
-          'line-dasharray': [2, 2],
-          'line-blur': 1,
+          "line-color": "#f00",
+          "line-width": 1,
+          "line-dasharray": [2, 2],
+          "line-blur": 1,
         },
       });
 

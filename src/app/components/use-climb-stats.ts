@@ -1,5 +1,5 @@
-import { Cim } from '@/types/cim';
-import { useMemo } from 'react';
+import { Cim } from "@/types/cim";
+import { useMemo } from "react";
 
 type ClimbStats = {
   totalAltitude: number;

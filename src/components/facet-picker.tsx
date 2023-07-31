@@ -1,10 +1,10 @@
-import { useMemo, type ComponentType } from 'react';
-import { CheckIcon, PlusCircleIcon } from 'lucide-react';
+import { useMemo, type ComponentType } from "react";
+import { CheckIcon, PlusCircleIcon } from "lucide-react";
 
-import { cn } from '@/lib/cn';
-import { Button } from './ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Badge } from './ui/badge';
+import { cn } from "@/lib/cn";
+import { Button } from "./ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Badge } from "./ui/badge";
 import {
   Command,
   CommandEmpty,
@@ -13,8 +13,8 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from './ui/command';
-import { Separator } from './ui/separator';
+} from "./ui/command";
+import { Separator } from "./ui/separator";
 
 type FacetPickerProps = {
   selectedvalues: Array<string> | undefined;
@@ -96,13 +96,13 @@ export function FacetPicker({
                   >
                     <div
                       className={cn(
-                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                         isSelected
-                          ? 'bg-primary text-primary-foreground'
-                          : 'opacity-50 [&_svg]:invisible'
+                          ? "bg-primary text-primary-foreground"
+                          : "opacity-50 [&_svg]:invisible"
                       )}
                     >
-                      <CheckIcon className={cn('h-4 w-4')} />
+                      <CheckIcon className={cn("h-4 w-4")} />
                     </div>
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
