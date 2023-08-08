@@ -28,7 +28,7 @@
     "lucide-react": "^0.263.1",
     "mapbox-gl": "^2.15.0",
     "next": "13.4.12",
-    "next-auth": "^4.22.3",
+    "next-auth": "^4.22.4",
     "nodemailer": "^6.9.4",
     "playwright": "^1.36.0",
     "react": "18.2.0",
