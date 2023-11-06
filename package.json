@@ -27,7 +27,7 @@
     "cmdk": "^0.2.0",
     "lucide-react": "^0.276.0",
     "mapbox-gl": "^2.15.0",
-    "next": "13.4.12",
+    "next": "14.0.1",
     "next-auth": "^4.22.4",
     "nodemailer": "^6.9.4",
     "playwright": "^1.36.0",
