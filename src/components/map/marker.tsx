@@ -34,6 +34,7 @@ export function Marker({
   const [markerContainer] = useState(() => document.createElement("div"));
   const [markerRoot] = useState(() => createRoot(markerContainer));
   const markerRef = useRef<mapboxgl.Marker | null>(null);
+  const isMounted = useRef(false);
 
   useEffect(
     function setup() {
@@ -44,13 +45,19 @@ export function Marker({
         .addTo(map);
 
       markerRef.current = marker;
+      isMounted.current = true;
 
       return () => {
         marker.remove();
+        isMounted.current = false;
 
         // It seems like you are supposed to unmount components outside of `useEffect`:
         // https://github.com/facebook/react/issues/25675#issuecomment-1363957941
-        setTimeout(() => markerRoot.unmount(), 0);
+        setTimeout(() => {
+          if (!isMounted.current) {
+            markerRoot.unmount();
+          }
+        }, 0);
       };
     },
 
