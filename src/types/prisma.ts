@@ -15,3 +15,4 @@ export type User = Prisma.UserGetPayload<Prisma.UserDefaultArgs>;
 export type VerificationToken =
   Prisma.VerificationTokenGetPayload<Prisma.VerificationTokenDefaultArgs>;
 export type Cim = Prisma.CimGetPayload<Prisma.CimDefaultArgs>;
+export type Activity = Prisma.ActivityGetPayload<Prisma.ActivityDefaultArgs>;
