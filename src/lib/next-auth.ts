@@ -114,7 +114,7 @@ export const authOptions: AuthOptions = {
         },
       })) as StravaAccount[];
 
-      if (isSessionExpired(account)) {
+      if (account && isSessionExpired(account)) {
         try {
           refreshStravaToken(account);
         } catch (error) {
