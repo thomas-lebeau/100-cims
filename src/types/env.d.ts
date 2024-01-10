@@ -9,15 +9,25 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      NEXT_PUBLIC_MAPBOX_TOKEN: string;
+      EMAIL_FROM: string;
+      EMAIL_SERVER_USER: string;
+      EMAIL_SERVER_PASSWORD: string;
+      EMAIL_SERVER_HOST: string;
+      EMAIL_SERVER_PORT: string;
 
       GOOGLE_CLIENT_ID: string;
       GOOGLE_CLIENT_SECRET: string;
 
-      EMAIL_SERVER_HOST: string;
-      EMAIL_SERVER_PORT: string;
-      EMAIL_SERVER_USER: string;
-      EMAIL_SERVER_PASSWORD: string;
+      NEXTAUTH_SECRET: string;
+      NEXTAUTH_URL: string;
+
+      NEXT_PUBLIC_MAPBOX_TOKEN: string;
+
+      DATABASE_URL: string;
+      DATABASE_SHADOW_URL: string;
+
+      STRAVA_CLIENT_ID: string;
+      STRAVA_CLIENT_SECRET: string;
     }
   }
 }

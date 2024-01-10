@@ -59,3 +59,17 @@ export async function getUniqueComarcas() {
     },
   });
 }
+
+export async function getsStravaAccounts(userId: string) {
+  return await prisma.account.findFirst({
+    select: {
+      id: true,
+      provider: true,
+      expires_at: true,
+    },
+    where: {
+      userId,
+      provider: "strava",
+    },
+  });
+}

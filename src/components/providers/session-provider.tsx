@@ -1,8 +1,8 @@
 "use client";
 
-import { type ReactNode } from "react";
 import { Session } from "next-auth";
 import { SessionProvider as NextSessionProvider } from "next-auth/react";
+import { type ReactNode } from "react";
 
 type SessionProviderProps = {
   session: Session | null;
