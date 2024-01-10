@@ -93,7 +93,7 @@ model CimToUser {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([cimId, userId])
-  @@unique([cimId, userId])
+  @@unique([cimId, userId]) // TODO: allow multiple ascents
   @@index([userId])
   @@index([cimId])
 }
@@ -112,9 +112,9 @@ model Activity {
   stravaId        String
   userId          String
   name            String
-  type            String
+  type            String // TODO: rename sportType?
   startDate       DateTime
-  summaryPolyline String
+  summaryPolyline String          @db.Text
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @default(now()) @updatedAt
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -128,7 +128,7 @@ model CimToActivity {
   activityId String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  cim        Cim      @relation(fields: [cimId], references: [id])
+  cim        Cim      @relation(fields: [cimId], references: [id]) // TODO: fix [referencial action](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions)
   activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
 
   @@id([cimId, activityId])
