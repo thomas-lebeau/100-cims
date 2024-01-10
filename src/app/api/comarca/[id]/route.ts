@@ -1,8 +1,9 @@
+import { getBBox } from "@/lib/geojson";
+import { type FeatureCollection } from "geojson";
 import { NextRequest, NextResponse } from "next/server";
+import { serializeError } from "serialize-error";
 import { z } from "zod";
 import rawData from "./data.json";
-import { type FeatureCollection } from "geojson";
-import { getBBox } from "@/lib/geojson";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -35,6 +36,6 @@ export async function GET(
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(serializeError(error), { status: 500 });
   }
 }

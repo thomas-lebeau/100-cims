@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import getServerSession from "@/lib/get-server-session";
 import prisma from "@/lib/prisma";
 import serverTimings from "@/lib/server-timings";
-import getServerSession from "@/lib/get-server-session";
 
-import { z } from "zod";
 import { stravaActivitySchema } from "@/types/strava";
+import { serializeError } from "serialize-error";
+import { z } from "zod";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -75,6 +76,6 @@ export async function GET(
       headers: serverTiming.headers(),
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(serializeError(error), { status: 500 });
   }
 }

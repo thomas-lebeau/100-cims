@@ -4,6 +4,7 @@ import { z } from "zod";
 import prisma from "@/lib/prisma";
 import serverTimings from "@/lib/server-timings";
 import getServerSession from "@/lib/get-server-session";
+import { serializeError } from "serialize-error";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -16,13 +17,13 @@ async function handler(
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
-    const result = routeContextSchema.safeParse(context);
+    const safeContext = routeContextSchema.safeParse(context);
 
-    if (!result.success) {
-      return NextResponse.json(result.error.issues, { status: 422 });
+    if (!safeContext.success) {
+      return NextResponse.json(safeContext.error.issues, { status: 422 });
     }
 
-    const id = result.data.params.id;
+    const id = safeContext.data.params.id;
     const serverTiming = new serverTimings();
     const session = await getServerSession();
 
@@ -33,7 +34,7 @@ async function handler(
       );
     }
 
-    serverTiming.start("usr");
+    serverTiming.start("db");
 
     let data;
 
@@ -53,14 +54,14 @@ async function handler(
       });
     }
 
-    serverTiming.stop("usr");
+    serverTiming.stop("db");
 
     return NextResponse.json(data, {
       status: 200,
       headers: serverTiming.headers(),
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(serializeError(error), { status: 500 });
   }
 }
 export const PUT = handler;

@@ -10,10 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSession } from "next-auth/react";
 import { cn } from "@/lib/cn";
+import { useSession } from "next-auth/react";
 
-export function UserNav({ className }: { className?: string }) {
+export function UserMenu({ className }: { className?: string }) {
   const { data, status } = useSession();
 
   if (status !== "authenticated") {
@@ -59,6 +59,10 @@ export function UserNav({ className }: { className?: string }) {
           </DropdownMenuLabel>
 
           <DropdownMenuSeparator />
+
+          <DropdownMenuItem asChild>
+            <Link href="/settings">Settings</Link>
+          </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
             <Link href="/api/auth/signout">Log out</Link>
