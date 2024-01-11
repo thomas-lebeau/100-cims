@@ -9,6 +9,7 @@ import prismaClient from "@/lib/prisma";
 import { Token } from "@/types/next-auth";
 import { AuthOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
+import { AdapterUser } from "next-auth/adapters";
 
 const googleProvider = GoogleProvider({
   clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -67,6 +68,31 @@ if (process.env.EMAIL_SERVER_HOST) {
   providers.push(emailProvider);
 }
 
+export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prismaClient),
+  providers: providers,
+  callbacks: {
+    async session({ session, user }) {
+      try {
+        await maybeRefreshToken(user);
+      } catch (error) {
+        console.error("Error refreshing access token", error);
+        // TODO: The error property will be used client-side to handle the refresh token error
+        session.error = "RefreshAccessTokenError";
+      }
+
+      if (user) {
+        session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.email = user.email;
+        session.user.image = user.image;
+      }
+
+      return session;
+    },
+  },
+};
+
 function isSessionExpired(account: Account) {
   return Boolean(account.expires_at && account.expires_at * 1000 < Date.now());
 }
@@ -102,36 +128,22 @@ async function refreshStravaToken(account: StravaAccount) {
   });
 }
 
-export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prismaClient),
-  providers: providers,
-  callbacks: {
-    async session({ session, user }) {
-      const [account] = (await prisma.account.findMany({
-        where: {
-          userId: user.id,
-          provider: "strava",
-        },
-      })) as StravaAccount[];
+function isStravaAccount(account: Account): account is StravaAccount {
+  return account.provider === "strava";
+}
 
-      if (isSessionExpired(account)) {
-        try {
-          refreshStravaToken(account);
-        } catch (error) {
-          console.error("Error refreshing access token", error);
-          // TODO: The error property will be used client-side to handle the refresh token error
-          session.error = "RefreshAccessTokenError";
-        }
-      }
-
-      if (user) {
-        session.user.id = user.id;
-        session.user.name = user.name;
-        session.user.email = user.email;
-        session.user.image = user.image;
-      }
-
-      return session;
+async function maybeRefreshToken(user: AdapterUser) {
+  const account = await prisma.account.findFirst({
+    where: {
+      userId: user.id,
+      provider: "strava",
     },
-  },
-};
+  });
+
+  if (!account) return;
+  if (!isSessionExpired(account)) return;
+
+  if (isStravaAccount(account)) {
+    refreshStravaToken(account);
+  }
+}
