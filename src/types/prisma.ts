@@ -1,15 +1,18 @@
 import { type Prisma } from "@prisma/client";
 
+type PrismaAccount = Prisma.AccountGetPayload<Prisma.AccountDefaultArgs>;
+
 export type StravaAccount = {
   provider: "strava";
   refresh_token: number;
-} & Prisma.AccountGetPayload<Prisma.AccountDefaultArgs>;
+} & PrismaAccount;
 
 export type GoogleAccount = {
   provider: "google";
-} & Prisma.AccountGetPayload<Prisma.AccountDefaultArgs>;
+  refresh_token: number;
+} & PrismaAccount;
 
-export type Account = StravaAccount | GoogleAccount;
+export type Account = StravaAccount | GoogleAccount | PrismaAccount;
 export type Session = Prisma.SessionGetPayload<Prisma.SessionDefaultArgs>;
 export type User = Prisma.UserGetPayload<Prisma.UserDefaultArgs>;
 export type VerificationToken =
