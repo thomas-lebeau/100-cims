@@ -57,6 +57,7 @@
     "postcss": "8.4.33",
     "prettier": "^3.1.0",
     "prisma": "^5.7.1",
+    "type-testing": "^0.2.0",
     "typescript": "^5.3.3"
   }
 }
