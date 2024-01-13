@@ -1,16 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import prisma from "@/lib/prisma";
 import serverTimings from "@/lib/server-timings";
 import getServerSession from "@/lib/get-server-session";
 import { serializeError } from "serialize-error";
+import { addAscent, deleteAscent } from "@/lib/db/ascent";
+import { activitySchema } from "@/lib/db/activities";
 
 const routeContextSchema = z.object({
   params: z.object({
     id: z.string(),
   }),
 });
+
+const bodySchema = z.array(
+  activitySchema
+    .omit({
+      id: true,
+      userId: true,
+      createdAt: true,
+      updatedAt: true,
+    })
+    .extend({
+      startDate: z.string().transform((date) => new Date(date)),
+    })
+);
 
 async function handler(
   req: NextRequest,
@@ -23,7 +37,7 @@ async function handler(
       return NextResponse.json(safeContext.error.issues, { status: 422 });
     }
 
-    const cimId = safeContext.data.params.id;
+    const id = safeContext.data.params.id;
     const serverTiming = new serverTimings();
     const session = await getServerSession();
 
@@ -39,19 +53,20 @@ async function handler(
     let data;
 
     if (req.method === "PUT") {
-      data = await prisma.cimToUser.create({
-        data: {
-          cimId: cimId,
-          userId: session.user.id,
-        },
-      });
+      const safeBody = bodySchema.safeParse(await req.json());
+
+      if (!safeBody.success) {
+        return NextResponse.json(safeBody.error.issues, { status: 422 });
+      }
+
+      data = await addAscent(session.user.id, id, safeBody.data);
+    } else if (req.method === "DELETE") {
+      data = await deleteAscent(session.user.id, id);
     } else {
-      data = await prisma.cimToUser.deleteMany({
-        where: {
-          cimId: cimId,
-          userId: session.user.id,
-        },
-      });
+      return NextResponse.json(
+        { error: "Method not allowed" },
+        { status: 405 }
+      );
     }
 
     serverTiming.stop("db");

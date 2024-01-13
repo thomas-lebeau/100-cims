@@ -14,6 +14,13 @@ const routeContextSchema = z.object({
   }),
 });
 
+const urlSearchParamsSchema = z.object({
+  since: z
+    .string()
+    .transform((date) => z.date().parse(new Date(date))?.getTime() / 1000)
+    .optional(),
+});
+
 export async function GET(
   req: NextRequest,
   context: z.infer<typeof routeContextSchema>
@@ -52,8 +59,18 @@ export async function GET(
 
     const pageId = safeContext.data.params.id ?? 1;
 
+    const safeUrlSearchParams = urlSearchParamsSchema.safeParse(
+      Object.fromEntries(new URL(req.url).searchParams.entries())
+    );
+
+    if (!safeUrlSearchParams.success) {
+      return NextResponse.json(safeUrlSearchParams.error.issues, {
+        status: 422,
+      });
+    }
+
     const res = await fetch(
-      `https://www.strava.com/api/v3/athlete/activities?page=${pageId}`,
+      `https://www.strava.com/api/v3/athlete/activities?page=${pageId}&after=${safeUrlSearchParams.data.since}`,
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -65,7 +82,7 @@ export async function GET(
     const safeActivity = stravaActivitySchema.array().safeParse(data);
 
     if (!safeActivity.success) {
-      return NextResponse.json(safeActivity.error.issues, { status: 422 });
+      return NextResponse.json(safeActivity.error.issues, { status: 422 }); //TODO: return [] or different error code
     }
 
     serverTiming.stop("get");
