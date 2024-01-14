@@ -7,11 +7,10 @@ import {
 
 type Variables = {
   cimIds: string[];
-  action: "ADD" | "REMOVE";
   activity?: ActivityInput;
 };
 
-export function useAscentMutation() {
+export function useSyncMutation() {
   const queryClient = useQueryClient();
 
   const { isPending, variables, mutate } = useMutation<
@@ -20,14 +19,14 @@ export function useAscentMutation() {
     Variables
   >({
     mutationKey: ["ascents"],
-    mutationFn: ({ action, cimIds, activity }) =>
-      fetch(`/api/ascents/${cimId}`, {
-        method: action === "ADD" ? "PUT" : action === "REMOVE" ? "DELETE" : "",
-        body: JSON.stringify(activity),
+    mutationFn: (variables: Variables) =>
+      fetch(`/api/sync`, {
+        method: "POST",
+        body: JSON.stringify(variables),
       }).then((res) => res.json()),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ["ascents"],
+        queryKey: ["last-syncs"],
       }),
   });
 

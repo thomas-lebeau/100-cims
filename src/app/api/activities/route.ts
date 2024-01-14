@@ -1,14 +1,9 @@
 import { getActivities } from "@/lib/db/activities";
 import getServerSession from "@/lib/get-server-session";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
-import { z } from "zod";
 
-const originTypeQueryParamSchema = z
-  .union([z.literal("STRAVA"), z.literal("GPX")])
-  .nullable();
-
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession();
 
@@ -16,15 +11,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const originType = originTypeQueryParamSchema.safeParse(
-      new URL(req.url).searchParams.get("originType")
-    );
-
-    if (!originType.success) {
-      return NextResponse.json(originType.error.issues, { status: 422 });
-    }
-
-    const data = await getActivities(session.user.id, originType.data);
+    const data = await getActivities(session.user.id);
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {

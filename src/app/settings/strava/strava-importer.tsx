@@ -1,12 +1,13 @@
 "use client";
 
 import { useActivitiesQuery } from "@/app/components/queries/use-activities-query";
-import { useAscentMutation } from "@/app/components/queries/use-ascents-mutation";
 import { useAscentsQuery } from "@/app/components/queries/use-ascents-query";
 import { useCimsQuery } from "@/app/components/queries/use-cims-query";
-import { useAllStravaActivities } from "@/app/components/queries/use-strava-activities-query";
+import { useLastSyncQuery } from "@/app/components/queries/use-last-sync-query";
+import { useStravaActivities } from "@/app/components/queries/use-strava-activities-query";
+import { useSyncMutation } from "@/app/components/queries/use-sync-mutation";
 import { Button } from "@/components/ui/button";
-import { Cim } from "@/types/prisma";
+import { Cim } from "@/lib/db/cims";
 import { StravaActivity } from "@/types/strava";
 import { toGeoJSON } from "@mapbox/polyline";
 import pointToLineDistance from "@turf/point-to-line-distance";
@@ -16,7 +17,7 @@ import { useMemo } from "react";
 
 const MAX_DISTANCE = 25; // in meters;
 
-type Matches = Record<Cim["id"], StravaActivity[]>;
+type Matches = Record<StravaActivity["originId"], Cim["id"][]>;
 
 function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   let matches: Matches = {};
@@ -32,42 +33,38 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
       );
 
       if (distance < MAX_DISTANCE) {
-        if (!matches[cim.id]) {
-          matches[cim.id] = [];
+        if (!matches[activity.originId]) {
+          matches[activity.originId] = [];
         }
 
-        matches[cim.id].push(activity);
+        matches[activity.originId].push(cim.id);
       }
     }
   }
-
   return matches;
 }
 
 export default function StravaImporter() {
   const { data: cims } = useCimsQuery();
+  const { data: lastSync } = useLastSyncQuery();
   const { data: ascents } = useAscentsQuery();
-  const { data: activities } = useActivitiesQuery({ originType: "STRAVA" });
-  const { isPending, variables, mutate } = useAscentMutation();
-
-  const lastImportedStravaActivity = activities[0];
-
+  const { data: activities } = useActivitiesQuery();
+  const { isPending, variables, mutate } = useSyncMutation();
+  if (lastSync) {
+    lastSync.createdAt = "2023-10-14T11:05:59.823Z";
+  }
   const {
     data: stravaActivities,
     error,
     isFetching,
-  } = useAllStravaActivities({
-    since: lastImportedStravaActivity?.startDate,
-  });
+  } = useStravaActivities({ since: lastSync?.createdAt });
 
-  const matches = useMemo(
+  const newActivities = useMemo(
     () => filterActivities(cims, stravaActivities),
     [stravaActivities, cims]
   );
-  const matchActivitiesCount = useMemo(
-    () => Object.values(matches).reduce((acc, match) => acc + match.length, 0),
-    [matches]
-  );
+
+  const activityCount = Object.keys(newActivities).length;
 
   if (error) return <p>Error!!!</p>;
   if (!stravaActivities) return null;
@@ -85,57 +82,54 @@ export default function StravaImporter() {
         <p>🔄 Downloading activities...({stravaActivities.length})</p>
       ) : (
         <p>
-          ✅ found {matchActivitiesCount} activities (of{" "}
-          {stravaActivities.length}){/*matching {cimCount} summits*/}
+          ✅ found {activityCount} activities (of {stravaActivities.length})
         </p>
       )}
 
       <ul>
-        {Object.entries(matches).map(([cimId, stravaActivities]) => {
-          const cim = cims.find((cim) => cim.id === cimId);
-          const isAcended = ascents.some((ascent) => ascent.id === cimId);
+        {Object.entries(newActivities).map(([activityId, cimIds]) => {
+          const activity = stravaActivities.find(
+            (activity) => activity.originId === activityId
+          );
+          const isUploaded = activities?.some(
+            (activity) => activity.originId === activityId
+          );
 
-          if (!cim) return;
+          if (!activity) return;
 
           return (
-            <li key={cim.id} className="mb-8">
-              🏔️ {isAcended ? "🟢" : "🔴"} {cim.name}{" "}
-              <Button
-                disabled={isPending && variables?.cimId === cimId}
-                onClick={() =>
-                  mutate({
-                    action: isAcended ? "REMOVE" : "ADD",
-                    cimId,
-                    activities: stravaActivities,
-                  })
-                }
+            <li key={activityId} className="mb-8">
+              <Link
+                href={`https://www.strava.com/activities/${activity.originId}`}
+                target="_blank"
               >
-                {isPending && variables?.cimId === cimId && (
+                {isUploaded ? "🟢" : "🔴"} {activity.name}
+              </Link>
+              <Button
+                disabled={
+                  isPending && variables?.activity?.originId === activityId
+                }
+                onClick={() => mutate({ cimIds, activity })}
+              >
+                {isPending && variables?.activity?.originId === activityId && (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                {isAcended ? "remove" : "add"}
+                Upload
               </Button>
-              <ul className="ml-8">
-                {stravaActivities.map((stravaActivity) => {
-                  const isUploaded = activities.some(
-                    ({ originId, originType }) =>
-                      originType === "STRAVA" &&
-                      originId === stravaActivity.originId
-                  );
+              {cimIds.map((cimId) => {
+                const cim = cims.find((cim) => cim.id === cimId);
+                const isAscended = ascents?.some(
+                  (ascent) => ascent.cimId === cimId
+                );
 
-                  return (
-                    <li key={stravaActivity.originId}>
-                      {isUploaded ? "🟢" : "🔴"}
-                      <Link
-                        href={`https://www.strava.com/activities/${stravaActivity.originId}`}
-                        target="_blank"
-                      >
-                        {stravaActivity.name}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+                if (!cim) return;
+
+                return (
+                  <span key={cimId}>
+                    {isAscended ? "🟢" : "🔴"} {cim.name}
+                  </span>
+                );
+              })}
             </li>
           );
         })}
