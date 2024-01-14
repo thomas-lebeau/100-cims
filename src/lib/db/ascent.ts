@@ -12,6 +12,17 @@ export async function getAscents(userId: string) {
   );
 }
 
+export async function addAscents(userId: string, ascents: AscentInput[]) {
+  return await prisma.ascent.createMany({
+    skipDuplicates: true,
+    data: ascents.map(({ cimId, activityId }) => ({
+      userId,
+      cimId,
+      activityId,
+    })),
+  });
+}
+
 export async function addAscent(
   userId: string,
   cimId: string,

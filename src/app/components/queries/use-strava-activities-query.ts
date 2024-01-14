@@ -1,3 +1,4 @@
+import zfetch from "@/lib/zfetch";
 import { StravaActivity } from "@/types/strava";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -28,9 +29,7 @@ function queryFn({ pageParam, meta }: { pageParam: unknown; meta: unknown }) {
     url += "?since=" + _meta.since;
   }
 
-  return fetch(url)
-    .then((res) => res.json())
-    .then((data) => apiResponseSchema.parse(data));
+  return zfetch(apiResponseSchema, url);
 }
 
 function getNextPageParam(
@@ -73,7 +72,7 @@ export function useStravaActivities(
     function loadNextPage() {
       if (isFetchingNextPage || !hasNextPage) return;
 
-      // fetchNextPage();
+      // fetchNextPage(); // TODO: fix this
     },
     [isFetchingNextPage, hasNextPage, fetchNextPage]
   );

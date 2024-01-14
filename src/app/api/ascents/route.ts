@@ -13,10 +13,8 @@ export async function GET() {
 
     const data = await getAscents(session.user.id);
 
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json(serializeError(error), { status: 500 });
   }
 }
-
-export type AscentResponse = Awaited<ReturnType<typeof GET>>;
