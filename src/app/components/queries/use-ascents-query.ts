@@ -1,13 +1,11 @@
 import { ascentSchema } from "@/lib/db/ascent";
+import zfetch from "@/lib/zfetch";
 import { useQuery } from "@tanstack/react-query";
 
 export function useAscentsQuery() {
   const { data, error, isFetching } = useQuery({
     queryKey: ["ascents"],
-    queryFn: () =>
-      fetch("/api/ascents")
-        .then((res) => res.json())
-        .then((data) => ascentSchema.array().parse(data)),
+    queryFn: () => zfetch(ascentSchema.array(), "/api/ascents"),
     initialData: [],
   });
 

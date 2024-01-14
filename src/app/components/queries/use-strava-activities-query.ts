@@ -1,3 +1,4 @@
+import { StravaActivity } from "@/types/strava";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { z } from "zod";
@@ -5,7 +6,7 @@ import { z } from "zod";
 const PAGE_SIZE = 30;
 
 type Meta = {
-  since?: Date;
+  since?: string;
 };
 
 const apiResponseSchema = z
@@ -14,19 +15,17 @@ const apiResponseSchema = z
     originId: z.string(),
     originType: z.literal("STRAVA"),
     sportType: z.string(),
-    startDate: z.string().transform((date) => new Date(date)),
+    startDate: z.string().datetime(),
     summaryPolyline: z.string(),
   })
   .array();
-
-type ApiResponse = z.infer<typeof apiResponseSchema>;
 
 function queryFn({ pageParam, meta }: { pageParam: unknown; meta: unknown }) {
   let url = "/api/strava/activities/" + pageParam;
   let _meta: Meta = meta as Meta;
 
   if (_meta.since) {
-    url += "?since=" + _meta.since.toISOString();
+    url += "?since=" + _meta.since;
   }
 
   return fetch(url)
@@ -35,13 +34,13 @@ function queryFn({ pageParam, meta }: { pageParam: unknown; meta: unknown }) {
 }
 
 function getNextPageParam(
-  lastPage: ApiResponse,
-  pages: ApiResponse[]
+  lastPage: StravaActivity[],
+  pages: StravaActivity[][]
 ): null | number {
   return lastPage.length >= PAGE_SIZE ? pages.length + 1 : null;
 }
 
-export function useAllStravaActivities(
+export function useStravaActivities(
   options: {
     enabled?: boolean;
   } & Meta = {}
@@ -74,7 +73,7 @@ export function useAllStravaActivities(
     function loadNextPage() {
       if (isFetchingNextPage || !hasNextPage) return;
 
-      fetchNextPage();
+      // fetchNextPage();
     },
     [isFetchingNextPage, hasNextPage, fetchNextPage]
   );

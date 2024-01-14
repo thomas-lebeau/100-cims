@@ -50,6 +50,8 @@ model User {
   sessions      Session[]
   cims          CimToUser[]
   activities    Activity[]
+  Ascent        Ascent[]
+  Sync          Sync[]
 }
 
 model VerificationToken {
@@ -74,6 +76,7 @@ model Cim {
   comarcas   Comarca[]
   users      CimToUser[]
   activities CimToActivity[]
+  Ascent     Ascent[]
 }
 
 model Comarca {
@@ -90,7 +93,7 @@ model CimToUser {
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  cim       Cim      @relation(fields: [cimId], references: [id])
+  cim       Cim      @relation(fields: [cimId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([cimId, userId])
@@ -111,6 +114,7 @@ model CimToComarca {
 model Activity {
   id              String          @id @default(cuid())
   userId          String
+  syncId          String?
   originId        String?         @db.Text
   originType      EnumOriginType?
   name            String
@@ -120,7 +124,39 @@ model Activity {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @default(now()) @updatedAt
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Sync            Sync?           @relation(fields: [syncId], references: [id], onDelete: Cascade)
   cims            CimToActivity[]
+  Ascent          Ascent[]
+
+  @@unique([userId, originType, originId(length: 20)]) // TODO: fix originId field length
+  @@index([userId])
+  @@index([syncId])
+}
+
+model Ascent {
+  id         String    @id @default(cuid())
+  cimId      String
+  userId     String
+  activityId String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  cim        Cim       @relation(fields: [cimId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activity   Activity? @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@unique([cimId, userId, activityId])
+  @@index([userId])
+  @@index([cimId])
+  @@index([activityId])
+}
+
+model Sync {
+  id         String     @id @default(cuid())
+  userId     String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activities Activity[]
 
   @@index([userId])
 }
@@ -130,7 +166,7 @@ model CimToActivity {
   activityId String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  cim        Cim      @relation(fields: [cimId], references: [id]) // TODO: fix [referencial action](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions)
+  cim        Cim      @relation(fields: [cimId], references: [id], onDelete: Cascade)
   activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
 
   @@id([cimId, activityId])

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import serverTimings from "@/lib/server-timings";
-import getServerSession from "@/lib/get-server-session";
-import { serializeError } from "serialize-error";
-import { addAscent, deleteAscent } from "@/lib/db/ascent";
 import { activitySchema } from "@/lib/db/activities";
+import { addAscent, deleteAscent } from "@/lib/db/ascent";
+import getServerSession from "@/lib/get-server-session";
+import serverTimings from "@/lib/server-timings";
+import { serializeError } from "serialize-error";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -13,18 +13,19 @@ const routeContextSchema = z.object({
   }),
 });
 
-const bodySchema = z.array(
-  activitySchema
-    .omit({
-      id: true,
-      userId: true,
-      createdAt: true,
-      updatedAt: true,
-    })
-    .extend({
-      startDate: z.string().transform((date) => new Date(date)),
-    })
-);
+const bodySchema = activitySchema
+  .omit({
+    id: true,
+    userId: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    startDate: z
+      .string()
+      .datetime()
+      .transform((date) => new Date(date)),
+  });
 
 async function handler(
   req: NextRequest,

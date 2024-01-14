@@ -17,7 +17,8 @@ const routeContextSchema = z.object({
 const urlSearchParamsSchema = z.object({
   since: z
     .string()
-    .transform((date) => z.date().parse(new Date(date))?.getTime() / 1000)
+    .transform((date) => new Date(date)?.getTime() / 1000)
+    .transform((date) => Math.ceil(date))
     .optional(),
 });
 
@@ -69,14 +70,17 @@ export async function GET(
       });
     }
 
-    const res = await fetch(
-      `https://www.strava.com/api/v3/athlete/activities?page=${pageId}&after=${safeUrlSearchParams.data.since}`,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
+    let url = `https://www.strava.com/api/v3/athlete/activities?page=${pageId}`;
+
+    if (safeUrlSearchParams.data.since) {
+      url += `&after=${safeUrlSearchParams.data.since}`;
+    }
+
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
     const data = await res.json();
 
     const safeActivity = stravaActivitySchema.array().safeParse(data);

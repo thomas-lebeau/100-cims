@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
-import { type Equal, type Expect } from "type-testing";
 import { z } from "zod";
+import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 
 export async function getCims() {
-  return await prisma.cim.findMany();
+  return cimSchema.array().parse(await prisma.cim.findMany());
 }
 
 export type Cim = Awaited<ReturnType<typeof getCims>>[0];
@@ -17,10 +17,6 @@ export const cimSchema = z.object({
   url: z.string(),
   img: z.string().nullable(),
   essencial: z.boolean(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.preprocess(toIsoDate, z.string().datetime()),
+  updatedAt: z.preprocess(toIsoDate, z.string().datetime()),
 });
-
-// Make sure the schema is in sync with prisma type
-// eslint-disable-next-line no-unused-vars
-type testType = Expect<Equal<z.infer<typeof cimSchema>, Cim>>;

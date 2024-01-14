@@ -76,6 +76,7 @@ export const authOptions: AuthOptions = {
       try {
         await maybeRefreshToken(user);
       } catch (error) {
+        // TODO: proper logging
         console.error("Error refreshing access token", error);
         // TODO: The error property will be used client-side to handle the refresh token error
         session.error = "RefreshAccessTokenError";
