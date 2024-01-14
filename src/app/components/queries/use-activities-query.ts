@@ -7,7 +7,6 @@ export function useActivitiesQuery() {
     queryKey: ["activities"],
     queryFn: () => zfetch(activitySchema.array(), "/api/activities"),
     initialData: [],
-    refetchOnMount: false,
   });
 
   return { data, error, isFetching };

@@ -2,16 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { activityInputSchema } from "@/lib/db/activities";
-import { addAscent } from "@/lib/db/ascent";
-import { addSync } from "@/lib/db/sync";
+import { AscentInput, addAscents } from "@/lib/db/ascent";
+import { addSync, getLastSync } from "@/lib/db/sync";
 import getServerSession from "@/lib/get-server-session";
 import serverTimings from "@/lib/server-timings";
 import { serializeError } from "serialize-error";
 
-const bodySchema = z.object({
-  cimIds: z.string().array().nonempty(),
-  activity: activityInputSchema,
-});
+const bodySchema = z.array(
+  z.object({
+    cimIds: z.string().array().nonempty(),
+    activity: activityInputSchema,
+  })
+);
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,24 +35,48 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(safeBody.error.issues, { status: 422 });
     }
 
-    const syncData = await addSync(session.user.id, [safeBody.data.activity]);
-    const activityId = syncData.activities[0].id;
+    const syncedData = await addSync(
+      session.user.id,
+      safeBody.data.map(({ activity }) => activity)
+    );
 
-    const ascentData = [];
+    const ascents = safeBody.data.reduce(
+      (acc: AscentInput[], { cimIds, activity }) =>
+        acc.concat(
+          cimIds.map((cimId) => ({
+            cimId,
+            activityId: syncedData.activities.find(
+              ({ originId }) => originId === activity.originId
+            ).id,
+          }))
+        ),
+      []
+    );
 
-    for (const cimId of safeBody.data.cimIds) {
-      ascentData.push(await addAscent(session.user.id, cimId, activityId));
-    }
+    const ascendedData = await addAscents(session.user.id, ascents);
 
     serverTiming.stop("db");
 
-    return NextResponse.json(
-      { syncData, ascentData },
-      {
-        status: 200,
-        headers: serverTiming.headers(),
-      }
-    );
+    return NextResponse.json([syncedData, ascendedData], {
+      status: 200,
+      headers: serverTiming.headers(),
+    });
+  } catch (error) {
+    return NextResponse.json(serializeError(error), { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    const session = await getServerSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const data = await getLastSync(session.user.id);
+
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json(serializeError(error), { status: 500 });
   }

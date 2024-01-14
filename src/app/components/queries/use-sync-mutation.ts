@@ -6,8 +6,10 @@ import {
 } from "@tanstack/react-query";
 
 type Variables = {
-  cimIds: string[];
-  activity?: ActivityInput;
+  ascents: {
+    cimIds: string[];
+    activity: ActivityInput;
+  }[];
 };
 
 export function useSyncMutation() {
@@ -22,11 +24,14 @@ export function useSyncMutation() {
     mutationFn: (variables: Variables) =>
       fetch(`/api/sync`, {
         method: "POST",
-        body: JSON.stringify(variables),
+        body: JSON.stringify(variables.ascents),
       }).then((res) => res.json()),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ["last-syncs"],
+        predicate: ({ queryKey }) =>
+          queryKey[0] === "ascents" ||
+          queryKey[0] === "activities" ||
+          queryKey[0] === "last-sync",
       }),
   });
 

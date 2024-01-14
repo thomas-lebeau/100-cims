@@ -17,7 +17,13 @@ import { useMemo } from "react";
 
 const MAX_DISTANCE = 25; // in meters;
 
-type Matches = Record<StravaActivity["originId"], Cim["id"][]>;
+type Matches = Record<
+  StravaActivity["originId"],
+  {
+    cimIds: Cim["id"][];
+    activity: StravaActivity;
+  }
+>;
 
 function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   let matches: Matches = {};
@@ -34,10 +40,13 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
 
       if (distance < MAX_DISTANCE) {
         if (!matches[activity.originId]) {
-          matches[activity.originId] = [];
+          matches[activity.originId] = {
+            cimIds: [],
+            activity,
+          };
         }
 
-        matches[activity.originId].push(cim.id);
+        matches[activity.originId].cimIds.push(cim.id);
       }
     }
   }
@@ -49,22 +58,18 @@ export default function StravaImporter() {
   const { data: lastSync } = useLastSyncQuery();
   const { data: ascents } = useAscentsQuery();
   const { data: activities } = useActivitiesQuery();
-  const { isPending, variables, mutate } = useSyncMutation();
-  if (lastSync) {
-    lastSync.createdAt = "2023-10-14T11:05:59.823Z";
-  }
+  const { isPending, mutate } = useSyncMutation();
   const {
     data: stravaActivities,
     error,
     isFetching,
-  } = useStravaActivities({ since: lastSync?.createdAt });
+  } = useStravaActivities({ since: lastSync?.createdAt }); // TODO: implement enable: false when last sync is loading
 
   const newActivities = useMemo(
     () => filterActivities(cims, stravaActivities),
     [stravaActivities, cims]
   );
-
-  const activityCount = Object.keys(newActivities).length;
+  const newAscents = Object.values(newActivities);
 
   if (error) return <p>Error!!!</p>;
   if (!stravaActivities) return null;
@@ -82,40 +87,35 @@ export default function StravaImporter() {
         <p>🔄 Downloading activities...({stravaActivities.length})</p>
       ) : (
         <p>
-          ✅ found {activityCount} activities (of {stravaActivities.length})
+          ✅ found {newAscents.length} activities (of {stravaActivities.length})
         </p>
       )}
 
+      <Button
+        disabled={isPending}
+        onClick={() => mutate({ ascents: newAscents })}
+      >
+        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        Upload
+      </Button>
+
       <ul>
-        {Object.entries(newActivities).map(([activityId, cimIds]) => {
-          const activity = stravaActivities.find(
-            (activity) => activity.originId === activityId
-          );
+        {newAscents.map(({ activity, cimIds }) => {
           const isUploaded = activities?.some(
-            (activity) => activity.originId === activityId
+            ({ originId }) => originId === activity.originId
           );
 
           if (!activity) return;
 
           return (
-            <li key={activityId} className="mb-8">
+            <li key={activity.originId} className="mb-8">
               <Link
                 href={`https://www.strava.com/activities/${activity.originId}`}
                 target="_blank"
               >
                 {isUploaded ? "🟢" : "🔴"} {activity.name}
               </Link>
-              <Button
-                disabled={
-                  isPending && variables?.activity?.originId === activityId
-                }
-                onClick={() => mutate({ cimIds, activity })}
-              >
-                {isPending && variables?.activity?.originId === activityId && (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                )}
-                Upload
-              </Button>
+
               {cimIds.map((cimId) => {
                 const cim = cims.find((cim) => cim.id === cimId);
                 const isAscended = ascents?.some(

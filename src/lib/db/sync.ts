@@ -34,6 +34,7 @@ export async function addSync(userId: string, activities: ActivityInput[]) {
       activities: {
         select: {
           id: true,
+          originId: true,
         },
       },
     },
