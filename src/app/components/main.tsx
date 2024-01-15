@@ -8,6 +8,7 @@ import { DataTable } from "../../components/data-table/data-table";
 import { columns } from "./columns-def";
 
 import { cn } from "@/lib/cn";
+import { useSession } from "next-auth/react";
 import { useAscentMutation } from "../../components/mutations/use-ascents-mutation";
 import { useAscentsQuery } from "../../components/queries/use-ascents-query";
 import { useCimsQuery } from "../../components/queries/use-cims-query";
@@ -23,9 +24,12 @@ type mainProps = {
 const INCLUDE_COMARCA = true;
 
 export default function Main({ className }: mainProps) {
+  const { status } = useSession();
   const { data: cims } = useCimsQuery(INCLUDE_COMARCA);
   const { data: comarcas } = useComarcas();
-  const { data: ascents } = useAscentsQuery();
+  const { data: ascents } = useAscentsQuery({
+    enabled: status === "authenticated",
+  });
   const { mutate } = useAscentMutation();
   const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims, ascents);
