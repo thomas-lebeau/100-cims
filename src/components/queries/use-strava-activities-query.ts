@@ -72,7 +72,7 @@ export function useStravaActivities(
     function loadNextPage() {
       if (isFetchingNextPage || !hasNextPage) return;
 
-      // fetchNextPage(); // TODO: fix this
+      fetchNextPage(); // TODO: fix this
     },
     [isFetchingNextPage, hasNextPage, fetchNextPage]
   );
