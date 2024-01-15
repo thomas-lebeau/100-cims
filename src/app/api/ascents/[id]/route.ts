@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import { activitySchema } from "@/lib/db/activities";
 import { addAscent, deleteAscent } from "@/lib/db/ascent";
 import getServerSession from "@/lib/get-server-session";
 import serverTimings from "@/lib/server-timings";
@@ -12,20 +11,6 @@ const routeContextSchema = z.object({
     id: z.string(),
   }),
 });
-
-const bodySchema = activitySchema
-  .omit({
-    id: true,
-    userId: true,
-    createdAt: true,
-    updatedAt: true,
-  })
-  .extend({
-    startDate: z
-      .string()
-      .datetime()
-      .transform((date) => new Date(date)),
-  });
 
 async function handler(
   req: NextRequest,
@@ -53,21 +38,20 @@ async function handler(
 
     let data;
 
-    if (req.method === "PUT") {
-      const safeBody = bodySchema.safeParse(await req.json());
+    switch (req.method) {
+      case "PUT":
+        data = await addAscent(session.user.id, id);
+        break;
 
-      if (!safeBody.success) {
-        return NextResponse.json(safeBody.error.issues, { status: 422 });
-      }
+      case "DELETE":
+        data = await deleteAscent(session.user.id, id);
+        break;
 
-      data = await addAscent(session.user.id, id, safeBody.data);
-    } else if (req.method === "DELETE") {
-      data = await deleteAscent(session.user.id, id);
-    } else {
-      return NextResponse.json(
-        { error: "Method not allowed" },
-        { status: 405 }
-      );
+      default:
+        return NextResponse.json(
+          { error: "Method not allowed" },
+          { status: 405 }
+        );
     }
 
     serverTiming.stop("db");

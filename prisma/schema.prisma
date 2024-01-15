@@ -39,16 +39,15 @@ model Session {
 }
 
 model User {
-  id            String      @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?     @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now()) @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @default(now()) @updatedAt
   accounts      Account[]
   sessions      Session[]
-  cims          CimToUser[]
   activities    Activity[]
   Ascent        Ascent[]
   Sync          Sync[]
@@ -74,7 +73,6 @@ model Cim {
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @default(now()) @updatedAt
   comarcas   Comarca[]
-  users      CimToUser[]
   activities CimToActivity[]
   Ascent     Ascent[]
 }
@@ -86,20 +84,6 @@ model Comarca {
   updatedAt DateTime @default(now()) @updatedAt
   codigo    String   @unique
   cims      Cim[]
-}
-
-model CimToUser {
-  cimId     String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  cim       Cim      @relation(fields: [cimId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([cimId, userId])
-  @@unique([cimId, userId]) // TODO: allow multiple ascents
-  @@index([userId])
-  @@index([cimId])
 }
 
 model CimToComarca {
@@ -155,6 +139,7 @@ model Sync {
   userId     String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  endAt      DateTime   @default(now()) // Todo: add endAt as the end of the last activity synced
   user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   activities Activity[]
 

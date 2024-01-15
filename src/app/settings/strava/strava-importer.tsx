@@ -7,8 +7,8 @@ import { useLastSyncQuery } from "@/app/components/queries/use-last-sync-query";
 import { useStravaActivities } from "@/app/components/queries/use-strava-activities-query";
 import { useSyncMutation } from "@/app/components/queries/use-sync-mutation";
 import { Button } from "@/components/ui/button";
+import { StravaActivity } from "@/lib/db/activities";
 import { Cim } from "@/lib/db/cims";
-import { StravaActivity } from "@/types/strava";
 import { toGeoJSON } from "@mapbox/polyline";
 import pointToLineDistance from "@turf/point-to-line-distance";
 import { Loader2 } from "lucide-react";
@@ -63,7 +63,7 @@ export default function StravaImporter() {
     data: stravaActivities,
     error,
     isFetching,
-  } = useStravaActivities({ since: lastSync?.createdAt }); // TODO: implement enable: false when last sync is loading
+  } = useStravaActivities({ since: lastSync?.endAt }); // TODO: implement enable: false when last sync is loading
 
   const newActivities = useMemo(
     () => filterActivities(cims, stravaActivities),

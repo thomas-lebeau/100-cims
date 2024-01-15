@@ -13,9 +13,3 @@ export type GoogleAccount = {
 } & PrismaAccount;
 
 export type Account = StravaAccount | GoogleAccount | PrismaAccount;
-export type Session = Prisma.SessionGetPayload<Prisma.SessionDefaultArgs>;
-export type User = Prisma.UserGetPayload<Prisma.UserDefaultArgs>;
-export type VerificationToken =
-  Prisma.VerificationTokenGetPayload<Prisma.VerificationTokenDefaultArgs>;
-export type Cim = Prisma.CimGetPayload<Prisma.CimDefaultArgs>;
-export type Activity = Prisma.ActivityGetPayload<Prisma.ActivityDefaultArgs>;

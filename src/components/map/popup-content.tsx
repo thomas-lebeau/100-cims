@@ -1,14 +1,12 @@
-import type { Cim } from "@/types/cim";
+import type { Cim } from "@/lib/db/cims";
 import { CheckCircle } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 import { Button } from "../ui/button";
 
-export type PopupContentProps = Pick<
-  Cim,
-  "id" | "name" | "altitude" | "climbed"
-> & {
-  onClickClimb: (id: string, climbed: boolean) => void; // eslint-disable-line no-unused-vars
+export type PopupContentProps = Pick<Cim, "id" | "name" | "altitude"> & {
+  climbed: boolean;
+  onClickClimb: (id: string, climbed: "ADD" | "REMOVE") => void; // eslint-disable-line no-unused-vars
 };
 
 export function PopupContent({
@@ -35,7 +33,7 @@ export function PopupContent({
             variant="ghost"
             size="icon"
             className="rounded-full"
-            onClick={() => onClickClimb(id, !!climbed)}
+            onClick={() => onClickClimb(id, climbed ? "REMOVE" : "ADD")}
           >
             <CheckCircle />
           </Button>

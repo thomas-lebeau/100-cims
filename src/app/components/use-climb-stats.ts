@@ -1,4 +1,5 @@
-import { Cim } from "@/types/cim";
+import { Ascent } from "@/lib/db/ascent";
+import { CimWithComarca as Cim } from "@/lib/db/cims";
 import { useMemo } from "react";
 
 type ClimbStats = {
@@ -10,11 +11,13 @@ type ClimbStats = {
   climbedCimsPercentage: number;
 };
 
-export function useClimbStats(cims: Cim[]): ClimbStats {
+export function useClimbStats(cims: Cim[], ascents: Ascent[]): ClimbStats {
   return useMemo<ClimbStats>(
     function calculateStats() {
       const stats = cims.reduce(
-        (acc, { altitude, climbed }) => {
+        (acc, { altitude, id }) => {
+          const climbed = ascents.some(({ cimId }) => cimId === id);
+
           acc.totalAltitude += altitude;
           acc.totalCims += 1;
           acc.climbedAltitude += climbed ? altitude : 0;
@@ -34,6 +37,7 @@ export function useClimbStats(cims: Cim[]): ClimbStats {
 
       return { ...stats, climbedPercentage, climbedCimsPercentage };
     },
-    [cims]
+
+    [cims, ascents]
   );
 }

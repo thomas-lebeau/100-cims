@@ -6,11 +6,11 @@ import {
 } from "@/components/ui/segmented-control";
 import { XIcon } from "lucide-react";
 
-import { FILTER_TYPE, FilterState, TSetFilter } from "./use-cim-filter";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { FacetPicker } from "@/components/facet-picker";
-import { Comarca } from "@/types/cim";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Comarca } from "@/lib/db/comarcas";
+import { FILTER_TYPE, FilterState, TSetFilter } from "./use-cim-filter";
 
 export default function FilterBar({
   filter,

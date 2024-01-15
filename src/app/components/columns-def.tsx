@@ -1,16 +1,17 @@
 "use client";
 
-import { Sparkles, CheckCircle } from "lucide-react";
+import { CheckCircle, Sparkles } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
-import type { Cim, Comarca } from "@/types/cim";
+import type { CimWithComarca } from "@/lib/db/cims";
+import type { Comarca } from "@/lib/db/comarcas";
 import type { ColumnDef } from "@tanstack/react-table";
 import { HeaderCell } from "../../components/data-table/header-cell";
 
-export const columns: ColumnDef<Cim>[] = [
+export const columns: ColumnDef<CimWithComarca>[] = [
   {
     accessorKey: "essencial",
     header: ({ column }) => <HeaderCell column={column} />,
@@ -38,13 +39,14 @@ export const columns: ColumnDef<Cim>[] = [
 
             const meta = table.options.meta;
 
+            // TODO: find a way to type this
             // meta is of type `unknown`
             if (
               meta &&
               "onClickClimb" in meta &&
               typeof meta.onClickClimb === "function"
             ) {
-              meta.onClickClimb(id, climbed);
+              meta.onClickClimb(id, climbed ? "REMOVE" : "ADD");
             }
           }}
         >

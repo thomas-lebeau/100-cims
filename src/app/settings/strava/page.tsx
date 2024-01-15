@@ -1,6 +1,10 @@
-import Hydrate from "@/components/hydrate";
+import Hydrate, { getQueryClient } from "@/components/hydrate";
 import { Separator } from "@/components/ui/separator";
-import { getsStravaAccounts } from "@/lib/db";
+import { getAccount } from "@/lib/db/accounts";
+import { getActivities } from "@/lib/db/activities";
+import { getAscents } from "@/lib/db/ascent";
+import { getCims } from "@/lib/db/cims";
+import { getLastSync } from "@/lib/db/sync";
 import getServerSession from "@/lib/get-server-session";
 import LinkStrava from "./link-strava";
 import StravaImporter from "./strava-importer";
@@ -11,12 +15,12 @@ export default async function SettingStravaPage() {
   if (!session) return null; // TODO guard
   const userId = session.user.id;
 
-  // getQueryClient().setQueryData(["cims"], await getCims());
-  // getQueryClient().setQueryData(["last-sync"], await getLastSync(userId));
-  // getQueryClient().setQueryData(["ascents"], await getAscents(userId));
-  // getQueryClient().setQueryData(["activities"], await getActivities(userId));
+  getQueryClient().setQueryData(["cims", false], await getCims());
+  getQueryClient().setQueryData(["last-sync"], await getLastSync(userId));
+  getQueryClient().setQueryData(["ascents"], await getAscents(userId));
+  getQueryClient().setQueryData(["activities"], await getActivities(userId));
 
-  const stravaAccount = await getsStravaAccounts(userId);
+  const [stravaAccount] = await getAccount(userId, "strava");
 
   return (
     <div className="space-y-6">

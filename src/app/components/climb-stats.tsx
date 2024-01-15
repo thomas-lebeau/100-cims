@@ -1,10 +1,16 @@
 import { Progress } from "@/components/ui/progress";
 
+import { Ascent } from "@/lib/db/ascent";
+import { CimWithComarca } from "@/lib/db/cims";
 import { useClimbStats } from "./use-climb-stats";
-import { Cim } from "@/types/cim";
 
-export default function ClimbStats({ cims }: { cims: Cim[] }) {
-  const stats = useClimbStats(cims);
+type ClimbStatsProps = {
+  cims: CimWithComarca[];
+  ascents: Ascent[];
+};
+
+export default function ClimbStats({ cims, ascents }: ClimbStatsProps) {
+  const stats = useClimbStats(cims, ascents);
 
   return (
     <div className="p-2 text-sm text-muted-foreground text-right grid grid-cols-3 grid-rows-2 items-center">

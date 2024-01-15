@@ -1,10 +1,11 @@
+import { StravaActivity } from "@/lib/db/activities";
 import zfetch from "@/lib/zfetch";
-import { StravaActivity } from "@/types/strava";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { z } from "zod";
 
 const PAGE_SIZE = 30;
+const FIRST_PAGE = 1;
 
 type Meta = {
   since?: string;
@@ -60,9 +61,9 @@ export function useStravaActivities(
     queryFn,
     initialData: {
       pages: [[]],
-      pageParams: [1],
+      pageParams: [FIRST_PAGE],
     },
-    initialPageParam: 1,
+    initialPageParam: FIRST_PAGE,
     getNextPageParam,
     refetchOnMount: true,
     meta,

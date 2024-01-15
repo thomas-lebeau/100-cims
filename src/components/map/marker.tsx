@@ -3,16 +3,17 @@
 import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 
-import { Pin } from "./pin";
-import type { Cim } from "@/types/cim";
+import type { CimWithComarca as Cim } from "@/lib/db/cims";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Map } from "./map";
-import { PopupContent } from "./popup-content";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Map } from "./map";
+import { Pin } from "./pin";
+import { PopupContent } from "./popup-content";
 
 type MarkerProps = Cim & {
+  climbed: boolean;
   selected: boolean;
-  onClickClimb: (id: string, climbed: boolean) => void; // eslint-disable-line no-unused-vars
+  onClickClimb: (id: string, action: "ADD" | "REMOVE") => void; // eslint-disable-line no-unused-vars
   onClick: (id: string | null) => void; // eslint-disable-line no-unused-vars
 };
 
@@ -31,7 +32,7 @@ export function Marker({
   const [open, setOpen] = useState(selected);
 
   // using `useState` as a Lazy initial ref
-  const [markerContainer] = useState(() => document.createElement("div"));
+  const [markerContainer] = useState(() => document?.createElement("div"));
   const [markerRoot] = useState(() => createRoot(markerContainer));
   const markerRef = useRef<mapboxgl.Marker | null>(null);
   const isMounted = useRef(false);

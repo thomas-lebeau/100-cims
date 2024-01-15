@@ -38,7 +38,7 @@ export async function addAscent(
 }
 
 export async function deleteAscent(userId: string, cimId: string) {
-  return prisma.cimToUser.deleteMany({
+  return prisma.ascent.deleteMany({
     where: {
       cimId,
       userId,

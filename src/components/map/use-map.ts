@@ -1,5 +1,5 @@
-import mapboxgl from "mapbox-gl";
 import { type FeatureCollection } from "geojson";
+import mapboxgl from "mapbox-gl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -14,8 +14,6 @@ const INITIAL_GEOJSON: FeatureCollection = {
 export function useMap(geoJsonUrl: string | undefined) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const abortController = useRef<AbortController>(new AbortController());
-  const mapControls = useRef(new mapboxgl.NavigationControl());
-
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
 
   const setGeoJson = useCallback(
@@ -43,7 +41,7 @@ export function useMap(geoJsonUrl: string | undefined) {
     });
 
     map.on("load", () => {
-      map.addControl(mapControls.current, "top-right");
+      map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
       map.addSource("comarcas", {
         type: "geojson",

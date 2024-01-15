@@ -1,4 +1,3 @@
-import { ActivityInput } from "@/lib/db/activities";
 import {
   DefaultError,
   useMutation,
@@ -6,9 +5,8 @@ import {
 } from "@tanstack/react-query";
 
 type Variables = {
-  cimIds: string[];
+  cimId: string;
   action: "ADD" | "REMOVE";
-  activity?: ActivityInput;
 };
 
 export function useAscentMutation() {
@@ -20,10 +18,9 @@ export function useAscentMutation() {
     Variables
   >({
     mutationKey: ["ascents"],
-    mutationFn: ({ action, cimIds, activity }) =>
+    mutationFn: ({ action, cimId }) =>
       fetch(`/api/ascents/${cimId}`, {
         method: action === "ADD" ? "PUT" : action === "REMOVE" ? "DELETE" : "",
-        body: JSON.stringify(activity),
       }).then((res) => res.json()),
     onSuccess: () =>
       queryClient.invalidateQueries({

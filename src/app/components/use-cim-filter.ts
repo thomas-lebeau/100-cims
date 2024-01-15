@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useState, type Dispatch } from "react";
 
+import { Ascent } from "@/lib/db/ascent";
+import { CimWithComarca as Cim } from "@/lib/db/cims";
 import type { ValueOf } from "@/types/values-of";
-import { Cim } from "@/types/cim";
 
 export const FILTER_TYPE = {
   name: "name",
@@ -31,7 +32,10 @@ type FilterValue<T extends FilterType> = {
 }[T];
 
 type FilterFn<T extends FilterType> = {
-  [K in T]: (filterValue: FilterValue<K>) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
+  [K in T]: (
+    filterValue: FilterValue<K>, // eslint-disable-line no-unused-vars
+    ascents: Ascent[] // eslint-disable-line no-unused-vars
+  ) => (cim: Cim) => boolean; // eslint-disable-line no-unused-vars
 };
 
 export type TSetFilter = Dispatch<Action<FilterType>>;
@@ -41,7 +45,10 @@ const filterFns: FilterFn<FilterType> = {
   essencial: (essencial) => (cim) => cim.essencial === essencial,
   comarca: (comarca) => (cim) =>
     cim.comarcas.some((c) => comarca.includes(c.codigo)),
-  climbed: (climbed) => (cim) => cim.climbed === climbed,
+  climbed: (climbed, ascents) => (cim) =>
+    climbed
+      ? ascents.some(({ cimId }) => cimId === cim.id)
+      : ascents.every(({ cimId }) => cimId !== cim.id),
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
@@ -51,7 +58,10 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
   };
 }
 
-export function useCimFilter(cims: Cim[]): [Cim[], FilterState, TSetFilter] {
+export function useCimFilter(
+  cims: Cim[],
+  ascents: Ascent[]
+): [Cim[], FilterState, TSetFilter] {
   const [filteredCims, setFilteredCims] = useState<Cim[]>(cims);
   const [filter, setFilter] = useReducer(reducer, {});
 
@@ -61,25 +71,32 @@ export function useCimFilter(cims: Cim[]): [Cim[], FilterState, TSetFilter] {
 
       if (filter.essencial) {
         filteredCims = filteredCims.filter(
-          filterFns.essencial(filter.essencial)
+          filterFns.essencial(filter.essencial, ascents)
         );
       }
 
       if (filter.comarca) {
-        filteredCims = filteredCims.filter(filterFns.comarca(filter.comarca));
+        filteredCims = filteredCims.filter(
+          filterFns.comarca(filter.comarca, ascents)
+        );
       }
 
       if (filter.name) {
-        filteredCims = filteredCims.filter(filterFns.name(filter.name));
+        filteredCims = filteredCims.filter(
+          filterFns.name(filter.name, ascents)
+        );
       }
 
       if (filter.climbed) {
-        filteredCims = filteredCims.filter(filterFns.climbed(filter.climbed));
+        filteredCims = filteredCims.filter(
+          filterFns.climbed(filter.climbed, ascents)
+        );
       }
 
       setFilteredCims(filteredCims);
     },
-    [cims, filter]
+
+    [cims, filter, ascents]
   );
 
   return [filteredCims, filter, setFilter];

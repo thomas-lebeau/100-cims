@@ -1,12 +1,38 @@
 import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
+import { comarcaSchema } from "./comarcas";
 
-export async function getCims() {
-  return cimSchema.array().parse(await prisma.cim.findMany());
+/* eslint-disable */
+export function getCims(): Promise<Cim[]>;
+export function getCims(includesComarca: true): Promise<CimWithComarca[]>;
+export function getCims(includesComarca: false): Promise<Cim[]>;
+export function getCims(
+  includesComarca: boolean
+): Promise<CimWithComarca[] | Cim[]>;
+export function getCims(
+  includesComarca: boolean = false
+): Promise<CimWithComarca[] | Cim[]> {
+  if (includesComarca) {
+    return getCimsWithComarcas();
+  }
+  return getCimsWithoutComarcas();
+}
+/* eslint-enable */
+
+export async function getCimsWithComarcas() {
+  return cimsWithComarcaSchema.array().parse(
+    await prisma.cim.findMany({
+      include: {
+        comarcas: true,
+      },
+    })
+  );
 }
 
-export type Cim = Awaited<ReturnType<typeof getCims>>[0];
+export async function getCimsWithoutComarcas() {
+  return cimSchema.array().parse(await prisma.cim.findMany());
+}
 
 export const cimSchema = z.object({
   id: z.string(),
@@ -20,3 +46,9 @@ export const cimSchema = z.object({
   createdAt: z.preprocess(toIsoDate, z.string().datetime()),
   updatedAt: z.preprocess(toIsoDate, z.string().datetime()),
 });
+export const cimsWithComarcaSchema = cimSchema.extend({
+  comarcas: comarcaSchema.array(),
+});
+
+export type Cim = z.infer<typeof cimSchema>;
+export type CimWithComarca = z.infer<typeof cimsWithComarcaSchema>;

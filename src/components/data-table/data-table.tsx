@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   ColumnDef,
   SortingState,
@@ -10,6 +9,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 import {
   Table,
@@ -24,7 +24,10 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   className?: string;
-  meta: TableMeta<TData>;
+  meta: TableMeta<TData> & {
+    onClickClimb: (cimId: string, action: "ADD" | "REMOVE") => void; // eslint-disable-line no-unused-vars
+    onClickComarca: (comarcaId: string) => void; // eslint-disable-line no-unused-vars
+  };
   onClickRow?: (row: TData) => void; // eslint-disable-line no-unused-vars
 }
 
