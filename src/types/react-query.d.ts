@@ -1,14 +1,17 @@
 import {
   DefaultError,
+  DefinedUseInfiniteQueryResult,
   DefinedUseQueryResult,
+  InfiniteData,
   QueryClient,
   QueryKey,
+  UseInfiniteQueryOptions,
   UseQueryOptions,
 } from "@tanstack/react-query";
 
 type NonUndefinedGuard<T> = T extends undefined ? never : T;
 
-type DefinedInitialDataOptions<
+type DefinedPlaceholderDataOptions<
   TQueryFnData = unknown,
   TError = DefaultError,
   TData = TQueryFnData,
@@ -19,8 +22,27 @@ type DefinedInitialDataOptions<
     | (() => NonUndefinedGuard<TQueryFnData>);
 };
 
+type DefinedPlaceholderDataInfiniteOptions<
+  TQueryFnData,
+  TError = DefaultError,
+  TData = InfiniteData<TQueryFnData>,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+> = UseInfiniteQueryOptions<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryFnData,
+  TQueryKey,
+  TPageParam
+> & {
+  placeholderData:
+    | NonUndefinedGuard<InfiniteData<TQueryFnData, TPageParam>>
+    | (() => NonUndefinedGuard<InfiniteData<TQueryFnData, TPageParam>>);
+};
+
 /**
- * redeclare useQuery to allow proper typing when placeholderData is provided
+ * redeclare (overload) useQuery and useInfiniteQuery to allow proper typing when placeholderData is provided
  */
 
 /* eslint-disable no-unused-vars */
@@ -31,8 +53,30 @@ declare module "@tanstack/react-query" {
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(
-    options: DefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey>,
+    options: DefinedPlaceholderDataOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey
+    >,
     queryClient?: QueryClient
   ): DefinedUseQueryResult<TData, TError>;
+
+  declare function useInfiniteQuery<
+    TQueryFnData,
+    TError = DefaultError,
+    TData = InfiniteData<TQueryFnData>,
+    TQueryKey extends QueryKey = QueryKey,
+    TPageParam = unknown,
+  >(
+    options: DefinedPlaceholderDataInfiniteOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    >,
+    queryClient?: QueryClient
+  ): DefinedUseInfiniteQueryResult<TData, TError>;
 }
 /* eslint-enable */

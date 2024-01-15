@@ -59,13 +59,12 @@ export function useStravaActivities(
   } = useInfiniteQuery({
     queryKey: ["strava-activities", options.since],
     queryFn,
-    initialData: {
+    placeholderData: {
       pages: [[]],
       pageParams: [FIRST_PAGE],
     },
     initialPageParam: FIRST_PAGE,
     getNextPageParam,
-    refetchOnMount: true,
     meta,
   });
 
