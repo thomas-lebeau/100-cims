@@ -34,7 +34,7 @@ export default function QueryProvider({ children }: QueryProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools />
+      <ReactQueryDevtools /> {/* TODO: lazy load this */}
     </QueryClientProvider>
   );
 }

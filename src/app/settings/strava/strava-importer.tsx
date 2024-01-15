@@ -1,11 +1,11 @@
 "use client";
 
-import { useActivitiesQuery } from "@/app/components/queries/use-activities-query";
-import { useAscentsQuery } from "@/app/components/queries/use-ascents-query";
-import { useCimsQuery } from "@/app/components/queries/use-cims-query";
-import { useLastSyncQuery } from "@/app/components/queries/use-last-sync-query";
-import { useStravaActivities } from "@/app/components/queries/use-strava-activities-query";
-import { useSyncMutation } from "@/app/components/queries/use-sync-mutation";
+import { useSyncMutation } from "@/components/mutations/use-sync-mutation";
+import { useActivitiesQuery } from "@/components/queries/use-activities-query";
+import { useAscentsQuery } from "@/components/queries/use-ascents-query";
+import { useCimsQuery } from "@/components/queries/use-cims-query";
+import { useLastSyncQuery } from "@/components/queries/use-last-sync-query";
+import { useStravaActivities } from "@/components/queries/use-strava-activities-query";
 import { Button } from "@/components/ui/button";
 import { StravaActivity } from "@/lib/db/activities";
 import { Cim } from "@/lib/db/cims";

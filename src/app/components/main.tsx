@@ -8,12 +8,12 @@ import { DataTable } from "../../components/data-table/data-table";
 import { columns } from "./columns-def";
 
 import { cn } from "@/lib/cn";
+import { useAscentMutation } from "../../components/mutations/use-ascents-mutation";
+import { useAscentsQuery } from "../../components/queries/use-ascents-query";
+import { useCimsQuery } from "../../components/queries/use-cims-query";
+import { useComarcas } from "../../components/queries/use-comarcas-query";
 import ClimbStats from "./climb-stats";
 import FilterBar from "./filter-bar";
-import { useAscentMutation } from "./queries/use-ascents-mutation";
-import { useAscentsQuery } from "./queries/use-ascents-query";
-import { useCimsQuery } from "./queries/use-cims-query";
-import { useComarcas } from "./queries/use-comarcas-query";
 import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
 
 type mainProps = {
