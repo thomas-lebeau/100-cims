@@ -12,7 +12,7 @@ type Response = {
   isFetching: boolean;
 };
 
-/* eslint-disable */
+/* eslint-disable no-unused-vars, no-redeclare */
 export function useCimsQuery(): Response & { data: Cim[] };
 export function useCimsQuery(
   includesComarca: true
@@ -36,7 +36,7 @@ export function useCimsQuery(includesComarca: boolean = false) {
 
       return zfetch(cimSchema.array(), "/api/cims");
     },
-    initialData: [], //TODO: set initial data wihth any of the quey if it exsists (and remove stale time)
+    placeholderData: [],
     staleTime: Infinity,
   });
 
