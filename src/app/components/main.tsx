@@ -8,23 +8,23 @@ import { DataTable } from "../../components/data-table/data-table";
 import { columns } from "./columns-def";
 
 import { cn } from "@/lib/cn";
-import { Comarca } from "@/lib/db/comarcas";
 import ClimbStats from "./climb-stats";
 import FilterBar from "./filter-bar";
 import { useAscentMutation } from "./queries/use-ascents-mutation";
 import { useAscentsQuery } from "./queries/use-ascents-query";
 import { useCimsQuery } from "./queries/use-cims-query";
+import { useComarcas } from "./queries/use-comarcas-query";
 import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
 
 type mainProps = {
   className?: string;
-  comarcas: Comarca[];
 };
 
 const INCLUDE_COMARCA = true;
 
-export default function Main({ className, comarcas }: mainProps) {
+export default function Main({ className }: mainProps) {
   const { data: cims } = useCimsQuery(INCLUDE_COMARCA);
+  const { data: comarcas } = useComarcas();
   const { data: ascents } = useAscentsQuery();
   const { mutate } = useAscentMutation();
   const [selected, setSelect] = useState<string | null>(null);

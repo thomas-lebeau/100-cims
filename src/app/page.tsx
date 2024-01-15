@@ -11,16 +11,15 @@ export default async function Home() {
   const userId = session?.user.id;
 
   getQueryClient().setQueryData(["cims", true], await getCims(true));
+  getQueryClient().setQueryData(["comarcas"], await getComarcas());
 
   if (userId) {
     getQueryClient().setQueryData(["ascents"], await getAscents(userId));
   }
 
-  const comarcas = await getComarcas();
-
   return (
     <Hydrate>
-      <Main className="grow" comarcas={comarcas} />
+      <Main className="grow" />
     </Hydrate>
   );
 }
