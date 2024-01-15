@@ -62,19 +62,18 @@ model VerificationToken {
 }
 
 model Cim {
-  id         String          @id @default(cuid())
-  name       String          @unique
-  altitude   Int
-  longitude  Float
-  latitude   Float
-  url        String          @unique
-  img        String?         @unique
-  essencial  Boolean
-  createdAt  DateTime        @default(now())
-  updatedAt  DateTime        @default(now()) @updatedAt
-  comarcas   Comarca[]
-  activities CimToActivity[]
-  Ascent     Ascent[]
+  id        String    @id @default(cuid())
+  name      String    @unique
+  altitude  Int
+  longitude Float
+  latitude  Float
+  url       String    @unique
+  img       String?   @unique
+  essencial Boolean
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  comarcas  Comarca[]
+  Ascent    Ascent[]
 }
 
 model Comarca {
@@ -96,20 +95,19 @@ model CimToComarca {
 }
 
 model Activity {
-  id              String          @id @default(cuid())
+  id              String      @id @default(cuid())
   userId          String
   syncId          String?
-  originId        String?         @db.Text
-  originType      EnumOriginType?
+  originId        String?     @db.Text
+  originType      OriginType?
   name            String
   sportType       String?
   startDate       DateTime
-  summaryPolyline String          @db.Text
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @default(now()) @updatedAt
-  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Sync            Sync?           @relation(fields: [syncId], references: [id], onDelete: Cascade)
-  cims            CimToActivity[]
+  summaryPolyline String      @db.Text
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @default(now()) @updatedAt
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Sync            Sync?       @relation(fields: [syncId], references: [id], onDelete: Cascade)
   Ascent          Ascent[]
 
   @@unique([userId, originType, originId(length: 20)]) // TODO: fix originId field length
@@ -146,21 +144,7 @@ model Sync {
   @@index([userId])
 }
 
-model CimToActivity {
-  cimId      String
-  activityId String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  cim        Cim      @relation(fields: [cimId], references: [id], onDelete: Cascade)
-  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
-
-  @@id([cimId, activityId])
-  @@unique([cimId, activityId])
-  @@index([cimId])
-  @@index([activityId])
-}
-
-enum EnumOriginType {
+enum OriginType {
   STRAVA
   GPX
 }
