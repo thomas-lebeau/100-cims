@@ -1,4 +1,6 @@
 import prisma from "@/lib/prisma";
+import { Extends } from "@/types/extends";
+import { Expect } from "type-testing";
 import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 
@@ -32,6 +34,32 @@ export const activityInputSchema = activitySchema.omit({
   createdAt: true,
   updatedAt: true,
 });
+
+// take a strava api response and return a db compatible Activity
+export const stravaActivitySchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    type: z.string(),
+    start_date: z.preprocess(toIsoDate, z.string().datetime()),
+    map: z.object({
+      summary_polyline: z.string(),
+    }),
+  })
+  .transform((data) => ({
+    name: data.name,
+    originId: data.id.toString(),
+    originType: "STRAVA" as const,
+    sportType: data.type,
+    startDate: data.start_date,
+    summaryPolyline: data.map.summary_polyline,
+  }));
+
+export type StravaActivity = z.infer<typeof stravaActivitySchema>;
+
+// Make sure the schema is in sync with prisma type
+// eslint-disable-next-line no-unused-vars
+type test = Expect<Extends<StravaActivity, ActivityInput>>; // TODO: move to a test file
 
 export async function getActivities(userId: string) {
   return activitySchema.array().parse(

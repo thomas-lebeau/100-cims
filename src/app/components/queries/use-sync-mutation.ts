@@ -1,9 +1,11 @@
 import { ActivityInput } from "@/lib/db/activities";
+import zfetch from "@/lib/zfetch";
 import {
   DefaultError,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import { z } from "zod";
 
 type Variables = {
   ascents: {
@@ -22,10 +24,10 @@ export function useSyncMutation() {
   >({
     mutationKey: ["ascents"],
     mutationFn: (variables: Variables) =>
-      fetch(`/api/sync`, {
+      zfetch(schema, "/api/sync", {
         method: "POST",
         body: JSON.stringify(variables.ascents),
-      }).then((res) => res.json()),
+      }),
     onSuccess: () =>
       queryClient.invalidateQueries({
         predicate: ({ queryKey }) =>
@@ -37,3 +39,5 @@ export function useSyncMutation() {
 
   return { isPending, variables, mutate };
 }
+
+const schema = z.tuple([z.object({}), z.object({ count: z.number() })]);

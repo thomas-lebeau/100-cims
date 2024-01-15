@@ -41,15 +41,20 @@ export async function POST(req: NextRequest) {
     );
 
     const ascents = safeBody.data.reduce(
-      (acc: AscentInput[], { cimIds, activity }) =>
-        acc.concat(
+      (acc: AscentInput[], { cimIds, activity }) => {
+        const syncedActivity = syncedData.activities.find(
+          ({ originId }) => originId === activity.originId
+        );
+
+        if (!syncedActivity) return acc;
+
+        return acc.concat(
           cimIds.map((cimId) => ({
             cimId,
-            activityId: syncedData.activities.find(
-              ({ originId }) => originId === activity.originId
-            ).id,
+            activityId: syncedActivity.id,
           }))
-        ),
+        );
+      },
       []
     );
 

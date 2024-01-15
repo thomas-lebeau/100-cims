@@ -4,13 +4,13 @@ import getServerSession from "@/lib/get-server-session";
 import prisma from "@/lib/prisma";
 import serverTimings from "@/lib/server-timings";
 
-import { stravaActivitySchema } from "@/types/strava";
+import { stravaActivitySchema } from "@/lib/db/activities";
 import { serializeError } from "serialize-error";
 import { z } from "zod";
 
 const routeContextSchema = z.object({
   params: z.object({
-    id: z.string(),
+    page: z.string(),
   }),
 });
 
@@ -58,7 +58,7 @@ export async function GET(
       return NextResponse.json(safeContext.error.issues, { status: 422 });
     }
 
-    const pageId = safeContext.data.params.id ?? 1;
+    const pageId = safeContext.data.params.page ?? 1;
 
     const safeUrlSearchParams = urlSearchParamsSchema.safeParse(
       Object.fromEntries(new URL(req.url).searchParams.entries())
@@ -70,10 +70,11 @@ export async function GET(
       });
     }
 
-    let url = `https://www.strava.com/api/v3/athlete/activities?page=${pageId}`;
+    // `after=` used to fetch the oldest page first
+    let url = `https://www.strava.com/api/v3/athlete/activities?page=${pageId}&after=`;
 
     if (safeUrlSearchParams.data.since) {
-      url += `&after=${safeUrlSearchParams.data.since}`;
+      url += `${safeUrlSearchParams.data.since}`;
     }
 
     const res = await fetch(url, {
@@ -90,7 +91,6 @@ export async function GET(
     }
 
     serverTiming.stop("get");
-    serverTiming.start("map");
 
     return NextResponse.json(safeActivity.data, {
       status: 200,

@@ -7,6 +7,7 @@ export function useAscentsQuery() {
     queryKey: ["ascents"],
     queryFn: () => zfetch(ascentSchema.array(), "/api/ascents"),
     initialData: [],
+    refetchOnMount: true,
   });
 
   return { data, error, isFetching };

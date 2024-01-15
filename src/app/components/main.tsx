@@ -4,26 +4,31 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Map, Marker } from "@/components/map";
 
-import { columns } from "./columns-def";
 import { DataTable } from "../../components/data-table/data-table";
+import { columns } from "./columns-def";
 
-import { Comarca, type Cim } from "@/types/cim";
-import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
 import { cn } from "@/lib/cn";
+import { Comarca } from "@/lib/db/comarcas";
 import ClimbStats from "./climb-stats";
 import FilterBar from "./filter-bar";
-import { useCims } from "./use-cims";
+import { useAscentMutation } from "./queries/use-ascents-mutation";
+import { useAscentsQuery } from "./queries/use-ascents-query";
+import { useCimsQuery } from "./queries/use-cims-query";
+import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
 
 type mainProps = {
-  initialCims: Cim[];
   className?: string;
   comarcas: Comarca[];
 };
 
-export default function Main({ className, initialCims, comarcas }: mainProps) {
-  const [cims, setClimbed] = useCims(initialCims);
+const INCLUDE_COMARCA = true;
+
+export default function Main({ className, comarcas }: mainProps) {
+  const { data: cims } = useCimsQuery(INCLUDE_COMARCA);
+  const { data: ascents } = useAscentsQuery();
+  const { mutate } = useAscentMutation();
   const [selected, setSelect] = useState<string | null>(null);
-  const [filteredCims, filter, setFilter] = useCimFilter(cims);
+  const [filteredCims, filter, setFilter] = useCimFilter(cims, ascents);
 
   const geoJsonUrl = useMemo(
     () =>
@@ -32,18 +37,8 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
   );
 
   const onClickClimb = useCallback(
-    (id: string, climbed: boolean) => {
-      setClimbed({ cimId: id, value: !climbed });
-
-      fetch(`/api/cims/${id}`, {
-        method: climbed ? "DELETE" : "PUT",
-      }).then((res) => {
-        if (res.status !== 200) {
-          setClimbed({ cimId: id, value: climbed });
-        }
-      });
-    },
-    [setClimbed]
+    (cimId: string, action: "ADD" | "REMOVE") => mutate({ cimId, action }),
+    [mutate]
   );
 
   const onClickComarca = useCallback(
@@ -76,6 +71,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
           <Marker
             key={cim.id}
             {...cim}
+            climbed={ascents.some((a) => a.cimId === cim.id)}
             selected={selected === cim.id}
             onClickClimb={onClickClimb}
             onClick={setSelect}
@@ -91,7 +87,7 @@ export default function Main({ className, initialCims, comarcas }: mainProps) {
           onClickRow={({ id }) => setSelect(id)}
           meta={{ onClickClimb, onClickComarca }}
         />
-        <ClimbStats cims={filteredCims} />
+        <ClimbStats cims={filteredCims} ascents={ascents} />
       </aside>
     </main>
   );

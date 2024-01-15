@@ -24,7 +24,7 @@ export default function QueryProvider({ children }: QueryProviderProps) {
              * Disable `refetchOnMount` because we use prefetching (and/or pre-caching)
              * Note: queries with **NO** initialData will still be fetched on mount
              */
-            refetchOnMount: true,
+            refetchOnMount: false,
           },
         },
       })
