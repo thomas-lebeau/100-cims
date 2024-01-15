@@ -3,7 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { useState, type ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 type QueryProviderProps = {
   children: ReactNode;
@@ -22,7 +22,8 @@ export default function QueryProvider({ children }: QueryProviderProps) {
 
             /**
              * Disable `refetchOnMount` because we use prefetching (and/or pre-caching)
-             * Note: queries with **NO** initialData will still be fetched on mount
+             *
+             * Note: queries with **NO** initialData will still be fetched on mount.
              */
             refetchOnMount: false,
           },

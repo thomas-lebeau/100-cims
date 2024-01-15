@@ -3,7 +3,7 @@ import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 import { comarcaSchema } from "./comarcas";
 
-/* eslint-disable */
+/* eslint-disable no-unused-vars, no-redeclare */
 export function getCims(): Promise<Cim[]>;
 export function getCims(includesComarca: true): Promise<CimWithComarca[]>;
 export function getCims(includesComarca: false): Promise<Cim[]>;
