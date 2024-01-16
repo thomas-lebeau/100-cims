@@ -3,6 +3,28 @@ import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 import { comarcaSchema } from "./comarcas";
 
+export type TinyCim = [Cim["id"], Cim["longitude"], Cim["latitude"]];
+
+const tinyCimSchema = z
+  .object({
+    id: z.string(),
+    longitude: z.number(),
+    latitude: z.number(),
+  })
+  .transform((cim) => [cim.id, cim.longitude, cim.latitude] as TinyCim);
+
+export async function getTinyCims() {
+  return tinyCimSchema.array().parse(
+    await prisma.cim.findMany({
+      select: {
+        id: true,
+        longitude: true,
+        latitude: true,
+      },
+    })
+  );
+}
+
 /* eslint-disable no-unused-vars, no-redeclare */
 export function getCims(): Promise<Cim[]>;
 export function getCims(includesComarca: true): Promise<CimWithComarca[]>;

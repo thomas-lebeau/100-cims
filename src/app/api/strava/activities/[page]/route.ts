@@ -5,6 +5,7 @@ import serverTimings from "@/lib/server-timings";
 
 import { getAccount } from "@/lib/db/accounts";
 import { stravaActivitySchema } from "@/lib/db/activities";
+import { STRAVA_BASE_URL } from "@/lib/strava";
 import { serializeError } from "serialize-error";
 import { z } from "zod";
 
@@ -58,7 +59,7 @@ export async function GET(
     }
 
     // `after=` used to fetch the oldest page first
-    let url = `https://www.strava.com/api/v3/athlete/activities?page=${pageId}&after=`;
+    let url = `${STRAVA_BASE_URL}/athlete/activities?page=${pageId}&after=`;
 
     if (safeUrlSearchParams.data.since) {
       url += `${safeUrlSearchParams.data.since}`;
