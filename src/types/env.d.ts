@@ -32,6 +32,9 @@ declare global {
 
       CRON_SECRET: string;
 
+      CI: string | undefined;
+      GITHUB_ACTIONS: string | undefined;
+
       // make typescript error when using env vars that are not defined in here
       [key: string]: undefined;
     }
