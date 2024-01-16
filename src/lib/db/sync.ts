@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { getMostRecentActivity } from "../get-most-recent-activity";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
