@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import getServerSession from "@/lib/get-server-session";
-import prisma from "@/lib/prisma";
 import serverTimings from "@/lib/server-timings";
 
+import { getAccount } from "@/lib/db/accounts";
 import { stravaActivitySchema } from "@/lib/db/activities";
 import { serializeError } from "serialize-error";
 import { z } from "zod";
@@ -37,19 +37,6 @@ export async function GET(
       );
     }
 
-    serverTiming.start("auth");
-
-    const { access_token } = await prisma.account.findFirstOrThrow({
-      where: {
-        userId: session.user.id,
-        provider: "strava",
-      },
-      select: {
-        access_token: true,
-      },
-    });
-
-    serverTiming.stop("auth");
     serverTiming.start("get");
 
     const safeContext = routeContextSchema.safeParse(context);
@@ -77,14 +64,17 @@ export async function GET(
       url += `${safeUrlSearchParams.data.since}`;
     }
 
+    const [{ access_token }] = await getAccount(session.user.id, "strava");
+
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    const data = await res.json();
 
-    const safeActivity = stravaActivitySchema.array().safeParse(data);
+    const safeActivity = stravaActivitySchema
+      .array()
+      .safeParse(await res.json());
 
     if (!safeActivity.success) {
       return NextResponse.json(safeActivity.error.issues, { status: 422 }); //TODO: return [] or different error code
