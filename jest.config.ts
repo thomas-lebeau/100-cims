@@ -14,6 +14,7 @@ const config: Config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
+  reporters: ["default", "github-actions"],
 };
 
 export default createJestConfig(config);
