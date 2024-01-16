@@ -1,15 +1,15 @@
 import prisma from "@/lib/prisma";
-import { StravaAccount, type Account } from "@/types/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import StravaProvider from "next-auth/providers/strava";
+import { StravaAccount, type Account } from "./db/accounts";
 
 import prismaClient from "@/lib/prisma";
 import { Token } from "@/types/next-auth";
 import { AuthOptions } from "next-auth";
-import { AdapterUser } from "next-auth/adapters";
 import { Provider } from "next-auth/providers";
+import { getAccount, isStravaAccount } from "./db/accounts";
 import { STRAVA_BASE_URL } from "./strava";
 
 const googleProvider = GoogleProvider({
@@ -75,7 +75,8 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async session({ session, user }) {
       try {
-        await maybeRefreshToken(user);
+        const account = await getAccount(user.id, "strava");
+        await maybeRefreshToken(account[0]); // FIXME: can one user have more than one strava account?
       } catch (error) {
         // TODO: proper logging
         console.error("Error refreshing access token", error);
@@ -95,13 +96,25 @@ export const authOptions: AuthOptions = {
   },
 };
 
+export async function maybeRefreshToken(account: Account) {
+  if (!isSessionExpired(account)) return;
+
+  if (isStravaAccount(account)) {
+    return refreshStravaToken(account);
+  }
+
+  // TODO: support for other account tokens?
+}
+
 function isSessionExpired(account: Account) {
   return Boolean(account.expires_at && account.expires_at * 1000 < Date.now());
 }
 
 async function refreshStravaToken(account: StravaAccount) {
   const response = await fetch(`${STRAVA_BASE_URL}/oauth/token`, {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
     body: new URLSearchParams({
       client_id: process.env.STRAVA_CLIENT_ID,
       client_secret: process.env.STRAVA_CLIENT_SECRET,
@@ -128,24 +141,4 @@ async function refreshStravaToken(account: StravaAccount) {
       },
     },
   });
-}
-
-function isStravaAccount(account: Account): account is StravaAccount {
-  return account.provider === "strava";
-}
-
-async function maybeRefreshToken(user: AdapterUser) {
-  const account = await prisma.account.findFirst({
-    where: {
-      userId: user.id,
-      provider: "strava",
-    },
-  });
-
-  if (!account) return;
-  if (!isSessionExpired(account)) return;
-
-  if (isStravaAccount(account)) {
-    refreshStravaToken(account);
-  }
 }

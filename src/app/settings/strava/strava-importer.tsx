@@ -9,7 +9,7 @@ import { useStravaActivities } from "@/components/queries/use-strava-activities-
 import { Button } from "@/components/ui/button";
 import { StravaActivity } from "@/lib/db/activities";
 import { Cim } from "@/lib/db/cims";
-import { getCimForActivity } from "@/lib/strava";
+import { cimsToTinyCims, getCimForPolyline } from "@/lib/geojson";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -26,7 +26,10 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   let matches: Matches = {};
 
   for (const activity of activities) {
-    const cimIds = getCimForActivity(cims, activity);
+    const cimIds = getCimForPolyline(
+      cimsToTinyCims(cims),
+      activity.summaryPolyline
+    );
 
     if (cimIds.length) {
       matches[activity.originId] = {
