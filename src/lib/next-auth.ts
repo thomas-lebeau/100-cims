@@ -8,12 +8,12 @@ import StravaProvider from "next-auth/providers/strava";
 import prismaClient from "@/lib/prisma";
 import { Token } from "@/types/next-auth";
 import { AuthOptions } from "next-auth";
-import { Provider } from "next-auth/providers";
 import { AdapterUser } from "next-auth/adapters";
+import { Provider } from "next-auth/providers";
 
 const googleProvider = GoogleProvider({
-  clientId: process.env.GOOGLE_CLIENT_ID as string,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   authorization: {
     params: {
       prompt: "consent",
@@ -36,8 +36,8 @@ const emailProvider = EmailProvider({
 });
 
 const stravaProvider = StravaProvider({
-  clientId: process.env.STRAVA_CLIENT_ID as string,
-  clientSecret: process.env.STRAVA_CLIENT_SECRET as string,
+  clientId: process.env.STRAVA_CLIENT_ID,
+  clientSecret: process.env.STRAVA_CLIENT_SECRET,
 
   token: {
     async request({ client, params, checks, provider }) {

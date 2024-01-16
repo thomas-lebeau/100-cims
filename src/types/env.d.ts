@@ -12,7 +12,7 @@ declare global {
       EMAIL_FROM: string;
       EMAIL_SERVER_USER: string;
       EMAIL_SERVER_PASSWORD: string;
-      EMAIL_SERVER_HOST: string;
+      EMAIL_SERVER_HOST: string | undefined; // email provider disabled on prod.
       EMAIL_SERVER_PORT: string;
 
       GOOGLE_CLIENT_ID: string;
@@ -31,6 +31,9 @@ declare global {
       STRAVA_VERIFY_TOKEN: string;
 
       CRON_SECRET: string;
+
+      // make typescript error when using env vars that are not defined in here
+      [key: string]: undefined;
     }
   }
 }
