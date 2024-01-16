@@ -5,7 +5,6 @@ generator client {
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
-  // url          = env("DATABASE_SHADOW_URL")
   relationMode = "prisma"
 }
 
@@ -97,15 +96,15 @@ model CimToComarca {
 model Activity {
   id              String      @id @default(cuid())
   userId          String
-  syncId          String?
-  originId        String?     @db.Text
-  originType      OriginType?
   name            String
-  sportType       String?
   startDate       DateTime
   summaryPolyline String      @db.Text
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @default(now()) @updatedAt
+  sportType       String?
+  originId        String?     @db.Text
+  originType      OriginType?
+  syncId          String?
   user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   Sync            Sync?       @relation(fields: [syncId], references: [id], onDelete: Cascade)
   Ascent          Ascent[]
