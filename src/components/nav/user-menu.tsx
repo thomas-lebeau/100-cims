@@ -40,7 +40,11 @@ export function UserMenu({ className }: { className?: string }) {
     <div className={cn(className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+          <Button
+            variant="ghost"
+            className="relative h-8 w-8 rounded-full"
+            name="User menu"
+          >
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.image} alt={user.name} />
               <AvatarFallback>{user.initial}</AvatarFallback>

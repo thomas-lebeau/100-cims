@@ -47,7 +47,7 @@ const prisma = new PrismaClient();
 function createBar(label, max) {
   const bar = new cliProgress.SingleBar(
     {
-      format: ` {bar} {percentage}% | ETA: {eta_formatted}s | {value}/{total} | ${label}`,
+      format: ` {bar} {percentage}% | ETA: {eta_formatted} | {value}/{total} | ${label}`,
     },
     cliProgress.Presets.shades_classic
   );

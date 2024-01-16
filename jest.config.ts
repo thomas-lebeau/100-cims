@@ -9,7 +9,7 @@ const config: Config = {
   collectCoverage: false,
   coverageProvider: "v8",
   testEnvironment: "jsdom",
-
+  testMatch: ["<rootDir>/src/**/*.test.(ts|tsx|js)"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
