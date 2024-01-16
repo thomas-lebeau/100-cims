@@ -10,6 +10,7 @@ export async function getAccount(
       id: true,
       provider: true,
       expires_at: true,
+      access_token: true,
     },
     where: {
       userId,

@@ -9,13 +9,10 @@ import { useStravaActivities } from "@/components/queries/use-strava-activities-
 import { Button } from "@/components/ui/button";
 import { StravaActivity } from "@/lib/db/activities";
 import { Cim } from "@/lib/db/cims";
-import { toGeoJSON } from "@mapbox/polyline";
-import pointToLineDistance from "@turf/point-to-line-distance";
+import { getCimForActivity } from "@/lib/strava";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-
-const MAX_DISTANCE = 25; // in meters;
 
 type Matches = Record<
   StravaActivity["originId"],
@@ -29,25 +26,13 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   let matches: Matches = {};
 
   for (const activity of activities) {
-    const line = toGeoJSON(activity.summaryPolyline);
+    const cimIds = getCimForActivity(cims, activity);
 
-    for (const cim of cims) {
-      const distance = pointToLineDistance(
-        [cim.longitude, cim.latitude],
-        line,
-        { units: "meters" }
-      );
-
-      if (distance < MAX_DISTANCE) {
-        if (!matches[activity.originId]) {
-          matches[activity.originId] = {
-            cimIds: [],
-            activity,
-          };
-        }
-
-        matches[activity.originId].cimIds.push(cim.id);
-      }
+    if (cimIds.length) {
+      matches[activity.originId] = {
+        cimIds,
+        activity,
+      };
     }
   }
   return matches;
