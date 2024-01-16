@@ -20,7 +20,7 @@ export default async function SettingStravaPage() {
   getQueryClient().setQueryData(["ascents"], await getAscents(userId));
   getQueryClient().setQueryData(["activities"], await getActivities(userId));
 
-  const [stravaAccount] = await getAccount(userId, "strava");
+  const isLinkedToStrava = (await getAccount(userId, "strava")).length > 0;
 
   return (
     <div className="space-y-6">
@@ -33,7 +33,9 @@ export default async function SettingStravaPage() {
 
       <Separator />
 
-      <Hydrate>{stravaAccount ? <StravaImporter /> : <LinkStrava />}</Hydrate>
+      <Hydrate>
+        {isLinkedToStrava ? <StravaImporter /> : <LinkStrava />}
+      </Hydrate>
     </div>
   );
 }

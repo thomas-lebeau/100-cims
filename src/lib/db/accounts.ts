@@ -6,15 +6,18 @@ export async function getAccount(
   provider?: "strava" | "google"
 ) {
   return await prisma.account.findMany({
-    select: {
-      id: true,
-      provider: true,
-      expires_at: true,
-      access_token: true,
-    },
     where: {
       userId,
       ...(provider ? { provider } : {}),
+    },
+  });
+}
+
+export async function getAccountIdByStravaId(stravaId: string) {
+  return await prisma.account.findFirst({
+    where: {
+      providerAccountId: stravaId,
+      provider: "strava",
     },
   });
 }

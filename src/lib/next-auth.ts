@@ -10,6 +10,7 @@ import { Token } from "@/types/next-auth";
 import { AuthOptions } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import { Provider } from "next-auth/providers";
+import { STRAVA_BASE_URL } from "./strava";
 
 const googleProvider = GoogleProvider({
   clientId: process.env.GOOGLE_CLIENT_ID,
@@ -99,7 +100,7 @@ function isSessionExpired(account: Account) {
 }
 
 async function refreshStravaToken(account: StravaAccount) {
-  const response = await fetch("https://www.strava.com/api/v3/oauth/token", {
+  const response = await fetch(`${STRAVA_BASE_URL}/oauth/token`, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
       client_id: process.env.STRAVA_CLIENT_ID,
