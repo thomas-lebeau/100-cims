@@ -20,6 +20,65 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 4. Run `npx prisma db push`
 5. Merge and deploy the branch in planetscale
 
+## Strava Webhook
+
+### Prerequisites
+
+- load env variables (e.g. `source .env`)
+- [jq](https://stedolan.github.io/jq/download/) to parse json
+- [ngrok](https://ngrok.com/download) to test locally (_optional_)
+
+### View subsciptions
+
+```bash
+curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
+    -d client_id=${STRAVA_CLIENT_ID} \
+    -d client_secret=${STRAVA_CLIENT_SECRET} | jq '.[] | .id'
+```
+
+### Create subscription
+
+<details open>
+<summary>local</summary>
+
+```bash
+curl -sS http://127.0.0.1:4040/api/tunnels \
+| jq -r '.tunnels[0].public_url' \
+| xargs -I {} \
+curl -X POST https://www.strava.com/api/v3/push_subscriptions \
+    -F client_id=${STRAVA_CLIENT_ID} \
+    -F client_secret=${STRAVA_CLIENT_SECRET} \
+    -F verify_token=${STRAVA_VERIFY_TOKEN} \
+    -F callback_url={}/api/strava/webhook
+```
+
+</details>
+
+<details>
+<summary>production</summary>
+
+```bash
+curl -X POST https://www.strava.com/api/v3/push_subscriptions \
+    -F client_id=${STRAVA_CLIENT_ID} \
+    -F client_secret=${STRAVA_CLIENT_SECRET} \
+    -F verify_token=${STRAVA_VERIFY_TOKEN} \
+    -F callback_url=https://100cims.vercel.app/api/strava/webhook
+```
+
+</details>
+
+### Delete subscription
+
+```bash
+curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
+    -d client_id=${STRAVA_CLIENT_ID} \
+    -d client_secret=${STRAVA_CLIENT_SECRET} \
+| jq '.[] | .id' \
+| xargs -I {} \
+curl -X DELETE \
+    "https://www.strava.com/api/v3/push_subscriptions/{}?client_id=${STRAVA_CLIENT_ID}&client_secret=${STRAVA_CLIENT_SECRET}"
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
