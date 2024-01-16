@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { Extends } from "@/types/extends";
 import { Expect } from "type-testing";
 import { z } from "zod";

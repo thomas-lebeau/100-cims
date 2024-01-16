@@ -1,11 +1,10 @@
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import StravaProvider from "next-auth/providers/strava";
 import { StravaAccount, type Account } from "./db/accounts";
 
-import prismaClient from "@/lib/prisma";
 import { Token } from "@/types/next-auth";
 import { AuthOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
@@ -70,7 +69,7 @@ if (process.env.EMAIL_SERVER_HOST) {
 }
 
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prismaClient),
+  adapter: PrismaAdapter(prisma),
   providers: providers,
   callbacks: {
     async session({ session, user }) {

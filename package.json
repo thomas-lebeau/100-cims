@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "postinstall": "prisma generate"
   },
   "prisma": {
@@ -49,7 +51,10 @@
     "zod-fetch": "^0.1.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.2.0",
+    "@testing-library/react": "^14.1.2",
     "@total-typescript/ts-reset": "^0.5.1",
+    "@types/jest": "^29.5.11",
     "@types/mapbox__polyline": "^1.0.5",
     "@types/mapbox-gl": "^2.7.14",
     "@types/node": "^20.11.3",
@@ -60,9 +65,12 @@
     "dotenv": "^16.3.1",
     "eslint": "8.56.0",
     "eslint-config-next": "^14.0.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "8.4.33",
     "prettier": "^3.2.2",
     "prisma": "^5.8.1",
+    "ts-node": "^10.9.2",
     "type-testing": "^0.2.0",
     "typescript": "^5.3.3"
   }
