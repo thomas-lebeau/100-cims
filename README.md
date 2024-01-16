@@ -10,25 +10,63 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Dashboards
+
+- [Strava](https://www.strava.com/settings/api)
+- [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims)
+- [Vercel](https://vercel.com/thomas-lebeau/100-cims)
+- [Ngrok](https://dashboard.ngrok.com/tunnels/agents)
+
 ## Database
 
-### Schema updates
+Database is hosted on [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims).
+
+### Update db schema
+
+Updates are done via [Prisma](https://www.prisma.io/). Edit the schema in `prisma/schema.prisma` and run the following commands to apply the changes to dev environement. Changes to production are done via creating deploy requests in [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims/dev).
+
+#### Development
 
 1. Make changes to the schema in `prisma/schema.prisma`
-2. Create a branch in planetscale [dashboard](https://app.planetscale.com/lebeau-thomas/100-cims)
+2. Run `npx prisma db push`
 3. Run `npx prisma generate`
-4. Run `npx prisma db push`
-5. Merge and deploy the branch in planetscale
+
+#### Production
+
+1. Create a deploy request in [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims/dev)
+2. Deploy it!
+
+### Seeding
+
+Resets the database and seeds it with data for `Cim` and `Comarca` tables.
+
+> [!CAUTION]
+> This will delete all data in the database!
+
+```bash
+npx prisma db seed
+```
 
 ## Strava Webhook
 
+> [!NOTE]  
+> Because Strava allows only one authorization callback domain per app and one app per account, we have a separate strava accounts (and app) for development and production.
+
+- [Strava Dashboard](https://www.strava.com/settings/api)
+- [Webhook Events API](https://developers.strava.com/docs/webhooks/) documentation.
+
 ### Prerequisites
 
-- load env variables (e.g. `source .env`)
+- Environement variables (e.g. `source .env`)
+  ```Properties
+  STRAVA_CLIENT_ID=...
+  STRAVA_CLIENT_SECRET=...
+  STRAVA_VERIFY_TOKEN=...
+  ```
 - [jq](https://stedolan.github.io/jq/download/) to parse json
-- [ngrok](https://ngrok.com/download) to test locally (_optional_)
+- [ngrok](https://ngrok.com/download) to test locally (_optional_) - [Instrucions here](https://developers.strava.com/docs/webhookexample/)
 
-### View subsciptions
+### View subsciption
 
 ```bash
 curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
