@@ -137,7 +137,7 @@ model Sync {
   userId     String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  endAt      DateTime   @default(now()) // Todo: add endAt as the end of the last activity synced
+  endAt      DateTime   @default(now())
   user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   activities Activity[]
 
