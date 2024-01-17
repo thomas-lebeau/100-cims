@@ -9,6 +9,7 @@
     "lint": "next lint -- -f gha",
     "test": "jest",
     "test:watch": "jest --watch",
+    "e2e": "playwright test",
     "postinstall": "prisma generate"
   },
   "prisma": {
@@ -51,6 +52,7 @@
     "zod-fetch": "^0.1.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.41.0",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@total-typescript/ts-reset": "^0.5.1",

@@ -35,6 +35,8 @@ declare global {
       CI: string | undefined;
       GITHUB_ACTIONS: string | undefined;
 
+      PLAYWRIGHT_TEST_BASE_URL: string;
+
       // make typescript error when using env vars that are not defined in here
       [key: string]: undefined;
     }

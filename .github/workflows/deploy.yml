@@ -1,0 +1,47 @@
+name: deploy
+
+on:
+  deployment_status:
+
+jobs:
+  e2e:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    container:
+      image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    env:
+      PLAYWRIGHT_REPORT_PATH: "${{ github.run_id }}-${{ github.run_attempt }}"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps
+
+      - run: npx playwright test
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          EMAIL_SERVER_USER: ${{ secrets.EMAIL_SERVER_USER }}
+          EMAIL_SERVER_PASSWORD: ${{ secrets.EMAIL_SERVER_PASSWORD }}
+
+      - uses: kheiakiyama/install-azcopy-action@v1
+        if: always()
+        with:
+          version: "v10"
+
+      - name: Publish Playwright report
+        if: always()
+        run: |
+          azcopy_v10 cp --recursive=true "./playwright-report/*" "https://100cims.blob.core.windows.net/\$web/$PLAYWRIGHT_REPORT_PATH"
+          echo "🎭 [playwright-report](https://100cims.z6.web.core.windows.net/$PLAYWRIGHT_REPORT_PATH/index.html)" >> $GITHUB_STEP_SUMMARY
+        env:
+          AZCOPY_AUTO_LOGIN_TYPE: SPN
+          AZCOPY_SPA_APPLICATION_ID: "${{ secrets.AZCOPY_SPA_APPLICATION_ID }}"
+          AZCOPY_SPA_CLIENT_SECRET: "${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}"
+          AZCOPY_TENANT_ID: "${{ secrets.AZCOPY_TENANT_ID }}"
