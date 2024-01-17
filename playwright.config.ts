@@ -10,9 +10,7 @@ export default defineConfig({
   forbidOnly: isCI,
   retries: isCI ? 1 : 0,
   workers: isCI ? 1 : undefined,
-  reporter: isCI
-    ? [["html", { attachmentsBaseURL: process.env.PLAYWRIGHT_REPORT_PATH }]]
-    : "html",
+  reporter: "html",
   use: {
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
     trace: isCI ? "on-first-retry" : "retain-on-failure",
