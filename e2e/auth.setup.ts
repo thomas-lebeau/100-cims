@@ -10,6 +10,8 @@ if (!process.env.CI) {
 }
 
 setup("authenticate", async ({ page }) => {
+  setup.slow();
+
   await page.goto("/");
 
   if (await page.locator('button[name="User menu"]').isVisible()) {
@@ -18,6 +20,9 @@ setup("authenticate", async ({ page }) => {
   }
 
   await page.getByRole("link", { name: "Login" }).click();
+
+  await page.getByRole("button", { name: "Sign in with Email" }).isVisible();
+
   await page.getByRole("textbox", { name: "Email" }).fill("hello@example.com");
   await page.getByRole("button", { name: "Sign in with Email" }).click();
   await page.goto("https://ethereal.email/login");
