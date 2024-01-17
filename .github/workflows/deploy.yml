@@ -10,6 +10,8 @@ jobs:
     if: github.event.deployment_status.state == 'success'
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    env:
+      PLAYWRIGHT_REPORT_PATH: "${{ github.run_id }}-${{ github.run_attempt }}"
 
     steps:
       - uses: actions/checkout@v4
@@ -35,3 +37,17 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - uses: kheiakiyama/install-azcopy-action@v1
+        with:
+          version: "v10"
+
+      - name: Publish Playwright report
+        run: |
+          azcopy_v10 cp --recursive "./playwright-report/*" "https://100cims.blob.core.windows.net/\$web/$PLAYWRIGHT_REPORT_PATH"
+          echo "::notice title=Report url::https://100cims.z6.web.core.windows.net/$PLAYWRIGHT_REPORT_PATH/index.html"
+        env:
+          AZCOPY_AUTO_LOGIN_TYPE: SPN
+          AZCOPY_SPA_APPLICATION_ID: "${{ secrets.AZCOPY_SPA_APPLICATION_ID }}"
+          AZCOPY_SPA_CLIENT_SECRET: "${{ secrets.AZCOPY_SPA_CLIENT_SECRET }}"
+          AZCOPY_TENANT_ID: "${{ secrets.AZCOPY_TENANT_ID }}"
