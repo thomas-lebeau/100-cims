@@ -10,8 +10,6 @@ if (!process.env.CI) {
 }
 
 setup("authenticate", async ({ page }) => {
-  setup.slow();
-
   await page.goto("/");
 
   if (await page.locator('button[name="User menu"]').isVisible()) {
