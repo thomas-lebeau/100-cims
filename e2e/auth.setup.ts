@@ -1,5 +1,6 @@
 import { expect, test as setup } from "@playwright/test";
 import { AUTH_FILE } from "../playwright.config";
+import { USER } from "./test-users";
 
 if (!process.env.CI) {
   try {
@@ -18,7 +19,7 @@ setup("authenticate", async ({ page }) => {
   }
 
   await page.getByRole("link", { name: "Login" }).click();
-  await page.getByRole("textbox", { name: "Email" }).fill("hello@example.com");
+  await page.getByRole("textbox", { name: "Email" }).fill(USER.email);
   await page.getByRole("button", { name: "Sign in with Email" }).click();
   await page.goto("https://ethereal.email/login");
   await page

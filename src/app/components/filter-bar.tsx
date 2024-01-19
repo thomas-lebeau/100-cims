@@ -65,7 +65,7 @@ export default function FilterBar({
         >
           <SegmentedControlOption value="all">All</SegmentedControlOption>
           <SegmentedControlOption value="climbed">
-            Acsended
+            Ascended
           </SegmentedControlOption>
         </SecgmentedControl>
         <FacetPicker
