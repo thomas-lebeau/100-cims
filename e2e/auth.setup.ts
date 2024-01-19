@@ -2,10 +2,12 @@ import { expect, test as setup } from "@playwright/test";
 import { AUTH_FILE } from "../playwright.config";
 import { USER } from "./test-users";
 
-try {
-  setup.use({ storageState: AUTH_FILE });
-} catch {
-  // No auth file, so we need to authenticate
+if (!process.env.CI) {
+  try {
+    setup.use({ storageState: AUTH_FILE });
+  } catch {
+    // No auth file, so we need to authenticate
+  }
 }
 
 setup("authenticate", async ({ page }) => {
