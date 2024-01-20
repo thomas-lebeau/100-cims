@@ -30,6 +30,7 @@ Updates are done via [Prisma](https://www.prisma.io/). Edit the schema in `prism
 1. Make changes to the schema in `prisma/schema.prisma`
 2. Run `npx prisma db push`
 3. Run `npx prisma generate`
+4. Restart dev server
 
 #### Production
 

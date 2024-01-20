@@ -19,6 +19,7 @@ const apiResponseSchema = z
     sportType: z.string(),
     startDate: z.string().datetime(),
     summaryPolyline: z.string(),
+    private: z.boolean(),
   })
   .array();
 

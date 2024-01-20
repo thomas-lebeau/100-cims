@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
     }
 
     const syncedData = await addSync(
+      "STRAVA_IMPORT",
       session.user.id,
       safeBody.data.map(({ activity }) => activity)
     );

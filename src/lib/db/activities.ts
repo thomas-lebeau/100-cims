@@ -23,6 +23,7 @@ export const activitySchema = z.object({
   sportType: z.string().nullable(),
   startDate: z.preprocess(toIsoDate, z.string().datetime()),
   summaryPolyline: z.string(),
+  private: z.boolean(),
   createdAt: z.preprocess(toIsoDate, z.string().datetime()),
   updatedAt: z.preprocess(toIsoDate, z.string().datetime()),
 });
@@ -45,6 +46,7 @@ export const stravaActivitySchema = z
     map: z.object({
       summary_polyline: z.string(),
     }),
+    private: z.boolean(),
   })
   .transform((data) => ({
     name: data.name,
@@ -53,6 +55,7 @@ export const stravaActivitySchema = z
     sportType: data.type,
     startDate: data.start_date,
     summaryPolyline: data.map.summary_polyline,
+    private: data.private,
   }));
 
 export type StravaActivity = z.infer<typeof stravaActivitySchema>;
