@@ -29,6 +29,8 @@ jobs:
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
           EMAIL_SERVER_USER: ${{ secrets.EMAIL_SERVER_USER }}
           EMAIL_SERVER_PASSWORD: ${{ secrets.EMAIL_SERVER_PASSWORD }}
+          STRAVA_VERIFY_TOKEN: ${{ secrets.STRAVA_VERIFY_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }} # dev db
 
       - uses: kheiakiyama/install-azcopy-action@v1
         if: always()
