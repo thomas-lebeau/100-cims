@@ -166,7 +166,20 @@ async function handleCreateActivityEvent(
 }
 
 export async function POST(req: NextRequest) {
-  handleEvent(req);
+  const awaitEventHandling = req.headers.get("x-await-event-handling");
+
+  // Make webhook handling synchronous for testing
+  //
+  // The subscription callback endpoint must acknowledge the POST of each new
+  // event with a status code of 200 OK within two seconds. Event pushes are
+  // retried (up to a total of three attempts) if a 200 is not returned.
+  // If your application needs to do more processing of the received information,
+  // it should do so asynchronously.
+  if (awaitEventHandling === "true") {
+    await handleEvent(req);
+  } else {
+    handleEvent(req);
+  }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }
