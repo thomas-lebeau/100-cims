@@ -34,45 +34,80 @@ test.describe("subscription", () => {
 });
 
 test.describe("handle incoming event", () => {
-  function cleanupSyncs() {
-    return prisma.sync.deleteMany({
-      where: {
-        userId: "clrgyxhx00000ereeuwlk42yq",
-      },
-    });
-  }
+  test.describe.configure({ mode: "serial" });
+  test.use({
+    extraHTTPHeaders: { "x-await-event-handling": "true" },
+  });
 
   test.beforeAll(cleanupSyncs);
   test.afterAll(cleanupSyncs);
 
-  test("respond with 200 to incoming event", async ({ request }) => {
-    const response = await request.post(WEBHOOK_ENDPOINT);
+  test("handle create event", async ({ request }) => {
+    const [before] = await getActivities(USER.userId);
 
-    expect(response.status()).toBe(200);
-    expect(await response.json()).toEqual({ ok: true });
-  });
+    expect(before).toBeUndefined();
 
-  test("handle event", async ({ request }) => {
-    const before = await getActivities("clrgyxhx00000ereeuwlk42yq");
-
-    expect(before.length).toBe(0);
-
-    await request.post(WEBHOOK_ENDPOINT, {
+    const response = await request.post(WEBHOOK_ENDPOINT, {
       data: {
         aspect_type: "create",
         event_time: 1623298179,
-        object_id: 10568058092, // https://www.strava.com/activities/10568058092
+        object_id: USER.activityId,
         object_type: "activity",
         owner_id: USER.stravaAccountId,
         subscription_id: 1,
         updates: {},
       },
-      headers: {
-        "x-await-event-handling": "true",
+    });
+
+    const [after] = await getActivities(USER.userId);
+
+    expect(after).toMatchObject({
+      name: "Some Hike",
+      private: false,
+    });
+    expect(response.status()).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+  });
+
+  test("handle update event", async ({ request }) => {
+    const [before] = await getActivities(USER.userId);
+
+    expect(before).toMatchObject({
+      name: "Some Hike",
+      private: false,
+    });
+
+    const response = await request.post(WEBHOOK_ENDPOINT, {
+      data: {
+        aspect_type: "update",
+        event_time: 1623298179,
+        object_id: USER.activityId,
+        object_type: "activity",
+        owner_id: USER.stravaAccountId,
+        subscription_id: 1,
+        updates: {
+          title: "new title",
+          private: "true",
+          visibility: "only_me",
+        },
       },
     });
 
-    const after = await getActivities("clrgyxhx00000ereeuwlk42yq");
-    expect(after.length).toBe(1);
+    const [after] = await getActivities(USER.userId);
+
+    expect(response.status()).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+    expect(after).toMatchObject({
+      name: "new title",
+      private: true,
+    });
   });
 });
+
+function cleanupSyncs() {
+  return prisma.sync.deleteMany({
+    where: {
+      userId: USER.userId,
+    },
+  });
+}
