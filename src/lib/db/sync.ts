@@ -4,6 +4,10 @@ import { getMostRecentActivity } from "../get-most-recent-activity";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 import { ActivityInput } from "./activities";
 
+const syncType = ["STRAVA_IMPORT", "STRAVA_WEBHOOK", "GPX"] as const;
+
+export type SyncType = (typeof syncType)[number];
+
 export async function getLastSync(userId: string) {
   return syncSchema.nullable().parse(
     await prisma.sync.findFirst({
@@ -17,13 +21,18 @@ export async function getLastSync(userId: string) {
   );
 }
 
-export async function addSync(userId: string, activities: ActivityInput[]) {
+export async function addSync(
+  syncType: SyncType,
+  userId: string,
+  activities: ActivityInput[]
+) {
   const { startDate } = getMostRecentActivity(activities);
 
   return await prisma.sync.create({
     data: {
       userId,
       endAt: startDate,
+      syncType,
       activities: {
         createMany: {
           skipDuplicates: true,
@@ -53,4 +62,28 @@ export const syncSchema = z.object({
   createdAt: z.preprocess(toIsoDate, z.string().datetime()),
   updatedAt: z.preprocess(toIsoDate, z.string().datetime()),
   endAt: z.preprocess(toIsoDate, z.string().datetime()),
+  syncType: z.enum(syncType),
 });
+
+export function updateStravaActivity(
+  userId: string,
+  originId: string,
+  activity: Partial<Pick<ActivityInput, "private" | "name" | "sportType">>
+) {
+  return prisma.activity.update({
+    select: {
+      id: true,
+      private: true,
+      name: true,
+      sportType: true,
+    },
+    where: {
+      userId_originType_originId: {
+        userId: userId,
+        originType: "STRAVA",
+        originId,
+      },
+    },
+    data: activity,
+  });
+}

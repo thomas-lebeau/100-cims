@@ -104,6 +104,7 @@ model Activity {
   sportType       String?
   originId        String?     @db.Text
   originType      OriginType?
+  private         Boolean     @default(false)
   syncId          String?
   user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   Sync            Sync?       @relation(fields: [syncId], references: [id], onDelete: Cascade)
@@ -134,6 +135,7 @@ model Ascent {
 model Sync {
   id         String     @id @default(cuid())
   userId     String
+  syncType   SyncType
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   endAt      DateTime   @default(now())
@@ -145,5 +147,11 @@ model Sync {
 
 enum OriginType {
   STRAVA
+  GPX
+}
+
+enum SyncType {
+  STRAVA_IMPORT
+  STRAVA_WEBHOOK
   GPX
 }

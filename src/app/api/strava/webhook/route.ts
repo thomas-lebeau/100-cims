@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
-import { stravaActivitySchema } from "@/lib/db/activities";
+import { ActivityInput, stravaActivitySchema } from "@/lib/db/activities";
 import { addAscents } from "@/lib/db/ascent";
 import { getTinyCims } from "@/lib/db/cims";
-import { addSync } from "@/lib/db/sync";
+import { addSync, updateStravaActivity } from "@/lib/db/sync";
 import { getCimForPolyline } from "@/lib/geojson";
 import { maybeRefreshToken } from "@/lib/next-auth";
 import { STRAVA_BASE_URL } from "@/lib/strava";
@@ -19,10 +19,23 @@ const eventBodySchema = z.object({
     z.literal("delete"),
   ]),
   event_time: z.number(),
-  object_id: z.number(),
+  object_id: z.number().transform((id) => id.toString()),
   object_type: z.union([z.literal("activity"), z.literal("athlete")]),
   owner_id: z.number().transform((id) => id.toString()),
   subscription_id: z.number(),
+  updates: z
+    .object({
+      title: z.string().optional(),
+      type: z.string().optional(),
+      private: z
+        .enum(["true", "false"])
+        .transform((value) =>
+          value === "true" ? true : value === "false" ? false : value
+        )
+        .optional(),
+      visibility: z.enum(["everyone", "followers_only", "only_me"]).optional(),
+    })
+    .optional(),
 });
 
 type WebhookEvent = z.infer<typeof eventBodySchema>;
@@ -82,7 +95,28 @@ async function handleEvent(req: NextRequest) {
 /* eslint-enable */
 
 async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
-  return ["TODO: Implement", event];
+  const updates: Partial<
+    Pick<ActivityInput, "private" | "name" | "sportType">
+  > = {};
+
+  if (
+    event.updates?.visibility === "only_me" ||
+    event.updates?.visibility === "followers_only"
+  ) {
+    updates.private = true;
+  } else if (event.updates?.visibility === "everyone") {
+    updates.private = false;
+  }
+
+  if (event.updates?.title) {
+    updates.name = event.updates.title;
+  }
+
+  if (event.updates?.type) {
+    updates.sportType = event.updates.type;
+  }
+
+  return updateStravaActivity(account.userId, event.object_id, updates);
 }
 
 async function handleDeleteActivityEvent(
@@ -113,7 +147,9 @@ async function handleCreateActivityEvent(
     return ["no cims found", event];
   }
 
-  const syncedData = await addSync(account.userId, [activity]);
+  const syncedData = await addSync("STRAVA_WEBHOOK", account.userId, [
+    activity,
+  ]);
 
   const activityId = syncedData.activities[0]?.id;
 
@@ -130,7 +166,20 @@ async function handleCreateActivityEvent(
 }
 
 export async function POST(req: NextRequest) {
-  handleEvent(req);
+  const awaitEventHandling = req.headers.get("x-await-event-handling");
+
+  // Make webhook handling synchronous for testing
+  //
+  // The subscription callback endpoint must acknowledge the POST of each new
+  // event with a status code of 200 OK within two seconds. Event pushes are
+  // retried (up to a total of three attempts) if a 200 is not returned.
+  // If your application needs to do more processing of the received information,
+  // it should do so asynchronously.
+  if (awaitEventHandling === "true") {
+    await handleEvent(req);
+  } else {
+    handleEvent(req);
+  }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }
