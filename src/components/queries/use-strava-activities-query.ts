@@ -65,6 +65,7 @@ export function useStravaActivities(
       pageParams: [FIRST_PAGE],
     },
     initialPageParam: FIRST_PAGE,
+    enabled: options.enabled,
     getNextPageParam,
     meta,
   });

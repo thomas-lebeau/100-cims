@@ -43,7 +43,7 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
 
 export default function StravaImporter() {
   const { data: cims } = useCimsQuery();
-  const { data: lastSync } = useLastSyncQuery();
+  const { data: lastSync, isFetching: isFetchingLastSync } = useLastSyncQuery();
   const { data: ascents } = useAscentsQuery();
   const { data: activities } = useActivitiesQuery();
   const { isPending, mutate } = useSyncMutation();
@@ -51,7 +51,10 @@ export default function StravaImporter() {
     data: stravaActivities,
     error,
     isFetching,
-  } = useStravaActivities({ since: lastSync?.endAt }); // TODO: implement enable: false when last sync is loading
+  } = useStravaActivities({
+    since: lastSync?.endAt,
+    enabled: isFetchingLastSync,
+  });
 
   const newActivities = useMemo(
     () => filterActivities(cims, stravaActivities),
@@ -80,7 +83,7 @@ export default function StravaImporter() {
       )}
 
       <Button
-        disabled={isPending}
+        disabled={isPending || !newAscents.length}
         onClick={() => mutate({ ascents: newAscents })}
       >
         {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
