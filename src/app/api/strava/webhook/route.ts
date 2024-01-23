@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
-import { ActivityInput, stravaActivitySchema } from "@/lib/db/activities";
+import {
+  ActivityInput,
+  deleteStravaActivity,
+  stravaActivitySchema,
+  updateStravaActivity,
+} from "@/lib/db/activities";
 import { addAscents } from "@/lib/db/ascent";
 import { getTinyCims } from "@/lib/db/cims";
-import { addSync, updateStravaActivity } from "@/lib/db/sync";
+import { addSync } from "@/lib/db/sync";
 import { getCimForPolyline } from "@/lib/geojson";
 import { maybeRefreshToken } from "@/lib/next-auth";
 import { STRAVA_BASE_URL } from "@/lib/strava";
@@ -55,6 +60,8 @@ async function handleEvent(req: NextRequest) {
 
     // TODO: handle athlete events?
     if (event.object_type !== "activity") return;
+    if (event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID))
+      return;
 
     // TODO: should this use the strava app admin token instead?
     const account = await getAccountIdByStravaId(event.owner_id);
@@ -123,7 +130,7 @@ async function handleDeleteActivityEvent(
   account: Account,
   event: WebhookEvent
 ) {
-  return ["TODO: Implement", event];
+  return deleteStravaActivity(account.userId, event.object_id);
 }
 
 async function handleCreateActivityEvent(

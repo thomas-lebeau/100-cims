@@ -54,7 +54,7 @@ test.describe("handle incoming event", () => {
         object_id: USER.activityId,
         object_type: "activity",
         owner_id: USER.stravaAccountId,
-        subscription_id: 1,
+        subscription_id: 12345,
         updates: {},
       },
     });
@@ -62,7 +62,7 @@ test.describe("handle incoming event", () => {
     const [after] = await getActivities(USER.userId);
 
     expect(after).toMatchObject({
-      name: "Some Hike",
+      name: "Lunch Hike",
       private: false,
     });
     expect(response.status()).toBe(200);
@@ -73,7 +73,7 @@ test.describe("handle incoming event", () => {
     const [before] = await getActivities(USER.userId);
 
     expect(before).toMatchObject({
-      name: "Some Hike",
+      name: "Lunch Hike",
       private: false,
     });
 
@@ -84,7 +84,7 @@ test.describe("handle incoming event", () => {
         object_id: USER.activityId,
         object_type: "activity",
         owner_id: USER.stravaAccountId,
-        subscription_id: 1,
+        subscription_id: 12345,
         updates: {
           title: "new title",
           private: "true",
@@ -101,6 +101,32 @@ test.describe("handle incoming event", () => {
       name: "new title",
       private: true,
     });
+  });
+
+  test("handle delete event", async ({ request }) => {
+    const [before] = await getActivities(USER.userId);
+
+    expect(before).toMatchObject({
+      name: "new title",
+      private: true,
+    });
+
+    const response = await request.post(WEBHOOK_ENDPOINT, {
+      data: {
+        aspect_type: "delete",
+        event_time: 1705954123,
+        object_id: USER.activityId,
+        object_type: "activity",
+        owner_id: USER.stravaAccountId,
+        subscription_id: 12345,
+      },
+    });
+
+    const [after] = await getActivities(USER.userId);
+
+    expect(response.status()).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+    expect(after).toBeUndefined();
   });
 });
 
