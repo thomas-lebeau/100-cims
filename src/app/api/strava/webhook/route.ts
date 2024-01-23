@@ -58,16 +58,20 @@ async function handleEvent(req: NextRequest) {
 
     const event = safeBody.data;
 
+    if (
+      event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
+    ) {
+      console.error("[handleEvent]", "Unknown subscription_id", event);
+    }
+
     // TODO: handle athlete events?
     if (event.object_type !== "activity") return;
-    if (event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID))
-      return;
 
     // TODO: should this use the strava app admin token instead?
     const account = await getAccountIdByStravaId(event.owner_id);
 
     if (!account) {
-      console.log("[handleEvent]", "No account found", event.owner_id);
+      console.error("[handleEvent]", "No account found", event.owner_id);
       return;
     }
 
