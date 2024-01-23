@@ -64,26 +64,3 @@ export const syncSchema = z.object({
   endAt: z.preprocess(toIsoDate, z.string().datetime()),
   syncType: z.enum(syncType),
 });
-
-export function updateStravaActivity(
-  userId: string,
-  originId: string,
-  activity: Partial<Pick<ActivityInput, "private" | "name" | "sportType">>
-) {
-  return prisma.activity.update({
-    select: {
-      id: true,
-      private: true,
-      name: true,
-      sportType: true,
-    },
-    where: {
-      userId_originType_originId: {
-        userId: userId,
-        originType: "STRAVA",
-        originId,
-      },
-    },
-    data: activity,
-  });
-}
