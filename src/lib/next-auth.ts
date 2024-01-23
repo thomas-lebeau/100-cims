@@ -73,14 +73,17 @@ export const authOptions: AuthOptions = {
   providers: providers,
   callbacks: {
     async session({ session, user }) {
-      try {
-        const account = await getAccount(user.id, "strava");
-        await maybeRefreshToken(account[0]); // FIXME: can one user have more than one strava account?
-      } catch (error) {
-        // TODO: proper logging
-        console.error("Error refreshing access token", error);
-        // TODO: The error property will be used client-side to handle the refresh token error
-        session.error = "RefreshAccessTokenError";
+      const [account] = await getAccount(user.id, "strava");
+
+      if (account) {
+        try {
+          await maybeRefreshToken(account);
+        } catch (error) {
+          // TODO: proper logging
+          console.error("Error refreshing access token", error);
+          // TODO: The error property will be used client-side to handle the refresh token error
+          session.error = "RefreshAccessTokenError";
+        }
       }
 
       if (user) {
