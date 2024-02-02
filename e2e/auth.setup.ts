@@ -1,13 +1,26 @@
-import { expect, test as setup } from "@playwright/test";
+import { BrowserContextOptions, expect, test as setup } from "@playwright/test";
+import fs from "fs";
 import { AUTH_FILE } from "../playwright.config";
 import { USER } from "./test-users";
 
+type StorageState = BrowserContextOptions["storageState"];
+
 if (!process.env.CI) {
-  try {
-    setup.use({ storageState: AUTH_FILE });
-  } catch {
-    // No auth file, so we need to authenticate
-  }
+  // read auth file if it exists. This allows us to run tests locally without
+  // having to authenticate every time
+  setup.use({
+    // eslint-disable-next-line no-empty-pattern
+    storageState: async ({}, use) => {
+      try {
+        const authFile = fs.readFileSync(AUTH_FILE, "utf-8");
+
+        return use(JSON.parse(authFile) as StorageState);
+      } catch {
+        // No auth file, so we will need to authenticate
+        return use(undefined);
+      }
+    },
+  });
 }
 
 setup("authenticate", async ({ page }) => {
