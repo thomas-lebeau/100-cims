@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
+    "postbuild": "datadog-ci sourcemaps upload .next/static --service=100-cims --release-version=$VERCEL_GIT_COMMIT_SHA --minified-path-prefix=/_next/static",
     "build": "next build",
     "start": "next start",
     "lint": "next lint -- -f gha",
@@ -53,6 +54,7 @@
     "zod-fetch": "^0.1.1"
   },
   "devDependencies": {
+    "@datadog/datadog-ci": "^2.31.2",
     "@playwright/test": "^1.41.2",
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.1",
