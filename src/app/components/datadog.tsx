@@ -23,7 +23,6 @@ function init() {
     trackLongTasks: true,
     defaultPrivacyLevel: "mask-user-input",
 
-    // Specify URLs to propagate trace headers for connection between RUM and backend trace
     allowedTracingUrls: [
       {
         match: process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
@@ -55,7 +54,5 @@ export default function DatadogRum() {
     () => datadogRum.clearUser();
   }, [session]);
 
-  // Render nothing - this component is only included so that the init code
-  // above will run client-side
   return null;
 }
