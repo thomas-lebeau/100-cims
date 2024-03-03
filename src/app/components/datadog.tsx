@@ -27,10 +27,10 @@ datadogRum.init({
   ],
 });
 
-datadogRum.setGlobalContext({
-  prNumber: process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID,
-  vercelUrl: process.env.NEXT_PUBLIC_VERCEL_URL,
-});
+datadogRum.setGlobalContextProperty(
+  "prNumber",
+  process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID
+);
 
 export default function DatadogRum() {
   const session = useSession();

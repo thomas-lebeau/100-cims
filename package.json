@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "postbuild": "datadog-ci sourcemaps upload .next/static --service=100-cims --release-version=$VERCEL_GIT_COMMIT_SHA --minified-path-prefix=/_next/static",
+    "postbuild": "datadog-ci sourcemaps upload .next/static --service=100-cims --release-version=$VERCEL_GIT_COMMIT_SHA --minified-path-prefix=/_next/static --repository-url=https://github.com/thomas-lebeau/100-cims",
     "build": "next build",
     "start": "next start",
     "lint": "next lint -- -f gha",
