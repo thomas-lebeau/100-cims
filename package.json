@@ -38,6 +38,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.1",
+    "dd-trace": "^5.5.0",
     "lucide-react": "^0.321.0",
     "mapbox-gl": "^3.1.2",
     "next": "^14.1.0",
