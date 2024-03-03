@@ -5,17 +5,29 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 datadogRum.init({
-  applicationId: "e4e89ba2-a49d-4a8d-8383-37184c7719c0",
-  clientToken: "pubebb08bd69e5c015e8cf67803c10a62bd",
+  applicationId: process.env.DATADOG_APPLICATION_ID,
+  clientToken: process.env.DATADOG_CLIENT_TOKEN,
   site: "datadoghq.eu",
   service: "100-cims",
-  env: process.env.NODE_ENV,
+  env: process.env.NEXT_PUBLIC_VERCEL_ENV,
+  version: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
   sessionSampleRate: 100,
   sessionReplaySampleRate: 20,
   trackUserInteractions: true,
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
+
+  beforeSend: (event) => {
+    if (!event.context) {
+      event.context = {};
+    }
+
+    event.context.prNumber = process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID;
+    event.context.vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
+
+    return true;
+  },
 
   // Specify URLs to propagate trace headers for connection between RUM and backend trace
   allowedTracingUrls: [
