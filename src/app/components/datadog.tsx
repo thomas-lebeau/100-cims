@@ -21,7 +21,7 @@ datadogRum.init({
   // Specify URLs to propagate trace headers for connection between RUM and backend trace
   allowedTracingUrls: [
     {
-      match: "https://100-cims.vercel.app/api/",
+      match: process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
       propagatorTypes: ["tracecontext"],
     },
   ],

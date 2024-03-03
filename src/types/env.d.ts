@@ -40,6 +40,7 @@ declare global {
 
       NEXT_PUBLIC_DATADOG_APPLICATION_ID: string;
       NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: string;
+      NEXT_PUBLIC_VERCEL_URL: string;
 
       // make typescript error when using env vars that are not defined in here
       [key: string]: undefined;
