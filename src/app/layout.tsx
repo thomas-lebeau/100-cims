@@ -1,3 +1,5 @@
+import "dd-trace/init";
+
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -22,7 +24,9 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-console.log(process.env);
+console.log(process.env.DD_VERSION);
+console.log(process.env.DD_SERVICE);
+console.log(process.env.DD_SITE);
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
