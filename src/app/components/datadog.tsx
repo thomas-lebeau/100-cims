@@ -1,6 +1,8 @@
 "use client";
 
 import { datadogRum } from "@datadog/browser-rum";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 datadogRum.init({
   applicationId: "e4e89ba2-a49d-4a8d-8383-37184c7719c0",
@@ -24,7 +26,23 @@ datadogRum.init({
   ],
 });
 
-export default function DatadogInit() {
+export default function DatadogRum() {
+  const session = useSession();
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      const { id, name, email } = session.data.user;
+
+      datadogRum.setUser({
+        id,
+        ...(name ? { name } : {}),
+        ...(email ? { email } : {}),
+      });
+    }
+
+    () => datadogRum.clearUser();
+  }, [session]);
+
   // Render nothing - this component is only included so that the init code
   // above will run client-side
   return null;
