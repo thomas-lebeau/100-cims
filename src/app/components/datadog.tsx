@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 datadogRum.init({
-  applicationId: process.env.DATADOG_APPLICATION_ID,
-  clientToken: process.env.DATADOG_CLIENT_TOKEN,
+  applicationId: process.env.NEXT_PUBLIC_DATADOG_APPLICATION_ID,
+  clientToken: process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN,
   site: "datadoghq.eu",
   service: "100-cims",
   env: process.env.NEXT_PUBLIC_VERCEL_ENV,
