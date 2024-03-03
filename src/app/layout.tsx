@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 
 import Providers from "@/components/providers";
 import Nav from "../components/nav/nav";
+import DatadogInit from "./components/datadog";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </Providers>
         </div>
+        <DatadogInit />
         <SpeedInsights debug={false} />
         <Analytics debug={false} />
       </body>
