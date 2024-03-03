@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/cn";
 import Link from "next/link";
+import { Button } from "../ui/button";
 import { UserMenu } from "./user-menu";
 
 export default function Nav({ className }: { className?: string }) {
@@ -10,6 +11,14 @@ export default function Nav({ className }: { className?: string }) {
       <Link href="/" className="text-2xl font-bold mr-auto">
         💯🏔️ 100 cims
       </Link>
+      <Button
+        onClick={() => {
+          throw new Error("Whaaaaaaat!!!");
+        }}
+        className="mr-2"
+      >
+        Booom
+      </Button>
       <UserMenu className="flex ml-auto" />
     </nav>
   );
