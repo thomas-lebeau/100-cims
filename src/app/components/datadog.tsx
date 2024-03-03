@@ -14,7 +14,7 @@ function init() {
     clientToken: process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN,
     site: "datadoghq.eu",
     service: "100-cims",
-    env: process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV,
+    env: process.env.NEXT_PUBLIC_VERCEL_ENV,
     version: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
     sessionSampleRate: 100,
     sessionReplaySampleRate: 20,
