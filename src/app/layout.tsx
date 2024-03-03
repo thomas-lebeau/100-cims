@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 
 import Providers from "@/components/providers";
 import Nav from "../components/nav/nav";
+import DatadogRum from "./components/datadog";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,15 +29,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(inter.className, "h-screen max-h-screen flex flex-col")}
       >
-        <div className="h-screen max-h-screen flex flex-col">
-          <Providers>
+        <Providers>
+          <div className="h-screen max-h-screen flex flex-col">
             <Nav />
 
             {children}
-          </Providers>
-        </div>
-        <SpeedInsights debug={false} />
-        <Analytics debug={false} />
+          </div>
+          <DatadogRum />
+          <SpeedInsights debug={false} />
+          <Analytics debug={false} />
+        </Providers>
       </body>
     </html>
   );
