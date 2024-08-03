@@ -7,7 +7,7 @@
     "postbuild": "datadog-ci sourcemaps upload .next/static --service=100-cims --release-version=$VERCEL_GIT_COMMIT_SHA --minified-path-prefix=/_next/static --repository-url=https://github.com/thomas-lebeau/100-cims",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint -- -f gha",
+    "lint": "next lint -f gha",
     "test": "jest",
     "test:watch": "jest --watch",
     "e2e": "playwright test",
