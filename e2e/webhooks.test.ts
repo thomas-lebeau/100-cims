@@ -36,11 +36,7 @@ test.describe("subscription", () => {
 test.describe("handle incoming event", () => {
   test.describe.configure({ mode: "serial" });
   test.use({
-    extraHTTPHeaders: {
-      "x-await-event-handling": "true",
-      "x-vercel-set-bypass-cookie": "true",
-      "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-    },
+    extraHTTPHeaders: { "x-await-event-handling": "true" },
   });
 
   test.beforeAll(cleanupSyncs);
