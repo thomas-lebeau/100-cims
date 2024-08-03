@@ -13,29 +13,24 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Dashboards
 
 - [Strava](https://www.strava.com/settings/api)
-- [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims)
+- [Supabase](https://supabase.com/dashboard/projects)
 - [Vercel](https://vercel.com/thomas-lebeau/100-cims)
 - [Ngrok](https://dashboard.ngrok.com/tunnels/agents)
 
 ## Database
 
-Database is hosted on [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims).
+Database is hosted on [Supabase](https://supabase.com/dashboard/projects).
 
 ### Update db schema
 
-Updates are done via [Prisma](https://www.prisma.io/). Edit the schema in `prisma/schema.prisma` and run the following commands to apply the changes to dev environement. Changes to production are done via creating deploy requests in [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims/dev).
+Updates are done via [Prisma](https://www.prisma.io/). Edit the schema in `prisma/schema.prisma` and run the following commands to apply the changes.
 
-#### Development
+#### Production
 
 1. Make changes to the schema in `prisma/schema.prisma`
 2. Run `npx prisma db push`
 3. Run `npx prisma generate`
 4. Restart dev server
-
-#### Production
-
-1. Create a deploy request in [Planetscale](https://app.planetscale.com/lebeau-thomas/100-cims/dev)
-2. Deploy it!
 
 ### Seeding
 
