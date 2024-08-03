@@ -132,7 +132,7 @@ export function Marker({
       );
 
       map.on("moveend", (data) => {
-        if (data?.markerId === id) {
+        if ("markerId" in data && data.markerId === id) {
           setOpen(true);
         }
       });
