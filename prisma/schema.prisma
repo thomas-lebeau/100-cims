@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  directUrl    = env("DIRECT_URL")
 }
 
 model Account {
@@ -110,8 +110,7 @@ model Activity {
   Sync            Sync?       @relation(fields: [syncId], references: [id], onDelete: Cascade)
   Ascent          Ascent[]
 
-  @@unique([userId, originType, originId(length: 20)]) // TODO: fix originId field length
-  @@index([userId])
+  @@unique([userId, originType, originId])
   @@index([syncId])
 }
 
@@ -128,7 +127,6 @@ model Ascent {
 
   @@unique([cimId, userId, activityId])
   @@index([userId])
-  @@index([cimId])
   @@index([activityId])
 }
 

@@ -14,6 +14,10 @@ export default defineConfig({
   use: {
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
     trace: isCI ? "on-first-retry" : "retain-on-failure",
+    extraHTTPHeaders: {
+      "x-vercel-set-bypass-cookie": "true",
+      "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+    },
   },
   projects: [
     { name: "setup", testMatch: /.*\.setup\.ts/ },
