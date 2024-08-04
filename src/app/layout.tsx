@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { VercelToolbar } from "@vercel/toolbar/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <DatadogRum />
           <SpeedInsights debug={false} />
           <Analytics debug={false} />
+          {process.env.NODE_ENV === "development" && <VercelToolbar />}
         </Providers>
       </body>
     </html>
