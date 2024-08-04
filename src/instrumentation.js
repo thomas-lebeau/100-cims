@@ -7,7 +7,8 @@ export function register() {
       env: process.env.VERCEL_ENV,
       version: process.env.VERCEL_GIT_COMMIT_SHA,
       service: "100-cims",
-
+      debug: true,
+      logInjection: true,
       runtimeMetrics: true,
       startupLogs: true,
     });

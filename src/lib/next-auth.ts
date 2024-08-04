@@ -10,6 +10,7 @@ import { AuthOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
 import { getAccount, isStravaAccount } from "./db/accounts";
 import { STRAVA_BASE_URL } from "./strava";
+import { tracer } from "dd-trace";
 
 const googleProvider = GoogleProvider({
   clientId: process.env.GOOGLE_CLIENT_ID,
@@ -91,6 +92,12 @@ export const authOptions: AuthOptions = {
         session.user.name = user.name;
         session.user.email = user.email;
         session.user.image = user.image;
+
+        tracer.setUser({
+          id: user.id,
+          email: user.email,
+          name: user.name ?? undefined,
+        });
       }
 
       return session;
