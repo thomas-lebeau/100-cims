@@ -24,10 +24,9 @@ function init() {
     defaultPrivacyLevel: "mask-user-input",
 
     allowedTracingUrls: [
-      {
-        match: "https://" + process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
-        propagatorTypes: ["tracecontext"],
-      },
+      getMatchOptions(process.env.NEXT_PUBLIC_VERCEL_URL),
+      getMatchOptions(process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL),
+      getMatchOptions(process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL),
     ],
   });
 
@@ -35,6 +34,13 @@ function init() {
     "prNumber",
     process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID
   );
+}
+
+function getMatchOptions(url: string) {
+  return {
+    match: "https://" + url + "/api/",
+    propagatorTypes: ["tracecontext" as const],
+  };
 }
 
 export default function DatadogRum() {
