@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { USER } from "./test-users";
+import { USER } from "./utils/test-users";
 
 test("has user menu", async ({ page }) => {
   await page.goto("/");
