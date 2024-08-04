@@ -1,7 +1,7 @@
 import { getActivities } from "@/lib/db/activities";
-import { prisma } from "@/lib/prisma";
 import { expect, test } from "playwright/test";
-import { USER } from "./test-users";
+import { USER } from "./utils/test-users";
+import { cleanupSyncs } from "./utils/db";
 
 const WEBHOOK_ENDPOINT = "/api/strava/webhook";
 
@@ -129,11 +129,3 @@ test.describe("handle incoming event", () => {
     expect(after).toBeUndefined();
   });
 });
-
-function cleanupSyncs() {
-  return prisma.sync.deleteMany({
-    where: {
-      userId: USER.userId,
-    },
-  });
-}

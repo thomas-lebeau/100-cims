@@ -1,7 +1,7 @@
 import { BrowserContextOptions, expect, test as setup } from "@playwright/test";
 import fs from "fs";
 import { AUTH_FILE } from "../playwright.config";
-import { USER } from "./test-users";
+import { USER } from "./utils/test-users";
 
 type StorageState = BrowserContextOptions["storageState"];
 

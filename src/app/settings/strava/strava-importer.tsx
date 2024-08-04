@@ -53,7 +53,7 @@ export default function StravaImporter() {
     isFetching,
   } = useStravaActivities({
     since: lastSync?.endAt,
-    enabled: isFetchingLastSync,
+    enabled: !isFetchingLastSync,
   });
 
   const newActivities = useMemo(
@@ -77,7 +77,7 @@ export default function StravaImporter() {
       {isFetching ? (
         <p>🔄 Downloading activities...({stravaActivities.length})</p>
       ) : (
-        <p>
+        <p data-testid="strava-importer-status">
           ✅ found {newAscents.length} activities (of {stravaActivities.length})
         </p>
       )}
