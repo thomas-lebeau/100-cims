@@ -1,10 +1,7 @@
-import { getActivities as _getActivites } from "@/lib/db/activities";
+import { getActivities } from "@/lib/db/activities";
 import getServerSession from "@/lib/get-server-session";
-import tracer from "dd-trace";
 import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
-
-const getActivities = tracer.wrap("getActivities", _getActivites);
 
 export async function GET() {
   try {

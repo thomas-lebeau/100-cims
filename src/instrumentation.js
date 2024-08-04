@@ -11,6 +11,7 @@ export function register() {
       logInjection: true,
       runtimeMetrics: true,
       startupLogs: true,
+      sampleRate: 1,
     });
   }
 }
