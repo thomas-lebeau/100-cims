@@ -28,6 +28,13 @@ function init() {
         match: "https://" + process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
         propagatorTypes: ["tracecontext"],
       },
+      {
+        match:
+          "https://" +
+          process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL +
+          "/api/",
+        propagatorTypes: ["tracecontext"],
+      },
     ],
   });
 
