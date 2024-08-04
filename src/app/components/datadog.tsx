@@ -25,7 +25,7 @@ function init() {
 
     allowedTracingUrls: [
       {
-        match: process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
+        match: "https://" + process.env.NEXT_PUBLIC_VERCEL_URL + "/api/",
         propagatorTypes: ["tracecontext"],
       },
     ],

@@ -22,10 +22,6 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-console.log("DD_SITE", process.env.DD_SITE);
-console.log("DD_SERVICE", process.env.DD_SERVICE);
-console.log("NEXT_RUNTIME", process.env.NEXT_RUNTIME);
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-screen">
