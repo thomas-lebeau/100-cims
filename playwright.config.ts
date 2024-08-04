@@ -15,6 +15,7 @@ export default defineConfig({
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
     trace: isCI ? "on-first-retry" : "retain-on-failure",
     extraHTTPHeaders: {
+      "x-vercel-skip-toolbar": "true",
       "x-vercel-set-bypass-cookie": "true",
       "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
     },
