@@ -1,0 +1,17 @@
+name: Auto merge
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'thomas-lebeau/100-cims'
+    steps:
+      - name: auto-merge
+        run: gh pr merge --auto --squash
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
