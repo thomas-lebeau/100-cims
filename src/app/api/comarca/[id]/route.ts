@@ -16,7 +16,8 @@ export async function GET(
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
-    const result = routeContextSchema.safeParse(context);
+    const result = routeContextSchema.safeParse(/* @next-codemod-error 'context' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+    context);
 
     if (!result.success) {
       return NextResponse.json(result.error.issues, { status: 422 });

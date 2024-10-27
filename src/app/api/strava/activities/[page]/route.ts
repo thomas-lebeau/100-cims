@@ -40,7 +40,8 @@ export async function GET(
 
     serverTiming.start("get");
 
-    const safeContext = routeContextSchema.safeParse(context);
+    const safeContext = routeContextSchema.safeParse(/* @next-codemod-error 'context' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+    context);
 
     if (!safeContext.success) {
       return NextResponse.json(safeContext.error.issues, { status: 422 });
