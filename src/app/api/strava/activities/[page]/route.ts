@@ -10,9 +10,11 @@ import { serializeError } from "serialize-error";
 import { z } from "zod";
 
 const routeContextSchema = z.object({
-  params: z.object({
-    page: z.string(),
-  }),
+  params: z.promise(
+    z.object({
+      page: z.string(),
+    })
+  ),
 });
 
 const urlSearchParamsSchema = z.object({
@@ -46,7 +48,7 @@ export async function GET(
       return NextResponse.json(safeContext.error.issues, { status: 422 });
     }
 
-    const pageId = safeContext.data.params.page ?? 1;
+    const pageId = (await safeContext.data.params).page ?? 1;
 
     const safeUrlSearchParams = urlSearchParamsSchema.safeParse(
       Object.fromEntries(new URL(req.url).searchParams.entries())
