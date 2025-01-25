@@ -1,6 +1,6 @@
 "use client";
 
-import mapboxgl from "mapbox-gl";
+import type { Map as MapboxMap } from "mapbox-gl";
 import { createContext, type ReactNode } from "react";
 
 import { useMap } from "./use-map";
@@ -13,7 +13,7 @@ export type MapProps = {
   geoJsonUrl: string | undefined;
 };
 
-const mapContext = createContext<mapboxgl.Map | null>(null);
+const mapContext = createContext<MapboxMap | null>(null);
 
 export function Map({ className, children, geoJsonUrl }: MapProps) {
   const { map, mapContainer } = useMap(geoJsonUrl);
