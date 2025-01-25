@@ -1,6 +1,6 @@
 "use client";
 
-import mapboxgl from "mapbox-gl";
+import { Marker as MapBoxMarker } from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 
 import type { CimWithComarca as Cim } from "@/lib/db/cims";
@@ -34,14 +34,14 @@ export function Marker({
   // using `useState` as a Lazy initial ref
   const [markerContainer] = useState(() => document?.createElement("div"));
   const [markerRoot] = useState(() => createRoot(markerContainer));
-  const markerRef = useRef<mapboxgl.Marker | null>(null);
+  const markerRef = useRef<MapBoxMarker | null>(null);
   const isMounted = useRef(false);
 
   useEffect(
     function setup() {
       if (!map) return;
 
-      const marker = new mapboxgl.Marker(markerContainer)
+      const marker = new MapBoxMarker({ element: markerContainer })
         .setLngLat([longitude, latitude])
         .addTo(map);
 
