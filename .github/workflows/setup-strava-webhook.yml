@@ -9,7 +9,6 @@ jobs:
       action:
         description: "Action to perform: 'view', 'create' or 'delete' subscription"
         default: "view"
-        required: true
 
     steps:
       - name: view subscription
