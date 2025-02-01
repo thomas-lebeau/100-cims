@@ -1,7 +1,7 @@
 import { BrowserContextOptions, expect, test as setup } from "@playwright/test";
 import fs from "fs";
 import { AUTH_FILE } from "../playwright.config";
-import { USER } from "./utils/test-users";
+import { TEST_USER_EMAIL } from "@/lib/playwright";
 
 type StorageState = BrowserContextOptions["storageState"];
 
@@ -32,7 +32,7 @@ setup("authenticate", async ({ page }) => {
   }
 
   await page.getByRole("link", { name: "Login" }).click();
-  await page.getByRole("textbox", { name: "Email" }).fill(USER.email);
+  await page.getByRole("textbox", { name: "Email" }).fill(TEST_USER_EMAIL);
   await page.getByRole("button", { name: "Sign in with Email" }).click();
   await page.goto("https://ethereal.email/login");
   await page

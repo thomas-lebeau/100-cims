@@ -1,12 +1,15 @@
-import { expect, test } from "@playwright/test";
-import { USER } from "./utils/test-users";
+import { expect, test } from "@/lib/playwright";
 
-test("has user menu", async ({ page }) => {
+test("has user menu", async ({ page, testUser }) => {
   await page.goto("/");
 
   await page.locator('button[name="User menu"]').click();
 
-  await expect(page.getByText(USER.email)).toBeVisible();
+  if (!testUser.email) {
+    fail("User email not found");
+  }
+
+  await expect(page.getByText(testUser.email)).toBeVisible();
 });
 
 test("Can filter by comarca", async ({ page }) => {

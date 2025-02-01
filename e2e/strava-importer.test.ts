@@ -1,8 +1,8 @@
-import { expect, test } from "@playwright/test";
-import { cleanupSyncs } from "./utils/db";
+import { expect, test } from "@/lib/playwright";
+import { cleanupSyncs } from "@/lib/db/sync";
 
-test.beforeAll(cleanupSyncs);
-test.afterAll(cleanupSyncs);
+test.beforeAll(({ testUser }) => cleanupSyncs(testUser.id));
+test.afterAll(({ testUser }) => cleanupSyncs(testUser.id));
 
 test("imports existing strava activities", async ({ page }) => {
   await page.goto("/settings/strava");

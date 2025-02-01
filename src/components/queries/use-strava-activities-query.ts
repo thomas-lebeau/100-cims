@@ -79,5 +79,5 @@ export function useStravaActivities(
     [isFetchingNextPage, hasNextPage, fetchNextPage]
   );
 
-  return { data: data.pages.flat(), error, isFetching };
+  return { data: data?.pages.flat() ?? [], error, isFetching };
 }

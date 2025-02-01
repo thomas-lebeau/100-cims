@@ -5423,15 +5423,10 @@
       "essencial": true
     }
   ],
-  "account": [
+  "user": [
     {
-      "type": "oauth",
-      "provider": "strava",
-      "providerAccountId": 130099507,
-      "user": {
-        "name": "John Doe",
-        "email": "hello@e2e.com"
-      }
+      "name": "John Doe",
+      "email": "hello@e2e.com"
     }
   ]
 }

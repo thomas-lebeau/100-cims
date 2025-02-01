@@ -54,6 +54,14 @@ export async function addSync(
   });
 }
 
+export function cleanupSyncs(userId: string) {
+  return prisma.sync.deleteMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 export type Sync = Awaited<ReturnType<typeof getLastSync>>;
 
 export const syncSchema = z.object({
