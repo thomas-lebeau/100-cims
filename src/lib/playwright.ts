@@ -6,7 +6,9 @@ export { expect } from "@playwright/test";
 export const TEST_USER_EMAIL = "hello@e2e.com";
 
 export const test = base.extend<{
-  testUser: NonNullable<Awaited<ReturnType<typeof getUser>>>;
+  testUser: NonNullable<
+    Awaited<ReturnType<typeof getUser>> & { email: string }
+  >;
 }>({
   testUser: async ({}, use) => {
     const testUser = await getUser(TEST_USER_EMAIL);
@@ -15,6 +17,6 @@ export const test = base.extend<{
       throw new Error(`User with email ${TEST_USER_EMAIL} not found`);
     }
 
-    await use(testUser);
+    await use({ ...testUser, email: TEST_USER_EMAIL });
   },
 });

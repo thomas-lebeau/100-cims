@@ -5,10 +5,6 @@ test("has user menu", async ({ page, testUser }) => {
 
   await page.locator('button[name="User menu"]').click();
 
-  if (!testUser.email) {
-    fail("User email not found");
-  }
-
   await expect(page.getByText(testUser.email)).toBeVisible();
 });
 
