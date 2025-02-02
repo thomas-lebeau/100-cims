@@ -71,6 +71,9 @@ if (process.env.EMAIL_SERVER_HOST) {
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: providers,
+  pages: {
+    verifyRequest: "/verify-request",
+  },
   callbacks: {
     async session({ session, user }) {
       const [account] = await getAccount(user.id, "strava");
