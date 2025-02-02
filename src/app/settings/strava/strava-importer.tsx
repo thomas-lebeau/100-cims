@@ -62,7 +62,9 @@ export default function StravaImporter() {
   );
   const newAscents = Object.values(newActivities);
 
-  if (error) return <p>Error!!!</p>;
+  if (error)
+    // TODO: If strava auth error, add link to connect strava account
+    return <p>{error.message}</p>;
   if (!stravaActivities) return null;
 
   return (

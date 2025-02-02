@@ -73,6 +73,15 @@ export async function GET(
       },
     });
 
+    if (!res.ok) {
+      return NextResponse.json(
+        {
+          error: `Failed to fetch strava activities. ${res.statusText}`,
+        },
+        { status: res.status }
+      );
+    }
+
     const safeActivity = stravaActivitySchema
       .array()
       .safeParse(await res.json());

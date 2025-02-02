@@ -4,13 +4,24 @@
     "es2020": true
   },
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "no-empty": ["error", { "allowEmptyCatch": true }]
   },
   "overrides": [
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "env": {
         "jest": true
+      }
+    },
+    {
+      "files": ["**/e2e", "**/playwright.ts"],
+      "rules": {
+        "no-empty-pattern": [
+          "error",
+          { "allowObjectPatternsAsParameters": true }
+        ],
+        "react-hooks/rules-of-hooks": "off"
       }
     }
   ]
