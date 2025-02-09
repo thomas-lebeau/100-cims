@@ -47,6 +47,7 @@ export default function StravaImporter() {
   const { data: ascents } = useAscentsQuery();
   const { data: activities } = useActivitiesQuery();
   const { isPending, mutate } = useSyncMutation();
+
   const {
     data: stravaActivities,
     error,

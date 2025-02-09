@@ -1,4 +1,6 @@
 import { Separator } from "@/components/ui/separator";
+import AscentList from "./ascent-list";
+import AscentStats from "./ascent-stats";
 
 export default async function SettingAcccountPage() {
   return (
@@ -9,7 +11,11 @@ export default async function SettingAcccountPage() {
           This is how others will see you on the site.
         </p>
       </div>
+
       <Separator />
+
+      <AscentStats />
+      <AscentList />
     </div>
   );
 }
