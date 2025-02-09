@@ -16,6 +16,7 @@ import { maybeRefreshToken } from "@/lib/next-auth";
 import { STRAVA_BASE_URL } from "@/lib/strava";
 import zfetch from "@/lib/zfetch";
 import { serializeError } from "serialize-error";
+import { logger } from "@/lib/logger";
 
 const eventBodySchema = z.object({
   aspect_type: z.union([
@@ -45,13 +46,12 @@ const eventBodySchema = z.object({
 
 type WebhookEvent = z.infer<typeof eventBodySchema>;
 
-/* eslint-disable no-console */
 async function handleEvent(req: NextRequest) {
   try {
     const safeBody = eventBodySchema.safeParse(await req.json());
 
     if (!safeBody.success) {
-      console.error("[handleEvent]", safeBody.error.issues);
+      logger.error("[handleEvent]", safeBody.error.issues);
 
       return;
     }
@@ -61,7 +61,7 @@ async function handleEvent(req: NextRequest) {
     if (
       event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
     ) {
-      console.error("[handleEvent]", "Unknown subscription_id", event);
+      logger.error("[handleEvent]", "Unknown subscription_id", event);
     }
 
     // TODO: handle athlete events?
@@ -71,7 +71,7 @@ async function handleEvent(req: NextRequest) {
     const account = await getAccountIdByStravaId(event.owner_id);
 
     if (!account) {
-      console.error("[handleEvent]", "No account found", event.owner_id);
+      logger.error("[handleEvent]", "No account found", event.owner_id);
       return;
     }
 
@@ -79,31 +79,30 @@ async function handleEvent(req: NextRequest) {
 
     if (event.aspect_type === "create") {
       const data = await handleCreateActivityEvent(account, event);
-      console.log("[handleCreateActivityEvent]", data);
+      logger.info("[handleCreateActivityEvent]", data);
 
       return;
     }
 
     if (event.aspect_type === "update") {
       const data = await handleUpadeActivityEvent(account, event);
-      console.log("[handleUpadeActivityEvent]", data);
+      logger.info("[handleUpadeActivityEvent]", data);
 
       return;
     }
 
     if (event.aspect_type === "delete") {
       const data = await handleDeleteActivityEvent(account, event);
-      console.log("[handleDeleteActivityEvent]", data);
+      logger.info("[handleDeleteActivityEvent]", data);
 
       return;
     }
 
-    console.error("[handleEvent]", "Unknown event_type", event.aspect_type);
+    logger.error("[handleEvent]", "Unknown event_type", event.aspect_type);
   } catch (error) {
-    console.error("[handleEvent]", serializeError(error));
+    logger.error("[handleEvent]", serializeError(error));
   }
 }
-/* eslint-enable */
 
 async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   const updates: Partial<
