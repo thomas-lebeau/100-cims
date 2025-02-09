@@ -61,7 +61,7 @@ export const stravaActivitySchema = z
 export type StravaActivity = z.infer<typeof stravaActivitySchema>;
 
 // Make sure the schema is in sync with prisma type
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type test = Expect<Extends<StravaActivity, ActivityInput>>; // TODO: move to a test file
 
 export async function getActivities(userId: string) {

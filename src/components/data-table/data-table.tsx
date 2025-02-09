@@ -24,11 +24,11 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   className?: string;
-  meta: TableMeta<TData> & {
-    onClickClimb: (cimId: string, action: "ADD" | "REMOVE") => void; // eslint-disable-line no-unused-vars
-    onClickComarca: (comarcaId: string) => void; // eslint-disable-line no-unused-vars
+  meta?: TableMeta<TData> & {
+    onClickClimb?: (cimId: string, action: "ADD" | "REMOVE") => void;
+    onClickComarca?: (comarcaId: string) => void;
   };
-  onClickRow?: (row: TData) => void; // eslint-disable-line no-unused-vars
+  onClickRow?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({

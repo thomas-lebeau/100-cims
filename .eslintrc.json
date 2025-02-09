@@ -1,5 +1,10 @@
 {
-  "extends": ["next", "eslint:recommended", "next/core-web-vitals"],
+  "extends": [
+    "next",
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "env": {
     "es2020": true
   },
