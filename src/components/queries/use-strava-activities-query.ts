@@ -25,7 +25,7 @@ const apiResponseSchema = z
 
 function queryFn({ pageParam, meta }: { pageParam: unknown; meta: unknown }) {
   let url = "/api/strava/activities/" + pageParam;
-  let _meta: Meta = meta as Meta;
+  const _meta: Meta = meta as Meta;
 
   if (_meta.since) {
     url += "?since=" + _meta.since;

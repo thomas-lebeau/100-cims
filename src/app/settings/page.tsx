@@ -1,8 +1,24 @@
 import { Separator } from "@/components/ui/separator";
 import AscentList from "./ascent-list";
 import AscentStats from "./ascent-stats";
-
+import { getAscents } from "@/lib/db/ascent";
+import { getQueryClient } from "@/components/hydrate";
+import { getLastSync } from "@/lib/db/sync";
+import { getCims } from "@/lib/db/cims";
+import getServerSession from "@/lib/get-server-session";
+import { getActivities } from "@/lib/db/activities";
+import Hydrate from "@/components/hydrate";
 export default async function SettingAcccountPage() {
+  const session = await getServerSession();
+
+  if (!session) return null; // TODO guard
+  const userId = session.user.id;
+
+  getQueryClient().setQueryData(["cims", false], await getCims());
+  getQueryClient().setQueryData(["last-sync"], await getLastSync(userId));
+  getQueryClient().setQueryData(["ascents"], await getAscents(userId));
+  getQueryClient().setQueryData(["activities"], await getActivities(userId));
+
   return (
     <div className="space-y-6">
       <div>
@@ -15,7 +31,10 @@ export default async function SettingAcccountPage() {
       <Separator />
 
       <AscentStats />
-      <AscentList />
+
+      <Hydrate>
+        <AscentList />
+      </Hydrate>
     </div>
   );
 }

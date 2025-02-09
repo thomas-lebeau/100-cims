@@ -1,76 +1,47 @@
-import Link from "next/link";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { ExternalLink, Sparkles } from "lucide-react";
-import { getAscents } from "@/lib/db/ascent";
-import { getCims } from "@/lib/db/cims";
-import { getActivities } from "@/lib/db/activities";
-import getServerSession from "@/lib/get-server-session";
+"use client";
 
-export default async function AscentList() {
-  const session = await getServerSession();
-  if (!session) return null; // TODO guard
+import { DataTable } from "@/components/data-table/data-table";
+import { columns } from "./columns";
+import { useActivitiesQuery } from "@/components/queries/use-activities-query";
+import { useAscentsQuery } from "@/components/queries/use-ascents-query";
+import { useCimsQuery } from "@/components/queries/use-cims-query";
 
-  const ascents = await getAscents(session.user.id);
-  const cims = await getCims();
-  const activities = await getActivities(session.user.id);
+export default function AscentList() {
+  const { data: cims } = useCimsQuery(true);
+  const { data: ascents } = useAscentsQuery();
+  const { data: activities } = useActivitiesQuery();
 
   if (!ascents || !cims || !activities) return null;
+
+  const data = ascents
+    .map((ascent) => {
+      const cim = cims.find((cim) => cim.id === ascent.cimId);
+      const activity = activities.find((a) => a.id === ascent.activityId);
+
+      if (!cim || !activity) return null;
+
+      return {
+        id: ascent.id,
+        cimName: cim.name,
+        cimAltitude: cim.altitude,
+        activityName: activity.name,
+        activityId: activity.originId,
+        date: new Date(activity.startDate),
+        isEssencial: cim.essencial,
+        comarcas: cim.comarcas,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null);
+
   return (
     <>
       <h3 className="mt-8 mb-4 text-lg font-medium">Your ascents</h3>
       <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Peak</TableHead>
-              <TableHead>Activity</TableHead>
-              <TableHead>Altitude</TableHead>
-              <TableHead>Date</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {ascents?.map((ascent) => {
-              const cim = cims.find((cim) => cim.id === ascent.cimId);
-              const activity = activities?.find(
-                (a) => a.id === ascent.activityId
-              );
-
-              if (!cim || !activity) return null;
-
-              return (
-                <TableRow key={ascent.id}>
-                  <TableCell>
-                    {!cim.essencial && (
-                      <Sparkles className="h-4 w-4 text-yellow-500" />
-                    )}
-                    {""}
-                    {cim.name}
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      href={`https://www.strava.com/activities/${activity.originId}`}
-                      target="_blank"
-                    >
-                      {activity.name}{" "}
-                      <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                    </Link>
-                  </TableCell>
-                  <TableCell>{cim.altitude}m</TableCell>
-                  <TableCell>
-                    {new Date(ascent.createdAt).toLocaleDateString()}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <DataTable
+          columns={columns}
+          data={data}
+          meta={{ onClickClimb: () => {}, onClickComarca: () => {} }}
+        />
       </div>
     </>
   );

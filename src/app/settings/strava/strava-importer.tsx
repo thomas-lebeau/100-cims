@@ -23,7 +23,7 @@ type Matches = Record<
 >;
 
 function filterActivities(cims: Cim[], activities: StravaActivity[]) {
-  let matches: Matches = {};
+  const matches: Matches = {};
 
   for (const activity of activities) {
     const cimIds = getCimForPolyline(
