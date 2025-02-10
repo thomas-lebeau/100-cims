@@ -40,7 +40,9 @@ export default function AscentList() {
         <DataTable
           columns={columns}
           data={data}
-          meta={{ onClickClimb: () => {}, onClickComarca: () => {} }}
+          initialState={{
+            sorting: [{ id: "date", desc: true }],
+          }}
         />
       </div>
     </>
