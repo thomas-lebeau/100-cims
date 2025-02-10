@@ -10,7 +10,10 @@ import { AuthOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
 import { getAccount, isStravaAccount } from "./db/accounts";
 import { STRAVA_BASE_URL } from "./strava";
-import { logger } from "./logger";
+import { createLogger } from "./logger";
+import { serializeError } from "serialize-error";
+
+const logger = createLogger("next-auth");
 
 const googleProvider = GoogleProvider({
   clientId: process.env.GOOGLE_CLIENT_ID,
@@ -83,7 +86,7 @@ export const authOptions: AuthOptions = {
         try {
           await maybeRefreshToken(account);
         } catch (error) {
-          logger.error("Error refreshing access token", error);
+          logger.error("Error refreshing access token", serializeError(error));
           // TODO: The error property will be used client-side to handle the refresh token error
           session.error = "RefreshAccessTokenError";
         }

@@ -16,7 +16,9 @@ import { maybeRefreshToken } from "@/lib/next-auth";
 import { STRAVA_BASE_URL } from "@/lib/strava";
 import zfetch from "@/lib/zfetch";
 import { serializeError } from "serialize-error";
-import { logger } from "@/lib/logger";
+import { createLogger } from "@/lib/logger";
+
+const logger = createLogger("strava-webhook");
 
 const eventBodySchema = z.object({
   aspect_type: z.union([
@@ -51,7 +53,7 @@ async function handleEvent(req: NextRequest) {
     const safeBody = eventBodySchema.safeParse(await req.json());
 
     if (!safeBody.success) {
-      logger.error("[handleEvent]", safeBody.error.issues);
+      logger.error("Invalid event body", safeBody.error.issues);
 
       return;
     }
@@ -61,7 +63,9 @@ async function handleEvent(req: NextRequest) {
     if (
       event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
     ) {
-      logger.error("[handleEvent]", "Unknown subscription_id", event);
+      logger.error("Unknown subscription_id");
+
+      return;
     }
 
     // TODO: handle athlete events?
@@ -71,36 +75,25 @@ async function handleEvent(req: NextRequest) {
     const account = await getAccountIdByStravaId(event.owner_id);
 
     if (!account) {
-      logger.error("[handleEvent]", "No account found", event.owner_id);
+      logger.error("No account found");
+
       return;
     }
 
     await maybeRefreshToken(account);
 
-    if (event.aspect_type === "create") {
-      const data = await handleCreateActivityEvent(account, event);
-      logger.info("[handleCreateActivityEvent]", data);
-
-      return;
+    switch (event.aspect_type) {
+      case "create":
+        return await handleCreateActivityEvent(account, event);
+      case "update":
+        return await handleUpadeActivityEvent(account, event);
+      case "delete":
+        return await handleDeleteActivityEvent(account, event);
+      default:
+        logger.error("Unknown event_type", { event_type: event.aspect_type });
     }
-
-    if (event.aspect_type === "update") {
-      const data = await handleUpadeActivityEvent(account, event);
-      logger.info("[handleUpadeActivityEvent]", data);
-
-      return;
-    }
-
-    if (event.aspect_type === "delete") {
-      const data = await handleDeleteActivityEvent(account, event);
-      logger.info("[handleDeleteActivityEvent]", data);
-
-      return;
-    }
-
-    logger.error("[handleEvent]", "Unknown event_type", event.aspect_type);
   } catch (error) {
-    logger.error("[handleEvent]", serializeError(error));
+    logger.error("Unknown error", serializeError(error));
   }
 }
 
@@ -126,14 +119,37 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
     updates.sportType = event.updates.type;
   }
 
-  return updateStravaActivity(account.userId, event.object_id, updates);
+  const updatedActivity = await updateStravaActivity(
+    account.userId,
+    event.object_id,
+    updates
+  );
+
+  if (!updatedActivity) {
+    logger.error("No activity updated", { userId: account.userId });
+
+    return;
+  }
+
+  logger.info("Activity updated", { userId: account.userId });
 }
 
 async function handleDeleteActivityEvent(
   account: Account,
   event: WebhookEvent
 ) {
-  return deleteStravaActivity(account.userId, event.object_id);
+  const deletedActivity = await deleteStravaActivity(
+    account.userId,
+    event.object_id
+  );
+
+  if (!deletedActivity) {
+    logger.error("No activity deleted", { userId: account.userId });
+
+    return;
+  }
+
+  logger.info("Activity deleted", { userId: account.userId });
 }
 
 async function handleCreateActivityEvent(
@@ -154,7 +170,9 @@ async function handleCreateActivityEvent(
   const cimIds = getCimForPolyline(cims, activity.summaryPolyline);
 
   if (cimIds.length === 0) {
-    return ["no cims found", event];
+    logger.info("No cims found", { userId: account.userId });
+
+    return;
   }
 
   const syncedData = await addSync("STRAVA_WEBHOOK", account.userId, [
@@ -164,15 +182,27 @@ async function handleCreateActivityEvent(
   const activityId = syncedData.activities[0]?.id;
 
   if (!activityId) {
-    return ["no activity created", event];
+    logger.error("No activity created", { userId: account.userId });
+
+    return;
   }
 
-  const ascendedData = await addAscents(
+  const ascents = await addAscents(
     account.userId,
     cimIds.map((cimId) => ({ cimId, activityId }))
   );
 
-  return [syncedData, ascendedData];
+  if (ascents.count === 0) {
+    logger.error("No ascents created", { userId: account.userId });
+
+    return;
+  }
+
+  logger.info("Activity created", {
+    userId: account.userId,
+    ascentsCount: ascents.count,
+    activityId,
+  });
 }
 
 export async function POST(req: NextRequest) {
