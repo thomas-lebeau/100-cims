@@ -29,6 +29,9 @@ interface DataTableProps<TData, TValue> {
     onClickComarca?: (comarcaId: string) => void;
   };
   onClickRow?: (row: TData) => void;
+  initialState?: {
+    sorting: SortingState;
+  };
 }
 
 export function DataTable<TData, TValue>({
@@ -37,6 +40,7 @@ export function DataTable<TData, TValue>({
   className,
   onClickRow,
   meta,
+  initialState,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -49,6 +53,7 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
     },
+    initialState,
     meta,
   });
 

@@ -20,16 +20,15 @@ type Ascent = {
 
 export const columns: ColumnDef<Ascent>[] = [
   {
-    id: "essential",
+    accessorKey: "isEssencial",
     header: ({ column }) => <HeaderCell column={column} />,
-    cell: ({ row }) => (
+    cell: ({ cell }) => (
       <div className="flex items-center justify-center">
-        {row.original.isEssencial && (
+        {cell.getValue<boolean>() && (
           <Sparkles className="h-4 w-4 text-yellow-500" />
         )}
       </div>
     ),
-    enableSorting: true,
   },
   {
     accessorKey: "cimName",
@@ -39,26 +38,9 @@ export const columns: ColumnDef<Ascent>[] = [
   {
     accessorKey: "comarcas",
     header: ({ column }) => <HeaderCell column={column}>Comarca</HeaderCell>,
-    cell: ({ row, table }) => {
+    cell: ({ row }) => {
       return row.getValue<Comarca[]>("comarcas")?.map((comarca) => (
-        <Badge
-          asChild
-          className="m-1"
-          variant="secondary"
-          key={comarca.codigo}
-          onClick={(e) => {
-            e.stopPropagation();
-
-            const meta = table.options.meta;
-            if (
-              meta &&
-              "onClickComarca" in meta &&
-              typeof meta.onClickComarca === "function"
-            ) {
-              meta.onClickComarca(comarca.codigo);
-            }
-          }}
-        >
+        <Badge asChild className="m-1" variant="secondary" key={comarca.codigo}>
           <button>{comarca.name}</button>
         </Badge>
       ));
