@@ -231,12 +231,17 @@ const urlSearchParamsSchema = z.object({
 });
 
 export async function GET(req: NextRequest) {
+  const logger = createLogger("strava-webhook-subscription");
   try {
     const safeUrlSearchParams = urlSearchParamsSchema.safeParse(
       Object.fromEntries(new URL(req.url).searchParams.entries())
     );
 
     if (!safeUrlSearchParams.success) {
+      logger.error(
+        "Invalid url search params",
+        safeUrlSearchParams.error.issues
+      );
       return NextResponse.json(safeUrlSearchParams.error.issues, {
         status: 422,
       });
@@ -246,14 +251,22 @@ export async function GET(req: NextRequest) {
       safeUrlSearchParams.data["hub.verify_token"] !==
       process.env.STRAVA_VERIFY_TOKEN
     ) {
+      logger.error("Invalid verify token", {
+        verifyToken: safeUrlSearchParams.data["hub.verify_token"],
+      });
+
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
+
+    logger.info("Valid verify token");
 
     return NextResponse.json(
       { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },
       { status: 200 }
     );
   } catch (error) {
+    logger.error("Unknown error", serializeError(error));
+
     return NextResponse.json(serializeError(error), { status: 500 });
   }
 }
