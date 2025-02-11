@@ -96,7 +96,7 @@ curl -X POST https://www.strava.com/api/v3/push_subscriptions \
     -F client_id=${STRAVA_CLIENT_ID} \
     -F client_secret=${STRAVA_CLIENT_SECRET} \
     -F verify_token=${STRAVA_VERIFY_TOKEN} \
-    -F callback_url=https://100cims.vercel.app/api/strava/webhook
+    -F callback_url=https://100-cims.vercel.app/api/strava/webhook
 ```
 
 </details>
