@@ -42,6 +42,7 @@ declare global {
       NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: string;
       DATADOG_API_KEY: string;
 
+      NEXT_PUBLIC_VERCEL_ENV: string;
       NEXT_PUBLIC_VERCEL_URL: string;
       NEXT_PUBLIC_VERCEL_BRANCH_URL: string;
       NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL: string;
