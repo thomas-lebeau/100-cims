@@ -5,17 +5,17 @@ import {
 } from "winston";
 
 const DATADOG_API_KEY = process.env.DATADOG_API_KEY;
-const APPLICATION_NAME = "100-cims";
+const SERVICE = "100-cims";
 
 const logger = createWinstonLogger({
   level: "info",
   exitOnError: false,
   format: format.json(),
-  defaultMeta: { env: process.env.NODE_ENV },
+  defaultMeta: { env: process.env.NEXT_PUBLIC_VERCEL_ENV },
   transports: [
     new transports.Http({
       host: "http-intake.logs.datadoghq.eu",
-      path: `/api/v2/logs?dd-api-key=${DATADOG_API_KEY}&ddsource=nodejs&service=${APPLICATION_NAME}`,
+      path: `/api/v2/logs?dd-api-key=${DATADOG_API_KEY}&ddsource=nodejs&service=${SERVICE}`,
       ssl: true,
     }),
     new transports.Console({

@@ -69,7 +69,11 @@ async function handleEvent(req: NextRequest) {
     }
 
     // TODO: handle athlete events?
-    if (event.object_type !== "activity") return;
+    if (event.object_type !== "activity") {
+      logger.info("Unknown object_type", { object_type: event.object_type });
+
+      return;
+    }
 
     // TODO: should this use the strava app admin token instead?
     const account = await getAccountIdByStravaId(event.owner_id);
