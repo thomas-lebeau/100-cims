@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { z } from "zod";
 
 import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
@@ -221,8 +222,9 @@ export async function POST(req: NextRequest) {
   // it should do so asynchronously.
   if (awaitEventHandling === "true") {
     await handleEvent(req);
+    logger.end();
   } else {
-    handleEvent(req);
+    waitUntil(handleEvent(req).then(() => logger.end()));
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
@@ -246,6 +248,8 @@ export async function GET(req: NextRequest) {
         "Invalid url search params",
         safeUrlSearchParams.error.issues
       );
+      logger.end();
+
       return NextResponse.json(safeUrlSearchParams.error.issues, {
         status: 422,
       });
@@ -258,11 +262,13 @@ export async function GET(req: NextRequest) {
       logger.error("Invalid verify token", {
         verifyToken: safeUrlSearchParams.data["hub.verify_token"],
       });
+      logger.end();
 
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     logger.info("Valid verify token");
+    logger.end();
 
     return NextResponse.json(
       { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },

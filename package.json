@@ -36,6 +36,7 @@
     "@tanstack/react-table": "^8.20.6",
     "@turf/point-to-line-distance": "^7.2.0",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/functions": "^2.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "@vercel/toolbar": "^0.1.30",
     "class-variance-authority": "^0.7.1",
