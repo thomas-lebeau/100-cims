@@ -228,7 +228,6 @@ export async function POST(req: NextRequest) {
   // it should do so asynchronously.
   if (awaitEventHandling === "true") {
     await handleEvent(req);
-    logger.end();
   } else {
     waitUntil(handleEvent(req));
   }
