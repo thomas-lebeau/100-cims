@@ -222,7 +222,6 @@ export async function POST(req: NextRequest) {
   // it should do so asynchronously.
   if (awaitEventHandling === "true") {
     await handleEvent(req);
-    logger.end();
   } else {
     waitUntil(handleEvent(req));
   }
@@ -261,13 +260,11 @@ export async function GET(req: NextRequest) {
       logger.error("Invalid verify token", {
         verifyToken: safeUrlSearchParams.data["hub.verify_token"],
       });
-      logger.end();
 
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     logger.info("Valid verify token");
-    logger.end();
 
     return NextResponse.json(
       { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },
