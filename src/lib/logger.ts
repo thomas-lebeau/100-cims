@@ -1,29 +1,65 @@
-import {
-  createLogger as createWinstonLogger,
-  format,
-  transports,
-} from "winston";
-
-const DATADOG_API_KEY = process.env.DATADOG_API_KEY;
-const SERVICE = "100-cims";
-
-const logger = createWinstonLogger({
-  level: "info",
-  exitOnError: false,
-  format: format.json(),
-  defaultMeta: { env: process.env.NEXT_PUBLIC_VERCEL_ENV },
-  transports: [
-    new transports.Http({
-      host: "http-intake.logs.datadoghq.eu",
-      path: `/api/v2/logs?dd-api-key=${DATADOG_API_KEY}&ddsource=nodejs&service=${SERVICE}`,
-      ssl: true,
-    }),
-    new transports.Console({
-      format: format.combine(format.colorize({ level: true }), format.simple()),
-    }),
-  ],
-});
+const BASE_URL = "https://http-intake.logs.datadoghq.eu/api/v2/logs";
+const BASE_PARAMS = {
+  ddsource: "nodejs",
+  service: "100-cims",
+  env: process.env.NEXT_PUBLIC_VERCEL_ENV,
+  ...ifDefined("next_deployment_id", process.env.NEXT_DEPLOYMENT_ID),
+};
 
 export function createLogger(module: string) {
-  return logger.child({ module });
+  return new Logger(module);
+}
+
+enum LOG_LEVEL {
+  INFO = "info",
+  ERROR = "error",
+}
+
+class Logger {
+  constructor(private readonly module: string) {}
+
+  private log(level: LOG_LEVEL, message: string, ...args: unknown[]) {
+    // eslint-disable-next-line no-console
+    console[level](`[${this.module}]`, message, ...args);
+
+    return fetch(BASE_URL, {
+      method: "POST",
+      headers: {
+        "dd-api-key": process.env.DATADOG_API_KEY,
+      },
+      body: JSON.stringify(
+        combine(
+          {
+            ...BASE_PARAMS,
+            level,
+            module: this.module,
+            message,
+          },
+          args
+        )
+      ),
+    });
+  }
+
+  info(message: string, ...args: unknown[]) {
+    return this.log(LOG_LEVEL.INFO, message, ...args);
+  }
+
+  error(message: string, ...args: unknown[]) {
+    return this.log(LOG_LEVEL.ERROR, message, ...args);
+  }
+}
+
+function ifDefined(key: string, value: string | undefined) {
+  return value ? { [key]: value } : {};
+}
+
+function combine(body: Record<string, unknown>, args: unknown[]) {
+  for (const arg of args) {
+    if (typeof arg === "object" && arg !== null) {
+      Object.entries(arg).forEach(([key, value]) => {
+        body[key] = value;
+      });
+    }
+  }
 }

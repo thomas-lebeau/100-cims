@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { z } from "zod";
 
 import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
@@ -222,7 +223,7 @@ export async function POST(req: NextRequest) {
   if (awaitEventHandling === "true") {
     await handleEvent(req);
   } else {
-    handleEvent(req);
+    waitUntil(handleEvent(req));
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
@@ -246,6 +247,7 @@ export async function GET(req: NextRequest) {
         "Invalid url search params",
         safeUrlSearchParams.error.issues
       );
+
       return NextResponse.json(safeUrlSearchParams.error.issues, {
         status: 422,
       });
