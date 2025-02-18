@@ -8,6 +8,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Preview'
+    environment:
+      name: Preview
     container:
       image: mcr.microsoft.com/playwright:v1.40.0-jammy
     env:
