@@ -146,7 +146,7 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   );
 
   if (!updatedActivity) {
-    waitUntil(logger.error("No activity updated", { userId: account.userId }));
+    waitUntil(logger.info("No activity updated", { userId: account.userId }));
 
     return;
   }
@@ -164,7 +164,7 @@ async function handleDeleteActivityEvent(
   );
 
   if (!deletedActivity) {
-    waitUntil(logger.error("No activity deleted", { userId: account.userId }));
+    waitUntil(logger.info("No activity deleted", { userId: account.userId }));
 
     return;
   }

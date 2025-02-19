@@ -81,32 +81,50 @@ export function updateStravaActivity(
   originId: string,
   activity: Partial<Pick<ActivityInput, "private" | "name" | "sportType">>
 ) {
-  return prisma.activity.update({
-    select: {
-      id: true,
-      private: true,
-      name: true,
-      sportType: true,
-    },
-    where: {
-      userId_originType_originId: {
-        userId: userId,
-        originType: "STRAVA",
-        originId,
+  return prisma.activity
+    .update({
+      select: {
+        id: true,
+        private: true,
+        name: true,
+        sportType: true,
       },
-    },
-    data: activity,
-  });
+      where: {
+        userId_originType_originId: {
+          userId: userId,
+          originType: "STRAVA",
+          originId,
+        },
+      },
+      data: activity,
+    })
+    .catch((err) => {
+      // If the activity is not found, return null
+      if (err.code === "P2025") {
+        return null;
+      }
+
+      throw err;
+    });
 }
 
 export function deleteStravaActivity(userId: string, originId: string) {
-  return prisma.activity.delete({
-    where: {
-      userId_originType_originId: {
-        userId: userId,
-        originType: "STRAVA",
-        originId,
+  return prisma.activity
+    .delete({
+      where: {
+        userId_originType_originId: {
+          userId: userId,
+          originType: "STRAVA",
+          originId,
+        },
       },
-    },
-  });
+    })
+    .catch((err) => {
+      // If the activity is not found, return null
+      if (err.code === "P2025") {
+        return null;
+      }
+
+      throw err;
+    });
 }
