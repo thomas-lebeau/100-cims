@@ -18,7 +18,7 @@ enum LOG_LEVEL {
 class Logger {
   constructor(private readonly module: string) {}
 
-  private log(level: LOG_LEVEL, message: string, ...args: unknown[]) {
+  private async log(level: LOG_LEVEL, message: string, ...args: unknown[]) {
     // eslint-disable-next-line no-console
     console[level](`[${this.module}]`, message, ...args);
 
@@ -44,7 +44,6 @@ class Logger {
         if (!res.ok) {
           console.error("Failed to log to Datadog", res);
         }
-        console.log("Logged to Datadog", res);
       })
       .catch((err) => {
         console.error("Failed to log to Datadog", err);
