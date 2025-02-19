@@ -25,6 +25,7 @@ class Logger {
     return fetch(BASE_URL, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         "dd-api-key": process.env.DATADOG_API_KEY,
       },
       body: JSON.stringify(
@@ -38,7 +39,16 @@ class Logger {
           args
         )
       ),
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          console.error("Failed to log to Datadog", res);
+        }
+        console.log("Logged to Datadog", res);
+      })
+      .catch((err) => {
+        console.error("Failed to log to Datadog", err);
+      });
   }
 
   info(message: string, ...args: unknown[]) {

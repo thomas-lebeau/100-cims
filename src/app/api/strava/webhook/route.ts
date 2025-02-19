@@ -54,7 +54,7 @@ async function handleEvent(req: NextRequest) {
     const safeBody = eventBodySchema.safeParse(await req.json());
 
     if (!safeBody.success) {
-      logger.error("Invalid event body", safeBody.error.issues);
+      waitUntil(logger.error("Invalid event body", safeBody.error.issues));
 
       return;
     }
@@ -64,14 +64,16 @@ async function handleEvent(req: NextRequest) {
     if (
       event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
     ) {
-      logger.error("Unknown subscription_id");
+      waitUntil(logger.error("Unknown subscription_id"));
 
       return;
     }
 
     // TODO: handle athlete events?
     if (event.object_type !== "activity") {
-      logger.info("Unknown object_type", { object_type: event.object_type });
+      waitUntil(
+        logger.info("Unknown object_type", { object_type: event.object_type })
+      );
 
       return;
     }
@@ -80,7 +82,7 @@ async function handleEvent(req: NextRequest) {
     const account = await getAccountIdByStravaId(event.owner_id);
 
     if (!account) {
-      logger.error("No account found");
+      waitUntil(logger.error("No account found"));
 
       return;
     }
@@ -95,10 +97,12 @@ async function handleEvent(req: NextRequest) {
       case "delete":
         return await handleDeleteActivityEvent(account, event);
       default:
-        logger.error("Unknown event_type", { event_type: event.aspect_type });
+        waitUntil(
+          logger.error("Unknown event_type", { event_type: event.aspect_type })
+        );
     }
   } catch (error) {
-    logger.error("Unknown error", serializeError(error));
+    waitUntil(logger.error("Unknown error", serializeError(error)));
   }
 }
 
@@ -131,12 +135,12 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   );
 
   if (!updatedActivity) {
-    logger.error("No activity updated", { userId: account.userId });
+    waitUntil(logger.error("No activity updated", { userId: account.userId }));
 
     return;
   }
 
-  logger.info("Activity updated", { userId: account.userId });
+  waitUntil(logger.info("Activity updated", { userId: account.userId }));
 }
 
 async function handleDeleteActivityEvent(
@@ -149,12 +153,12 @@ async function handleDeleteActivityEvent(
   );
 
   if (!deletedActivity) {
-    logger.error("No activity deleted", { userId: account.userId });
+    waitUntil(logger.error("No activity deleted", { userId: account.userId }));
 
     return;
   }
 
-  logger.info("Activity deleted", { userId: account.userId });
+  waitUntil(logger.info("Activity deleted", { userId: account.userId }));
 }
 
 async function handleCreateActivityEvent(
@@ -175,7 +179,7 @@ async function handleCreateActivityEvent(
   const cimIds = getCimForPolyline(cims, activity.summaryPolyline);
 
   if (cimIds.length === 0) {
-    logger.info("No cims found", { userId: account.userId });
+    waitUntil(logger.info("No cims found", { userId: account.userId }));
 
     return;
   }
@@ -187,7 +191,7 @@ async function handleCreateActivityEvent(
   const activityId = syncedData.activities[0]?.id;
 
   if (!activityId) {
-    logger.error("No activity created", { userId: account.userId });
+    waitUntil(logger.error("No activity created", { userId: account.userId }));
 
     return;
   }
@@ -198,16 +202,18 @@ async function handleCreateActivityEvent(
   );
 
   if (ascents.count === 0) {
-    logger.error("No ascents created", { userId: account.userId });
+    waitUntil(logger.error("No ascents created", { userId: account.userId }));
 
     return;
   }
 
-  logger.info("Activity created", {
-    userId: account.userId,
-    ascentsCount: ascents.count,
-    activityId,
-  });
+  waitUntil(
+    logger.info("Activity created", {
+      userId: account.userId,
+      ascentsCount: ascents.count,
+      activityId,
+    })
+  );
 }
 
 export async function POST(req: NextRequest) {
@@ -243,9 +249,11 @@ export async function GET(req: NextRequest) {
     );
 
     if (!safeUrlSearchParams.success) {
-      logger.error(
-        "Invalid url search params",
-        safeUrlSearchParams.error.issues
+      waitUntil(
+        logger.error(
+          "Invalid url search params",
+          safeUrlSearchParams.error.issues
+        )
       );
 
       return NextResponse.json(safeUrlSearchParams.error.issues, {
@@ -257,21 +265,23 @@ export async function GET(req: NextRequest) {
       safeUrlSearchParams.data["hub.verify_token"] !==
       process.env.STRAVA_VERIFY_TOKEN
     ) {
-      logger.error("Invalid verify token", {
-        verifyToken: safeUrlSearchParams.data["hub.verify_token"],
-      });
+      waitUntil(
+        logger.error("Invalid verify token", {
+          verifyToken: safeUrlSearchParams.data["hub.verify_token"],
+        })
+      );
 
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    logger.info("Valid verify token");
+    waitUntil(logger.info("Valid verify token"));
 
     return NextResponse.json(
       { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },
       { status: 200 }
     );
   } catch (error) {
-    logger.error("Unknown error", serializeError(error));
+    waitUntil(logger.error("Unknown error", serializeError(error)));
 
     return NextResponse.json(serializeError(error), { status: 500 });
   }
