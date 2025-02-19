@@ -205,7 +205,12 @@ async function handleCreateActivityEvent(
   const cimIds = getCimForPolyline(cims, activity.summaryPolyline);
 
   if (cimIds.length === 0) {
-    waitUntil(logger.info("No cims found", { userId: account.userId }));
+    waitUntil(
+      logger.info("No cims found", {
+        userId: account.userId,
+        objectId: event.object_id,
+      })
+    );
 
     return;
   }

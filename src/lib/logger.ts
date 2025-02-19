@@ -2,7 +2,7 @@ const BASE_URL = "https://http-intake.logs.datadoghq.eu/api/v2/logs";
 const BASE_PARAMS = {
   ddsource: "nodejs",
   service: "100-cims",
-  env: process.env.NEXT_PUBLIC_VERCEL_ENV,
+  ddtags: `env:${process.env.NEXT_PUBLIC_VERCEL_ENV}`,
   ...ifDefined("next_deployment_id", process.env.NEXT_DEPLOYMENT_ID),
 };
 
@@ -71,4 +71,6 @@ function combine(body: Record<string, unknown>, args: unknown[]) {
       });
     }
   }
+
+  return body;
 }
