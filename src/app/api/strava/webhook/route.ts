@@ -87,7 +87,18 @@ async function handleEvent(req: NextRequest) {
       return;
     }
 
-    await maybeRefreshToken(account);
+    try {
+      await maybeRefreshToken(account);
+    } catch (error) {
+      waitUntil(
+        logger.error("Failed to refresh token", serializeError(error), {
+          userId: account.userId,
+          accountId: account.id,
+        })
+      );
+
+      return;
+    }
 
     switch (event.aspect_type) {
       case "create":
@@ -173,7 +184,22 @@ async function handleCreateActivityEvent(
         Authorization: `Bearer ${account.access_token}`,
       },
     }
-  );
+  ).catch((err) => {
+    waitUntil(logger.error("Failed to fetch activity", serializeError(err)));
+
+    return;
+  });
+
+  if (!activity) {
+    waitUntil(
+      logger.error("No activity found", {
+        userId: account.userId,
+        objectId: event.object_id,
+      })
+    );
+
+    return;
+  }
 
   const cims = await getTinyCims();
   const cimIds = getCimForPolyline(cims, activity.summaryPolyline);
