@@ -1,9 +1,5 @@
-import {
-  Cim,
-  CimWithComarca,
-  cimSchema,
-  cimsWithComarcaSchema,
-} from "@/lib/db/cims";
+import type { Cim, CimWithComarca } from "@/lib/db/cims";
+import { cimSchema, cimsWithComarcaSchema } from "@/lib/db/cims";
 import zfetch from "@/lib/zfetch";
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,8 +1,5 @@
-import {
-  DefaultError,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import type { DefaultError } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Variables = {
   cimId: string;

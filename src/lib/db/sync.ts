@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { getMostRecentActivity } from "../get-most-recent-activity";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
-import { ActivityInput } from "./activities";
+import type { ActivityInput } from "./activities";
 
 const syncType = ["STRAVA_IMPORT", "STRAVA_WEBHOOK", "GPX"] as const;
 

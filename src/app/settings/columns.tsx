@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { Sparkles, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { HeaderCell } from "@/components/data-table/header-cell";

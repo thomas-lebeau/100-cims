@@ -1,8 +1,7 @@
 import { type FeatureCollection } from "geojson";
+import type { LngLatBoundsLike, GeoJSONSource } from "mapbox-gl";
 import {
   Map,
-  LngLatBoundsLike,
-  GeoJSONSource,
   NavigationControl,
   ScaleControl,
   GeolocateControl,

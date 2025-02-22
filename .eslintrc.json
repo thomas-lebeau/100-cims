@@ -8,9 +8,14 @@
   "env": {
     "es2020": true
   },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
     "no-console": "warn",
-    "no-empty": ["error", { "allowEmptyCatch": true }]
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-exports": "error"
   },
   "overrides": [
     {
@@ -20,7 +25,7 @@
       }
     },
     {
-      "files": ["**/e2e", "**/playwright.ts"],
+      "files": ["e2e/**", "**/playwright.ts"],
       "rules": {
         "no-empty-pattern": [
           "error",

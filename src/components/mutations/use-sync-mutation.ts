@@ -1,10 +1,7 @@
-import { ActivityInput } from "@/lib/db/activities";
+import type { ActivityInput } from "@/lib/db/activities";
 import zfetch from "@/lib/zfetch";
-import {
-  DefaultError,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import type { DefaultError } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
 type Variables = {

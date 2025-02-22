@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState, type Dispatch } from "react";
 
-import { Ascent } from "@/lib/db/ascent";
-import { CimWithComarca as Cim } from "@/lib/db/cims";
+import type { Ascent } from "@/lib/db/ascent";
+import type { CimWithComarca as Cim } from "@/lib/db/cims";
 import type { ValueOf } from "@/types/values-of";
 
 export const FILTER_TYPE = {

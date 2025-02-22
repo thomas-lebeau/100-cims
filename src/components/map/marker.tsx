@@ -1,7 +1,8 @@
 "use client";
 
 import { Marker as MapBoxMarker } from "mapbox-gl";
-import { createRoot, Root } from "react-dom/client";
+import type { Root } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 
 import type { CimWithComarca as Cim } from "@/lib/db/cims";
 import { useContext, useEffect, useRef, useState } from "react";

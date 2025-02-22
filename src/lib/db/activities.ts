@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { Extends } from "@/types/extends";
-import { Expect } from "type-testing";
+import type { Extends } from "@/types/extends";
+import type { Expect } from "type-testing";
 import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 

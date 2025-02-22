@@ -3,11 +3,12 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/nodemailer";
 import GoogleProvider from "next-auth/providers/google";
 import StravaProvider from "next-auth/providers/strava";
-import { StravaAccount, type Account } from "./db/accounts";
+import type { StravaAccount } from "./db/accounts";
+import { type Account } from "./db/accounts";
 
-import { Token } from "@/types/next-auth";
+import type { Token } from "@/types/next-auth";
 import NextAuth from "next-auth";
-import { Provider } from "next-auth/providers";
+import type { Provider } from "next-auth/providers";
 import { getAccount, isStravaAccount } from "./db/accounts";
 import { STRAVA_BASE_URL } from "./strava";
 import { createLogger } from "./logger";
