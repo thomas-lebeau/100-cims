@@ -25,6 +25,8 @@ type Matches = Record<
 function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   const matches: Matches = {};
 
+  performance.mark("start");
+
   for (const activity of activities) {
     const cimIds = getCimForPolyline(
       cimsToTinyCims(cims),
@@ -38,6 +40,10 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
       };
     }
   }
+
+  performance.mark("end");
+  performance.measure("filterActivities", "start", "end");
+
   return matches;
 }
 

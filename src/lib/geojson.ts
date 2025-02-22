@@ -31,6 +31,7 @@ export function cimsToTinyCims(cims: Cim[]): TinyCim[] {
 }
 
 export function getCimForPolyline(cims: TinyCim[], polyline: string) {
+  performance.mark("getCimForPolylineStart");
   const line = toGeoJSON(polyline);
   const matches = [];
 
@@ -48,6 +49,13 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
       matches.push(cim[0]);
     }
   }
+
+  performance.mark("getCimForPolylineEnd");
+  performance.measure(
+    "getCimForPolyline",
+    "getCimForPolylineStart",
+    "getCimForPolylineEnd"
+  );
 
   return matches;
 }
