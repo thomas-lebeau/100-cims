@@ -7,9 +7,11 @@ import serverTimings from "@/lib/server-timings";
 import { serializeError } from "serialize-error";
 
 const routeContextSchema = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
+  params: z.promise(
+    z.object({
+      id: z.string(),
+    })
+  ),
 });
 
 async function handler(
@@ -23,7 +25,7 @@ async function handler(
       return NextResponse.json(safeContext.error.issues, { status: 422 });
     }
 
-    const id = safeContext.data.params.id;
+    const id = (await safeContext.data.params).id;
     const serverTiming = new serverTimings();
     const session = await getServerSession();
 

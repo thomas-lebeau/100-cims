@@ -6,9 +6,11 @@ import { z } from "zod";
 import rawData from "./data.json";
 
 const routeContextSchema = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
+  params: z.promise(
+    z.object({
+      id: z.string(),
+    })
+  ),
 });
 
 export async function GET(
@@ -22,7 +24,7 @@ export async function GET(
       return NextResponse.json(result.error.issues, { status: 422 });
     }
 
-    const ids = result.data.params.id.split(",");
+    const ids = (await result.data.params).id.split(",");
 
     const features = (rawData as unknown as FeatureCollection).features.filter(
       (feature) => ids.includes(feature.properties?.CODICOMAR)
