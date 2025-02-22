@@ -132,5 +132,9 @@ export function Marker({
     [map, id, selected, longitude, latitude]
   );
 
-  return <div ref={markerContainer} />;
+  return (
+    <div>
+      <div ref={markerContainer} />
+    </div>
+  );
 }
