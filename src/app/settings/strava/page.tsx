@@ -5,12 +5,12 @@ import { getActivities } from "@/lib/db/activities";
 import { getAscents } from "@/lib/db/ascent";
 import { getCims } from "@/lib/db/cims";
 import { getLastSync } from "@/lib/db/sync";
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import LinkStrava from "./link-strava";
 import StravaImporter from "./strava-importer";
 
 export default async function SettingStravaPage() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) return null; // TODO guard
   const userId = session.user.id;

@@ -1,11 +1,11 @@
 import { getActivities } from "@/lib/db/activities";
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
 
 export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

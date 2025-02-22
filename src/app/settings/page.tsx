@@ -5,11 +5,11 @@ import { getAscents } from "@/lib/db/ascent";
 import { getQueryClient } from "@/components/hydrate";
 import { getLastSync } from "@/lib/db/sync";
 import { getCims } from "@/lib/db/cims";
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import { getActivities } from "@/lib/db/activities";
 import Hydrate from "@/components/hydrate";
 export default async function SettingAcccountPage() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) return null; // TODO guard
   const userId = session.user.id;

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { addAscent, deleteAscent } from "@/lib/db/ascent";
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import serverTimings from "@/lib/server-timings";
 import { serializeError } from "serialize-error";
 
@@ -27,7 +27,7 @@ async function handler(
 
     const id = (await safeContext.data.params).id;
     const serverTiming = new serverTimings();
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json(

@@ -1,12 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import EmailProvider from "next-auth/providers/email";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import EmailProvider from "next-auth/providers/nodemailer";
 import GoogleProvider from "next-auth/providers/google";
 import StravaProvider from "next-auth/providers/strava";
 import { StravaAccount, type Account } from "./db/accounts";
 
 import { Token } from "@/types/next-auth";
-import { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import { Provider } from "next-auth/providers";
 import { getAccount, isStravaAccount } from "./db/accounts";
 import { STRAVA_BASE_URL } from "./strava";
@@ -42,8 +42,17 @@ const emailProvider = EmailProvider({
 const stravaProvider = StravaProvider({
   clientId: process.env.STRAVA_CLIENT_ID,
   clientSecret: process.env.STRAVA_CLIENT_SECRET,
-
+  profile(profile) {
+    return {
+      // Strava return a number but prisma adapter expects a string
+      id: `${profile.id}`,
+      name: `${profile.firstname} ${profile.lastname}`,
+      email: null,
+      image: profile.profile,
+    };
+  },
   token: {
+    // @ts-expect-error - The type definition is incorrect
     async request({ client, params, checks, provider }) {
       const { token_type, expires_at, refresh_token, access_token } =
         await client.oauthCallback(provider.callbackUrl, params, checks);
@@ -58,7 +67,6 @@ const stravaProvider = StravaProvider({
       };
     },
   },
-
   authorization: {
     params: {
       scope: "activity:read_all",
@@ -72,7 +80,7 @@ if (process.env.EMAIL_SERVER_HOST) {
   providers.push(emailProvider);
 }
 
-export const authOptions: AuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: providers,
   pages: {
@@ -102,7 +110,7 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
-};
+});
 
 export async function maybeRefreshToken(account: Account) {
   if (!isSessionExpired(account)) return;
