@@ -1,6 +1,6 @@
 import { auth } from "@/lib/next-auth";
 
-import Hydrate, { getQueryClient } from "@/components/hydrate";
+import Hydrate, { seedQueryCache } from "@/components/hydrate";
 import { getAscents } from "@/lib/db/ascent";
 import { getCims } from "@/lib/db/cims";
 import { getComarcas } from "@/lib/db/comarcas";
@@ -10,11 +10,11 @@ export default async function Home() {
   const session = await auth();
   const userId = session?.user.id;
 
-  getQueryClient().setQueryData(["cims", true], await getCims(true));
-  getQueryClient().setQueryData(["comarcas"], await getComarcas());
+  await seedQueryCache(["cims", true], await getCims(true));
+  await seedQueryCache(["comarcas"], await getComarcas());
 
   if (userId) {
-    getQueryClient().setQueryData(["ascents"], await getAscents(userId));
+    await seedQueryCache(["ascents"], await getAscents(userId));
   }
 
   return (

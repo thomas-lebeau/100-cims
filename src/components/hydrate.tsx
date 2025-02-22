@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { cache, type ReactNode } from "react";
 
-export const getQueryClient = cache(() => new QueryClient());
+const getQueryClient = cache(() => new QueryClient());
 
 export default function Hydrate({ children }: { children: ReactNode }) {
   const queryClient = getQueryClient();
@@ -14,4 +14,11 @@ export default function Hydrate({ children }: { children: ReactNode }) {
   return (
     <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
   );
+}
+
+export async function seedQueryCache(
+  queryKeys: Array<string | boolean>,
+  data: unknown
+) {
+  getQueryClient().setQueryData(queryKeys, data);
 }
