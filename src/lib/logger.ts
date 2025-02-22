@@ -42,11 +42,11 @@ class Logger {
     })
       .then((res) => {
         if (!res.ok) {
-          console.error("Failed to log to Datadog", res);
+          console.error("Failed to log to Datadog", res); // eslint-disable-line no-console
         }
       })
       .catch((err) => {
-        console.error("Failed to log to Datadog", err);
+        console.error("Failed to log to Datadog", err); // eslint-disable-line no-console
       });
   }
 
