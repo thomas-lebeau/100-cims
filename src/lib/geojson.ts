@@ -1,4 +1,5 @@
 import type { Cim, TinyCim } from "@/lib/db/cims";
+import { datadogRum } from "@datadog/browser-rum";
 import { toGeoJSON } from "@mapbox/polyline";
 import pointToLineDistance from "@turf/point-to-line-distance";
 import type { BBox } from "geojson";
@@ -31,6 +32,7 @@ export function cimsToTinyCims(cims: Cim[]): TinyCim[] {
 }
 
 export function getCimForPolyline(cims: TinyCim[], polyline: string) {
+  performance.mark("getCimForPolylineStart");
   const line = toGeoJSON(polyline);
   const matches = [];
 
@@ -48,6 +50,18 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
       matches.push(cim[0]);
     }
   }
+
+  performance.mark("getCimForPolylineEnd");
+  const measure = performance.measure(
+    "getCimForPolyline",
+    "getCimForPolylineStart",
+    "getCimForPolylineEnd"
+  );
+
+  datadogRum.addDurationVital("getCimForPolyline", {
+    startTime: Date.now() - measure.startTime,
+    duration: measure.duration,
+  });
 
   return matches;
 }

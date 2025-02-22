@@ -13,6 +13,7 @@ import { cimsToTinyCims, getCimForPolyline } from "@/lib/geojson";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
+import { datadogRum } from "@datadog/browser-rum";
 
 type Matches = Record<
   StravaActivity["originId"],
@@ -24,6 +25,8 @@ type Matches = Record<
 
 function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   const matches: Matches = {};
+
+  performance.mark("start");
 
   for (const activity of activities) {
     const cimIds = getCimForPolyline(
@@ -38,6 +41,14 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
       };
     }
   }
+
+  performance.mark("end");
+  const measure = performance.measure("filterActivities", "start", "end");
+  datadogRum.addDurationVital("filterActivities", {
+    startTime: Date.now() - measure.startTime,
+    duration: measure.duration,
+  });
+
   return matches;
 }
 
