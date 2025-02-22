@@ -33,7 +33,7 @@ setup("authenticate", async ({ page }) => {
 
   await page.getByRole("link", { name: "Login" }).click();
   await page.getByRole("textbox", { name: "Email" }).fill(TEST_USER_EMAIL);
-  await page.getByRole("button", { name: "Sign in with Email" }).click();
+  await page.getByRole("button", { name: "Sign in with Nodemailer" }).click();
   await page.goto("https://ethereal.email/login");
   await page
     .getByRole("textbox", { name: "Email address" })
