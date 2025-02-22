@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import serverTimings from "@/lib/server-timings";
 
 import { getAccount } from "@/lib/db/accounts";
@@ -31,7 +31,7 @@ export async function GET(
 ) {
   try {
     const serverTiming = new serverTimings();
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json(

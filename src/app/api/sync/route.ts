@@ -4,7 +4,7 @@ import { z } from "zod";
 import { activityInputSchema } from "@/lib/db/activities";
 import { AscentInput, addAscents } from "@/lib/db/ascent";
 import { addSync, getLastSync } from "@/lib/db/sync";
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 import serverTimings from "@/lib/server-timings";
 import { serializeError } from "serialize-error";
 
@@ -18,7 +18,7 @@ const bodySchema = z.array(
 export async function POST(req: NextRequest) {
   try {
     const serverTiming = new serverTimings();
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json(
@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

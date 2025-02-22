@@ -1,4 +1,4 @@
-import getServerSession from "@/lib/get-server-session";
+import { auth } from "@/lib/next-auth";
 
 import Hydrate, { getQueryClient } from "@/components/hydrate";
 import { getAscents } from "@/lib/db/ascent";
@@ -7,7 +7,7 @@ import { getComarcas } from "@/lib/db/comarcas";
 import Main from "./components/main";
 
 export default async function Home() {
-  const session = await getServerSession();
+  const session = await auth();
   const userId = session?.user.id;
 
   getQueryClient().setQueryData(["cims", true], await getCims(true));
