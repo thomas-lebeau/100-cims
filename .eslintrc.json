@@ -28,6 +28,16 @@
         ],
         "react-hooks/rules-of-hooks": "off"
       }
+    },
+    {
+      "files": ["prisma/**"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
     }
   ]
 }
