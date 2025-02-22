@@ -1,5 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
-import { waitUntil } from "@vercel/functions";
+import { NextRequest, NextResponse, after } from "next/server";
 import { z } from "zod";
 
 import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
@@ -54,7 +53,7 @@ async function handleEvent(req: NextRequest) {
     const safeBody = eventBodySchema.safeParse(await req.json());
 
     if (!safeBody.success) {
-      waitUntil(logger.error("Invalid event body", safeBody.error.issues));
+      after(logger.error("Invalid event body", safeBody.error.issues));
 
       return;
     }
@@ -64,14 +63,14 @@ async function handleEvent(req: NextRequest) {
     if (
       event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
     ) {
-      waitUntil(logger.error("Unknown subscription_id"));
+      after(logger.error("Unknown subscription_id"));
 
       return;
     }
 
     // TODO: handle athlete events?
     if (event.object_type !== "activity") {
-      waitUntil(
+      after(
         logger.info("Unknown object_type", { object_type: event.object_type })
       );
 
@@ -82,7 +81,7 @@ async function handleEvent(req: NextRequest) {
     const account = await getAccountIdByStravaId(event.owner_id);
 
     if (!account) {
-      waitUntil(logger.error("No account found"));
+      after(logger.error("No account found"));
 
       return;
     }
@@ -90,7 +89,7 @@ async function handleEvent(req: NextRequest) {
     try {
       await maybeRefreshToken(account);
     } catch (error) {
-      waitUntil(
+      after(
         logger.error("Failed to refresh token", serializeError(error), {
           userId: account.userId,
           accountId: account.id,
@@ -108,12 +107,12 @@ async function handleEvent(req: NextRequest) {
       case "delete":
         return await handleDeleteActivityEvent(account, event);
       default:
-        waitUntil(
+        after(
           logger.error("Unknown event_type", { event_type: event.aspect_type })
         );
     }
   } catch (error) {
-    waitUntil(logger.error("Unknown error", serializeError(error)));
+    after(logger.error("Unknown error", serializeError(error)));
   }
 }
 
@@ -146,12 +145,12 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   );
 
   if (!updatedActivity) {
-    waitUntil(logger.info("No activity updated", { userId: account.userId }));
+    after(logger.info("No activity updated", { userId: account.userId }));
 
     return;
   }
 
-  waitUntil(logger.info("Activity updated", { userId: account.userId }));
+  after(logger.info("Activity updated", { userId: account.userId }));
 }
 
 async function handleDeleteActivityEvent(
@@ -164,12 +163,12 @@ async function handleDeleteActivityEvent(
   );
 
   if (!deletedActivity) {
-    waitUntil(logger.info("No activity deleted", { userId: account.userId }));
+    after(logger.info("No activity deleted", { userId: account.userId }));
 
     return;
   }
 
-  waitUntil(logger.info("Activity deleted", { userId: account.userId }));
+  after(logger.info("Activity deleted", { userId: account.userId }));
 }
 
 async function handleCreateActivityEvent(
@@ -185,13 +184,13 @@ async function handleCreateActivityEvent(
       },
     }
   ).catch((err) => {
-    waitUntil(logger.error("Failed to fetch activity", serializeError(err)));
+    after(logger.error("Failed to fetch activity", serializeError(err)));
 
     return;
   });
 
   if (!activity) {
-    waitUntil(
+    after(
       logger.error("No activity found", {
         userId: account.userId,
         objectId: event.object_id,
@@ -205,7 +204,7 @@ async function handleCreateActivityEvent(
   const cimIds = getCimForPolyline(cims, activity.summaryPolyline);
 
   if (cimIds.length === 0) {
-    waitUntil(
+    after(
       logger.info("No cims found", {
         userId: account.userId,
         objectId: event.object_id,
@@ -222,7 +221,7 @@ async function handleCreateActivityEvent(
   const activityId = syncedData.activities[0]?.id;
 
   if (!activityId) {
-    waitUntil(logger.error("No activity created", { userId: account.userId }));
+    after(logger.error("No activity created", { userId: account.userId }));
 
     return;
   }
@@ -233,12 +232,12 @@ async function handleCreateActivityEvent(
   );
 
   if (ascents.count === 0) {
-    waitUntil(logger.error("No ascents created", { userId: account.userId }));
+    after(logger.error("No ascents created", { userId: account.userId }));
 
     return;
   }
 
-  waitUntil(
+  after(
     logger.info("Activity created", {
       userId: account.userId,
       ascentsCount: ascents.count,
@@ -260,7 +259,7 @@ export async function POST(req: NextRequest) {
   if (awaitEventHandling === "true") {
     await handleEvent(req);
   } else {
-    waitUntil(handleEvent(req));
+    after(handleEvent(req));
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
@@ -280,7 +279,7 @@ export async function GET(req: NextRequest) {
     );
 
     if (!safeUrlSearchParams.success) {
-      waitUntil(
+      after(
         logger.error(
           "Invalid url search params",
           safeUrlSearchParams.error.issues
@@ -296,7 +295,7 @@ export async function GET(req: NextRequest) {
       safeUrlSearchParams.data["hub.verify_token"] !==
       process.env.STRAVA_VERIFY_TOKEN
     ) {
-      waitUntil(
+      after(
         logger.error("Invalid verify token", {
           verifyToken: safeUrlSearchParams.data["hub.verify_token"],
         })
@@ -305,14 +304,14 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    waitUntil(logger.info("Valid verify token"));
+    after(logger.info("Valid verify token"));
 
     return NextResponse.json(
       { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },
       { status: 200 }
     );
   } catch (error) {
-    waitUntil(logger.error("Unknown error", serializeError(error)));
+    after(logger.error("Unknown error", serializeError(error)));
 
     return NextResponse.json(serializeError(error), { status: 500 });
   }
