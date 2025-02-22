@@ -1,7 +1,7 @@
 "use client";
 
 import { Marker as MapBoxMarker } from "mapbox-gl";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 
 import type { CimWithComarca as Cim } from "@/lib/db/cims";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -30,33 +30,35 @@ export function Marker({
 }: MarkerProps) {
   const map = useContext(Map.context);
   const [open, setOpen] = useState(selected);
-
-  // using `useState` as a Lazy initial ref
-  const [markerContainer] = useState(() => document?.createElement("div"));
-  const [markerRoot] = useState(() => createRoot(markerContainer));
-  const markerRef = useRef<MapBoxMarker | null>(null);
+  const [isSetup, setIsSetup] = useState<boolean>(false);
+  const markerContainer = useRef<HTMLDivElement>(null);
+  const markerRoot = useRef<Root>(null);
+  const marker = useRef<MapBoxMarker | null>(null);
   const isMounted = useRef(false);
 
   useEffect(
     function setup() {
       if (!map) return;
+      if (!markerContainer.current) return;
 
-      const marker = new MapBoxMarker({ element: markerContainer })
+      markerRoot.current = createRoot(markerContainer.current);
+      marker.current = new MapBoxMarker({ element: markerContainer.current })
         .setLngLat([longitude, latitude])
         .addTo(map);
 
-      markerRef.current = marker;
+      setIsSetup(true);
+
       isMounted.current = true;
 
       return () => {
-        marker.remove();
+        marker.current?.remove();
         isMounted.current = false;
 
         // It seems like you are supposed to unmount components outside of `useEffect`:
         // https://github.com/facebook/react/issues/25675#issuecomment-1363957941
         setTimeout(() => {
           if (!isMounted.current) {
-            markerRoot.unmount();
+            markerRoot.current?.unmount();
           }
         }, 0);
       };
@@ -64,18 +66,18 @@ export function Marker({
 
     // ignore latitute and longitude changes as they are handled separately
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [map, markerContainer]
+    [map]
   );
 
   useEffect(
     function render() {
       if (climbed) {
-        markerContainer.classList.add("z-10");
+        markerContainer.current?.classList.add("z-10");
       } else {
-        markerContainer.classList.remove("z-10");
+        markerContainer.current?.classList.remove("z-10");
       }
 
-      markerRoot.render(
+      markerRoot.current?.render(
         <Popover open={open} onOpenChange={(open) => onClick(open ? id : null)}>
           <PopoverTrigger>
             <Pin color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} />
@@ -92,22 +94,12 @@ export function Marker({
         </Popover>
       );
     },
-    [
-      id,
-      markerRoot,
-      markerContainer,
-      name,
-      climbed,
-      altitude,
-      open,
-      onClickClimb,
-      onClick,
-    ]
+    [id, name, climbed, altitude, open, onClickClimb, onClick, isSetup]
   );
 
   useEffect(
     function updateCoords() {
-      markerRef.current?.setLngLat([longitude, latitude]);
+      marker.current?.setLngLat([longitude, latitude]);
     },
     [latitude, longitude]
   );
@@ -140,5 +132,5 @@ export function Marker({
     [map, id, selected, longitude, latitude]
   );
 
-  return null;
+  return <div ref={markerContainer} />;
 }
