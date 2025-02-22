@@ -4,7 +4,7 @@ import { datadogRum } from "@datadog/browser-rum";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-if (process.env.NODE_ENV !== "development") {
+if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "development") {
   init();
 }
 
@@ -18,9 +18,7 @@ function init() {
     version: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
     sessionSampleRate: 100,
     sessionReplaySampleRate: 20,
-    trackUserInteractions: true,
-    trackResources: true,
-    trackLongTasks: true,
+    compressIntakeRequests: true,
     defaultPrivacyLevel: "mask-user-input",
 
     allowedTracingUrls: [
