@@ -1,4 +1,4 @@
-import Hydrate, { getQueryClient } from "@/components/hydrate";
+import Hydrate, { seedQueryCache } from "@/components/hydrate";
 import { Separator } from "@/components/ui/separator";
 import { getAccount } from "@/lib/db/accounts";
 import { getActivities } from "@/lib/db/activities";
@@ -15,10 +15,10 @@ export default async function SettingStravaPage() {
   if (!session) return null; // TODO guard
   const userId = session.user.id;
 
-  getQueryClient().setQueryData(["cims", false], await getCims());
-  getQueryClient().setQueryData(["last-sync"], await getLastSync(userId));
-  getQueryClient().setQueryData(["ascents"], await getAscents(userId));
-  getQueryClient().setQueryData(["activities"], await getActivities(userId));
+  await seedQueryCache(["cims", false], await getCims());
+  await seedQueryCache(["last-sync"], await getLastSync(userId));
+  await seedQueryCache(["ascents"], await getAscents(userId));
+  await seedQueryCache(["activities"], await getActivities(userId));
 
   const isLinkedToStrava = (await getAccount(userId, "strava")).length > 0;
 
