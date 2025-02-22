@@ -1,4 +1,4 @@
-import { StravaActivity } from "@/lib/db/activities";
+import type { StravaActivity } from "@/lib/db/activities";
 import zfetch from "@/lib/zfetch";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";

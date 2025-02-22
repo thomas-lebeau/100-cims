@@ -9,8 +9,9 @@ import { XIcon } from "lucide-react";
 import { FacetPicker } from "@/components/facet-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Comarca } from "@/lib/db/comarcas";
-import { FILTER_TYPE, FilterState, TSetFilter } from "./use-cim-filter";
+import type { Comarca } from "@/lib/db/comarcas";
+import type { FilterState, TSetFilter } from "./use-cim-filter";
+import { FILTER_TYPE } from "./use-cim-filter";
 
 export default function FilterBar({
   filter,

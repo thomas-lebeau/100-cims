@@ -25,7 +25,7 @@
       }
     },
     {
-      "files": ["**/e2e", "**/playwright.ts"],
+      "files": ["e2e/**", "**/playwright.ts"],
       "rules": {
         "no-empty-pattern": [
           "error",

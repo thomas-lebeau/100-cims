@@ -1,4 +1,4 @@
-import { ActivityInput } from "./db/activities";
+import type { ActivityInput } from "./db/activities";
 
 export function getMostRecentActivity(activities: ActivityInput[]) {
   return activities.reduce((acc, curr) => {

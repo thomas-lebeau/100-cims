@@ -1,8 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { activityInputSchema } from "@/lib/db/activities";
-import { AscentInput, addAscents } from "@/lib/db/ascent";
+import type { AscentInput} from "@/lib/db/ascent";
+import { addAscents } from "@/lib/db/ascent";
 import { addSync, getLastSync } from "@/lib/db/sync";
 import { auth } from "@/lib/next-auth";
 import serverTimings from "@/lib/server-timings";

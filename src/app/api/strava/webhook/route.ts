@@ -1,9 +1,12 @@
-import { NextRequest, NextResponse, after } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse, after } from "next/server";
 import { z } from "zod";
 
-import { Account, getAccountIdByStravaId } from "@/lib/db/accounts";
+import type { Account} from "@/lib/db/accounts";
+import { getAccountIdByStravaId } from "@/lib/db/accounts";
+import type {
+  ActivityInput} from "@/lib/db/activities";
 import {
-  ActivityInput,
   deleteStravaActivity,
   stravaActivitySchema,
   updateStravaActivity,

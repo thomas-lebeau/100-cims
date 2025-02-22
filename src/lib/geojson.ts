@@ -1,7 +1,8 @@
-import { Cim, TinyCim } from "@/lib/db/cims";
+import type { Cim, TinyCim } from "@/lib/db/cims";
 import { toGeoJSON } from "@mapbox/polyline";
 import pointToLineDistance from "@turf/point-to-line-distance";
-import { BBox, type Feature } from "geojson";
+import type { BBox } from "geojson";
+import { type Feature } from "geojson";
 
 export const MAX_DISTANCE = 25; // in meters;
 

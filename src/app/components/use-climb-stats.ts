@@ -1,5 +1,5 @@
-import { Ascent } from "@/lib/db/ascent";
-import { CimWithComarca as Cim } from "@/lib/db/cims";
+import type { Ascent } from "@/lib/db/ascent";
+import type { CimWithComarca as Cim } from "@/lib/db/cims";
 import { useMemo } from "react";
 
 type ClimbStats = {

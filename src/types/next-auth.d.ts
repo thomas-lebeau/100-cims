@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-import { User, TokenSet } from "next-auth";
+import type { User, TokenSet } from "next-auth";
 
 type UserId = string;
 

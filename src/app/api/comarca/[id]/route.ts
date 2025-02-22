@@ -1,6 +1,7 @@
 import { getBBox } from "@/lib/geojson";
 import { type FeatureCollection } from "geojson";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
 import { z } from "zod";
 import rawData from "./data.json";

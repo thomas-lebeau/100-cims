@@ -1,4 +1,5 @@
-import { BrowserContextOptions, expect, test as setup } from "@playwright/test";
+import type { BrowserContextOptions } from "@playwright/test";
+import { expect, test as setup } from "@playwright/test";
 import fs from "fs";
 import { AUTH_FILE } from "../playwright.config";
 import { TEST_USER_EMAIL } from "@/lib/playwright";

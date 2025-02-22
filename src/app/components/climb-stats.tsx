@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 
-import { Ascent } from "@/lib/db/ascent";
-import { CimWithComarca } from "@/lib/db/cims";
+import type { Ascent } from "@/lib/db/ascent";
+import type { CimWithComarca } from "@/lib/db/cims";
 import { useClimbStats } from "./use-climb-stats";
 
 type ClimbStatsProps = {
