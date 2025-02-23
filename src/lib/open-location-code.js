@@ -59,7 +59,7 @@
  */
 (function (root, factory) {
   /* global define, module */
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === "function" && define.amd && root) {
     // AMD. Register as an anonymous module.
     define(function () {
       return (root.returnExportsGlobal = factory());
