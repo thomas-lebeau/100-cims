@@ -2,24 +2,23 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 import { comarcaSchema } from "./comarcas";
-import { CODE_PRECISION_NORMAL, encode } from "../open-location-code";
 
-export type TinyCim = [Cim["id"], Cim["longitude"], Cim["latitude"], string];
+export type TinyCim = [
+  Cim["id"],
+  Cim["longitude"],
+  Cim["latitude"],
+  Cim["code"],
+];
 
 const tinyCimSchema = z
   .object({
     id: z.string(),
     longitude: z.number(),
     latitude: z.number(),
+    code: z.string(),
   })
   .transform(
-    (cim) =>
-      [
-        cim.id,
-        cim.longitude,
-        cim.latitude,
-        encode(cim.latitude, cim.longitude, CODE_PRECISION_NORMAL),
-      ] as TinyCim
+    (cim) => [cim.id, cim.longitude, cim.latitude, cim.code] as TinyCim
   );
 
 export async function getTinyCims() {
@@ -29,6 +28,7 @@ export async function getTinyCims() {
         id: true,
         longitude: true,
         latitude: true,
+        code: true,
       },
     })
   );
@@ -71,6 +71,7 @@ export const cimSchema = z.object({
   altitude: z.number(),
   latitude: z.number(),
   longitude: z.number(),
+  code: z.string(),
   url: z.string(),
   img: z.string().nullable(),
   essencial: z.boolean(),

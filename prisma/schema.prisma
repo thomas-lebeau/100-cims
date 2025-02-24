@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  directUrl    = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Account {
@@ -66,6 +66,7 @@ model Cim {
   altitude  Int
   longitude Float
   latitude  Float
+  code      String
   url       String    @unique
   img       String?   @unique
   essencial Boolean
