@@ -3,6 +3,10 @@ const fs = require("fs");
 const { PrismaClient } = require("@prisma/client");
 const { z } = require("zod");
 const { withBar } = require("./utils");
+const {
+  encode,
+  CODE_PRECISION_EXTRA,
+} = require("../src/lib/open-location-code");
 
 const TABLES = [
   "account",
@@ -27,16 +31,23 @@ const seedSchema = z.object({
     })
   ),
   cim: z.array(
-    z.object({
-      name: z.string(),
-      altitude: z.number(),
-      latitude: z.number(),
-      longitude: z.number(),
-      essencial: z.boolean(),
-      img: z.string().nullable(),
-      url: z.string(),
-      comarca: z.array(z.string()),
-    })
+    z
+      .object({
+        name: z.string(),
+        altitude: z.number(),
+        latitude: z.number(),
+        longitude: z.number(),
+        essencial: z.boolean(),
+        img: z.string().nullable(),
+        url: z.string(),
+        comarca: z.array(z.string()),
+      })
+      .transform((cim) => {
+        return {
+          ...cim,
+          code: encode(cim.latitude, cim.longitude, CODE_PRECISION_EXTRA),
+        };
+      })
   ),
   user: z.array(
     z.object({
@@ -76,6 +87,7 @@ async function main() {
         altitude: cim.altitude,
         latitude: cim.latitude,
         longitude: cim.longitude,
+        code: cim.code,
         essencial: cim.essencial,
         img: cim.img,
         url: cim.url,

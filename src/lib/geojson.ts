@@ -1,8 +1,7 @@
 import type { Cim, TinyCim } from "@/lib/db/cims";
 import { datadogRum } from "@datadog/browser-rum";
-import { decode as decodePolyline, toGeoJSON } from "@mapbox/polyline";
+import { decode as decodePolyline } from "@mapbox/polyline";
 import OpenLocationCode from "./open-location-code";
-import { CODE_PRECISION_NORMAL } from "./open-location-code";
 import pointToLineDistance from "@turf/point-to-line-distance";
 import type { BBox } from "geojson";
 import { type Feature } from "geojson";
@@ -51,12 +50,7 @@ export function getBBox(
 }
 
 export function cimsToTinyCims(cims: Cim[]): TinyCim[] {
-  return cims.map((cim) => [
-    cim.id,
-    cim.longitude,
-    cim.latitude,
-    OpenLocationCode.encode(cim.latitude, cim.longitude, CODE_PRECISION_NORMAL),
-  ]);
+  return cims.map((cim) => [cim.id, cim.longitude, cim.latitude, cim.code]);
 }
 
 function shortestCommonPrefix(a: PlusCode, b: PlusCode): string {
@@ -101,13 +95,17 @@ function getPlusCodeRegex(a: PlusCode, b: PlusCode) {
 
 export function getCimForPolyline(cims: TinyCim[], polyline: string) {
   performance.mark("getCimForPolylineStart");
-  const geoJsonLine = toGeoJSON(polyline);
+  const coordinates = decodePolyline(polyline);
+  const geoJsonLine = {
+    type: "LineString" as const,
+    coordinates,
+  };
 
-  if (geoJsonLine.coordinates.length < 2) {
+  if (coordinates.length < 2) {
     return [];
   }
 
-  const [x1, y1, x2, y2] = getBBox(decodePolyline(polyline));
+  const [x1, y1, x2, y2] = getBBox(coordinates);
   const startPlusCode = OpenLocationCode.encode(y1, x1, SEARCH_PRECISION);
   const endPlusCode = OpenLocationCode.encode(y2, x2, SEARCH_PRECISION);
 
@@ -123,7 +121,7 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
   const matches = [];
 
   for (const cim of cimsInRegion) {
-    const distance = pointToLineDistance([cim[1], cim[2]], geoJsonLine, {
+    const distance = pointToLineDistance([cim[2], cim[1]], geoJsonLine, {
       units: "meters",
     });
 
