@@ -121,7 +121,7 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
   const matches = [];
 
   for (const cim of cimsInRegion) {
-    const distance = pointToLineDistance([cim[1], cim[2]], geoJsonLine, {
+    const distance = pointToLineDistance([cim[2], cim[1]], geoJsonLine, {
       units: "meters",
     });
 
