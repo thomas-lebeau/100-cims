@@ -23,9 +23,7 @@ export function SidebarNav({ items }: SidebarNavProps) {
           key={item.href}
           href={item.href}
           className={cn(
-            pathname === item.href
-              ? buttonVariants({ variant: "default" })
-              : buttonVariants({ variant: "ghost" }),
+            pathname === item.href ? buttonVariants({ variant: "default" }) : buttonVariants({ variant: "ghost" }),
             "justify-start"
           )}
         >

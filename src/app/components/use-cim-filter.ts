@@ -43,12 +43,9 @@ export type TSetFilter = Dispatch<Action<FilterType>>;
 const filterFns: FilterFn<FilterType> = {
   name: (name) => (cim) => cim.name.toLowerCase().includes(name),
   essencial: (essencial) => (cim) => cim.essencial === essencial,
-  comarca: (comarca) => (cim) =>
-    cim.comarcas.some((c) => comarca.includes(c.codigo)),
+  comarca: (comarca) => (cim) => cim.comarcas.some((c) => comarca.includes(c.codigo)),
   climbed: (climbed, ascents) => (cim) =>
-    climbed
-      ? ascents.some(({ cimId }) => cimId === cim.id)
-      : ascents.every(({ cimId }) => cimId !== cim.id),
+    climbed ? ascents.some(({ cimId }) => cimId === cim.id) : ascents.every(({ cimId }) => cimId !== cim.id),
 } as const;
 
 function reducer(state: FilterState, action: Action<FilterType>): FilterState {
@@ -58,10 +55,7 @@ function reducer(state: FilterState, action: Action<FilterType>): FilterState {
   };
 }
 
-export function useCimFilter(
-  cims: Cim[],
-  ascents: Ascent[]
-): [Cim[], FilterState, TSetFilter] {
+export function useCimFilter(cims: Cim[], ascents: Ascent[]): [Cim[], FilterState, TSetFilter] {
   const [filteredCims, setFilteredCims] = useState<Cim[]>(cims);
   const [filter, setFilter] = useReducer(reducer, {});
 
@@ -70,27 +64,19 @@ export function useCimFilter(
       let filteredCims = cims;
 
       if (filter.essencial) {
-        filteredCims = filteredCims.filter(
-          filterFns.essencial(filter.essencial, ascents)
-        );
+        filteredCims = filteredCims.filter(filterFns.essencial(filter.essencial, ascents));
       }
 
       if (filter.comarca) {
-        filteredCims = filteredCims.filter(
-          filterFns.comarca(filter.comarca, ascents)
-        );
+        filteredCims = filteredCims.filter(filterFns.comarca(filter.comarca, ascents));
       }
 
       if (filter.name) {
-        filteredCims = filteredCims.filter(
-          filterFns.name(filter.name, ascents)
-        );
+        filteredCims = filteredCims.filter(filterFns.name(filter.name, ascents));
       }
 
       if (filter.climbed) {
-        filteredCims = filteredCims.filter(
-          filterFns.climbed(filter.climbed, ascents)
-        );
+        filteredCims = filteredCims.filter(filterFns.climbed(filter.climbed, ascents));
       }
 
       setFilteredCims(filteredCims);

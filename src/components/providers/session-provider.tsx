@@ -9,11 +9,6 @@ type SessionProviderProps = {
   children: ReactNode;
 };
 
-export default function SessionProvider({
-  session,
-  children,
-}: SessionProviderProps) {
-  return (
-    <NextSessionProvider session={session}>{children}</NextSessionProvider>
-  );
+export default function SessionProvider({ session, children }: SessionProviderProps) {
+  return <NextSessionProvider session={session}>{children}</NextSessionProvider>;
 }

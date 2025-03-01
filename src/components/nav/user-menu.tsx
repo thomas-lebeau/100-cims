@@ -40,11 +40,7 @@ export function UserMenu({ className }: { className?: string }) {
     <div className={cn(className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className="relative h-8 w-8 rounded-full"
-            name="User menu"
-          >
+          <Button variant="ghost" className="relative h-8 w-8 rounded-full" name="User menu">
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.image} alt={user.name} />
               <AvatarFallback>{user.initial}</AvatarFallback>
@@ -56,9 +52,7 @@ export function UserMenu({ className }: { className?: string }) {
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">{user.name}</p>
-              <p className="text-xs leading-none text-muted-foreground">
-                {user.email}
-              </p>
+              <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
             </div>
           </DropdownMenuLabel>
 

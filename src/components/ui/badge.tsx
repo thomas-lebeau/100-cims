@@ -9,12 +9,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         secondary:
           "border-transparent bg-lime-200 dark:bg-lime-500text-secondary-foreground hover:bg-lime-200/80 dark:hover:bg-lime-500/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
       },
     },
@@ -24,9 +22,7 @@ const badgeVariants = cva(
   }
 );
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {
   asChild?: boolean;
 }
 
@@ -34,13 +30,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   ({ className, variant, asChild, ...props }: BadgeProps, ref) => {
     const Comp = asChild ? Slot : "div";
 
-    return (
-      <Comp
-        className={cn(badgeVariants({ variant }), className)}
-        ref={ref}
-        {...props}
-      />
-    );
+    return <Comp className={cn(badgeVariants({ variant }), className)} ref={ref} {...props} />;
   }
 );
 Badge.displayName = "Badge";

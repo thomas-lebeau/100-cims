@@ -1,4 +1,4 @@
-import type { NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -15,10 +15,7 @@ const routeContextSchema = z.object({
   ),
 });
 
-async function handler(
-  req: NextRequest,
-  context: z.infer<typeof routeContextSchema>
-) {
+async function handler(req: NextRequest, context: z.infer<typeof routeContextSchema>) {
   try {
     const safeContext = routeContextSchema.safeParse(context);
 
@@ -31,10 +28,7 @@ async function handler(
     const session = await auth();
 
     if (!session) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401, headers: serverTiming.headers() }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: serverTiming.headers() });
     }
 
     serverTiming.start("db");
@@ -51,10 +45,7 @@ async function handler(
         break;
 
       default:
-        return NextResponse.json(
-          { error: "Method not allowed" },
-          { status: 405 }
-        );
+        return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
     }
 
     serverTiming.stop("db");

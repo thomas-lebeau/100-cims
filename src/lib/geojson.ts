@@ -22,19 +22,14 @@ function extendBBox(bboxA: BBox, bboxB: BBox): BBox {
   ];
 }
 
-function isArrayofCoord(
-  thing: Array<unknown>
-): thing is Array<[number, number]> {
+function isArrayofCoord(thing: Array<unknown>): thing is Array<[number, number]> {
   return Array.isArray(thing[0]);
 }
 
-export function getBBox(
-  things: Array<Feature> | Array<[number, number]>
-): BBox {
+export function getBBox(things: Array<Feature> | Array<[number, number]>): BBox {
   if (isArrayofCoord(things)) {
     return things.reduce(
-      (bbox: BBox, thing) =>
-        extendBBox(bbox, [thing[1], thing[0], thing[1], thing[0]]),
+      (bbox: BBox, thing) => extendBBox(bbox, [thing[1], thing[0], thing[1], thing[0]]),
       [Infinity, Infinity, -Infinity, -Infinity]
     );
   }
@@ -110,10 +105,7 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
   const endPlusCode = OpenLocationCode.encode(y2, x2, SEARCH_PRECISION);
 
   // TODO: optimize this
-  if (
-    !startPlusCode.match(PLUS_CODE_RANGE_REGEX) ||
-    !endPlusCode.match(PLUS_CODE_RANGE_REGEX)
-  ) {
+  if (!startPlusCode.match(PLUS_CODE_RANGE_REGEX) || !endPlusCode.match(PLUS_CODE_RANGE_REGEX)) {
     return []; // The polyline is not in the correct region
   }
   const regex = getPlusCodeRegex(startPlusCode, endPlusCode);
@@ -132,11 +124,7 @@ export function getCimForPolyline(cims: TinyCim[], polyline: string) {
 
   performance.mark("getCimForPolylineEnd");
 
-  const measure = performance.measure(
-    "getCimForPolyline",
-    "getCimForPolylineStart",
-    "getCimForPolylineEnd"
-  );
+  const measure = performance.measure("getCimForPolyline", "getCimForPolylineStart", "getCimForPolylineEnd");
 
   datadogRum.addDurationVital("getCimForPolyline", {
     startTime: Date.now() - measure.startTime,

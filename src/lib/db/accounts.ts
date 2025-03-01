@@ -16,10 +16,7 @@ export type GoogleAccount = {
 export type Account = StravaAccount | GoogleAccount | PrismaAccount;
 
 //TODO: Make react query hook to allow refetch and show activity when connected without page reload
-export async function getAccount(
-  userId: string,
-  provider?: "strava" | "google"
-) {
+export async function getAccount(userId: string, provider?: "strava" | "google") {
   return await prisma.account.findMany({
     where: {
       userId,

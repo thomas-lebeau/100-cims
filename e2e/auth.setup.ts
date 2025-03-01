@@ -1,6 +1,6 @@
+import * as fs from "node:fs";
 import type { BrowserContextOptions } from "@playwright/test";
 import { expect, test as setup } from "@playwright/test";
-import fs from "fs";
 import { AUTH_FILE } from "../playwright.config";
 import { TEST_USER_EMAIL } from "@/lib/playwright";
 
@@ -36,22 +36,15 @@ setup("authenticate", async ({ page }) => {
   await page.getByRole("textbox", { name: "Email" }).fill(TEST_USER_EMAIL);
   await page.getByRole("button", { name: "Sign in with Nodemailer" }).click();
   await page.goto("https://ethereal.email/login");
-  await page
-    .getByRole("textbox", { name: "Email address" })
-    .fill(process.env.EMAIL_SERVER_USER);
-  await page
-    .getByRole("textbox", { name: "Password" })
-    .fill(process.env.EMAIL_SERVER_PASSWORD);
+  await page.getByRole("textbox", { name: "Email address" }).fill(process.env.EMAIL_SERVER_USER);
+  await page.getByRole("textbox", { name: "Password" }).fill(process.env.EMAIL_SERVER_PASSWORD);
   await page.getByRole("button", { name: "Log in" }).click();
   await page.goto("https://ethereal.email/messages");
   await page
     .getByRole("link", { name: /Sign in to/ })
     .first()
     .click();
-  await page
-    .frameLocator("#message iframe")
-    .getByRole("link", { name: "Sign in" })
-    .click();
+  await page.frameLocator("#message iframe").getByRole("link", { name: "Sign in" }).click();
 
   await expect(page.locator('button[name="User menu"]')).toBeVisible();
 

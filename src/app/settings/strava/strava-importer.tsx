@@ -29,10 +29,7 @@ function filterActivities(cims: Cim[], activities: StravaActivity[]) {
   performance.mark("start");
 
   for (const activity of activities) {
-    const cimIds = getCimForPolyline(
-      cimsToTinyCims(cims),
-      activity.summaryPolyline
-    );
+    const cimIds = getCimForPolyline(cimsToTinyCims(cims), activity.summaryPolyline);
 
     if (cimIds.length) {
       matches[activity.originId] = {
@@ -68,10 +65,7 @@ export default function StravaImporter() {
     enabled: !isFetchingLastSync,
   });
 
-  const newActivities = useMemo(
-    () => filterActivities(cims, stravaActivities),
-    [stravaActivities, cims]
-  );
+  const newActivities = useMemo(() => filterActivities(cims, stravaActivities), [stravaActivities, cims]);
   const newAscents = Object.values(newActivities);
 
   if (error)
@@ -83,9 +77,7 @@ export default function StravaImporter() {
     <>
       <div>
         <h3 className="text-lg font-medium">Import Activity</h3>
-        <p className="text-sm text-muted-foreground">
-          Connect your Strava account to import your activities.
-        </p>
+        <p className="text-sm text-muted-foreground">Connect your Strava account to import your activities.</p>
       </div>
 
       {isFetching ? (
@@ -96,36 +88,26 @@ export default function StravaImporter() {
         </p>
       )}
 
-      <Button
-        disabled={isPending || !newAscents.length}
-        onClick={() => mutate({ ascents: newAscents })}
-      >
+      <Button disabled={isPending || !newAscents.length} onClick={() => mutate({ ascents: newAscents })}>
         {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         Upload
       </Button>
 
       <ul>
         {newAscents.map(({ activity, cimIds }) => {
-          const isUploaded = activities?.some(
-            ({ originId }) => originId === activity.originId
-          );
+          const isUploaded = activities?.some(({ originId }) => originId === activity.originId);
 
           if (!activity) return;
 
           return (
             <li key={activity.originId} className="mb-8">
-              <Link
-                href={`https://www.strava.com/activities/${activity.originId}`}
-                target="_blank"
-              >
+              <Link href={`https://www.strava.com/activities/${activity.originId}`} target="_blank">
                 {isUploaded ? "🟢" : "🔴"} {activity.name}
               </Link>
 
               {cimIds.map((cimId) => {
                 const cim = cims.find((cim) => cim.id === cimId);
-                const isAscended = ascents?.some(
-                  (ascent) => ascent.cimId === cimId
-                );
+                const isAscended = ascents?.some((ascent) => ascent.cimId === cimId);
 
                 if (!cim) return;
 

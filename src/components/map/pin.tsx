@@ -14,13 +14,7 @@ export function Pin({ color }: { color: ValueOf<typeof COLOR> }) {
           <stop offset="100%" stopOpacity="0.05"></stop>
         </radialGradient>
       </defs>
-      <ellipse
-        cx="13.5"
-        cy="34.8"
-        rx="10.5"
-        ry="5.25"
-        fill="url(#shadowGradient)"
-      ></ellipse>
+      <ellipse cx="13.5" cy="34.8" rx="10.5" ry="5.25" fill="url(#shadowGradient)"></ellipse>
       <path
         fill={color}
         d="M27,13.5C27,19.07 20.25,27 14.75,34.5C14.02,35.5 12.98,35.5 12.25,34.5C6.75,27 0,19.22 0,13.5C0,6.04 6.04,0 13.5,0C20.96,0 27,6.04 27,13.5Z"

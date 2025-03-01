@@ -1,9 +1,9 @@
-import type { NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { activityInputSchema } from "@/lib/db/activities";
-import type { AscentInput} from "@/lib/db/ascent";
+import type { AscentInput } from "@/lib/db/ascent";
 import { addAscents } from "@/lib/db/ascent";
 import { addSync, getLastSync } from "@/lib/db/sync";
 import { auth } from "@/lib/next-auth";
@@ -23,10 +23,7 @@ export async function POST(req: NextRequest) {
     const session = await auth();
 
     if (!session) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401, headers: serverTiming.headers() }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: serverTiming.headers() });
     }
 
     serverTiming.start("db");
@@ -43,23 +40,18 @@ export async function POST(req: NextRequest) {
       safeBody.data.map(({ activity }) => activity)
     );
 
-    const ascents = safeBody.data.reduce(
-      (acc: AscentInput[], { cimIds, activity }) => {
-        const syncedActivity = syncedData.activities.find(
-          ({ originId }) => originId === activity.originId
-        );
+    const ascents = safeBody.data.reduce((acc: AscentInput[], { cimIds, activity }) => {
+      const syncedActivity = syncedData.activities.find(({ originId }) => originId === activity.originId);
 
-        if (!syncedActivity) return acc;
+      if (!syncedActivity) return acc;
 
-        return acc.concat(
-          cimIds.map((cimId) => ({
-            cimId,
-            activityId: syncedActivity.id,
-          }))
-        );
-      },
-      []
-    );
+      return acc.concat(
+        cimIds.map((cimId) => ({
+          cimId,
+          activityId: syncedActivity.id,
+        }))
+      );
+    }, []);
 
     const ascendedData = await addAscents(session.user.id, ascents);
 

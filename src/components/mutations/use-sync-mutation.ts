@@ -14,11 +14,7 @@ type Variables = {
 export function useSyncMutation() {
   const queryClient = useQueryClient();
 
-  const { isPending, variables, mutate } = useMutation<
-    unknown,
-    DefaultError,
-    Variables
-  >({
+  const { isPending, variables, mutate } = useMutation<unknown, DefaultError, Variables>({
     mutationKey: ["ascents"],
     mutationFn: (variables: Variables) =>
       zfetch(schema, "/api/sync", {
@@ -28,9 +24,7 @@ export function useSyncMutation() {
     onSuccess: () =>
       queryClient.invalidateQueries({
         predicate: ({ queryKey }) =>
-          queryKey[0] === "ascents" ||
-          queryKey[0] === "activities" ||
-          queryKey[0] === "last-sync",
+          queryKey[0] === "ascents" || queryKey[0] === "activities" || queryKey[0] === "last-sync",
       }),
   });
 

@@ -19,12 +19,7 @@ async function maybeRethrow(response: Response) {
     body = await response.json();
   } catch {}
 
-  if (
-    body &&
-    typeof body === "object" &&
-    "error" in body &&
-    typeof body.error === "string"
-  ) {
+  if (body && typeof body === "object" && "error" in body && typeof body.error === "string") {
     throw new Error(body.error);
   }
 }

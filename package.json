@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint -f gha",
+    "format": "prettier --check .",
     "test": "jest",
     "test:watch": "jest --watch",
     "e2e": "playwright test",

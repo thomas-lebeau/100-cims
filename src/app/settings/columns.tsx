@@ -24,9 +24,7 @@ export const columns: ColumnDef<Ascent>[] = [
     header: ({ column }) => <HeaderCell column={column} />,
     cell: ({ cell }) => (
       <div className="flex items-center justify-center">
-        {cell.getValue<boolean>() && (
-          <Sparkles className="h-4 w-4 text-yellow-500" />
-        )}
+        {cell.getValue<boolean>() && <Sparkles className="h-4 w-4 text-yellow-500" />}
       </div>
     ),
   },
@@ -67,9 +65,7 @@ export const columns: ColumnDef<Ascent>[] = [
         Altitude
       </HeaderCell>
     ),
-    cell: ({ row }) => (
-      <div className="text-right">{row.getValue<number>("cimAltitude")}m</div>
-    ),
+    cell: ({ row }) => <div className="text-right">{row.getValue<number>("cimAltitude")}m</div>,
   },
   {
     accessorKey: "date",
@@ -78,10 +74,6 @@ export const columns: ColumnDef<Ascent>[] = [
         Date
       </HeaderCell>
     ),
-    cell: ({ row }) => (
-      <div className="text-right">
-        {new Date(row.getValue<string>("date")).toLocaleDateString()}
-      </div>
-    ),
+    cell: ({ row }) => <div className="text-right">{new Date(row.getValue<string>("date")).toLocaleDateString()}</div>,
   },
 ];

@@ -84,13 +84,7 @@ export function Marker({
             <Pin color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} />
           </PopoverTrigger>
           <PopoverContent>
-            <PopupContent
-              id={id}
-              name={name}
-              altitude={altitude}
-              climbed={climbed}
-              onClickClimb={onClickClimb}
-            />
+            <PopupContent id={id} name={name} altitude={altitude} climbed={climbed} onClickClimb={onClickClimb} />
           </PopoverContent>
         </Popover>
       );

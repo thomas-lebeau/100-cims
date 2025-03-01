@@ -9,11 +9,7 @@ type Variables = {
 export function useAscentMutation() {
   const queryClient = useQueryClient();
 
-  const { isPending, variables, mutate } = useMutation<
-    unknown,
-    DefaultError,
-    Variables
-  >({
+  const { isPending, variables, mutate } = useMutation<unknown, DefaultError, Variables>({
     mutationKey: ["ascents"],
     mutationFn: ({ action, cimId }) =>
       fetch(`/api/ascents/${cimId}`, {

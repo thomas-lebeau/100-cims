@@ -35,15 +35,11 @@ export default function Main({ className }: mainProps) {
   const [filteredCims, filter, setFilter] = useCimFilter(cims, ascents);
 
   const geoJsonUrl = useMemo(
-    () =>
-      filter.comarca ? `/api/comarca/${filter.comarca.join(",")}` : undefined,
+    () => (filter.comarca ? `/api/comarca/${filter.comarca.join(",")}` : undefined),
     [filter.comarca]
   );
 
-  const onClickClimb = useCallback(
-    (cimId: string, action: "ADD" | "REMOVE") => mutate({ cimId, action }),
-    [mutate]
-  );
+  const onClickClimb = useCallback((cimId: string, action: "ADD" | "REMOVE") => mutate({ cimId, action }), [mutate]);
 
   const onClickComarca = useCallback(
     (comarcaId: string) => {
@@ -66,10 +62,7 @@ export default function Main({ className }: mainProps) {
   }, [filter.comarca]);
 
   return (
-    <main
-      className={cn(className, "flex")}
-      style={{ height: "calc(100% - 3rem)" }}
-    >
+    <main className={cn(className, "flex")} style={{ height: "calc(100% - 3rem)" }}>
       <Map className="basis-2/3 h-full" geoJsonUrl={geoJsonUrl}>
         {filteredCims.map((cim) => (
           <Marker

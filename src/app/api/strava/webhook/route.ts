@@ -1,16 +1,11 @@
-import type { NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse, after } from "next/server";
 import { z } from "zod";
 
-import type { Account} from "@/lib/db/accounts";
+import type { Account } from "@/lib/db/accounts";
 import { getAccountIdByStravaId } from "@/lib/db/accounts";
-import type {
-  ActivityInput} from "@/lib/db/activities";
-import {
-  deleteStravaActivity,
-  stravaActivitySchema,
-  updateStravaActivity,
-} from "@/lib/db/activities";
+import type { ActivityInput } from "@/lib/db/activities";
+import { deleteStravaActivity, stravaActivitySchema, updateStravaActivity } from "@/lib/db/activities";
 import { addAscents } from "@/lib/db/ascent";
 import { getTinyCims } from "@/lib/db/cims";
 import { addSync } from "@/lib/db/sync";
@@ -24,11 +19,7 @@ import { createLogger } from "@/lib/logger";
 const logger = createLogger("strava-webhook");
 
 const eventBodySchema = z.object({
-  aspect_type: z.union([
-    z.literal("create"),
-    z.literal("update"),
-    z.literal("delete"),
-  ]),
+  aspect_type: z.union([z.literal("create"), z.literal("update"), z.literal("delete")]),
   event_time: z.number(),
   object_id: z.number().transform((id) => id.toString()),
   object_type: z.union([z.literal("activity"), z.literal("athlete")]),
@@ -40,9 +31,7 @@ const eventBodySchema = z.object({
       type: z.string().optional(),
       private: z
         .enum(["true", "false"])
-        .transform((value) =>
-          value === "true" ? true : value === "false" ? false : value
-        )
+        .transform((value) => (value === "true" ? true : value === "false" ? false : value))
         .optional(),
       visibility: z.enum(["everyone", "followers_only", "only_me"]).optional(),
     })
@@ -63,9 +52,7 @@ async function handleEvent(req: NextRequest) {
 
     const event = safeBody.data;
 
-    if (
-      event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)
-    ) {
+    if (event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)) {
       after(logger.error("Unknown subscription_id"));
 
       return;
@@ -73,9 +60,7 @@ async function handleEvent(req: NextRequest) {
 
     // TODO: handle athlete events?
     if (event.object_type !== "activity") {
-      after(
-        logger.info("Unknown object_type", { object_type: event.object_type })
-      );
+      after(logger.info("Unknown object_type", { object_type: event.object_type }));
 
       return;
     }
@@ -110,9 +95,7 @@ async function handleEvent(req: NextRequest) {
       case "delete":
         return await handleDeleteActivityEvent(account, event);
       default:
-        after(
-          logger.error("Unknown event_type", { event_type: event.aspect_type })
-        );
+        after(logger.error("Unknown event_type", { event_type: event.aspect_type }));
     }
   } catch (error) {
     after(logger.error("Unknown error", serializeError(error)));
@@ -120,14 +103,9 @@ async function handleEvent(req: NextRequest) {
 }
 
 async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
-  const updates: Partial<
-    Pick<ActivityInput, "private" | "name" | "sportType">
-  > = {};
+  const updates: Partial<Pick<ActivityInput, "private" | "name" | "sportType">> = {};
 
-  if (
-    event.updates?.visibility === "only_me" ||
-    event.updates?.visibility === "followers_only"
-  ) {
+  if (event.updates?.visibility === "only_me" || event.updates?.visibility === "followers_only") {
     updates.private = true;
   } else if (event.updates?.visibility === "everyone") {
     updates.private = false;
@@ -141,11 +119,7 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
     updates.sportType = event.updates.type;
   }
 
-  const updatedActivity = await updateStravaActivity(
-    account.userId,
-    event.object_id,
-    updates
-  );
+  const updatedActivity = await updateStravaActivity(account.userId, event.object_id, updates);
 
   if (!updatedActivity) {
     after(logger.info("No activity updated", { userId: account.userId }));
@@ -156,14 +130,8 @@ async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   after(logger.info("Activity updated", { userId: account.userId }));
 }
 
-async function handleDeleteActivityEvent(
-  account: Account,
-  event: WebhookEvent
-) {
-  const deletedActivity = await deleteStravaActivity(
-    account.userId,
-    event.object_id
-  );
+async function handleDeleteActivityEvent(account: Account, event: WebhookEvent) {
+  const deletedActivity = await deleteStravaActivity(account.userId, event.object_id);
 
   if (!deletedActivity) {
     after(logger.info("No activity deleted", { userId: account.userId }));
@@ -174,19 +142,12 @@ async function handleDeleteActivityEvent(
   after(logger.info("Activity deleted", { userId: account.userId }));
 }
 
-async function handleCreateActivityEvent(
-  account: Account,
-  event: WebhookEvent
-) {
-  const activity = await zfetch(
-    stravaActivitySchema,
-    `${STRAVA_BASE_URL}/activities/${event.object_id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${account.access_token}`,
-      },
-    }
-  ).catch((err) => {
+async function handleCreateActivityEvent(account: Account, event: WebhookEvent) {
+  const activity = await zfetch(stravaActivitySchema, `${STRAVA_BASE_URL}/activities/${event.object_id}`, {
+    headers: {
+      Authorization: `Bearer ${account.access_token}`,
+    },
+  }).catch((err) => {
     after(logger.error("Failed to fetch activity", serializeError(err)));
 
     return;
@@ -217,9 +178,7 @@ async function handleCreateActivityEvent(
     return;
   }
 
-  const syncedData = await addSync("STRAVA_WEBHOOK", account.userId, [
-    activity,
-  ]);
+  const syncedData = await addSync("STRAVA_WEBHOOK", account.userId, [activity]);
 
   const activityId = syncedData.activities[0]?.id;
 
@@ -282,22 +241,14 @@ export async function GET(req: NextRequest) {
     );
 
     if (!safeUrlSearchParams.success) {
-      after(
-        logger.error(
-          "Invalid url search params",
-          safeUrlSearchParams.error.issues
-        )
-      );
+      after(logger.error("Invalid url search params", safeUrlSearchParams.error.issues));
 
       return NextResponse.json(safeUrlSearchParams.error.issues, {
         status: 422,
       });
     }
 
-    if (
-      safeUrlSearchParams.data["hub.verify_token"] !==
-      process.env.STRAVA_VERIFY_TOKEN
-    ) {
+    if (safeUrlSearchParams.data["hub.verify_token"] !== process.env.STRAVA_VERIFY_TOKEN) {
       after(
         logger.error("Invalid verify token", {
           verifyToken: safeUrlSearchParams.data["hub.verify_token"],
@@ -309,10 +260,7 @@ export async function GET(req: NextRequest) {
 
     after(logger.info("Valid verify token"));
 
-    return NextResponse.json(
-      { "hub.challenge": safeUrlSearchParams.data["hub.challenge"] },
-      { status: 200 }
-    );
+    return NextResponse.json({ "hub.challenge": safeUrlSearchParams.data["hub.challenge"] }, { status: 200 });
   } catch (error) {
     after(logger.error("Unknown error", serializeError(error)));
 

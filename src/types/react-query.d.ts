@@ -17,9 +17,7 @@ type DefinedPlaceholderDataOptions<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 > = UseQueryOptions<TQueryFnData, TError, TData, TQueryKey> & {
-  placeholderData:
-    | NonUndefinedGuard<TQueryFnData>
-    | (() => NonUndefinedGuard<TQueryFnData>);
+  placeholderData: NonUndefinedGuard<TQueryFnData> | (() => NonUndefinedGuard<TQueryFnData>);
 };
 
 type DefinedPlaceholderDataInfiniteOptions<
@@ -28,14 +26,7 @@ type DefinedPlaceholderDataInfiniteOptions<
   TData = InfiniteData<TQueryFnData>,
   TQueryKey extends QueryKey = QueryKey,
   TPageParam = unknown,
-> = UseInfiniteQueryOptions<
-  TQueryFnData,
-  TError,
-  TData,
-  TQueryFnData,
-  TQueryKey,
-  TPageParam
-> & {
+> = UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey, TPageParam> & {
   placeholderData:
     | NonUndefinedGuard<InfiniteData<TQueryFnData, TPageParam>>
     | (() => NonUndefinedGuard<InfiniteData<TQueryFnData, TPageParam>>);
@@ -53,12 +44,7 @@ declare module "@tanstack/react-query" {
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(
-    options: DefinedPlaceholderDataOptions<
-      TQueryFnData,
-      TError,
-      TData,
-      TQueryKey
-    >,
+    options: DefinedPlaceholderDataOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient
   ): DefinedUseQueryResult<TData, TError>;
 
@@ -69,13 +55,7 @@ declare module "@tanstack/react-query" {
     TQueryKey extends QueryKey = QueryKey,
     TPageParam = unknown,
   >(
-    options: DefinedPlaceholderDataInfiniteOptions<
-      TQueryFnData,
-      TError,
-      TData,
-      TQueryKey,
-      TPageParam
-    >,
+    options: DefinedPlaceholderDataInfiniteOptions<TQueryFnData, TError, TData, TQueryKey, TPageParam>,
     queryClient?: QueryClient
   ): DefinedUseInfiniteQueryResult<TData, TError>;
 }

@@ -21,11 +21,7 @@ export async function getLastSync(userId: string) {
   );
 }
 
-export async function addSync(
-  syncType: SyncType,
-  userId: string,
-  activities: ActivityInput[]
-) {
+export async function addSync(syncType: SyncType, userId: string, activities: ActivityInput[]) {
   const { startDate } = getMostRecentActivity(activities);
 
   return await prisma.sync.create({
