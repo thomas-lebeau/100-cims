@@ -70,8 +70,6 @@ export default function Main({ className }: mainProps) {
             {...cim}
             climbed={ascents.some((a) => a.cimId === cim.id)}
             selected={selected === cim.id}
-            onClickClimb={onClickClimb}
-            onClick={setSelect}
           />
         ))}
       </Map>

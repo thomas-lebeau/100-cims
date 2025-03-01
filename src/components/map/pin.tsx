@@ -1,13 +1,22 @@
 import type { ValueOf } from "@/types/values-of";
+import type { Ref } from "react";
 
 const COLOR = {
   GREEN: "#3cc83e",
   RED: "#ff0000",
 } as const;
 
-export function Pin({ color }: { color: ValueOf<typeof COLOR> }) {
+export function Pin({
+  className,
+  color,
+  ref,
+}: {
+  className?: string;
+  color: ValueOf<typeof COLOR>;
+  ref?: Ref<SVGSVGElement>;
+}) {
   return (
-    <svg display="block" height="41px" width="27px" viewBox="0 0 27 41">
+    <svg display="block" height="41px" width="27px" viewBox="0 0 27 41" ref={ref} className={className}>
       <defs>
         <radialGradient id="shadowGradient">
           <stop offset="10%" stopOpacity="0.4"></stop>
