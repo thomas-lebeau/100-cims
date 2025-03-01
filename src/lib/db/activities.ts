@@ -8,10 +8,7 @@ const originType = ["STRAVA", "GPX"] as const;
 
 export type OriginType = (typeof originType)[number] | null;
 export type Activity = Awaited<ReturnType<typeof getActivities>>[number];
-export type ActivityInput = Omit<
-  Activity,
-  "id" | "userId" | "syncId" | "createdAt" | "updatedAt"
->;
+export type ActivityInput = Omit<Activity, "id" | "userId" | "syncId" | "createdAt" | "updatedAt">;
 
 export const activitySchema = z.object({
   id: z.string(),

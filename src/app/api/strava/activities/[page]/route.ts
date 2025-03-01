@@ -1,4 +1,4 @@
-import type { NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { auth } from "@/lib/next-auth";
@@ -26,19 +26,13 @@ const urlSearchParamsSchema = z.object({
     .optional(),
 });
 
-export async function GET(
-  req: NextRequest,
-  context: z.infer<typeof routeContextSchema>
-) {
+export async function GET(req: NextRequest, context: z.infer<typeof routeContextSchema>) {
   try {
     const serverTiming = new serverTimings();
     const session = await auth();
 
     if (!session) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401, headers: serverTiming.headers() }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: serverTiming.headers() });
     }
 
     serverTiming.start("get");
@@ -85,9 +79,7 @@ export async function GET(
       );
     }
 
-    const safeActivity = stravaActivitySchema
-      .array()
-      .safeParse(await res.json());
+    const safeActivity = stravaActivitySchema.array().safeParse(await res.json());
 
     if (!safeActivity.success) {
       return NextResponse.json(safeActivity.error.issues, { status: 422 }); //TODO: return [] or different error code

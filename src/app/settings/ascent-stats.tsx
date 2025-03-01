@@ -32,9 +32,7 @@ export default async function AscentStats() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground font-normal">
-              Total Ascents
-            </CardTitle>
+            <CardTitle className="text-sm text-muted-foreground font-normal">Total Ascents</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalAscents}</div>
@@ -43,9 +41,7 @@ export default async function AscentStats() {
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground font-normal">
-              Unique Peaks
-            </CardTitle>
+            <CardTitle className="text-sm text-muted-foreground font-normal">Unique Peaks</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{uniquePeaks}</div>
@@ -54,9 +50,7 @@ export default async function AscentStats() {
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground font-normal">
-              Essential Peaks
-            </CardTitle>
+            <CardTitle className="text-sm text-muted-foreground font-normal">Essential Peaks</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{essentialPeaks}</div>
@@ -65,14 +59,10 @@ export default async function AscentStats() {
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground font-normal">
-              Total Altitude
-            </CardTitle>
+            <CardTitle className="text-sm text-muted-foreground font-normal">Total Altitude</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {totalAltitude.toLocaleString()}m
-            </div>
+            <div className="text-2xl font-bold">{totalAltitude.toLocaleString()}m</div>
           </CardContent>
         </Card>
       </div>

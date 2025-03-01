@@ -18,8 +18,7 @@ export default function ClimbStats({ cims, ascents }: ClimbStatsProps) {
       {stats.climbedCimsPercentage}% ({stats.climbedCims} /{stats.totalCims}
       )
       <Progress value={stats.climbedPercentage} className="col-span-2" />
-      {stats.climbedPercentage}% ({stats.climbedAltitude}m /{" "}
-      {stats.totalAltitude}m)
+      {stats.climbedPercentage}% ({stats.climbedAltitude}m / {stats.totalAltitude}m)
     </div>
   );
 }

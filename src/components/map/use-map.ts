@@ -1,11 +1,6 @@
 import { type FeatureCollection } from "geojson";
 import type { LngLatBoundsLike, GeoJSONSource } from "mapbox-gl";
-import {
-  Map,
-  NavigationControl,
-  ScaleControl,
-  GeolocateControl,
-} from "mapbox-gl";
+import { Map, NavigationControl, ScaleControl, GeolocateControl } from "mapbox-gl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

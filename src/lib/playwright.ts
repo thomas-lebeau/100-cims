@@ -6,9 +6,7 @@ export { expect } from "@playwright/test";
 export const TEST_USER_EMAIL = "hello@e2e.com";
 
 export const test = base.extend<{
-  testUser: NonNullable<
-    Awaited<ReturnType<typeof getUser>> & { email: string }
-  >;
+  testUser: NonNullable<Awaited<ReturnType<typeof getUser>> & { email: string }>;
 }>({
   testUser: async ({}, use) => {
     const testUser = await getUser(TEST_USER_EMAIL);

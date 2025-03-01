@@ -34,10 +34,7 @@ function queryFn({ pageParam, meta }: { pageParam: unknown; meta: unknown }) {
   return zfetch(apiResponseSchema, url);
 }
 
-function getNextPageParam(
-  lastPage: StravaActivity[],
-  pages: StravaActivity[][]
-): null | number {
+function getNextPageParam(lastPage: StravaActivity[], pages: StravaActivity[][]): null | number {
   return lastPage.length >= PAGE_SIZE ? pages.length + 1 : null;
 }
 
@@ -50,14 +47,7 @@ export function useStravaActivities(
     ...(options.since && { since: options.since }),
   };
 
-  const {
-    data,
-    error,
-    isFetching,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useInfiniteQuery({
+  const { data, error, isFetching, isFetchingNextPage, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ["strava-activities", options.since],
     queryFn,
     placeholderData: {

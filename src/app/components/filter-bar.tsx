@@ -1,9 +1,6 @@
 import { useMemo } from "react";
 
-import {
-  SecgmentedControl,
-  SegmentedControlOption,
-} from "@/components/ui/segmented-control";
+import { SecgmentedControl, SegmentedControlOption } from "@/components/ui/segmented-control";
 import { XIcon } from "lucide-react";
 
 import { FacetPicker } from "@/components/facet-picker";
@@ -33,9 +30,7 @@ export default function FilterBar({
           type="search"
           placeholder="Filter cims..."
           value={filter.name ?? ""}
-          onChange={(event) =>
-            setFilter({ type: FILTER_TYPE.name, payload: event.target.value })
-          }
+          onChange={(event) => setFilter({ type: FILTER_TYPE.name, payload: event.target.value })}
           className="max-w space-x-2"
         />
       </div>
@@ -50,9 +45,7 @@ export default function FilterBar({
           }
         >
           <SegmentedControlOption value="all">All</SegmentedControlOption>
-          <SegmentedControlOption value="essentials">
-            Essentials
-          </SegmentedControlOption>
+          <SegmentedControlOption value="essentials">Essentials</SegmentedControlOption>
         </SecgmentedControl>
 
         <SecgmentedControl
@@ -65,9 +58,7 @@ export default function FilterBar({
           }
         >
           <SegmentedControlOption value="all">All</SegmentedControlOption>
-          <SegmentedControlOption value="climbed">
-            Ascended
-          </SegmentedControlOption>
+          <SegmentedControlOption value="climbed">Ascended</SegmentedControlOption>
         </SecgmentedControl>
         <FacetPicker
           title="Comarca"
@@ -84,9 +75,7 @@ export default function FilterBar({
           <Button
             className="h-8 text-muted-foreground font-normal text-xs px-3"
             variant="ghost"
-            onClick={() =>
-              setFilter({ type: FILTER_TYPE.comarca, payload: undefined })
-            }
+            onClick={() => setFilter({ type: FILTER_TYPE.comarca, payload: undefined })}
           >
             Reset
             <XIcon className="ml-2 h-4 w-4" />

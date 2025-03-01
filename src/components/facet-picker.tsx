@@ -27,25 +27,13 @@ type FacetPickerProps = {
   }[];
 };
 
-export function FacetPicker({
-  title,
-  options,
-  selectedvalues: _selectedvalues,
-  setValues,
-}: FacetPickerProps) {
-  const selectedvalues = useMemo(
-    () => new Set(_selectedvalues),
-    [_selectedvalues]
-  );
+export function FacetPicker({ title, options, selectedvalues: _selectedvalues, setValues }: FacetPickerProps) {
+  const selectedvalues = useMemo(() => new Set(_selectedvalues), [_selectedvalues]);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-8 border-dashed text-muted-foreground font-normal text-xs"
-        >
+        <Button variant="outline" size="sm" className="h-8 border-dashed text-muted-foreground font-normal text-xs">
           <PlusCircleIcon className="mr-2 h-4 w-4" />
           {title}
           {selectedvalues?.size > 0 && (
@@ -56,9 +44,7 @@ export function FacetPicker({
               </Badge>
               <div className="hidden space-x-1 lg:flex">
                 {selectedvalues.size > 2 ? (
-                  <Badge variant="secondary">
-                    {selectedvalues.size} selected
-                  </Badge>
+                  <Badge variant="secondary">{selectedvalues.size} selected</Badge>
                 ) : (
                   options
                     .filter((option) => selectedvalues.has(option.value))
@@ -97,16 +83,12 @@ export function FacetPicker({
                     <div
                       className={cn(
                         "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                        isSelected
-                          ? "bg-primary text-primary-foreground"
-                          : "opacity-50 [&_svg]:invisible"
+                        isSelected ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"
                       )}
                     >
                       <CheckIcon className={cn("h-4 w-4")} />
                     </div>
-                    {option.icon && (
-                      <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                    )}
+                    {option.icon && <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
                     <span>{option.label}</span>
                   </CommandItem>
                 );
@@ -116,10 +98,7 @@ export function FacetPicker({
               <>
                 <CommandSeparator />
                 <CommandGroup>
-                  <CommandItem
-                    onSelect={() => setValues(undefined)}
-                    className="justify-center text-center"
-                  >
+                  <CommandItem onSelect={() => setValues(undefined)} className="justify-center text-center">
                     Clear filters
                   </CommandItem>
                 </CommandGroup>

@@ -1,12 +1,9 @@
 /* eslint-disable no-console */
-const fs = require("fs");
-const { PrismaClient } = require("@prisma/client");
-const { z } = require("zod");
-const { withBar } = require("./utils");
-const {
-  encode,
-  CODE_PRECISION_EXTRA,
-} = require("../src/lib/open-location-code");
+import * as fs from "node:fs";
+import { PrismaClient } from "@prisma/client";
+import { z } from "zod";
+import { withBar } from "./utils";
+import { encode, CODE_PRECISION_EXTRA } from "../src/lib/open-location-code";
 
 const TABLES = [
   "account",
@@ -19,7 +16,7 @@ const TABLES = [
   "activity",
   "ascent",
   "sync",
-];
+] as const;
 
 const CIMS = JSON.parse(fs.readFileSync(__dirname + "/seed.json", "utf8"));
 
@@ -57,6 +54,8 @@ const seedSchema = z.object({
   ),
 });
 
+type SeedData = z.infer<typeof seedSchema>;
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -68,6 +67,7 @@ async function main() {
   }
 
   await withBar("Reset db", TABLES, async (table) => {
+    // @ts-expect-error deleteMany() should accecpt no args
     await prisma[table].deleteMany();
   });
 
@@ -96,7 +96,7 @@ async function main() {
             where: { name },
             create: {
               name,
-              codigo: safeCims.data.comarca.find((c) => c.name === name).codigo,
+              codigo: safeCims.data.comarca.find((c) => c.name === name)!.codigo,
             },
           })),
         },
@@ -124,11 +124,12 @@ async function main() {
 
 main();
 
-async function verifyTables(data) {
+async function verifyTables(data: SeedData) {
   let error = false;
 
   for (const [tableName, tableData] of Object.entries(data)) {
-    const count = await prisma[tableName].count();
+    // @ts-expect-error count() should accecpt no args
+    const count = await prisma[tableName as (typeof TABLES)[number]].count();
 
     if (count !== tableData.length) {
       error = true;
@@ -136,9 +137,7 @@ async function verifyTables(data) {
         `❌ Created ${count} item${count > 1 ? "s" : ""} on table "${tableName}" (Expected ${tableData.length})`
       );
     } else {
-      console.log(
-        `✅ Created ${count} item${count > 1 ? "s" : ""} on table "${tableName}"`
-      );
+      console.log(`✅ Created ${count} item${count > 1 ? "s" : ""} on table "${tableName}"`);
     }
   }
 

@@ -55,8 +55,11 @@ const stravaProvider = StravaProvider({
   token: {
     // @ts-expect-error - The type definition is incorrect
     async request({ client, params, checks, provider }) {
-      const { token_type, expires_at, refresh_token, access_token } =
-        await client.oauthCallback(provider.callbackUrl, params, checks);
+      const { token_type, expires_at, refresh_token, access_token } = await client.oauthCallback(
+        provider.callbackUrl,
+        params,
+        checks
+      );
 
       return {
         tokens: {

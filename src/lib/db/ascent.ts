@@ -23,11 +23,7 @@ export async function addAscents(userId: string, ascents: AscentInput[]) {
   });
 }
 
-export async function addAscent(
-  userId: string,
-  cimId: string,
-  activityId?: string
-) {
+export async function addAscent(userId: string, cimId: string, activityId?: string) {
   return await prisma.ascent.create({
     data: {
       userId,
@@ -47,10 +43,7 @@ export async function deleteAscent(userId: string, cimId: string) {
 }
 
 export type Ascent = Awaited<ReturnType<typeof getAscents>>[0];
-export type AscentInput = Omit<
-  Ascent,
-  "id" | "userId" | "createdAt" | "updatedAt"
->;
+export type AscentInput = Omit<Ascent, "id" | "userId" | "createdAt" | "updatedAt">;
 
 export const ascentSchema = z.object({
   id: z.string(),

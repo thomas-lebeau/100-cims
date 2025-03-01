@@ -26,16 +26,12 @@ export default async function SettingStravaPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-medium">Strava</h3>
-        <p className="text-sm text-muted-foreground">
-          Connect your Strava account to import your activities.
-        </p>
+        <p className="text-sm text-muted-foreground">Connect your Strava account to import your activities.</p>
       </div>
 
       <Separator />
 
-      <Hydrate>
-        {isLinkedToStrava ? <StravaImporter /> : <LinkStrava />}
-      </Hydrate>
+      <Hydrate>{isLinkedToStrava ? <StravaImporter /> : <LinkStrava />}</Hydrate>
     </div>
   );
 }

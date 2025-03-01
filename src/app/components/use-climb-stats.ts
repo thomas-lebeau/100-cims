@@ -28,12 +28,8 @@ export function useClimbStats(cims: Cim[], ascents: Ascent[]): ClimbStats {
         { totalAltitude: 0, totalCims: 0, climbedAltitude: 0, climbedCims: 0 }
       );
 
-      const climbedPercentage = Math.round(
-        (stats.climbedAltitude / stats.totalAltitude) * 100
-      );
-      const climbedCimsPercentage = Math.round(
-        (stats.climbedCims / stats.totalCims) * 100
-      );
+      const climbedPercentage = Math.round((stats.climbedAltitude / stats.totalAltitude) * 100);
+      const climbedCimsPercentage = Math.round((stats.climbedCims / stats.totalCims) * 100);
 
       return { ...stats, climbedPercentage, climbedCimsPercentage };
     },

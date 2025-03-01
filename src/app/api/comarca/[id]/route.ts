@@ -1,6 +1,6 @@
 import { getBBox } from "@/lib/geojson";
 import { type FeatureCollection } from "geojson";
-import type { NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
 import { z } from "zod";
@@ -14,10 +14,7 @@ const routeContextSchema = z.object({
   ),
 });
 
-export async function GET(
-  req: NextRequest,
-  context: z.infer<typeof routeContextSchema>
-) {
+export async function GET(req: NextRequest, context: z.infer<typeof routeContextSchema>) {
   try {
     const result = routeContextSchema.safeParse(context);
 
@@ -27,8 +24,8 @@ export async function GET(
 
     const ids = (await result.data.params).id.split(",");
 
-    const features = (rawData as unknown as FeatureCollection).features.filter(
-      (feature) => ids.includes(feature.properties?.CODICOMAR)
+    const features = (rawData as unknown as FeatureCollection).features.filter((feature) =>
+      ids.includes(feature.properties?.CODICOMAR)
     );
 
     const data: FeatureCollection = {

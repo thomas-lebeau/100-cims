@@ -28,10 +28,7 @@ function init() {
     ],
   });
 
-  datadogRum.setGlobalContextProperty(
-    "prNumber",
-    process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID
-  );
+  datadogRum.setGlobalContextProperty("prNumber", process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID);
 }
 
 function getMatchOptions(url: string) {

@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "next",
-    "eslint:recommended",
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  "extends": ["next", "eslint:recommended", "next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "env": {
     "es2020": true
   },
@@ -27,10 +22,7 @@
     {
       "files": ["e2e/**", "**/playwright.ts"],
       "rules": {
-        "no-empty-pattern": [
-          "error",
-          { "allowObjectPatternsAsParameters": true }
-        ],
+        "no-empty-pattern": ["error", { "allowObjectPatternsAsParameters": true }],
         "react-hooks/rules-of-hooks": "off"
       }
     },

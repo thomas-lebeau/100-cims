@@ -1,16 +1,11 @@
-import {
-  cleanupExpiredSessions,
-  cleanupExpiredVerificationTokens,
-} from "@/lib/db/cron";
-import type { NextRequest} from "next/server";
+import { cleanupExpiredSessions, cleanupExpiredVerificationTokens } from "@/lib/db/cron";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { serializeError } from "serialize-error";
 
 export async function GET(req: NextRequest) {
   try {
-    if (
-      req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`
-    ) {
+    if (req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

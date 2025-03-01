@@ -3,12 +3,7 @@ import { z } from "zod";
 import { toIsoDate } from "../to-iso-date-zod-preprocessor";
 import { comarcaSchema } from "./comarcas";
 
-export type TinyCim = [
-  Cim["id"],
-  Cim["longitude"],
-  Cim["latitude"],
-  Cim["code"],
-];
+export type TinyCim = [Cim["id"], Cim["longitude"], Cim["latitude"], Cim["code"]];
 
 const tinyCimSchema = z
   .object({
@@ -17,9 +12,7 @@ const tinyCimSchema = z
     latitude: z.number(),
     code: z.string(),
   })
-  .transform(
-    (cim) => [cim.id, cim.longitude, cim.latitude, cim.code] as TinyCim
-  );
+  .transform((cim) => [cim.id, cim.longitude, cim.latitude, cim.code] as TinyCim);
 
 export async function getTinyCims() {
   return tinyCimSchema.array().parse(
@@ -38,12 +31,8 @@ export async function getTinyCims() {
 export function getCims(): Promise<Cim[]>;
 export function getCims(includesComarca: true): Promise<CimWithComarca[]>;
 export function getCims(includesComarca: false): Promise<Cim[]>;
-export function getCims(
-  includesComarca: boolean
-): Promise<CimWithComarca[] | Cim[]>;
-export function getCims(
-  includesComarca: boolean = false
-): Promise<CimWithComarca[] | Cim[]> {
+export function getCims(includesComarca: boolean): Promise<CimWithComarca[] | Cim[]>;
+export function getCims(includesComarca: boolean = false): Promise<CimWithComarca[] | Cim[]> {
   if (includesComarca) {
     return getCimsWithComarcas();
   }

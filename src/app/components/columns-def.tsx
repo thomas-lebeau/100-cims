@@ -16,9 +16,7 @@ export const columns: ColumnDef<CimWithComarca>[] = [
     accessorKey: "essencial",
     header: ({ column }) => <HeaderCell column={column} />,
     cell: ({ row }) => {
-      return row.getValue<boolean>("essencial") ? (
-        <Sparkles className="h-4 w-4 text-yellow-500" />
-      ) : null;
+      return row.getValue<boolean>("essencial") ? <Sparkles className="h-4 w-4 text-yellow-500" /> : null;
     },
   },
   {
@@ -41,22 +39,12 @@ export const columns: ColumnDef<CimWithComarca>[] = [
 
             // TODO: find a way to type this
             // meta is of type `unknown`
-            if (
-              meta &&
-              "onClickClimb" in meta &&
-              typeof meta.onClickClimb === "function"
-            ) {
+            if (meta && "onClickClimb" in meta && typeof meta.onClickClimb === "function") {
               meta.onClickClimb(id, climbed ? "REMOVE" : "ADD");
             }
           }}
         >
-          <CheckCircle
-            strokeWidth={3}
-            className={cn(
-              "h-4 w-4",
-              climbed ? "text-green-500" : "text-gray-300"
-            )}
-          />
+          <CheckCircle strokeWidth={3} className={cn("h-4 w-4", climbed ? "text-green-500" : "text-gray-300")} />
         </Button>
       );
     },
@@ -81,11 +69,7 @@ export const columns: ColumnDef<CimWithComarca>[] = [
             const meta = table.options.meta;
 
             // meta is of type `unknown`
-            if (
-              meta &&
-              "onClickComarca" in meta &&
-              typeof meta.onClickComarca === "function"
-            ) {
+            if (meta && "onClickComarca" in meta && typeof meta.onClickComarca === "function") {
               meta.onClickComarca(comarca.codigo);
             }
           }}

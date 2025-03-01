@@ -27,9 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-screen">
       {/* TODO: Add [openGraph](https://vercel.com/thomas-lebeau/100-cims/DUBmc7KBESwUztZABFroBTnPUTDN/og)  */}
-      <body
-        className={cn(inter.className, "h-screen max-h-screen flex flex-col")}
-      >
+      <body className={cn(inter.className, "h-screen max-h-screen flex flex-col")}>
         <Providers>
           <div className="h-screen max-h-screen flex flex-col">
             <Nav />

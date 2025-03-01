@@ -9,13 +9,7 @@ export type PopupContentProps = Pick<Cim, "id" | "name" | "altitude"> & {
   onClickClimb: (id: string, climbed: "ADD" | "REMOVE") => void; // eslint-disable-line no-unused-vars
 };
 
-export function PopupContent({
-  id,
-  name,
-  altitude,
-  climbed,
-  onClickClimb,
-}: PopupContentProps) {
+export function PopupContent({ id, name, altitude, climbed, onClickClimb }: PopupContentProps) {
   return (
     <div className="grid gap-4">
       <div className="flex items-center">
@@ -23,12 +17,7 @@ export function PopupContent({
           <h4 className="font-medium leading-none text-base">{name}</h4>
           <p className="text-sm text-muted-foreground">{altitude} m</p>
         </div>
-        <div
-          className={cn(
-            "ml-auto",
-            climbed ? "text-green-500" : "text-gray-400"
-          )}
-        >
+        <div className={cn("ml-auto", climbed ? "text-green-500" : "text-gray-400")}>
           <Button
             variant="ghost"
             size="icon"
