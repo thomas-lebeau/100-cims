@@ -16,9 +16,8 @@
     "prepare": "husky"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.ts"
   },
-  "type": "module",
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
     "@datadog/browser-rum": "^6.3.0",
@@ -64,6 +63,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@total-typescript/ts-reset": "^0.6.1",
+    "@types/cli-progress": "^3.11.6",
     "@types/jest": "^29.5.14",
     "@types/mapbox__polyline": "^1.0.5",
     "@types/mapbox-gl": "^3.4.1",

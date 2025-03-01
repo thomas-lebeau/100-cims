@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 // Copyright 2014 Google Inc. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the 'License');
@@ -121,10 +122,7 @@
   var PAIR_CODE_LENGTH_ = 10;
 
   // First place value of the pairs (if the last pair value is 1).
-  var PAIR_FIRST_PLACE_VALUE_ = Math.pow(
-    ENCODING_BASE_,
-    PAIR_CODE_LENGTH_ / 2 - 1
-  );
+  var PAIR_FIRST_PLACE_VALUE_ = Math.pow(ENCODING_BASE_, PAIR_CODE_LENGTH_ / 2 - 1);
 
   // Inverse of the precision of the pair section of the code.
   var PAIR_PRECISION_ = Math.pow(ENCODING_BASE_, 3);
@@ -147,22 +145,15 @@
   var GRID_LAT_FIRST_PLACE_VALUE_ = Math.pow(GRID_ROWS_, GRID_CODE_LENGTH_ - 1);
 
   // First place value of the longitude grid (if the last place is 1).
-  var GRID_LNG_FIRST_PLACE_VALUE_ = Math.pow(
-    GRID_COLUMNS_,
-    GRID_CODE_LENGTH_ - 1
-  );
+  var GRID_LNG_FIRST_PLACE_VALUE_ = Math.pow(GRID_COLUMNS_, GRID_CODE_LENGTH_ - 1);
 
   // Multiply latitude by this much to make it a multiple of the finest
   // precision.
-  var FINAL_LAT_PRECISION_ =
-    PAIR_PRECISION_ *
-    Math.pow(GRID_ROWS_, MAX_DIGIT_COUNT_ - PAIR_CODE_LENGTH_);
+  var FINAL_LAT_PRECISION_ = PAIR_PRECISION_ * Math.pow(GRID_ROWS_, MAX_DIGIT_COUNT_ - PAIR_CODE_LENGTH_);
 
   // Multiply longitude by this much to make it a multiple of the finest
   // precision.
-  var FINAL_LNG_PRECISION_ =
-    PAIR_PRECISION_ *
-    Math.pow(GRID_COLUMNS_, MAX_DIGIT_COUNT_ - PAIR_CODE_LENGTH_);
+  var FINAL_LNG_PRECISION_ = PAIR_PRECISION_ * Math.pow(GRID_COLUMNS_, MAX_DIGIT_COUNT_ - PAIR_CODE_LENGTH_);
 
   // Minimum length of a code that can be shortened.
   var MIN_TRIMMABLE_CODE_LEN_ = 6;
@@ -200,10 +191,7 @@
       return false;
     }
     // Is it in an illegal position?
-    if (
-      code.indexOf(SEPARATOR_) > SEPARATOR_POSITION_ ||
-      code.indexOf(SEPARATOR_) % 2 == 1
-    ) {
+    if (code.indexOf(SEPARATOR_) > SEPARATOR_POSITION_ || code.indexOf(SEPARATOR_) % 2 == 1) {
       return false;
     }
     // We can have an even number of padding characters before the separator,
@@ -218,14 +206,8 @@
         return false;
       }
       // There can only be one group and it must have even length.
-      var padMatch = code.match(
-        new RegExp("(" + PADDING_CHARACTER_ + "+)", "g")
-      );
-      if (
-        padMatch.length > 1 ||
-        padMatch[0].length % 2 == 1 ||
-        padMatch[0].length > SEPARATOR_POSITION_ - 2
-      ) {
+      var padMatch = code.match(new RegExp("(" + PADDING_CHARACTER_ + "+)", "g"));
+      if (padMatch.length > 1 || padMatch[0].length % 2 == 1 || padMatch[0].length > SEPARATOR_POSITION_ - 2) {
         return false;
       }
       // If the code is long enough to end with a separator, make sure it does.
@@ -240,9 +222,7 @@
     }
 
     // Strip the separator and any padding characters.
-    code = code
-      .replace(new RegExp("\\" + SEPARATOR_ + "+"), "")
-      .replace(new RegExp(PADDING_CHARACTER_ + "+"), "");
+    code = code.replace(new RegExp("\\" + SEPARATOR_ + "+"), "").replace(new RegExp(PADDING_CHARACTER_ + "+"), "");
     // Check the code contains only valid characters.
     for (var i = 0, len = code.length; i < len; i++) {
       var character = code.charAt(i).toUpperCase();
@@ -266,10 +246,7 @@
       return false;
     }
     // If there are less characters than expected before the SEPARATOR.
-    if (
-      code.indexOf(SEPARATOR_) >= 0 &&
-      code.indexOf(SEPARATOR_) < SEPARATOR_POSITION_
-    ) {
+    if (code.indexOf(SEPARATOR_) >= 0 && code.indexOf(SEPARATOR_) < SEPARATOR_POSITION_) {
       return true;
     }
     return false;
@@ -292,16 +269,14 @@
     }
 
     // Work out what the first latitude character indicates for latitude.
-    var firstLatValue =
-      CODE_ALPHABET_.indexOf(code.charAt(0).toUpperCase()) * ENCODING_BASE_;
+    var firstLatValue = CODE_ALPHABET_.indexOf(code.charAt(0).toUpperCase()) * ENCODING_BASE_;
     if (firstLatValue >= LATITUDE_MAX_ * 2) {
       // The code would decode to a latitude of >= 90 degrees.
       return false;
     }
     if (code.length > 1) {
       // Work out what the first longitude character indicates for longitude.
-      var firstLngValue =
-        CODE_ALPHABET_.indexOf(code.charAt(1).toUpperCase()) * ENCODING_BASE_;
+      var firstLngValue = CODE_ALPHABET_.indexOf(code.charAt(1).toUpperCase()) * ENCODING_BASE_;
       if (firstLngValue >= LONGITUDE_MAX_ * 2) {
         // The code would decode to a longitude of >= 180 degrees.
         return false;
@@ -324,11 +299,7 @@
    * @return {string} The code.
    * @throws {Exception} if any of the input values are not numbers.
    */
-  var encode = (OpenLocationCode.encode = function (
-    latitude,
-    longitude,
-    codeLength
-  ) {
+  var encode = (OpenLocationCode.encode = function (latitude, longitude, codeLength) {
     latitude = Number(latitude);
     longitude = Number(longitude);
     if (typeof codeLength == "undefined") {
@@ -339,13 +310,8 @@
     if (isNaN(latitude) || isNaN(longitude) || isNaN(codeLength)) {
       throw new Error("ValueError: Parameters are not numbers");
     }
-    if (
-      codeLength < MIN_DIGIT_COUNT_ ||
-      (codeLength < PAIR_CODE_LENGTH_ && codeLength % 2 == 1)
-    ) {
-      throw new Error(
-        "IllegalArgumentException: Invalid Open Location Code length"
-      );
+    if (codeLength < MIN_DIGIT_COUNT_ || (codeLength < PAIR_CODE_LENGTH_ && codeLength % 2 == 1)) {
+      throw new Error("IllegalArgumentException: Invalid Open Location Code length");
     }
     // Ensure that latitude and longitude are valid.
     latitude = clipLatitude(latitude);
@@ -365,13 +331,8 @@
     // Multiply values by their precision and convert to positive.
     // Force to integers so the division operations will have integer results.
     // Note: JavaScript requires rounding before truncating to ensure precision!
-    var latVal = Math.floor(
-      Math.round((latitude + LATITUDE_MAX_) * FINAL_LAT_PRECISION_ * 1e6) / 1e6
-    );
-    var lngVal = Math.floor(
-      Math.round((longitude + LONGITUDE_MAX_) * FINAL_LNG_PRECISION_ * 1e6) /
-        1e6
-    );
+    var latVal = Math.floor(Math.round((latitude + LATITUDE_MAX_) * FINAL_LAT_PRECISION_ * 1e6) / 1e6);
+    var lngVal = Math.floor(Math.round((longitude + LONGITUDE_MAX_) * FINAL_LNG_PRECISION_ * 1e6) / 1e6);
 
     // Compute the grid part of the code if necessary.
     if (codeLength > PAIR_CODE_LENGTH_) {
@@ -397,10 +358,7 @@
     }
 
     // Add the separator character.
-    code =
-      code.substring(0, SEPARATOR_POSITION_) +
-      SEPARATOR_ +
-      code.substring(SEPARATOR_POSITION_);
+    code = code.substring(0, SEPARATOR_POSITION_) + SEPARATOR_ + code.substring(SEPARATOR_POSITION_);
 
     // If we don't need to pad the code, return the requested section.
     if (codeLength >= SEPARATOR_POSITION_) {
@@ -408,9 +366,7 @@
     }
     // Pad and return the code.
     return (
-      code.substring(0, codeLength) +
-      Array(SEPARATOR_POSITION_ - codeLength + 1).join(PADDING_CHARACTER_) +
-      SEPARATOR_
+      code.substring(0, codeLength) + Array(SEPARATOR_POSITION_ - codeLength + 1).join(PADDING_CHARACTER_) + SEPARATOR_
     );
   });
 
@@ -430,11 +386,7 @@
     // integer arithmetic. Only at the final step are they converted to floating
     // point and combined.
     if (!isFull(code)) {
-      throw new Error(
-        "IllegalArgumentException: " +
-          "Passed Plus Code is not a valid full code: " +
-          code
-      );
+      throw new Error("IllegalArgumentException: " + "Passed Plus Code is not a valid full code: " + code);
     }
     // Strip the '+' and '0' characters from the code and convert to upper case.
     code = code.replace("+", "").replace(/0/g, "").toLocaleUpperCase("en-US");
@@ -511,18 +463,12 @@
    * @throws {Exception} if the short code is not valid, or the reference
    *     position values are not numbers.
    */
-  OpenLocationCode.recoverNearest = function (
-    shortCode,
-    referenceLatitude,
-    referenceLongitude
-  ) {
+  OpenLocationCode.recoverNearest = function (shortCode, referenceLatitude, referenceLongitude) {
     if (!isShort(shortCode)) {
       if (isFull(shortCode)) {
         return shortCode.toUpperCase();
       } else {
-        throw new Error(
-          "ValueError: Passed short code is not valid: " + shortCode
-        );
+        throw new Error("ValueError: Passed short code is not valid: " + shortCode);
       }
     }
     referenceLatitude = Number(referenceLatitude);
@@ -544,10 +490,7 @@
     var halfResolution = resolution / 2.0;
 
     // Use the reference location to pad the supplied short code and decode it.
-    var codeArea = decode(
-      encode(referenceLatitude, referenceLongitude).substr(0, paddingLength) +
-        shortCode
-    );
+    var codeArea = decode(encode(referenceLatitude, referenceLongitude).substr(0, paddingLength) + shortCode);
     // How many degrees latitude is the code from the reference? If it is more
     // than half the resolution, we need to move it north or south but keep it
     // within -90 to 90 degrees.
@@ -574,11 +517,7 @@
       codeArea.longitudeCenter += resolution;
     }
 
-    return encode(
-      codeArea.latitudeCenter,
-      codeArea.longitudeCenter,
-      codeArea.codeLength
-    );
+    return encode(codeArea.latitudeCenter, codeArea.longitudeCenter, codeArea.codeLength);
   };
 
   /**
@@ -607,9 +546,7 @@
     code = code.toUpperCase();
     var codeArea = decode(code);
     if (codeArea.codeLength < MIN_TRIMMABLE_CODE_LEN_) {
-      throw new Error(
-        "ValueError: Code length must be at least " + MIN_TRIMMABLE_CODE_LEN_
-      );
+      throw new Error("ValueError: Code length must be at least " + MIN_TRIMMABLE_CODE_LEN_);
     }
     // Ensure that latitude and longitude are valid.
     latitude = Number(latitude);
@@ -620,10 +557,7 @@
     latitude = clipLatitude(latitude);
     longitude = normalizeLongitude(longitude);
     // How close are the latitude and longitude to the code center.
-    var range = Math.max(
-      Math.abs(codeArea.latitudeCenter - latitude),
-      Math.abs(codeArea.longitudeCenter - longitude)
-    );
+    var range = Math.max(Math.abs(codeArea.latitudeCenter - latitude), Math.abs(codeArea.longitudeCenter - longitude));
     for (var i = PAIR_RESOLUTIONS_.length - 2; i >= 1; i--) {
       // Check if we're close enough to shorten. The range must be less than 1/2
       // the resolution to shorten at all, and we want to allow some safety, so
@@ -691,29 +625,11 @@
    *
    * @constructor
    */
-  var CodeArea = (OpenLocationCode.CodeArea = function (
-    latitudeLo,
-    longitudeLo,
-    latitudeHi,
-    longitudeHi,
-    codeLength
-  ) {
-    return new OpenLocationCode.CodeArea.fn.Init(
-      latitudeLo,
-      longitudeLo,
-      latitudeHi,
-      longitudeHi,
-      codeLength
-    );
+  var CodeArea = (OpenLocationCode.CodeArea = function (latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength) {
+    return new OpenLocationCode.CodeArea.fn.Init(latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength);
   });
   CodeArea.fn = CodeArea.prototype = {
-    Init: function (
-      latitudeLo,
-      longitudeLo,
-      latitudeHi,
-      longitudeHi,
-      codeLength
-    ) {
+    Init: function (latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength) {
       /**
        * The latitude of the SW corner.
        * @type {number}
@@ -743,18 +659,12 @@
        * The latitude of the center in degrees.
        * @type {number}
        */
-      this.latitudeCenter = Math.min(
-        latitudeLo + (latitudeHi - latitudeLo) / 2,
-        LATITUDE_MAX_
-      );
+      this.latitudeCenter = Math.min(latitudeLo + (latitudeHi - latitudeLo) / 2, LATITUDE_MAX_);
       /**
        * The longitude of the center in degrees.
        * @type {number}
        */
-      this.longitudeCenter = Math.min(
-        longitudeLo + (longitudeHi - longitudeLo) / 2,
-        LONGITUDE_MAX_
-      );
+      this.longitudeCenter = Math.min(longitudeLo + (longitudeHi - longitudeLo) / 2, LONGITUDE_MAX_);
     },
   };
   CodeArea.fn.Init.prototype = CodeArea.fn;
