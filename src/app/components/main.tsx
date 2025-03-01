@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 
 import { Map, Marker } from "@/components/map";
 
@@ -16,6 +16,7 @@ import { useComarcas } from "../../components/queries/use-comarcas-query";
 import ClimbStats from "./climb-stats";
 import FilterBar from "./filter-bar";
 import { FILTER_TYPE, useCimFilter } from "./use-cim-filter";
+import { usePathname } from "next/navigation";
 
 type mainProps = {
   className?: string;
@@ -23,7 +24,15 @@ type mainProps = {
 
 const INCLUDE_COMARCA = true;
 
+function useCode() {
+  const setCode = (code: string) => window.history.pushState(null, "", "/" + code);
+  const pathname = usePathname();
+
+  return [pathname.replace("/", ""), setCode] as const;
+}
+
 export default function Main({ className }: mainProps) {
+  const [code, setCode] = useCode();
   const { status } = useSession();
   const { data: cims } = useCimsQuery(INCLUDE_COMARCA);
   const { data: comarcas } = useComarcas();
@@ -31,7 +40,6 @@ export default function Main({ className }: mainProps) {
     enabled: status === "authenticated",
   });
   const { mutate } = useAscentMutation();
-  const [selected, setSelect] = useState<string | null>(null);
   const [filteredCims, filter, setFilter] = useCimFilter(cims, ascents);
 
   const geoJsonUrl = useMemo(
@@ -57,10 +65,6 @@ export default function Main({ className }: mainProps) {
     [filter.comarca, setFilter]
   );
 
-  useEffect(() => {
-    setSelect(null);
-  }, [filter.comarca]);
-
   return (
     <main className={cn(className, "flex")} style={{ height: "calc(100% - 3rem)" }}>
       <Map className="basis-2/3 h-full" geoJsonUrl={geoJsonUrl}>
@@ -69,7 +73,7 @@ export default function Main({ className }: mainProps) {
             key={cim.id}
             {...cim}
             climbed={ascents.some((a) => a.cimId === cim.id)}
-            selected={selected === cim.id}
+            selected={code === cim.code}
           />
         ))}
       </Map>
@@ -79,7 +83,7 @@ export default function Main({ className }: mainProps) {
           columns={columns}
           data={filteredCims}
           className="overflow-auto grow p-2"
-          onClickRow={({ id }) => setSelect(id)}
+          onClickRow={({ code }) => setCode(code)}
           meta={{ onClickClimb, onClickComarca }}
         />
         <ClimbStats cims={filteredCims} ascents={ascents} />
