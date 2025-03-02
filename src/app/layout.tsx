@@ -27,7 +27,7 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="h-screen">
+    <html lang="en" className="h-screen" suppressHydrationWarning>
       {/* TODO: Add [openGraph](https://vercel.com/thomas-lebeau/100-cims/DUBmc7KBESwUztZABFroBTnPUTDN/og)  */}
       <body className={cn(inter.className, "h-screen max-h-screen flex flex-col")}>
         <Providers>
