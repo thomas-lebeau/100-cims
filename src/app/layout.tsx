@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VercelToolbar } from "@vercel/toolbar/next";
@@ -6,6 +7,7 @@ import { Inter } from "next/font/google";
 import React from "react";
 
 import { cn } from "@/lib/cn";
+import { getFeatureFlags } from "@/lib/flags";
 
 import Providers from "@/components/providers";
 import Nav from "../components/nav/nav";
@@ -23,7 +25,7 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-screen">
       {/* TODO: Add [openGraph](https://vercel.com/thomas-lebeau/100-cims/DUBmc7KBESwUztZABFroBTnPUTDN/og)  */}
@@ -31,15 +33,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <div className="h-screen max-h-screen flex flex-col">
             <Nav />
-
             {children}
           </div>
-          <DatadogRum />
-          <SpeedInsights debug={false} />
-          <Analytics debug={false} />
-          {process.env.NODE_ENV === "development" && <VercelToolbar />}
+          <ToolBars />
         </Providers>
       </body>
     </html>
+  );
+}
+
+export async function ToolBars() {
+  const flags = await getFeatureFlags();
+
+  return (
+    <>
+      {flags.datadogRum && <DatadogRum flags={flags} />}
+      {flags.vercelAnalytics && <SpeedInsights debug={false} />}
+      {flags.vercelAnalytics && <Analytics debug={false} />}
+      {flags.vercelToolbar && <VercelToolbar />}
+      {flags.reactQueryToolbar && <ReactQueryDevtools />}
+    </>
   );
 }
