@@ -4,9 +4,7 @@ import { datadogRum } from "@datadog/browser-rum";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "development") {
-  init();
-}
+const prNumber = process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID;
 
 function init() {
   datadogRum.init({
@@ -28,7 +26,9 @@ function init() {
     ],
   });
 
-  datadogRum.setGlobalContextProperty("prNumber", process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID);
+  if (prNumber) {
+    datadogRum.setGlobalContextProperty("prNumber", process.env.NEXT_PUBLIC_VERCEL_GIT_PULL_REQUEST_ID);
+  }
 }
 
 function getMatchOptions(url: string) {
@@ -38,22 +38,42 @@ function getMatchOptions(url: string) {
   };
 }
 
-export default function DatadogRum() {
+type DatadogRumProps = {
+  flags: Record<string, boolean>;
+};
+
+export default function DatadogRum({ flags }: DatadogRumProps) {
   const session = useSession();
 
   useEffect(() => {
-    if (session.status === "authenticated") {
-      const { id, name, email } = session.data.user;
+    init();
+  }, []);
 
-      datadogRum.setUser({
-        id,
-        ...(name ? { name } : {}),
-        ...(email ? { email } : {}),
+  useEffect(
+    function setFeatureFalgs() {
+      Object.entries(flags).forEach(([key, value]) => {
+        datadogRum.addFeatureFlagEvaluation(key, value);
       });
-    }
+    },
+    [flags]
+  );
 
-    () => datadogRum.clearUser();
-  }, [session]);
+  useEffect(
+    function setUser() {
+      if (session.status === "authenticated") {
+        const { id, name, email } = session.data.user;
+
+        datadogRum.setUser({
+          id,
+          ...(name ? { name } : {}),
+          ...(email ? { email } : {}),
+        });
+      }
+
+      () => datadogRum.clearUser();
+    },
+    [session]
+  );
 
   return null;
 }
