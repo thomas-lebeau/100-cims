@@ -6,17 +6,24 @@ const COLOR = {
   RED: "#ff0000",
 } as const;
 
-export function Pin({
-  className,
-  color,
-  ref,
-}: {
+type PinProps = {
   className?: string;
   color: ValueOf<typeof COLOR>;
   ref?: Ref<SVGSVGElement>;
-}) {
+  onClick: () => void;
+};
+
+export function Pin({ className, color, ref, onClick }: PinProps) {
   return (
-    <svg display="block" height="41px" width="27px" viewBox="0 0 27 41" ref={ref} className={className}>
+    <svg
+      display="block"
+      height="41px"
+      width="27px"
+      viewBox="0 0 27 41"
+      ref={ref}
+      className={className}
+      onClick={onClick}
+    >
       <defs>
         <radialGradient id="shadowGradient">
           <stop offset="10%" stopOpacity="0.4"></stop>

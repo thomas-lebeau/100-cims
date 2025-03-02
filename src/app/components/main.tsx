@@ -74,6 +74,7 @@ export default function Main({ className }: mainProps) {
             {...cim}
             climbed={ascents.some((a) => a.cimId === cim.id)}
             selected={code === cim.code}
+            onClick={() => setCode(cim.code)}
           />
         ))}
       </Map>
