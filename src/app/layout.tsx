@@ -32,8 +32,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body className={cn(inter.className, "h-screen max-h-screen flex flex-col")}>
         <Providers>
           <div className="h-screen max-h-screen flex flex-col">
-            <Nav />
             {children}
+            <Nav />
           </div>
           <ToolBars />
         </Providers>
