@@ -21,7 +21,9 @@ export function Map({ className, children, geoJsonUrl }: MapProps) {
   return (
     <>
       <div ref={mapContainer} className={className}></div>
-      <mapContext.Provider value={map}>{children}</mapContext.Provider>
+      <mapContext.Provider value={map}>
+        <div className="marker-container">{children}</div>
+      </mapContext.Provider>
     </>
   );
 }
