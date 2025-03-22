@@ -1,0 +1,74 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Component Patterns
+
+## Basic Component Structure
+```tsx
+import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+
+type ExampleProps = {
+  children: ReactNode;
+  className?: string;
+  variant?: "default" | "secondary";
+};
+
+export function Example({
+  children,
+  className,
+  variant = "default"
+}: ExampleProps) {
+  return (
+    <div className={cn(
+      "base-styles",
+      variant === "secondary" && "secondary-styles",
+      className
+    )}>
+      {children}
+    </div>
+  );
+}
+```
+
+## Server Component
+```tsx
+import { Suspense } from "react";
+import { DataList } from "@/components/data-list";
+import { DataListSkeleton } from "@/components/skeletons";
+
+export default function DataPage() {
+  return (
+    <div className="container">
+      <h1 className="text-2xl font-bold mb-4">Data Page</h1>
+      <Suspense fallback={<DataListSkeleton />}>
+        <DataList />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+## Client Component
+```tsx
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="flex items-center gap-2">
+      <Button onClick={() => setCount(count - 1)}>-</Button>
+      <span className="min-w-10 text-center">{count}</span>
+      <Button onClick={() => setCount(count + 1)}>+</Button>
+    </div>
+  );
+}
+```
+
+```

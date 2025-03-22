@@ -1,0 +1,34 @@
+---
+name: Project Overview
+version: "1.0"
+globs:
+  - "**/*"
+---
+# 100-CIMS Project Overview
+
+## Project Structure
+- `src/app`: Next.js App Router pages and layouts
+- `src/components`: React components organized by category
+- `src/components/ui`: Shadcn UI components (should rarely be edited)
+- `src/lib`: Utility functions organized by category
+- `src/types`: TypeScript type definitions
+- `prisma`: Database schema and migrations
+- `public`: Static assets
+
+## Tech Stack
+- Next.js 15 with App Router
+- React 19
+- TypeScript
+- Prisma for database access
+- TailwindCSS for styling
+- Shadcn UI components
+- React Query for data fetching
+- Mapbox for map interactions
+
+## Coding Standards
+- Follow project code style rules in 002-code-styles.mdc
+- Maintain semantic HTML structure
+- Ensure responsive design with mobile-first approach
+- Use React Server Components when possible
+- Follow proper error handling patterns
+- Optimize for performance and accessibility
