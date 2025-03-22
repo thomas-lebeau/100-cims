@@ -2,7 +2,6 @@
 
 A Next.js application for tracking mountain summit climbs in Catalonia.
 
-
 ## 📋 Overview
 
 100 Cims is a web application that helps hikers track their progress climbing the 100 most significant mountain summits of Catalonia, with Strava integration for automatic activity tracking.
@@ -36,7 +35,7 @@ To reset the database and seed it with initial data for `Cim` and `Comarca` tabl
 npx prisma db seed
 ```
 
-> [!WARNING] 
+> [!WARNING]
 > This will delete all existing data in the database!
 
 ## 🔄 Strava Integration
@@ -44,7 +43,7 @@ npx prisma db seed
 The app uses Strava's API to fetch activity data and webhooks to keep user activities up to date.
 
 > [!NOTE]
->  Strava allows only one authorization callback domain per app and one app per account. Separate Strava accounts (and apps) are used for development and production.
+> Strava allows only one authorization callback domain per app and one app per account. Separate Strava accounts (and apps) are used for development and production.
 
 - [Strava Dashboard](https://www.strava.com/settings/api)
 - [Webhook Events API](https://developers.strava.com/docs/webhooks/) documentation.
@@ -65,6 +64,7 @@ curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
 ```
 
 #### Create subscription (local development)
+
 ```bash
 curl -sS http://127.0.0.1:4040/api/tunnels \
 | jq -r '.tunnels[0].public_url' \
@@ -77,6 +77,7 @@ curl -X POST https://www.strava.com/api/v3/push_subscriptions \
 ```
 
 #### Create subscription (production)
+
 ```bash
 curl -X POST https://www.strava.com/api/v3/push_subscriptions \
     -F client_id=${STRAVA_CLIENT_ID} \
@@ -86,6 +87,7 @@ curl -X POST https://www.strava.com/api/v3/push_subscriptions \
 ```
 
 #### Delete subscription
+
 ```bash
 curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
     -d client_id=${STRAVA_CLIENT_ID} \
@@ -95,6 +97,7 @@ curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
 curl -X DELETE \
     "https://www.strava.com/api/v3/push_subscriptions/{}?client_id=${STRAVA_CLIENT_ID}&client_secret=${STRAVA_CLIENT_SECRET}"
 ```
+
 </details>
 
 ## 📊 Admin Dashboards
@@ -108,16 +111,19 @@ curl -X DELETE \
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm test
 ```
 
 ### E2E Tests
+
 ```bash
 npm run e2e
 ```
 
 Interactive UI mode:
+
 ```bash
 npm run e2e:ui
 ```

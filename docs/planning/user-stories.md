@@ -52,7 +52,7 @@
 | US-43 | Location Services  | As a hiker, I want the app to use my current location to show nearby mountains.                                     | COULD HAVE  | PLANNED |
 | US-44 | Mobile Performance | As a mobile user, I want the app to load quickly and work smoothly even on slower connections.                      | SHOULD HAVE | PLANNED |
 
-## Social Features 
+## Social Features
 
 | ID    | Title              | User Story                                                                                  | Priority   | Status      |
 | ----- | ------------------ | ------------------------------------------------------------------------------------------- | ---------- | ----------- |
