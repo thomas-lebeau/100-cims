@@ -1,0 +1,68 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Code Style Standards
+
+## File Naming and Structure
+- Use kebab-case for all file names: `my-component.tsx`, `some-util.ts`
+- Components go in `src/components` with sub-directories for categories (`ui`, `nav`, etc.)
+- The `src/components/ui` folder is only for shadcn component, they should almost never be edited
+- Pages and layouts go in `src/app` following Next.js App Router conventions
+- Utility functions go in `src/lib` with subdirectories for categories (like `db`)
+- Types go in `src/types`
+
+## Component Structure
+- Use functional components with TypeScript
+- Export components as named exports for utility components, and default exports for pages
+- Use React.forwardRef for UI components that need to forward refs
+- Component props should be defined as types (not interfaces) at the top of the file
+- Prefer destructuring props in function parameters
+
+## Styling
+- Use Tailwind CSS for styling with the `cn` utility for merging classes
+- Use the class-variance-authority (cva) for variant-based components
+- Use shadcn component for primitive components
+
+## TypeScript Patterns
+- Use consistent type imports: `import type { ComponentType } from "react"`
+- Use strict typing for all props and return values
+- Use VariantProps from class-variance-authority for component variants
+- Follow the TypeScript reset patterns used in the project
+
+## Code Formatting
+- Max line width of 120 characters (as defined in .prettierrc)
+- Use trailing commas in arrays and objects (ES5 style)
+- Use double quotes for strings
+- Two spaces for indentation
+
+## React and Next.js Patterns
+- Use React Server Components for pages and layouts
+- Use React Query for data fetching with hydration boundaries
+- Use Next.js App Router conventions
+- Use consistent error handling and loading states
+- Use `seedQueryCache` to prepopulate the React Query cache from server components
+
+
+## Imports Order
+- React/Next.js imports first
+- External library imports next
+- Internal utilities, types, and components last with `@/` aliases
+
+## Naming Conventions
+- PascalCase for React components
+- camelCase for functions, variables, and instances
+- Interface names typically extend component names (ButtonProps for Button)
+- Consistent naming for related components (e.g., CommandInput, CommandList for Command components)
+
+## Best Practices
+- Use useMemo for derived state
+- Use consistent UI component composition patterns
+- Maintain semantic HTML structure
+- Use Next.js authentication patterns as shown in the project
+
+## Export Patterns
+- For UI components, export both the component and its variants (e.g., `export { Button, buttonVariants }`)
+- Use named exports for utility functions
+- Export type definitions alongside components when appropriate 

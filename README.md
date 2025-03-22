@@ -1,68 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 💯⛰️ 100 Cims
 
-## Getting Started
+A Next.js application for tracking mountain summit climbs in Catalonia.
 
-First, run the development server:
+## 📋 Overview
 
-```bash
-npm run dev
-```
+100 Cims is a web application that helps hikers track their progress climbing the 100 most significant mountain summits of Catalonia, with Strava integration for automatic activity tracking.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-## Dashboards
+### Installation
 
-- [Strava](https://www.strava.com/settings/api)
-- [Supabase](https://supabase.com/dashboard/projects)
-- [Vercel](https://vercel.com/thomas-lebeau/100-cims)
-- [Ngrok](https://dashboard.ngrok.com/tunnels/agents)
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up environment variables (see `.env.example` for required variables)
+4. Run the development server: `npm run dev`
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application
 
-## Database
+## 🗄️ Database
 
-Database is hosted on [Supabase](https://supabase.com/dashboard/projects).
+The application uses Supabase with Prisma as an ORM.
 
-### Update db schema
+### Updating the database schema
 
-Updates are done via [Prisma](https://www.prisma.io/). Edit the schema in `prisma/schema.prisma` and run the following commands to apply the changes.
+1. Edit the schema in `prisma/schema.prisma`
+2. Run `npx prisma db push` to update the database schema
+3. Run `npx prisma generate` to generate the Prisma client
+4. Restart the development server
 
-#### Production
+### Seeding the database
 
-1. Make changes to the schema in `prisma/schema.prisma`
-2. Run `npx prisma db push`
-3. Run `npx prisma generate`
-4. Restart dev server
-
-### Seeding
-
-Resets the database and seeds it with data for `Cim` and `Comarca` tables.
-
-> [!CAUTION]
-> This will delete all data in the database!
+To reset the database and seed it with initial data for `Cim` and `Comarca` tables:
 
 ```bash
 npx prisma db seed
 ```
 
-## Strava Webhook
+> [!WARNING]
+> This will delete all existing data in the database!
 
-> [!NOTE]  
-> Because Strava allows only one authorization callback domain per app and one app per account, we have a separate strava accounts (and app) for development and production.
+## 🔄 Strava Integration
+
+The app uses Strava's API to fetch activity data and webhooks to keep user activities up to date.
+
+> [!NOTE]
+> Strava allows only one authorization callback domain per app and one app per account. Separate Strava accounts (and apps) are used for development and production.
 
 - [Strava Dashboard](https://www.strava.com/settings/api)
 - [Webhook Events API](https://developers.strava.com/docs/webhooks/) documentation.
 
-### Prerequisites
+### Managing Strava Webhooks
 
-- Environement variables (e.g. `source .env`)
-  ```Properties
-  STRAVA_CLIENT_ID=...
-  STRAVA_CLIENT_SECRET=...
-  STRAVA_VERIFY_TOKEN=...
-  ```
-- [jq](https://stedolan.github.io/jq/download/) to parse json
-- [ngrok](https://ngrok.com/download) to test locally (_optional_) - [Instrucions here](https://developers.strava.com/docs/webhookexample/)
+Use the github action `setup-strava-webhooks` to manage the Strava webhooks.
 
-### View subsciption
+<details>
+<summary>Alternative commands</summary>
+
+#### View subscription
 
 ```bash
 curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
@@ -70,10 +63,7 @@ curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
     -d client_secret=${STRAVA_CLIENT_SECRET} | jq '.[] | .id'
 ```
 
-### Create subscription
-
-<details open>
-<summary>local</summary>
+#### Create subscription (local development)
 
 ```bash
 curl -sS http://127.0.0.1:4040/api/tunnels \
@@ -86,10 +76,7 @@ curl -X POST https://www.strava.com/api/v3/push_subscriptions \
     -F callback_url={}/api/strava/webhook
 ```
 
-</details>
-
-<details>
-<summary>production</summary>
+#### Create subscription (production)
 
 ```bash
 curl -X POST https://www.strava.com/api/v3/push_subscriptions \
@@ -99,9 +86,7 @@ curl -X POST https://www.strava.com/api/v3/push_subscriptions \
     -F callback_url=https://100-cims.vercel.app/api/strava/webhook
 ```
 
-</details>
-
-### Delete subscription
+#### Delete subscription
 
 ```bash
 curl -sS -G https://www.strava.com/api/v3/push_subscriptions \
@@ -113,17 +98,36 @@ curl -X DELETE \
     "https://www.strava.com/api/v3/push_subscriptions/{}?client_id=${STRAVA_CLIENT_ID}&client_secret=${STRAVA_CLIENT_SECRET}"
 ```
 
-## Learn More
+</details>
 
-To learn more about Next.js, take a look at the following resources:
+## 📊 Admin Dashboards
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Strava API Dashboard](https://www.strava.com/settings/api)
+- [Supabase Dashboard](https://supabase.com/dashboard/projects)
+- [Vercel Dashboard](https://vercel.com/thomas-lebeau/100-cims)
+- [Ngrok Dashboard](https://dashboard.ngrok.com/tunnels/agents)
+- [Datadog Dashboard](https://app.datadoghq.eu/rum/performance-monitoring)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🧪 Testing
 
-## Deploy on Vercel
+### Unit Tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### E2E Tests
+
+```bash
+npm run e2e
+```
+
+Interactive UI mode:
+
+```bash
+npm run e2e:ui
+```
+
+## 📄 License
+
+This project is licensed under the terms found in the [LICENSE](LICENSE) file.

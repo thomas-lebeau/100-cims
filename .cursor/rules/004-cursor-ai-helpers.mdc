@@ -1,0 +1,63 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Cursor AI Helpers
+
+## Understanding and Goals
+
+- This project is a Next.js application with the App Router
+- It uses shadcn/ui for components which are based on Radix UI primitives
+- The main focus is on creating a clean, performant, and accessible UI
+- Performance optimization is important - prefer server components when possible
+- Always follow the established patterns in existing code
+
+## AI Assistance Preferences
+
+### Code Analysis
+- When analyzing code, focus on:
+  - Performance bottlenecks
+  - Accessibility issues
+  - Type safety
+  - Error handling
+  - Edge cases
+
+### Code Generation
+- When generating code, ensure:
+  - Types are properly defined with TypeScript
+  - The component structure follows project patterns
+  - CSS uses Tailwind classes with proper responsive design
+  - Error states are properly handled
+  - Components are properly named and exported
+
+### Code Refactoring
+- For refactoring, prioritize:
+  - Moving client-side logic to server components where appropriate
+  - Extracting reusable components and hooks
+  - Improving type safety
+  - Optimizing performance
+
+### Code Review
+- When reviewing code, check for:
+  - Type safety issues
+  - Unused variables and imports
+  - Proper error handling
+  - Accessibility concerns
+  - Performance considerations
+  - Consistent naming and structure
+
+## Preferred Tools and APIs
+
+- For data fetching: React Query with Zod validation
+- For state management: React Context (prefer minimal state)
+- For utilities: use the existing utils in `@/lib/utils`
+- For accessing the database: Prisma client from `@/lib/prisma`
+
+## Technical Debt and Issues to Avoid
+
+- Avoid excessive nesting of components
+- Avoid unnecessary client components
+- Avoid prop drilling - use context or composition
+- Avoid direct DOM manipulation
+- Don't mix styling approaches (stick with Tailwind)
