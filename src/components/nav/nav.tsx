@@ -6,7 +6,7 @@ import { UserMenu } from "./user-menu";
 
 export default function Nav({ className }: { className?: string }) {
   return (
-    <nav className={cn(className, "flex h-12 items-center px-2 py-4")}>
+    <nav className={cn(className, "flex h-12 items-center px-2 py-4 z-50 bg-background")}>
       <Link href="/" className="text-2xl font-bold mr-auto">
         💯🏔️ 100 cims
       </Link>
