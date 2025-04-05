@@ -117,11 +117,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 });
 
 export async function maybeRefreshToken(account: Account) {
-  if (!isSessionExpired(account)) return;
+  if (!isSessionExpired(account)) {
+    logger.info("Session is still valid", {
+      expires_at: account.expires_at,
+      now: Date.now(),
+      account: account.id,
+      provider: account.provider,
+      providerAccountId: account.providerAccountId,
+      userId: account.userId,
+    });
+
+    return;
+  }
 
   if (isStravaAccount(account)) {
     return refreshStravaToken(account);
   }
+
+  logger.error("Not a Strava account", {
+    expires_at: account.expires_at,
+    now: Date.now(),
+    account: account.id,
+    provider: account.provider,
+    providerAccountId: account.providerAccountId,
+    userId: account.userId,
+  });
 
   // TODO: support for other account tokens?
 }
@@ -146,6 +166,13 @@ async function refreshStravaToken(account: StravaAccount) {
 
   const tokens = (await response.json()) as Token;
 
+  logger.info("Strava token refreshed", {
+    account: account.id,
+    provider: account.provider,
+    providerAccountId: account.providerAccountId,
+    userId: account.userId,
+  });
+
   if (!response.ok) throw tokens;
 
   await prisma.account.update({
@@ -160,5 +187,12 @@ async function refreshStravaToken(account: StravaAccount) {
         providerAccountId: account.providerAccountId,
       },
     },
+  });
+
+  logger.info("Strava token updated", {
+    account: account.id,
+    provider: account.provider,
+    providerAccountId: account.providerAccountId,
+    userId: account.userId,
   });
 }
