@@ -40,68 +40,6 @@ const eventBodySchema = z.object({
 
 type WebhookEvent = z.infer<typeof eventBodySchema>;
 
-async function handleEvent(req: NextRequest) {
-  try {
-    const safeBody = eventBodySchema.safeParse(await req.json());
-
-    if (!safeBody.success) {
-      after(logger.error("Invalid event body", safeBody.error.issues));
-
-      return;
-    }
-
-    const event = safeBody.data;
-
-    if (event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)) {
-      after(logger.error("Unknown subscription_id"));
-
-      return;
-    }
-
-    // TODO: handle athlete events?
-    if (event.object_type !== "activity") {
-      after(logger.info("Unknown object_type", { object_type: event.object_type }));
-
-      return;
-    }
-
-    // TODO: should this use the strava app admin token instead?
-    const account = await getAccountIdByStravaId(event.owner_id);
-
-    if (!account) {
-      after(logger.error("No account found"));
-
-      return;
-    }
-
-    try {
-      await maybeRefreshToken(account);
-    } catch (error) {
-      after(
-        logger.error("Failed to refresh token", serializeError(error), {
-          userId: account.userId,
-          accountId: account.id,
-        })
-      );
-
-      return;
-    }
-
-    switch (event.aspect_type) {
-      case "create":
-        return await handleCreateActivityEvent(account, event);
-      case "update":
-        return await handleUpadeActivityEvent(account, event);
-      case "delete":
-        return await handleDeleteActivityEvent(account, event);
-      default:
-        after(logger.error("Unknown event_type", { event_type: event.aspect_type }));
-    }
-  } catch (error) {
-    after(logger.error("Unknown error", serializeError(error)));
-  }
-}
-
 async function handleUpadeActivityEvent(account: Account, event: WebhookEvent) {
   const updates: Partial<Pick<ActivityInput, "private" | "name" | "sportType">> = {};
 
@@ -161,7 +99,7 @@ async function handleCreateActivityEvent(account: Account, event: WebhookEvent) 
       })
     );
 
-    return;
+    throw new Error("No activity found");
   }
 
   const cims = await getTinyCims();
@@ -209,19 +147,66 @@ async function handleCreateActivityEvent(account: Account, event: WebhookEvent) 
 }
 
 export async function POST(req: NextRequest) {
-  const awaitEventHandling = req.headers.get("x-await-event-handling");
+  try {
+    const safeBody = eventBodySchema.safeParse(await req.json());
 
-  // Make webhook handling synchronous for testing
-  //
-  // The subscription callback endpoint must acknowledge the POST of each new
-  // event with a status code of 200 OK within two seconds. Event pushes are
-  // retried (up to a total of three attempts) if a 200 is not returned.
-  // If your application needs to do more processing of the received information,
-  // it should do so asynchronously.
-  if (awaitEventHandling === "true") {
-    await handleEvent(req);
-  } else {
-    after(handleEvent(req));
+    if (!safeBody.success) {
+      after(logger.error("Invalid event body", safeBody.error.issues));
+
+      return;
+    }
+
+    const event = safeBody.data;
+
+    if (event.subscription_id !== parseInt(process.env.STRAVA_SUBSCRIPTION_ID)) {
+      after(logger.error("Unknown subscription_id"));
+
+      return;
+    }
+
+    // TODO: handle athlete events?
+    if (event.object_type !== "activity") {
+      after(logger.info("Unknown object_type", { object_type: event.object_type }));
+
+      return;
+    }
+
+    // TODO: should this use the strava app admin token instead?
+    const account = await getAccountIdByStravaId(event.owner_id);
+
+    if (!account) {
+      after(logger.error("No account found"));
+
+      return;
+    }
+
+    try {
+      await maybeRefreshToken(account);
+    } catch (error) {
+      after(
+        logger.error("Failed to refresh token", serializeError(error), {
+          userId: account.userId,
+          accountId: account.id,
+        })
+      );
+
+      return;
+    }
+
+    switch (event.aspect_type) {
+      case "create":
+        return await handleCreateActivityEvent(account, event);
+      case "update":
+        return await handleUpadeActivityEvent(account, event);
+      case "delete":
+        return await handleDeleteActivityEvent(account, event);
+      default:
+        after(logger.error("Unknown event_type", { event_type: event.aspect_type }));
+    }
+  } catch (error) {
+    after(logger.error("Unknown error", serializeError(error)));
+
+    return NextResponse.json(serializeError(error), { status: 500 });
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
