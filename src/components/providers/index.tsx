@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import QueryProvider from "./query-provider";
 import SessionProvider from "./session-provider";
+import ThemeProvider from "./theme-provider";
 import { auth } from "@/lib/next-auth";
 
 export default async function Providers({ children }: { children: ReactNode }) {
@@ -8,7 +9,9 @@ export default async function Providers({ children }: { children: ReactNode }) {
 
   return (
     <SessionProvider session={session}>
-      <QueryProvider>{children}</QueryProvider>
+      <ThemeProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </ThemeProvider>
     </SessionProvider>
   );
 }

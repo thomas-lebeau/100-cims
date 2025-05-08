@@ -10,9 +10,10 @@ import { Pin } from "./pin";
 type MarkerProps = Cim & {
   climbed: boolean;
   selected: boolean;
+  onClick: () => void;
 };
 
-export function Marker({ id, longitude, latitude, climbed, selected }: MarkerProps) {
+export function Marker({ id, longitude, latitude, climbed, selected, onClick }: MarkerProps) {
   const map = useContext(Map.context);
   const markerElem = useRef<SVGSVGElement>(null);
   const marker = useRef<MapBoxMarker | null>(null);
@@ -65,7 +66,12 @@ export function Marker({ id, longitude, latitude, climbed, selected }: MarkerPro
 
   return (
     <div style={{ position: "absolute", top: -999, left: -999 }}>
-      <Pin ref={markerElem} color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED} className={climbed ? "z-10" : ""} />
+      <Pin
+        ref={markerElem}
+        onClick={onClick}
+        className={climbed ? "z-10" : ""}
+        color={climbed ? Pin.COLOR.GREEN : Pin.COLOR.RED}
+      />
     </div>
   );
 }
