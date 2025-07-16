@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev --turbopack",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "postbuild": "datadog-ci sourcemaps upload .next/static --service=100-cims --release-version=$VERCEL_GIT_COMMIT_SHA --minified-path-prefix=/_next/static --repository-url=https://github.com/thomas-lebeau/100-cims",
     "build": "next build",
     "start": "next start",
@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@datadog/datadog-ci": "^3.3.1",
+    "@datadog/webpack-plugin": "^2.6.3-dev-4",
     "@playwright/test": "^1.51.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

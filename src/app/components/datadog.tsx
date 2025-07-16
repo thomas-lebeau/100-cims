@@ -17,7 +17,9 @@ function init() {
     sessionSampleRate: 100,
     sessionReplaySampleRate: 20,
     compressIntakeRequests: true,
-    defaultPrivacyLevel: "mask-user-input",
+    // @ts-expect-error this is a beta feature
+    defaultPrivacyLevel: "mask-unless-allowlisted",
+    enablePrivacyForActionName: true,
 
     allowedTracingUrls: [
       getMatchOptions(process.env.NEXT_PUBLIC_VERCEL_URL),

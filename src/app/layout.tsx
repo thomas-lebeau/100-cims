@@ -47,7 +47,7 @@ export async function ToolBars() {
 
   return (
     <>
-      {flags.datadogRum && <DatadogRum flags={flags} />}
+      <DatadogRum flags={flags} />
       {flags.vercelAnalytics && <SpeedInsights debug={false} />}
       {flags.vercelAnalytics && <Analytics debug={false} />}
       {flags.vercelToolbar && <VercelToolbar />}
