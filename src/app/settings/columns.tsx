@@ -28,7 +28,7 @@ export const columns: ColumnDef<Ascent>[] = [
       </div>
     ),
   },
-  {
+{
     accessorKey: "cimName",
     header: ({ column }) => <HeaderCell column={column}>Peak</HeaderCell>,
     cell: ({ row }) => <div>{row.getValue("cimName")}</div>,
@@ -51,6 +51,7 @@ export const columns: ColumnDef<Ascent>[] = [
       <Link
         href={`https://www.strava.com/activities/${row.original.activityId}`}
         target="_blank"
+        rel="noopener noreferrer"
         className="flex items-center gap-1 hover:underline"
       >
         {row.getValue("activityName")}
