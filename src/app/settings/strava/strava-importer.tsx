@@ -81,7 +81,7 @@ export default function StravaImporter() {
       </div>
 
       {isFetching ? (
-        <p>🔄 Downloading activities...({stravaActivities.length})</p>
+<p>🔄 Downloading activities...({stravaActivities.length})</p>
       ) : (
         <p data-testid="strava-importer-status">
           ✅ found {newAscents.length} activities (of {stravaActivities.length})
@@ -101,7 +101,7 @@ export default function StravaImporter() {
 
           return (
             <li key={activity.originId} className="mb-8">
-              <Link href={`https://www.strava.com/activities/${activity.originId}`} target="_blank">
+              <Link href={`https://www.strava.com/activities/${activity.originId}`} target="_blank" rel="noopener noreferrer">
                 {isUploaded ? "🟢" : "🔴"} {activity.name}
               </Link>
 
