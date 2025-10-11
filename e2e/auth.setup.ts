@@ -1,4 +1,5 @@
 import * as fs from "node:fs";
+import * as path from "node:path";
 import type { BrowserContextOptions } from "@playwright/test";
 import { expect, test as setup } from "@playwright/test";
 import { AUTH_FILE } from "../playwright.config";
@@ -13,7 +14,8 @@ if (!process.env.CI) {
     // eslint-disable-next-line no-empty-pattern
     storageState: async ({}, use) => {
       try {
-        const authFile = fs.readFileSync(AUTH_FILE, "utf-8");
+        const safeAuthFile = path.resolve(AUTH_FILE);
+        const authFile = fs.readFileSync(safeAuthFile, "utf-8");
 
         return use(JSON.parse(authFile) as StorageState);
       } catch {
